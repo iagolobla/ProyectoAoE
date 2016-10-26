@@ -25,7 +25,7 @@ public class Mapa {
                 mapa.get(i).add(new Celda());
             }
         }
-        
+        mapa.get(3).get(3).crearCiudadela();
     }
     
 }

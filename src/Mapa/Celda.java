@@ -18,6 +18,7 @@ public class Celda {
     Recurso recurso;
     Posicion pos;
     String tipo;
+    
     public Celda(){
         
     }
@@ -43,5 +44,8 @@ public class Celda {
             
         }
     }*/
+    public Edificio crearCiudadela(){
+        return new Edificio("Ciudadela",pos);
+    }
     
 }
