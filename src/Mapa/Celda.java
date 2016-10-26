@@ -17,5 +17,18 @@ public class Celda {
     Edificio  edificio;
     Recurso recurso;
     Posicion pos;
+    String tipo;
+    
+    public Celda(String tipo){
+        switch(tipo){
+            case "Soldado":
+                break;
+            case "Paisano":
+                break;
+            default:
+                System.out.println("Tipo mal introducido");
+            
+        }
+    }
     
 }
