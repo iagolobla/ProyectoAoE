@@ -17,8 +17,15 @@ public class Mapa {
     HashMap edificios;
     HashMap recursos;
     
-    /*public Mapa(){
-        mapa=new ArrayList
-    }*/
+    public Mapa(){
+        mapa=new ArrayList(10);
+        for(int i=0;i<mapa.size();i++){
+            mapa.add(new ArrayList(10));
+            for(int j=0;j<mapa.get(i).size();j++){
+                mapa.get(i).add(new Celda());
+            }
+        }
+        
+    }
     
 }

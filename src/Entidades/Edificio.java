@@ -5,7 +5,6 @@
  */
 package Entidades;
 
-import Entidades.Personaje;
 
 /**
  *

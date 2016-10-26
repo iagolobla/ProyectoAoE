@@ -18,25 +18,30 @@ public class Celda {
     Recurso recurso;
     Posicion pos;
     String tipo;
-    
-    public Celda(String tipo){
+    public Celda(){
+        
+    }
+    /*public Celda(String tipo){
         switch(tipo){
             case "Soldado":
-                new Personaje("Soldado");
+                personaje=new Personaje("Soldado",pos);
                 break;
             case "Paisano":
-                new Personaje("Paisano");
+                personaje=new Personaje("Paisano",pos);
                 break;
             case "Ciudadela":
+                edificio=new Edificio("Ciudadela",pos);
                 break;
             case "Casa":
+                edificio=new Edificio("Casa",pos);
                 break;
             case "Cuartel":
+                edificio=new Edificio("Cuartel",pos);
                 break;
             default:
                 System.out.println("Tipo mal introducido");
             
         }
-    }
+    }*/
     
 }
