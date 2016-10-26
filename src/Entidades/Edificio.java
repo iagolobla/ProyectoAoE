@@ -42,9 +42,17 @@ public class Edificio {
     
     public Personaje crearPaisano(String Nombre){
         if(!this.tipo.equals("Ciudadela")){
-            System.out.println("Este edificio no puede crear personajes");
+            System.out.println("Este edificio no puede crear Paisanos");
             return null;
         }
         return new Personaje("Paisano", Nombre);
+    }
+    
+    public Personaje crearSoldado(String Nombre){
+        if(!this.tipo.equals("Cuartel")){
+            System.out.println("Este edificio no puede crear Soldados");
+            return null;
+        }
+        return new Personaje("Soldado", Nombre);
     }
 }
