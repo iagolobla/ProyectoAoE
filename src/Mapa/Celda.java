@@ -22,8 +22,16 @@ public class Celda {
     public Celda(String tipo){
         switch(tipo){
             case "Soldado":
+                new Personaje("Soldado");
                 break;
             case "Paisano":
+                new Personaje("Paisano");
+                break;
+            case "Ciudadela":
+                break;
+            case "Casa":
+                break;
+            case "Cuartel":
                 break;
             default:
                 System.out.println("Tipo mal introducido");
