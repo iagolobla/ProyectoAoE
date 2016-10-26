@@ -5,6 +5,8 @@
  */
 package Entidades;
 
+import Entidades.Personaje;
+
 /**
  *
  * @author iagolobla
@@ -37,5 +39,13 @@ public class Edificio {
             default:
                 System.out.println("Error, tipo de edificio incorrecto");
         }
+    }
+    
+    public Personaje crearPaisano(String Nombre){
+        if(!this.tipo.equals("Ciudadela")){
+            System.out.println("Este edificio no puede crear personajes");
+            return null;
+        }
+        return new Personaje("Paisano", Nombre);
     }
 }
