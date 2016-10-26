@@ -21,7 +21,7 @@ public class Posicion {
     public Posicion(float valorX, float valorY) {
         x = valorX;
         y = valorY;
-    }
+    } 
 
     public float getX() {
         return x;
