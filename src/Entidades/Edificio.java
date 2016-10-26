@@ -20,16 +20,22 @@ public class Edificio {
     
     public Edificio(String tipe, Posicion posicion){
         //Igualar punto y posicion evitando aliasing
+        punto = new Posicion(posicion.getX(), posicion.getY());
         switch(tipe){
             case("Ciudadela"):
+                tipo = tipe;
                 salud = SALUDCIUDADELA;
                 break;
             case("Cuartel"):
+                tipo = tipe;
                 salud = SALUDCUARTEL;
                 break;
             case("Casa"):
+                tipo = tipe;
                 salud = SALUDCASA;
                 break;
+            default:
+                System.out.println("Error, tipo de edificio incorrecto");
         }
     }
 }
