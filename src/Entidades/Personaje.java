@@ -16,7 +16,7 @@ public class Personaje {
     private int ataque;
     private int capRecolectar;
     
-    private Personaje(String tipo){
+    public Personaje(String tipo){
         switch(tipo){
             case "Soldado":
                 armadura=100;
