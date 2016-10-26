@@ -9,6 +9,8 @@ package Mapa;
  *
  * @author javier
  */
+import java.util.ArrayList;
 public class Mapa {
+    ArrayList<ArrayList<Celda>> mapa; 
     
 }
