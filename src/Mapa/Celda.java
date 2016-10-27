@@ -20,7 +20,7 @@ public class Celda {
     String tipo;
     
     public Celda(){
-        
+        tipo="Pradera";
     }
     /*public Celda(String tipo){
         switch(tipo){
