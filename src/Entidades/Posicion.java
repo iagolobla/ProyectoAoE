@@ -10,40 +10,40 @@ package Entidades;
  * @author iagolobla
  */
 public class Posicion {
-    private float x;
-    private float y;
+    private int x;
+    private int y;
 
     public Posicion() {
         x = 0;
         y = 0;
     }
 
-    public Posicion(float valorX, float valorY) {
+    public Posicion(int valorX, int valorY) {
         x = valorX;
         y = valorY;
     } 
 
-    public float getX() {
+    public int getX() {
         return x;
     }
 
-    public float getY() {
+    public int getY() {
         return y;
     }
 
-    public void setX(float valor) {
+    public void setX(int valor) {
         x = valor;
     }
 
-    public void setY(float valor) {
+    public void setY(int valor) {
         y = valor;
     }
 
-    public void moverX(float valor) {
+    public void moverX(int valor) {
         x += valor;
     }
 
-    public void moverY(float valor) {
+    public void moverY(int valor) {
         y += valor;
     }
 

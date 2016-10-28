@@ -19,8 +19,9 @@ public class Celda {
     Posicion pos;
     String tipo;
     
-    public Celda(){
+    public Celda(Posicion posicion){
         tipo="Pradera";
+        pos=posicion;
     }
     /*public Celda(String tipo){
         switch(tipo){

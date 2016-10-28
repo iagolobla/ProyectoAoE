@@ -9,6 +9,7 @@ package Mapa;
  *
  * @author javier
  */
+import Entidades.Posicion;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Mapa {
@@ -18,11 +19,11 @@ public class Mapa {
     HashMap recursos;
     
     public Mapa(){
-        mapa=new ArrayList(10);
-        for(int i=0;i<mapa.size();i++){
-            mapa.add(new ArrayList(10));
-            for(int j=0;j<mapa.get(i).size();j++){
-                mapa.get(i).add(new Celda());
+        mapa=new ArrayList();
+        for(int i=0;i<10;i++){
+            mapa.add(new ArrayList());
+            for(int j=0;j<10;j++){
+                mapa.get(i).add(new Celda(new Posicion(i,j)));
             }
         }
         mapa.get(3).get(3).crearCiudadela();
