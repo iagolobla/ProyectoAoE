@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Entidades;
-
+import Mapa.Celda;
 
 /**
  *
@@ -19,7 +19,7 @@ public class Edificio {
     private int salud;
     private Posicion punto;
     
-    public Edificio(String tipe, Posicion posicion){
+    public Edificio(String tipe, Posicion posicion, String Nombre){
         //Igualar punto y posicion evitando aliasing
         punto = new Posicion(posicion.getX(), posicion.getY());
         switch(tipe){
@@ -40,11 +40,13 @@ public class Edificio {
         }
     }
     
+    
     public Personaje crearPaisano(String Nombre){
         if(!this.tipo.equals("Ciudadela")){
             System.out.println("Este edificio no puede crear Paisanos");
             return null;
         }
+        
         return new Personaje("Paisano", Nombre);
     }
     

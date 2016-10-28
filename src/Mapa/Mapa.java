@@ -29,4 +29,15 @@ public class Mapa {
         mapa.get(3).get(3).crearCiudadela();
     }
     
+    
+    public Celda getCelda(Posicion p){
+        if (p == null){
+            System.out.println("Posicion pasada nula!");
+            return null;
+        }
+        int x = p.getX();
+        int y = p.getY();
+        
+        return mapa.get(x).get(y);
+    }
 }

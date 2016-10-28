@@ -46,7 +46,9 @@ public class Celda {
         }
     }*/
     public Edificio crearCiudadela(){
-        return new Edificio("Ciudadela",pos);
+        return new Edificio("Ciudadela", pos, "Ciudadela");
     }
+    
+    
     
 }
