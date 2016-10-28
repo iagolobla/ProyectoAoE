@@ -10,13 +10,13 @@ package Entidades;
  * @author iagolobla
  */
 import java.util.Scanner;
-
+import Mapa.Mapa;
 public class Principal {
 
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
-        //CREAR EL MAPA
+        Mapa map=new Mapa();
         while (seguir) {
             System.out.print("$ ");
             String linea = scanner.nextLine();
@@ -35,6 +35,9 @@ public class Principal {
                             //comprobar si se puede mover a esa posicion
                             //....
                         }
+                        break;
+                    case "mapa":
+                        map.imprimir();
                         break;
                     default:
                         System.out.println("Comando incorrecto");

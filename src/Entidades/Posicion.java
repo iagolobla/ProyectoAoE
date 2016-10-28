@@ -22,6 +22,10 @@ public class Posicion {
         x = valorX;
         y = valorY;
     } 
+    public Posicion(Posicion p){
+        x=p.getX();
+        y=p.getY();
+    }
 
     public int getX() {
         return x;

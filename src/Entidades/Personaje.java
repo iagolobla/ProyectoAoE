@@ -19,7 +19,8 @@ public class Personaje {
     private String Nombre;  //Aqui se necesita poner un nombre al personaje para usar eso como clave en el hashmap de personajes en el mapa
     private Posicion posicion;
 
-    public Personaje(String tipo, String Nombre) {
+    public Personaje(String tipo, String Nombre,Posicion pos) {
+        posicion=new Posicion(pos);
         switch (tipo) {
             case "Soldado":
                 armadura = 100;

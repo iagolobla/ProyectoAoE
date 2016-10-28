@@ -47,7 +47,7 @@ public class Edificio {
             return null;
         }
         
-        return new Personaje("Paisano", Nombre);
+        return new Personaje("Paisano", Nombre,punto);
     }
     
     public Personaje crearSoldado(String Nombre){
@@ -55,6 +55,6 @@ public class Edificio {
             System.out.println("Este edificio no puede crear Soldados");
             return null;
         }
-        return new Personaje("Soldado", Nombre);
+        return new Personaje("Soldado", Nombre,punto);
     }
 }

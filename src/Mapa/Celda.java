@@ -20,33 +20,34 @@ public class Celda {
     String tipo;
     
     public Celda(Posicion posicion){
+        if(posicion==null){
+            System.out.println("ERROR EN LA POSICION ->NULL");
+            return;
+        }
         tipo="Pradera";
-        pos=posicion;
+        pos=new Posicion(posicion);
     }
-    /*public Celda(String tipo){
+    public Celda(String tipo){
         switch(tipo){
             case "Soldado":
-                personaje=new Personaje("Soldado",pos);
+                personaje=new Personaje("Soldado","Soldado",pos);
                 break;
             case "Paisano":
-                personaje=new Personaje("Paisano",pos);
+                personaje=new Personaje("Paisano","Paisano",pos);
                 break;
             case "Ciudadela":
-                edificio=new Edificio("Ciudadela",pos);
+                edificio=new Edificio("Ciudadela",pos,"Ciudadela");
                 break;
             case "Casa":
-                edificio=new Edificio("Casa",pos);
+                edificio=new Edificio("Casa",pos,"Casa");
                 break;
             case "Cuartel":
-                edificio=new Edificio("Cuartel",pos);
+                edificio=new Edificio("Cuartel",pos,"Cuartel");
                 break;
             default:
                 System.out.println("Tipo mal introducido");
             
         }
-    }*/
-    public Edificio crearCiudadela(){
-        return new Edificio("Ciudadela", pos, "Ciudadela");
     }
     
     
