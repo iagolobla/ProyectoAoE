@@ -20,13 +20,13 @@ public class Mapa {
     
     public Mapa(){
         mapa=new ArrayList();
-        for(int i=0;i<10;i++){
+        for(int i=0;i<5;i++){
             mapa.add(new ArrayList());
-            for(int j=0;j<10;j++){
+            for(int j=0;j<8;j++){
                 mapa.get(i).add(new Celda(new Posicion(i,j)));
             }
         }
-        mapa.get(3).get(3);
+        mapa.get(3).set(3,new Celda("Ciudadela",new Posicion(3,3)));
     }
     
     
@@ -41,8 +41,8 @@ public class Mapa {
         return mapa.get(x).get(y);
     }
     public void imprimir() {
-        for (int i = 0; i < mapa.size(); i++){
-            System.out.print("==");
+        for (int i = 0; i < 8; i++){
+            System.out.print("=");
         }
         System.out.println("");
         for (int i = 0; i < mapa.size(); i++) {
@@ -70,9 +70,10 @@ public class Mapa {
             System.out.print("|");
             System.out.println("");
         }
-        for (int i = 0; i < mapa.size(); i++){
-            System.out.print("==");
+        for (int i = 0; i < 8; i++){
+            System.out.print("=");
         }
+        System.out.println("");
     }
 
 }

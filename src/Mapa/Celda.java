@@ -27,7 +27,13 @@ public class Celda {
         tipo="Pradera";
         pos=new Posicion(posicion);
     }
-    public Celda(String tipo){
+    public Celda(String tipo,Posicion posicion){
+        if(posicion==null){
+            System.out.println("ERROR EN LA POSICION ->NULL");
+            return;
+        }
+        pos=new Posicion(posicion);
+        this.tipo=tipo;
         switch(tipo){
             case "Soldado":
                 personaje=new Personaje("Soldado","Soldado",pos);
