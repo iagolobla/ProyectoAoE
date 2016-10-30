@@ -17,7 +17,7 @@ public class Mapa {
     HashMap personajes;
     HashMap edificios;
     HashMap recursos;
-    
+  
     private final int MAPAX = 8;
     private final int MAPAY = 8;
     
@@ -29,7 +29,11 @@ public class Mapa {
                 mapa.get(i).add(new Celda(new Posicion(i,j)));
             }
         }
-        mapa.get(3).set(3,new Celda("Ciudadela",new Posicion(3,3)));
+        
+        //Creacion de la ciudadela
+        String Name = "Ciudadela-" + edificios.size()+1;    //edificios.size() ayuda a crear el nombre
+        mapa.get(3).set(3,new Celda("Ciudadela",new Posicion(3,3), Name));   
+        edificios.put(Name, getCelda(new Posicion(3,3)).getObj());
     }
     
     
@@ -78,6 +82,7 @@ public class Mapa {
         }
         System.out.println("");
     }
+    
 
 }
 
