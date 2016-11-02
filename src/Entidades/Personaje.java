@@ -64,4 +64,39 @@ public class Personaje {
     }
     //GETTERS Y SETTERS
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public int getArmadura() {
+        return armadura;
+    }
+
+    public int getSalud() {
+        return salud;
+    }
+
+    public void setSalud(int salud) {
+        this.salud = salud;
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
+    public int getCapRecolectar() {
+        return capRecolectar;
+    }
+
+    public void setCapRecolectar(int capRecolectar) {
+        this.capRecolectar = capRecolectar;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
 }
