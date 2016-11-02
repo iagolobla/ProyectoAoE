@@ -100,4 +100,8 @@ public class Personaje {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
+    
+    public void setPosicion(Posicion pos){
+        this.posicion = new Posicion(pos);
+    }
 }

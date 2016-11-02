@@ -98,4 +98,21 @@ public class Celda {
         tipo = "Pradera";
     }
 
+    public void setPersonaje(Personaje personaje) {
+        this.personaje = personaje;
+        tipo = personaje.getTipo();
+    }
+
+    public void setEdificio(Edificio edificio) {
+        this.edificio = edificio;
+    }
+
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
+    }
+    
+    public String getTipo(){
+        return tipo;
+    }
+    
 }
