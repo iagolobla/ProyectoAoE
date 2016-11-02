@@ -59,11 +59,12 @@ public class Personaje {
         }
     }
     
-    public void mover(String direccion){
-        
-    }
     //GETTERS Y SETTERS
 
+    public Posicion getPosicion(){
+        return new Posicion(posicion);
+    }
+    
     public String getTipo() {
         return tipo;
     }

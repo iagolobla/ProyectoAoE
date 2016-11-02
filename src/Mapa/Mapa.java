@@ -10,54 +10,58 @@ package Mapa;
  * @author javier
  */
 import Entidades.Posicion;
+import Entidades.Personaje;
+import Entidades.Recurso;
+import Entidades.Edificio;
 import java.util.ArrayList;
 import java.util.HashMap;
-import Entidades.Edificio;
+
 public class Mapa {
-    ArrayList<ArrayList<Celda>> mapa; 
+
+    ArrayList<ArrayList<Celda>> mapa;
     HashMap personajes;
     HashMap edificios;
     HashMap recursos;
-  
+
     private final int MAPAX = 16;
     private final int MAPAY = 8;
-    
-    public Mapa(){
-        edificios=new HashMap();
-        personajes=new HashMap();
-        recursos=new HashMap();
-        mapa=new ArrayList<>();
-        for(int i=0;i<MAPAY;i++){
+
+    public Mapa() {
+        edificios = new HashMap();
+        personajes = new HashMap();
+        recursos = new HashMap();
+        mapa = new ArrayList<>();
+        for (int i = 0; i < MAPAY; i++) {
             mapa.add(new ArrayList<>());
-            for(int j=0;j<MAPAX;j++){
-                mapa.get(i).add(new Celda(new Posicion(i,j)));
+            for (int j = 0; j < MAPAX; j++) {
+                mapa.get(i).add(new Celda(new Posicion(i, j)));
             }
         }
-        
+
         //Creacion de la ciudadela
-        String Name = "Ciudadela-" + edificios.size()+1;    //edificios.size() ayuda a crear el nombre
-        mapa.get(3).set(3,new Celda("Ciudadela",new Posicion(3,3), Name));   
-        edificios.put(Name, getCelda(new Posicion(3,3)).getObj());
-        
+        String Name = "Ciudadela-" + edificios.size() + 1;    //edificios.size() ayuda a crear el nombre
+        mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
+        edificios.put(Name, getCelda(new Posicion(3, 3)).getObj());
+
         //creacion un personaje
-        Name="Personaje-"+personajes.size()+1;
-        mapa.get(3).set(4,new Celda("Paisano",new Posicion(3,4), Name));   
-        personajes.put(Name, getCelda(new Posicion(3,4)).getObj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        Name = "Personaje-" + personajes.size() + 1;
+        mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
+        personajes.put(Name, getCelda(new Posicion(3, 4)).getObj());//Aqui creo que hay ALIASING Assign return variable to new variable.
     }
-    
-    
-    public Celda getCelda(Posicion p){
-        if (p == null){
+
+    public Celda getCelda(Posicion p) {
+        if (p == null) {
             System.out.println("Posicion pasada nula!");
             return null;
         }
         int x = p.getX();
         int y = p.getY();
-        
+
         return mapa.get(x).get(y);
     }
+
     public void imprimir() {
-        for (int i = 0; i < MAPAX+2; i++){
+        for (int i = 0; i < MAPAX + 2; i++) {
             System.out.print("&");
         }
         System.out.println("");
@@ -90,23 +94,46 @@ public class Mapa {
             System.out.print("&");
             System.out.println("");
         }
-        for (int i = 0; i < MAPAX+2; i++){
+        for (int i = 0; i < MAPAX + 2; i++) {
             System.out.print("&");
         }
         System.out.println("");
     }
-    
 
-    public boolean checkCeldaCoords(Celda cell){  //Devuelve true si la celda tiene una posicion valida en el mapa
-        if(cell.getPosicion().getX() < 0 || cell.getPosicion().getX() >= MAPAX)
+    public boolean checkCeldaCoords(Celda cell) {  //Devuelve true si la celda tiene una posicion valida en el mapa
+        if (cell.getPosicion().getX() < 0 || cell.getPosicion().getX() >= MAPAX) {
             return false;
-        if(cell.getPosicion().getY() < 0 || cell.getPosicion().getY() >= MAPAY)
+        }
+        if (cell.getPosicion().getY() < 0 || cell.getPosicion().getY() >= MAPAY) {
             return false;
+        }
         return true;
-        
+
     }
-    
-    public void mover(String direccion){
+
+    public void moverPj(String Nombre, String direccion) {
+        Personaje Pj = (Personaje) personajes.get(Nombre);
+        Posicion pos = Pj.getPosicion();
+        Celda cell = getCelda(pos);
+
+        switch (direccion) {
+            case "S":
+                pos.moverY(-1);
+                break;
+            case "N":
+                pos.moverY(1);
+                break;
+            case "E":
+                pos.moverX(1);
+                break;
+            case "O":
+                pos.moverX(-1);
+                break;
+            default:
+                System.out.println("Error, direccion no valida!");
+                
+        }
+        
         
     }
 
@@ -118,19 +145,12 @@ public class Mapa {
         return new HashMap(personajes);
     }
 
-
-
     public HashMap getEdificios() {
         return new HashMap(edificios);
     }
-
 
     public HashMap getRecursos() {
         return new HashMap(recursos);
     }
 
-    
 }
-
-
-
