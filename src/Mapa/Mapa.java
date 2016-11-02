@@ -96,6 +96,9 @@ public class Mapa {
     }
     
 
+    public boolean checkCeldaCoords(){  //Devuelve true si la celda tiene una posicion valida en el mapa
+        
+    }
 }
 
 

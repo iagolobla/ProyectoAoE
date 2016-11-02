@@ -58,6 +58,10 @@ public class Personaje {
                 return null;
         }
     }
+    
+    public void mover(String Nombre, String direccion){
+        
+    }
     //GETTERS Y SETTERS
 
 }

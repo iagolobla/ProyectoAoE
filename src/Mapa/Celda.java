@@ -86,5 +86,9 @@ public class Celda {
         System.out.println("Celda Vacia!");
         return null;
     }
+    
+    public Posicion getPosicion(){
+        return new Posicion(pos);
+    }
 
 }
