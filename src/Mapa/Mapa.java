@@ -18,16 +18,16 @@ public class Mapa {
     HashMap edificios;
     HashMap recursos;
   
-    private final int MAPAX = 8;
+    private final int MAPAX = 16;
     private final int MAPAY = 8;
     
     public Mapa(){
         edificios=new HashMap();
         personajes=new HashMap();
         recursos=new HashMap();
-        mapa=new ArrayList();
+        mapa=new ArrayList<>();
         for(int i=0;i<MAPAY;i++){
-            mapa.add(new ArrayList());
+            mapa.add(new ArrayList<>());
             for(int j=0;j<MAPAX;j++){
                 mapa.get(i).add(new Celda(new Posicion(i,j)));
             }
@@ -57,7 +57,7 @@ public class Mapa {
     }
     public void imprimir() {
         for (int i = 0; i < MAPAX+2; i++){
-            System.out.print("$");
+            System.out.print("&");
         }
         System.out.println("");
         for (int i = 0; i < MAPAY; i++) {
@@ -90,7 +90,7 @@ public class Mapa {
             System.out.println("");
         }
         for (int i = 0; i < MAPAX+2; i++){
-            System.out.print("$");
+            System.out.print("&");
         }
         System.out.println("");
     }
