@@ -23,6 +23,7 @@ public class Personaje {
         posicion=new Posicion(pos);
         switch (tipo) {
             case "Soldado":
+                this.tipo=tipo;
                 armadura = 100;
                 salud = 200;
                 ataque = 50;
@@ -30,6 +31,7 @@ public class Personaje {
                 this.Nombre = Nombre;   //El parametro nombre debe ser unico para cada personaje
                 break;
             case "Paisano":
+                this.tipo=tipo;
                 armadura = 50;
                 salud = 150;
                 ataque = 10;
