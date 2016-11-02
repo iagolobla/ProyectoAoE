@@ -41,7 +41,7 @@ public class Mapa {
         //creacion un personaje
         Name="Personaje-"+personajes.size()+1;
         mapa.get(3).set(4,new Celda("Paisano",new Posicion(3,4), Name));   
-        edificios.put(Name, getCelda(new Posicion(3,4)).getObj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        personajes.put(Name, getCelda(new Posicion(3,4)).getObj());//Aqui creo que hay ALIASING Assign return variable to new variable.
     }
     
     

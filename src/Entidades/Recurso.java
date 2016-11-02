@@ -37,4 +37,14 @@ public class Recurso {
     }                                       //la cantidad de ese recurso, es decir, solo quitar la capRecoleccion
     
     //GETTERS Y SETTERS
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+    
+    
 }

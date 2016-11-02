@@ -62,4 +62,16 @@ public class Edificio {
     
     
     //GETTERS Y SETTERS
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public int getSalud() {
+        return salud;
+    }
+
+    public void setSalud(int salud) {
+        this.salud = salud;
+    }
 }
