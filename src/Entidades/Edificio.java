@@ -57,4 +57,9 @@ public class Edificio {
         }
         return new Personaje("Soldado", Nombre,punto);
     }
+    
+    
+    
+    
+    //GETTERS Y SETTERS
 }

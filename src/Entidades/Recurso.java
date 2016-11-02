@@ -35,4 +35,6 @@ public class Recurso {
     public void setCantidad(int cantidad){  //Este metodo es para el caso en el que un personaje sin suficiente
         this.cantidad = cantidad;           //capacidad de carga intenta recolectar un recurso, hay que mermar
     }                                       //la cantidad de ese recurso, es decir, solo quitar la capRecoleccion
+    
+    //GETTERS Y SETTERS
 }

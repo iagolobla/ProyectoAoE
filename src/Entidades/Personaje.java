@@ -58,5 +58,6 @@ public class Personaje {
                 return null;
         }
     }
+    //GETTERS Y SETTERS
 
 }
