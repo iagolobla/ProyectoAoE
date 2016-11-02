@@ -96,7 +96,16 @@ public class Mapa {
     }
     
 
-    public boolean checkCeldaCoords(){  //Devuelve true si la celda tiene una posicion valida en el mapa
+    public boolean checkCeldaCoords(Celda cell){  //Devuelve true si la celda tiene una posicion valida en el mapa
+        if(cell.getPosicion().getX() < 0 || cell.getPosicion().getX() >= MAPAX)
+            return false;
+        if(cell.getPosicion().getY() < 0 || cell.getPosicion().getY() >= MAPAY)
+            return false;
+        return true;
+        
+    }
+    
+    public void mover(String direccion){
         
     }
 }

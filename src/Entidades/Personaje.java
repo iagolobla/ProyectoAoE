@@ -59,7 +59,7 @@ public class Personaje {
         }
     }
     
-    public void mover(String Nombre, String direccion){
+    public void mover(String direccion){
         
     }
     //GETTERS Y SETTERS

@@ -90,5 +90,12 @@ public class Celda {
     public Posicion getPosicion(){
         return new Posicion(pos);
     }
+    
+    public void liberarCelda(){
+        edificio = null;
+        personaje = null;
+        recurso = null;
+        tipo = "Pradera";
+    }
 
 }
