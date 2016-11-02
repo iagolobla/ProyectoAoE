@@ -12,6 +12,7 @@ package Mapa;
 import Entidades.Posicion;
 import java.util.ArrayList;
 import java.util.HashMap;
+import Entidades.Edificio;
 public class Mapa {
     ArrayList<ArrayList<Celda>> mapa; 
     HashMap personajes;
@@ -108,6 +109,27 @@ public class Mapa {
     public void mover(String direccion){
         
     }
+
+    public ArrayList<ArrayList<Celda>> getMapa() {
+        return mapa;
+    }
+
+    public HashMap getPersonajes() {
+        return new HashMap(personajes);
+    }
+
+
+
+    public HashMap getEdificios() {
+        return new HashMap(edificios);
+    }
+
+
+    public HashMap getRecursos() {
+        return new HashMap(recursos);
+    }
+
+    
 }
 
 

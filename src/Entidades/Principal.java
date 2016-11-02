@@ -30,6 +30,14 @@ public class Principal {
                         if(comando.length !=3){
                             System.out.println("Errorsintactico: MOVER ...");
                         }else{
+                            System.out.println(comando[1]);
+                            System.out.println(comando[2]);
+                            if(map.getPersonajes().containsKey(comando[1])){
+                                Personaje personaje=(Personaje) map.getPersonajes().get(comando[1]);
+                                personaje.mover(comando[2]);
+                            }else{
+                                System.out.println("El personaje no existe");
+                            }
                             //procesar comando
                             //obtener personaje del mapa
                             //comprobar si se puede mover a esa posicion
