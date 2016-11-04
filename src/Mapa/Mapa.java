@@ -41,12 +41,12 @@ public class Mapa {
         //Creacion de la ciudadela
         String Name = "Ciudadela-" + edificios.size() + 1;    //edificios.size() ayuda a crear el nombre
         mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
-        edificios.put(Name, getCelda(new Posicion(3, 3)).getObj());
+        edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
 
         //creacion un personaje
         Name = "Personaje-" + personajes.size() + 1;
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
-        personajes.put(Name, getCelda(new Posicion(3, 4)).getObj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
     }
 
     public Celda getCelda(Posicion p) {
@@ -67,8 +67,9 @@ public class Mapa {
         System.out.println("");
         for (int i = 0; i < MAPAY; i++) {
             System.out.print("&");
-            for (int j = 0; j < mapa.get(0).size(); j++) {
-                switch (mapa.get(i).get(j).tipo) {
+            for (int j = 0; j < MAPAX; j++) {
+                if(mapa.get(i).get(j).getVisible()){
+                switch (mapa.get(i).get(j).getTipo()) {
                     case ("Pradera"):
                         System.out.print(" ");
                         break;
@@ -89,6 +90,9 @@ public class Mapa {
                         break;
                     default:
                         System.out.println("Error, tipo de edificio incorrecto");
+                }
+                } else {
+                    System.out.println("*");
                 }
             }
             System.out.print("&");

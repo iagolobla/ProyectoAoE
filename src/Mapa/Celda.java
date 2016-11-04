@@ -21,6 +21,7 @@ public class Celda {
     Recurso recurso;
     Posicion pos;
     String tipo;
+    boolean visible = false;
 
     public Celda(Posicion posicion) {
         if (posicion == null) {
@@ -41,9 +42,11 @@ public class Celda {
         switch (tipo) {
             case "Soldado":
                 personaje = new Personaje("Soldado", Nombre, pos);
+                visible = true;
                 break;
             case "Paisano":
                 personaje = new Personaje("Paisano", Nombre, pos);
+                visible = true;
                 break;
             case "Ciudadela":
                 edificio = new Edificio("Ciudadela", pos, Nombre);
@@ -116,7 +119,15 @@ public class Celda {
     public void setRecurso(Recurso recurso) {
         this.recurso = recurso;
     }
-
+    
+    public boolean getVisible(){
+        return visible;
+    }
+    
+    public void setVisible(Boolean estado){
+        visible = estado;
+    }
+    
     public String getTipo() {
         return tipo;
     }
