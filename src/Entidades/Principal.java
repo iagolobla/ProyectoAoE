@@ -34,7 +34,7 @@ public class Principal {
                             System.out.println(comando[2]);
                             if(map.getPersonajes().containsKey(comando[1])){
                                 Personaje personaje=(Personaje) map.getPersonajes().get(comando[1]);
-                                map.moverPj(comando[1], comando[2]);
+                                personaje.moverPj(map, comando[2]);
                                 //personaje.mover(comando[2]);
                             }else{
                                 System.out.println("El personaje no existe");
