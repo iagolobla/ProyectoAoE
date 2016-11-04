@@ -65,6 +65,9 @@ public class Principal {
                                 break;
                         }
                         break;
+                    case "describir":
+                        
+                        break;
                     case "mapa":
                         map.imprimir();
                         break;

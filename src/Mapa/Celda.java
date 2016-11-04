@@ -81,7 +81,7 @@ public class Celda {
     }
 
     public Edificio getEf() {
-        if (personaje != null) {
+        if (edificio != null) {
             return edificio;
         }
         System.out.println("Celda Vacia!");
@@ -89,7 +89,7 @@ public class Celda {
     }
 
     public Recurso getRs() {
-        if (personaje != null) {
+        if (recurso != null) {
             return recurso;
         }
         System.out.println("Celda Vacia!");
