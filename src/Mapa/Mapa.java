@@ -27,9 +27,9 @@ public class Mapa {
     private final int MAPAY = 8;
 
     public Mapa() {
-        edificios = new HashMap();
-        personajes = new HashMap();
-        recursos = new HashMap();
+        edificios = new HashMap<String,Edificio>();
+        personajes = new HashMap<String,Personaje>();
+        recursos = new HashMap<String,Recurso>();
         mapa = new ArrayList<>();
         for (int i = 0; i < MAPAY; i++) {
             mapa.add(new ArrayList<>());
@@ -157,16 +157,16 @@ public class Mapa {
         return mapa;
     }
 
-    public HashMap getPersonajes() {
-        return new HashMap(personajes);
+    public HashMap<String, Personaje> getPersonajes() {
+        return new HashMap<String, Personaje>(personajes);
     }
 
-    public HashMap getEdificios() {
-        return new HashMap(edificios);
+    public HashMap<String, Edificio> getEdificios() {
+        return new HashMap<String, Edificio>(edificios);
     }
 
-    public HashMap getRecursos() {
-        return new HashMap(recursos);
+    public HashMap<String, Recurso> getRecursos() {
+        return new HashMap<String, Recurso>(recursos);
     }
 
 }
