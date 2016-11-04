@@ -19,9 +19,9 @@ import java.util.HashMap;
 public class Mapa {
 
     ArrayList<ArrayList<Celda>> mapa;
-    HashMap personajes;
-    HashMap edificios;
-    HashMap recursos;
+    HashMap <String,Personaje> personajes;
+    HashMap <String,Edificio> edificios;
+    HashMap <String,Recurso> recursos;
 
     private final int MAPAX = 16;
     private final int MAPAY = 8;

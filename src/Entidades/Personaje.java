@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Entidades;
+import Mapa.Celda;
+import Mapa.Mapa;
 
 /**
  *
@@ -58,7 +60,42 @@ public class Personaje {
                 return null;
         }
     }
-    
+        /*public void moverPj(Mapa mapa, String direccion) {
+        Celda cell = posicion;
+
+        switch (direccion) {
+            case "S":
+                pos.moverX(1);
+                break;
+            case "N":
+                pos.moverX(-1);
+                break;
+            case "E":
+                pos.moverY(1);
+                break;
+            case "O":
+                pos.moverY(-1);
+                break;
+            default:
+                System.out.println("Error, direccion no valida!");
+                
+        }
+        
+        Celda newcell = this.getCelda(pos);
+        
+        if(!this.checkCeldaCoords(newcell) && !newcell.getTipo().equals("Pradera")){    //Compruebo que la celda sea valida y que no haya nada en ella
+            System.out.println("Imposible mover en esa direccion");
+            return;
+        }
+        
+        Pj.setPosicion(pos);    //Actualizamos la posicion del personaje
+        newcell.setPersonaje(Pj);   //Metemos el personaje en la nueva celda
+        
+        this.mapa.get(pos.getX()).set(pos.getY(), newcell); //Metemos la celda en su posicion del mapa
+        
+        cell.liberarCelda();    //Ponemos la celda donde estaba el personaje como pradera
+    }
+    */
     //GETTERS Y SETTERS
 
     public Posicion getPosicion(){
