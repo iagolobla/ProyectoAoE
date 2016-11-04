@@ -19,9 +19,9 @@ import java.util.HashMap;
 public class Mapa {
 
     ArrayList<ArrayList<Celda>> mapa;
-    HashMap <String,Personaje> personajes;
-    HashMap <String,Edificio> edificios;
-    HashMap <String,Recurso> recursos;
+    HashMap<String, Personaje> personajes;
+    HashMap<String, Edificio> edificios;
+    HashMap<String, Recurso> recursos;
 
     private final int MAPAX = 16;
     private final int MAPAY = 8;
@@ -68,31 +68,31 @@ public class Mapa {
         for (int i = 0; i < MAPAY; i++) {
             System.out.print("&");
             for (int j = 0; j < MAPAX; j++) {
-                if(mapa.get(i).get(j).getVisible()){
-                switch (mapa.get(i).get(j).getTipo()) {
-                    case ("Pradera"):
-                        System.out.print(" ");
-                        break;
-                    case ("Ciudadela"):
-                        System.out.print("C");
-                        break;
-                    case ("Cuartel"):
-                        System.out.print("c");
-                        break;
-                    case ("Casa"):
-                        System.out.print("Ç");
-                        break;
-                    case "Soldado":
-                        System.out.print("S");
-                        break;
-                    case "Paisano":
-                        System.out.print("P");
-                        break;
-                    default:
-                        System.out.println("Error, tipo de edificio incorrecto");
-                }
+                if (mapa.get(i).get(j).getVisible()) {
+                    switch (mapa.get(i).get(j).getTipo()) {
+                        case ("Pradera"):
+                            System.out.print(" ");
+                            break;
+                        case ("Ciudadela"):
+                            System.out.print("C");
+                            break;
+                        case ("Cuartel"):
+                            System.out.print("c");
+                            break;
+                        case ("Casa"):
+                            System.out.print("Ç");
+                            break;
+                        case "Soldado":
+                            System.out.print("S");
+                            break;
+                        case "Paisano":
+                            System.out.print("P");
+                            break;
+                        default:
+                            System.out.println("Error, tipo de edificio incorrecto");
+                    }
                 } else {
-                    System.out.println("*");
+                    System.out.print("*");
                 }
             }
             System.out.print("&");
@@ -135,21 +135,21 @@ public class Mapa {
                 break;
             default:
                 System.out.println("Error, direccion no valida!");
-                
+
         }
-        
+
         Celda newcell = this.getCelda(pos);
-        
-        if(!this.checkCeldaCoords(newcell) && !newcell.getTipo().equals("Pradera")){    //Compruebo que la celda sea valida y que no haya nada en ella
+
+        if (!this.checkCeldaCoords(newcell) && !newcell.getTipo().equals("Pradera")) {    //Compruebo que la celda sea valida y que no haya nada en ella
             System.out.println("Imposible mover en esa direccion");
             return;
         }
-        
+
         Pj.setPosicion(pos);    //Actualizamos la posicion del personaje
         newcell.setPersonaje(Pj);   //Metemos el personaje en la nueva celda
-        
+
         this.mapa.get(pos.getX()).set(pos.getY(), newcell); //Metemos la celda en su posicion del mapa
-        
+
         cell.liberarCelda();    //Ponemos la celda donde estaba el personaje como pradera
     }
 
