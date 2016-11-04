@@ -66,7 +66,16 @@ public class Principal {
                         }
                         break;
                     case "describir":
-                        
+                        if(map.getPersonajes().containsKey(comando[1])){
+                            Personaje p=map.getPersonajes().get(comando[1]);
+                            System.out.println(p);
+                        }else if(map.getEdificios().containsKey(comando[1])){
+                            
+                        }else if(map.getRecursos().containsKey(comando[1])){
+                            
+                        }else{
+                            System.out.println("No existe la entidad introducida");
+                        }
                         break;
                     case "mapa":
                         map.imprimir();

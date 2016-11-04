@@ -53,7 +53,7 @@ public class Posicion {
 
     @Override
     public String toString() {
-        return "Posicion{" + "x=" + x + ", y=" + y + "}";
+        return "Posicion("+x+","+y+")";
     }
 
     @Override

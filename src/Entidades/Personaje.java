@@ -95,6 +95,20 @@ public class Personaje {
         
         cell.liberarCelda();    //Ponemos la celda donde estaba el personaje como pradera
     }
+    @Override
+    public String toString() {
+        String impresion = "";
+        impresion+="Tipo: "+tipo+"\n";
+        impresion+="Armadura: "+armadura+"\n";
+        impresion+="Salud: "+salud+"\n";
+        impresion+="Ataque: "+ataque+"\n";
+        impresion+="Capacidad Recolección: "+capRecolectar+"\n";
+        impresion+="Nombre: "+Nombre+"\n";
+        impresion+="Posicion: "+posicion+"\n";
+        
+
+        return impresion;
+    }
     
     //GETTERS Y SETTERS
 
