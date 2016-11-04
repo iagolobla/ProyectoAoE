@@ -44,7 +44,7 @@ public class Mapa {
         edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
 
         //creacion un personaje
-        Name = "Personaje-" + personajes.size() + 1;
+        Name = "Paisano-" + personajes.size() + 1;
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
     }
@@ -92,7 +92,7 @@ public class Mapa {
                         System.out.println("Error, tipo de edificio incorrecto");
                 }
                 } else {
-                    System.out.println("*");
+                    System.out.print("*");
                 }
             }
             System.out.print("&");
