@@ -61,8 +61,7 @@ public class Personaje {
         }
     }
         public void moverPj(Mapa mapa, String direccion) {
-        Posicion pos=new Posicion(posicion);
-        Celda cell = mapa.getCelda(pos);
+        Celda cell = mapa.getCelda(posicion);
         
         switch (direccion) {
             case "S":

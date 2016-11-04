@@ -31,12 +31,16 @@ public class Mapa {
         personajes = new HashMap();
         recursos = new HashMap();
         mapa = new ArrayList<>();
+        Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             mapa.add(new ArrayList<>());
-            for (int j = 0; j < MAPAX; j++) {
-                mapa.get(i).add(new Celda(new Posicion(i, j)));
+            for (int j = 0; j < MAPAX; j++) {   //Inicializamos visible a false para todas las celdas
+                cell = new Celda(new Posicion(i, j));
+                cell.setVisible(false);
+                mapa.get(i).add(cell);
             }
         }
+        
 
         //Creacion de la ciudadela
         String Name = "Ciudadela-" + edificios.size() + 1;    //edificios.size() ayuda a crear el nombre
@@ -59,13 +63,53 @@ public class Mapa {
 
         return mapa.get(x).get(y);
     }
+    
+    private void ponerVisible(Celda cell){
+        Celda aux;
+        Posicion pos;
+        if(cell.getTipo().equals("Soldado") || cell.getTipo().equals("Paisano")){   //Cuando localiza un soldado o paisano pone
+                    pos = new Posicion(cell.getPosicion());                                 //sus celdas adyacentes en visible
+                    aux = this.getCelda(pos);
+                    aux.setVisible(true);   //Pone visible la celda del personaje
+                    
+                    pos.moverX(1);
+                    aux = this.getCelda(pos);
+                    aux.setVisible(true);   //Pone visible la celda de abajo
+                    
+                    pos.moverX(-2);
+                    aux = this.getCelda(pos);
+                    aux.setVisible(true);   //Pone visible la celda de arriba
+                    
+                    pos.moverX(1);
+                    pos.moverY(1);
+                    aux = this.getCelda(pos);
+                    aux.setVisible(true);   //Pone visible la celda derecha
+                    
+                    pos.moverY(-2);
+                    aux = this.getCelda(pos);
+                    aux.setVisible(true);   //Pone visible la celda izquierda
+                }
+    }
 
     public void imprimir() {
+        Celda cell;
+        Celda aux;
+        Posicion pos;
+        
         for (int i = 0; i < MAPAX + 2; i++) {
             System.out.print("&");
         }
         System.out.println("");
-        for (int i = 0; i < MAPAY; i++) {
+        
+        //Recorremos mapa para actualizar las visibilidades
+        for(int i = 0;i<MAPAY;i++){
+            for(int j = 0;j<MAPAX;j++){
+                cell = this.getCelda(new Posicion(i,j));
+                this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
+            }
+        }
+        
+        for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
             System.out.print("&");
             for (int j = 0; j < MAPAX; j++) {
                 if (mapa.get(i).get(j).getVisible()) {
