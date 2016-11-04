@@ -69,29 +69,35 @@ public class Celda {
         }
     }
 
-    public Object getObj() {
-        if (tipo == "Soldado" || tipo == "Paisano") {
-            if (personaje != null) {
-                return personaje;
-            }
-        } else if (tipo == "Ciudadela" || tipo == "Casa" || tipo == "Cuartel") {
-            if (personaje != null) {
-                return edificio;
-            }
-        } else if (tipo == "Bosque" || tipo == "Cantera" || tipo == "Arbusto") {
-            if (personaje != null) {
-                return recurso;
-            }
+    public Personaje getPj() {
+        if (personaje != null) {
+            return personaje;
         }
         System.out.println("Celda Vacia!");
         return null;
     }
-    
-    public Posicion getPosicion(){
+
+    public Edificio getEf() {
+        if (personaje != null) {
+            return edificio;
+        }
+        System.out.println("Celda Vacia!");
+        return null;
+    }
+
+    public Recurso getRs() {
+        if (personaje != null) {
+            return recurso;
+        }
+        System.out.println("Celda Vacia!");
+        return null;
+    }
+
+    public Posicion getPosicion() {
         return new Posicion(pos);
     }
-    
-    public void liberarCelda(){
+
+    public void liberarCelda() {
         edificio = null;
         personaje = null;
         recurso = null;
@@ -110,9 +116,9 @@ public class Celda {
     public void setRecurso(Recurso recurso) {
         this.recurso = recurso;
     }
-    
-    public String getTipo(){
+
+    public String getTipo() {
         return tipo;
     }
-    
+
 }
