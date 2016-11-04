@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Entidades;
+
 import Mapa.Celda;
 
 /**
@@ -11,27 +12,28 @@ import Mapa.Celda;
  * @author iagolobla
  */
 public class Edificio {
+
     private final int SALUDCIUDADELA = 200;
     private final int SALUDCASA = 50;
     private final int SALUDCUARTEL = 150;
-    
+
     private String tipo;
     private int salud;
     private Posicion punto;
-    
-    public Edificio(String tipe, Posicion posicion, String Nombre){
+
+    public Edificio(String tipe, Posicion posicion, String Nombre) {
         //Igualar punto y posicion evitando aliasing
         punto = new Posicion(posicion.getX(), posicion.getY());
-        switch(tipe){
-            case("Ciudadela"):
+        switch (tipe) {
+            case ("Ciudadela"):
                 tipo = tipe;
                 salud = SALUDCIUDADELA;
                 break;
-            case("Cuartel"):
+            case ("Cuartel"):
                 tipo = tipe;
                 salud = SALUDCUARTEL;
                 break;
-            case("Casa"):
+            case ("Casa"):
                 tipo = tipe;
                 salud = SALUDCASA;
                 break;
@@ -39,29 +41,28 @@ public class Edificio {
                 System.out.println("Error, tipo de edificio incorrecto");
         }
     }
-    
-    
-    public Personaje crearPaisano(String Nombre){
-        if(!this.tipo.equals("Ciudadela")){
+
+    public Personaje crearPaisano(String Nombre) {
+        if (!this.tipo.equals("Ciudadela")) {
             System.out.println("Este edificio no puede crear Paisanos");
             return null;
         }
-        
-        return new Personaje("Paisano", Nombre,punto);
+
+        return new Personaje("Paisano", Nombre, punto);
     }
-    
-    public Personaje crearSoldado(String Nombre){
-        if(!this.tipo.equals("Cuartel")){
+
+    public Personaje crearSoldado(String Nombre) {
+        if (!this.tipo.equals("Cuartel")) {
             System.out.println("Este edificio no puede crear Soldados");
             return null;
         }
-        return new Personaje("Soldado", Nombre,punto);
+        return new Personaje("Soldado", Nombre, punto);
     }
-    
-    
-    
-    
+
     //GETTERS Y SETTERS
+    public Posicion getPosicion() {
+        return new Posicion(punto);
+    }
 
     public String getTipo() {
         return tipo;
