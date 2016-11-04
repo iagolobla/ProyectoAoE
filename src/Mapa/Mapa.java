@@ -27,9 +27,9 @@ public class Mapa {
     private final int MAPAY = 8;
 
     public Mapa() {
-        edificios = new HashMap<String,Edificio>();
-        personajes = new HashMap<String,Personaje>();
-        recursos = new HashMap<String,Recurso>();
+        edificios = new HashMap<String, Edificio>();
+        personajes = new HashMap<String, Personaje>();
+        recursos = new HashMap<String, Recurso>();
         mapa = new ArrayList<>();
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
@@ -40,7 +40,6 @@ public class Mapa {
                 mapa.get(i).add(cell);
             }
         }
-        
 
         //Creacion de la ciudadela
         String Name = "Ciudadela-" + edificios.size() + 1;    //edificios.size() ayuda a crear el nombre
@@ -63,52 +62,57 @@ public class Mapa {
 
         return mapa.get(x).get(y);
     }
-    
-    private void ponerVisible(Celda cell){
+
+    private void ponerVisible(Celda cell) {
         Celda aux;
         Posicion pos;
-        if(cell.getTipo().equals("Soldado") || cell.getTipo().equals("Paisano")){   //Cuando localiza un soldado o paisano pone
-                    pos = new Posicion(cell.getPosicion());                                 //sus celdas adyacentes en visible
-                    aux = this.getCelda(pos);
-                    aux.setVisible(true);   //Pone visible la celda del personaje
-                    
-                    pos.moverX(1);
-                    aux = this.getCelda(pos);
-                    aux.setVisible(true);   //Pone visible la celda de abajo
-                    
-                    pos.moverX(-2);
-                    aux = this.getCelda(pos);
-                    aux.setVisible(true);   //Pone visible la celda de arriba
-                    
-                    pos.moverX(1);
-                    pos.moverY(1);
-                    aux = this.getCelda(pos);
-                    aux.setVisible(true);   //Pone visible la celda derecha
-                    
-                    pos.moverY(-2);
-                    aux = this.getCelda(pos);
-                    aux.setVisible(true);   //Pone visible la celda izquierda
-                }
+        if (cell.getTipo().equals("Soldado") || cell.getTipo().equals("Paisano")) {   //Cuando localiza un soldado o paisano pone
+            pos = new Posicion(cell.getPosicion());                                 //sus celdas adyacentes en visible
+            aux = this.getCelda(pos);
+            aux.setVisible(true);   //Pone visible la celda del personaje
+
+            pos.moverX(1);
+            if (this.checkCoords(pos)) {
+                aux = this.getCelda(pos);
+                aux.setVisible(true);   //Pone visible la celda de abajo
+            }
+            pos.moverX(-2);
+            if (this.checkCoords(pos)) {
+                aux = this.getCelda(pos);
+                aux.setVisible(true);   //Pone visible la celda de arriba
+            }
+            pos.moverX(1);
+            pos.moverY(1);
+            if (this.checkCoords(pos)) {
+                aux = this.getCelda(pos);
+                aux.setVisible(true);   //Pone visible la celda derecha
+            }
+            pos.moverY(-2);
+            if (this.checkCoords(pos)) {
+                aux = this.getCelda(pos);
+                aux.setVisible(true);   //Pone visible la celda izquierda
+            }
+        }
     }
 
     public void imprimir() {
         Celda cell;
         Celda aux;
         Posicion pos;
-        
+
         for (int i = 0; i < MAPAX + 2; i++) {
             System.out.print("&");
         }
         System.out.println("");
-        
+
         //Recorremos mapa para actualizar las visibilidades
-        for(int i = 0;i<MAPAY;i++){
-            for(int j = 0;j<MAPAX;j++){
-                cell = this.getCelda(new Posicion(i,j));
+        for (int i = 0; i < MAPAY; i++) {
+            for (int j = 0; j < MAPAX; j++) {
+                cell = this.getCelda(new Posicion(i, j));
                 this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
             }
         }
-        
+
         for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
             System.out.print("&");
             for (int j = 0; j < MAPAX; j++) {
@@ -148,15 +152,14 @@ public class Mapa {
         System.out.println("");
     }
 
-    public boolean checkCeldaCoords(Celda cell) {  //Devuelve true si la celda tiene una posicion valida en el mapa
-        if(cell.getPosicion().getX() < MAPAY && cell.getPosicion().getY() < MAPAX){
-            if(cell.getPosicion().getX() >= 0 && cell.getPosicion().getY() >= 0){
+    public boolean checkCoords(Posicion pos) {  //Devuelve true si la posicion pasada es valida en el mapa
+        if (pos.getX() < MAPAY && pos.getY() < MAPAX) {
+            if (pos.getX() >= 0 && pos.getY() >= 0) {
                 return true;
             }
         }
         return false;
     }
-
 
     public ArrayList<ArrayList<Celda>> getMapa() {
         return mapa;
