@@ -23,8 +23,8 @@ public class Mapa {
     HashMap<String, Edificio> edificios;
     HashMap<String, Recurso> recursos;
 
-    private final int MAPAX = 16;
-    private final int MAPAY = 8;
+    public final int MAPAX = 16;
+    public final int MAPAY = 8;
 
     public Mapa() {
         edificios = new HashMap<String, Edificio>();
@@ -50,6 +50,14 @@ public class Mapa {
         Name = "Paisano-" + personajes.size() + 1;
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        
+        //Recorremos mapa para actualizar las visibilidades
+        for (int i = 0; i < MAPAY; i++) {
+            for (int j = 0; j < MAPAX; j++) {
+                cell = this.getCelda(new Posicion(i, j));
+                this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
+            }
+        }
     }
 
     public Celda getCelda(Posicion p) {
@@ -63,7 +71,7 @@ public class Mapa {
         return mapa.get(x).get(y);
     }
 
-    private void ponerVisible(Celda cell) {
+    public void ponerVisible(Celda cell) {
         Celda aux;
         Posicion pos;
         if (cell.getTipo().equals("Soldado") || cell.getTipo().equals("Paisano")) {   //Cuando localiza un soldado o paisano pone
@@ -105,13 +113,7 @@ public class Mapa {
         }
         System.out.println("");
 
-        //Recorremos mapa para actualizar las visibilidades
-        for (int i = 0; i < MAPAY; i++) {
-            for (int j = 0; j < MAPAX; j++) {
-                cell = this.getCelda(new Posicion(i, j));
-                this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
-            }
-        }
+        
 
         for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
             System.out.print("&");

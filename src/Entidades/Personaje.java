@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Entidades;
+
 import Mapa.Celda;
 import Mapa.Mapa;
 
@@ -21,11 +22,11 @@ public class Personaje {
     private String Nombre;  //Aqui se necesita poner un nombre al personaje para usar eso como clave en el hashmap de personajes en el mapa
     private Posicion posicion;
 
-    public Personaje(String tipo, String Nombre,Posicion pos) {
-        posicion=new Posicion(pos);
+    public Personaje(String tipo, String Nombre, Posicion pos) {
+        posicion = new Posicion(pos);
         switch (tipo) {
             case "Soldado":
-                this.tipo=tipo;
+                this.tipo = tipo;
                 armadura = 100;
                 salud = 200;
                 ataque = 50;
@@ -33,7 +34,7 @@ public class Personaje {
                 this.Nombre = Nombre;   //El parametro nombre debe ser unico para cada personaje
                 break;
             case "Paisano":
-                this.tipo=tipo;
+                this.tipo = tipo;
                 armadura = 50;
                 salud = 150;
                 ataque = 10;
@@ -60,62 +61,74 @@ public class Personaje {
                 return null;
         }
     }
-        public void moverPj(Mapa mapa, String direccion) {
+
+    public void moverPj(Mapa mapa, String direccion) {
         Celda cell = mapa.getCelda(posicion);
+        Posicion pos = new Posicion(posicion);
         
+
         switch (direccion) {
             case "S":
-                posicion.moverX(1);
+                pos.moverX(1);
                 break;
             case "N":
-                posicion.moverX(-1);
+                pos.moverX(-1);
                 break;
             case "E":
-                posicion.moverY(1);
+                pos.moverY(1);
                 break;
             case "O":
-                posicion.moverY(-1);
+                pos.moverY(-1);
                 break;
             default:
                 System.out.println("Error, direccion no valida!");
-                
+
         }
-        
-        Celda newcell = mapa.getCelda(posicion);
-        
-        /*if(!this.checkCeldaCoords(newcell) && !newcell.getTipo().equals("Pradera")){    //Compruebo que la celda sea valida y que no haya nada en ella
+        if (mapa.checkCoords(pos)) {
+            this.setPosicion(pos);
+            Celda newcell = mapa.getCelda(posicion);
+
+            /*if(!this.checkCeldaCoords(newcell) && !newcell.getTipo().equals("Pradera")){    //Compruebo que la celda sea valida y que no haya nada en ella
             System.out.println("Imposible mover en esa direccion");
             return;
         }*/
-        
-        //Pj.setPosicion(pos);    //Actualizamos la posicion del personaje
-        newcell.setPersonaje(this);   //Metemos el personaje en la nueva celda
-        
-        mapa.getMapa().get(posicion.getX()).set(posicion.getY(), newcell); //Metemos la celda en su posicion del mapa
-        
-        cell.liberarCelda();    //Ponemos la celda donde estaba el personaje como pradera
+            //Pj.setPosicion(pos);    //Actualizamos la posicion del personaje
+            newcell.setPersonaje(this);   //Metemos el personaje en la nueva celda
+
+            mapa.getMapa().get(posicion.getX()).set(posicion.getY(), newcell); //Metemos la celda en su posicion del mapa
+
+            cell.liberarCelda();    //Ponemos la celda donde estaba el personaje como pradera
+        } else {
+            System.out.println("No se puede Mover en esa direccion!");
+        }
+        //Recorremos mapa para actualizar las visibilidades
+        for (int i = 0; i < mapa.MAPAY; i++) {
+            for (int j = 0; j < mapa.MAPAX; j++) {
+                cell = mapa.getCelda(new Posicion(i, j));
+                mapa.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
+            }
+        }
     }
+
     @Override
     public String toString() {
         String impresion = "";
-        impresion+="Tipo: "+tipo+"\n";
-        impresion+="Armadura: "+armadura+"\n";
-        impresion+="Salud: "+salud+"\n";
-        impresion+="Ataque: "+ataque+"\n";
-        impresion+="Capacidad Recolección: "+capRecolectar+"\n";
-        impresion+="Nombre: "+Nombre+"\n";
-        impresion+="Posicion: "+posicion+"\n";
-        
+        impresion += "Tipo: " + tipo + "\n";
+        impresion += "Armadura: " + armadura + "\n";
+        impresion += "Salud: " + salud + "\n";
+        impresion += "Ataque: " + ataque + "\n";
+        impresion += "Capacidad Recolección: " + capRecolectar + "\n";
+        impresion += "Nombre: " + Nombre + "\n";
+        impresion += "Posicion: " + posicion + "\n";
 
         return impresion;
     }
-    
-    //GETTERS Y SETTERS
 
-    public Posicion getPosicion(){
+    //GETTERS Y SETTERS
+    public Posicion getPosicion() {
         return new Posicion(posicion);
     }
-    
+
     public String getTipo() {
         return tipo;
     }
@@ -151,8 +164,8 @@ public class Personaje {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-    
-    public void setPosicion(Posicion pos){
+
+    public void setPosicion(Posicion pos) {
         this.posicion = new Posicion(pos);
     }
 }
