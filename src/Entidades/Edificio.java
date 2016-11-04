@@ -58,6 +58,17 @@ public class Edificio {
         }
         return new Personaje("Soldado", Nombre, punto);
     }
+    
+    @Override
+    public String toString() {
+        String impresion = "";
+        impresion+="Tipo: "+tipo+"\n";
+        impresion+="Salud: "+salud+"\n";
+        impresion+="Posicion: "+punto+"\n";
+        
+
+        return impresion;
+    }
 
     //GETTERS Y SETTERS
     public Posicion getPosicion() {
