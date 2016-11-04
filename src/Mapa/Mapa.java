@@ -149,14 +149,12 @@ public class Mapa {
     }
 
     public boolean checkCeldaCoords(Celda cell) {  //Devuelve true si la celda tiene una posicion valida en el mapa
-        if (cell.getPosicion().getX() < 0 || cell.getPosicion().getX() >= MAPAX) {
-            return false;
+        if(cell.getPosicion().getX() < MAPAY && cell.getPosicion().getY() < MAPAX){
+            if(cell.getPosicion().getX() >= 0 && cell.getPosicion().getY() >= 0){
+                return true;
+            }
         }
-        if (cell.getPosicion().getY() < 0 || cell.getPosicion().getY() >= MAPAY) {
-            return false;
-        }
-        return true;
-
+        return false;
     }
 
     public void moverPj(String Nombre, String direccion) {
