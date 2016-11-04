@@ -21,7 +21,7 @@ public class Celda {
     Recurso recurso;
     Posicion pos;
     String tipo;
-    boolean visible = false;
+    boolean visible;
 
     public Celda(Posicion posicion) {
         if (posicion == null) {
