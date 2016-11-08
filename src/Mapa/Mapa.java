@@ -66,6 +66,15 @@ public class Mapa {
         cantidades[0]++;
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        /*for(int i=6;i<8;i++){
+            for(int j=6;j<8;j++){
+                Name = "Bosque-" + (cantidades[5] + 1);
+                cantidades[5]++;
+                mapa.get(i).set(j, new Celda("Bosque", new Posicion(i, j), Name));
+                recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
+            }
+        }*/
+        //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
 
         //Recorremos mapa para actualizar las visibilidades
         for (int i = 0; i < MAPAY; i++) {

@@ -69,9 +69,11 @@ public class Personaje {
         switch (Edificio.toLowerCase()) {
             case "casa":
 
-                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada//COMPROBAR INTRODUCIR EN HASHMAP
                     String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
+                    mapa.getCantidades()[3]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                    //COMPROBAR ESTO//mapa.getEdificios().put(Name, getCelda(new Posicion(3, 3)).getEf());
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
                 }
@@ -80,6 +82,7 @@ public class Personaje {
 
                 if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                     String Name = "Cuartel-" + (mapa.getCantidades()[4] + 1);
+                    mapa.getCantidades()[4]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
@@ -89,6 +92,7 @@ public class Personaje {
 
                 if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                     String Name = "Ciudadela-" + (mapa.getCantidades()[2] + 1);
+                    mapa.getCantidades()[2]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
