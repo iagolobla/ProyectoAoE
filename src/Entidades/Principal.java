@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import Mapa.Mapa;
+import Mapa.Celda;
 
 public class Principal {
 
@@ -37,7 +38,8 @@ public class Principal {
                             System.out.println(comando[2]);
                             if (map.getPersonajes().containsKey(comando[1])) {
                                 Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
-                                personaje.moverPj(map, comando[2]);
+                                Posicion pos = personaje.moverPj(map, comando[2]);
+                                System.out.println("El " + comando[1] + " se ha movido a la posicion" + pos);
                                 //personaje.mover(comando[2]);
                             } else {
                                 System.out.println("El personaje no existe");
@@ -78,6 +80,39 @@ public class Principal {
                         }else{
                             System.out.println("No existe la entidad introducida");
                         }
+                        break;
+                        
+                    case "mirar":
+                        Posicion posMirar = new Posicion(comando[1]);  //guarda la posicion pasada
+                        Celda cellMirar = map.getCelda(posMirar);
+                        
+                        switch(cellMirar.getTipo()){    //En funcion del tipo de la celda
+                            case "Soldado":
+                                System.out.println("Celda tipo Pradera, hay un Soldado aqui");
+                                break;
+                            case "Paisano":
+                                System.out.println("Celda tipo Pradera, hay un Paisano aqui");
+                                break;
+                            case "Ciudadela":
+                                System.out.println("Celda tipo Ciudadela");
+                                break;
+                            case "Casa":
+                                System.out.println("Celda tipo Casa");
+                                break;
+                            case "Cuartel":
+                                System.out.println("Celda tipo Cuartel");
+                                break;
+                            case "Bosque":
+                                System.out.println("Celda tipo Bosque");
+                                break;
+                            case "Cantera":
+                                System.out.println("Celda tipo Cantera");
+                                break;
+                            case "Arbusto":
+                                System.out.println("Celda tipo Arbusto");
+                                break;
+                        }
+                        
                         break;
                     case "mapa":
                         map.imprimir();

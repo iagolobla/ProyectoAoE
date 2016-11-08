@@ -62,7 +62,7 @@ public class Personaje {
         }
     }
 
-    public void moverPj(Mapa mapa, String direccion) {
+    public Posicion moverPj(Mapa mapa, String direccion) {
         Celda cell = mapa.getCelda(posicion);
         Posicion pos = new Posicion(posicion);
         
@@ -103,6 +103,7 @@ public class Personaje {
                 mapa.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
             }
         }
+        return new Posicion(posicion);
     }
 
     @Override
