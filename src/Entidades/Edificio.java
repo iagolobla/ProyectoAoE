@@ -20,7 +20,11 @@ public class Edificio {
     private String tipo;
     private int salud;
     private Posicion punto;
-
+    
+    private int madera;
+    private int piedra;
+    private int comida;
+    
     public Edificio(String tipe, Posicion posicion, String Nombre) {
         //Igualar punto y posicion evitando aliasing
         punto = new Posicion(posicion.getX(), posicion.getY());
