@@ -42,12 +42,12 @@ public class Mapa {
         }
 
         //Creacion de la ciudadela
-        String Name = "Ciudadela-" + edificios.size() + 1;    //edificios.size() ayuda a crear el nombre
+        String Name = "Ciudadela-" + (edificios.size() + 1);    //edificios.size() ayuda a crear el nombre
         mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
         edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
 
         //creacion un personaje
-        Name = "Paisano-" + personajes.size() + 1;
+        Name = "Paisano-" + (personajes.size() + 1);
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
         
