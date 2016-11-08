@@ -50,7 +50,7 @@ public class Mapa {
         Name = "Paisano-" + (personajes.size() + 1);
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
-        
+
         //Recorremos mapa para actualizar las visibilidades
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {
@@ -113,8 +113,6 @@ public class Mapa {
         }
         System.out.println("");
 
-        
-
         for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
             System.out.print("&");
             for (int j = 0; j < MAPAX; j++) {
@@ -152,6 +150,13 @@ public class Mapa {
             System.out.print("&");
         }
         System.out.println("");
+    }
+    
+    public boolean checkBuilding(Posicion pos) {
+        if(this.getCelda(pos).getTipo().equals("Pradera")){
+            return true;
+        }
+        return false;
     }
 
     public boolean checkCoords(Posicion pos) {  //Devuelve true si la posicion pasada es valida en el mapa

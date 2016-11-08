@@ -47,6 +47,7 @@ public class Principal {
                             //comprobar si se puede mover a esa posicion
                             //....
                         }
+                        map.imprimir();
                         break;
                     case "listar":
                         switch (comando[1].toLowerCase()) {
