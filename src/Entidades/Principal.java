@@ -40,8 +40,9 @@ public class Principal {
                                 Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
                                 Posicion p = new Posicion(personaje.getPosicion());
                                 Posicion pos = personaje.moverPj(map, comando[2]);
-                                if(!(p.equals(pos)))
+                                if (!(p.equals(pos))) {
                                     System.out.println("El " + comando[1] + " se ha movido a la " + pos);
+                                }
                                 //personaje.mover(comando[2]);
                             } else {
                                 System.out.println("El personaje no existe");
@@ -72,28 +73,17 @@ public class Principal {
                         break;
                     case "construir":
                         if (comando.length == 4) {
-                            switch (comando[2].toLowerCase()) {
-                                case "casa":
-                                    if (map.getPersonajes().containsKey(comando[1])) {
-                                        Personaje personaje = map.getPersonajes().get(comando[1]);
-                                        personaje.crearCasa(map, comando[3]);
-                                    } else {
-                                        System.out.println("El personaje no existe");
-                                    }
-                                    break;
-                                case "ciudadela":
-
-                                    break;
-                                case "cuartel":
-                                    break;
-                                default:
-                                    System.out.println("comando incorrecto. Debe introducir listar personajes o listar edificios.");
-                                    break;
+                            if (map.getPersonajes().containsKey(comando[1])) {
+                                Personaje personaje = map.getPersonajes().get(comando[1]);
+                                personaje.construir(map, comando[3], comando[2]);
+                            } else {
+                                System.out.println("El personaje no existe");
                             }
 
                         } else {
                             System.out.println("Comando construir incorrecto");
                         }
+                        map.imprimir();
                         break;
                     case "describir":
                         if (map.getPersonajes().containsKey(comando[1])) {
@@ -108,12 +98,12 @@ public class Principal {
                             System.out.println("No existe la entidad introducida");
                         }
                         break;
-                        
+
                     case "mirar":
                         Posicion posMirar = new Posicion(comando[1]);  //guarda la posicion pasada
                         Celda cellMirar = map.getCelda(posMirar);
-                        
-                        switch(cellMirar.getTipo()){    //En funcion del tipo de la celda
+
+                        switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
                             case "Soldado":
                                 System.out.println("Celda tipo Pradera, hay un Soldado aqui");
                                 break;
@@ -139,7 +129,7 @@ public class Principal {
                                 System.out.println("Celda tipo Arbusto");
                                 break;
                         }
-                        
+
                         break;
                     case "mapa":
                         map.imprimir();
