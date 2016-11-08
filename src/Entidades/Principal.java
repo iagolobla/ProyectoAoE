@@ -40,9 +40,8 @@ public class Principal {
                                 Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
                                 Posicion p = new Posicion(personaje.getPosicion());
                                 Posicion pos = personaje.moverPj(map, comando[2]);
-                                if (!(p.equals(pos))) {
+                                if(!(p.equals(pos)))
                                     System.out.println("El " + comando[1] + " se ha movido a la " + pos);
-                                }
                                 //personaje.mover(comando[2]);
                             } else {
                                 System.out.println("El personaje no existe");
@@ -77,7 +76,7 @@ public class Principal {
                                 case "casa":
                                     if (map.getPersonajes().containsKey(comando[1])) {
                                         Personaje personaje = map.getPersonajes().get(comando[1]);
-                                        personaje.crearCasa(map, comando[3]);
+                                        personaje.construir(map, comando[3], comando[2]);
                                     } else {
                                         System.out.println("El personaje no existe");
                                     }
@@ -109,68 +108,38 @@ public class Principal {
                             System.out.println("No existe la entidad introducida");
                         }
                         break;
-
+                        
                     case "mirar":
                         Posicion posMirar = new Posicion(comando[1]);  //guarda la posicion pasada
-
-                        if(map.checkCoords(posMirar)){   
                         Celda cellMirar = map.getCelda(posMirar);
                         
-                        if (cellMirar.getVisible()) {
-
-                            switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
-                                case "Pradera":
-                                    System.out.println("Celda tipo Pradera, no hay nada aqui");
-                                    break;
-                                case "Soldado":
-                                    System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                    Personaje soldadito = cellMirar.getPj();
-                                    System.out.println(soldadito);
-                                    break;
-                                case "Paisano":
-                                    System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                    Personaje paisanito = cellMirar.getPj();
-                                    System.out.println(paisanito);
-                                    break;
-                                case "Ciudadela":
-                                    System.out.println("Celda tipo Edificio");
-                                    Edificio ciudadelita = cellMirar.getEf();
-                                    System.out.println(ciudadelita);
-                                    break;
-                                case "Casa":
-                                    System.out.println("Celda tipo Edificio");
-                                    Edificio casita = cellMirar.getEf();
-                                    System.out.println(casita);
-                                    break;
-                                case "Cuartel":
-                                    System.out.println("Celda tipo Edificio");
-                                    Edificio cuartelito = cellMirar.getEf();
-                                    System.out.println(cuartelito);
-                                    break;
-                                case "Bosque":
-                                    System.out.println("Celda tipo Recurso");
-                                    Recurso bosquecito = cellMirar.getRs();
-                                    System.out.println(bosquecito);
-                                    break;
-                                case "Cantera":
-                                    System.out.println("Celda tipo Recurso");
-                                    Recurso canterita= cellMirar.getRs();
-                                    System.out.println(canterita);
-                                    break;
-                                case "Arbusto":
-                                    System.out.println("Celda tipo Recurso");
-                                    Recurso arbustito = cellMirar.getRs();
-                                    System.out.println(arbustito);
-                                    break;
-                            }
-
-                        } else {    //Si no es visible la celda
-                            System.out.println("Esa celda no es visible");
+                        switch(cellMirar.getTipo()){    //En funcion del tipo de la celda
+                            case "Soldado":
+                                System.out.println("Celda tipo Pradera, hay un Soldado aqui");
+                                break;
+                            case "Paisano":
+                                System.out.println("Celda tipo Pradera, hay un Paisano aqui");
+                                break;
+                            case "Ciudadela":
+                                System.out.println("Celda tipo Ciudadela");
+                                break;
+                            case "Casa":
+                                System.out.println("Celda tipo Casa");
+                                break;
+                            case "Cuartel":
+                                System.out.println("Celda tipo Cuartel");
+                                break;
+                            case "Bosque":
+                                System.out.println("Celda tipo Bosque");
+                                break;
+                            case "Cantera":
+                                System.out.println("Celda tipo Cantera");
+                                break;
+                            case "Arbusto":
+                                System.out.println("Celda tipo Arbusto");
+                                break;
                         }
                         
-                        } else {    //Si las coordenadas dadas estan fuera del mapa
-                            System.out.println("Celda no existente!");
-                        }
                         break;
                     case "mapa":
                         map.imprimir();

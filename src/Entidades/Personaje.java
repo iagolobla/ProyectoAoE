@@ -46,10 +46,9 @@ public class Personaje {
 
         }
     }
-    public void crearCasa(Mapa mapa,String direccion){
-        Posicion pos = new Posicion(posicion);
-        
 
+    public void construir(Mapa mapa, String direccion, String Edificio) {
+        Posicion pos = new Posicion(posicion);
         switch (direccion) {
             case "S":
                 pos.moverX(1);
@@ -67,19 +66,44 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
-        if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-            String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
-            mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-        } else {
-            System.out.println("No se puede Contruir en esa direccion!");
+        switch (Edificio.toLowerCase()) {
+            case "casa":
+
+                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                    String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
+                    mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                } else {
+                    System.out.println("No se puede Contruir en esa direccion!");
+                }
+                break;
+            case "cuartel":
+
+                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                    String Name = "Cuartel-" + (mapa.getCantidades()[4] + 1);
+                    mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                } else {
+                    System.out.println("No se puede Contruir en esa direccion!");
+                }
+                break;
+            case "ciudadela":
+
+                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                    String Name = "Ciudadela-" + (mapa.getCantidades()[2] + 1);
+                    mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                } else {
+                    System.out.println("No se puede Contruir en esa direccion!");
+                }
+                break;
+            default:
+                System.out.println("Error, direccion no valida!");
+
         }
-        
+
     }
 
     public Posicion moverPj(Mapa mapa, String direccion) {
         Celda cell = mapa.getCelda(posicion);
         Posicion pos = new Posicion(posicion);
-        
 
         switch (direccion) {
             case "S":

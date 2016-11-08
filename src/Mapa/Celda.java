@@ -50,6 +50,7 @@ public class Celda {
                 break;
             case "Ciudadela":
                 edificio = new Edificio("Ciudadela", pos, Nombre);
+                visible = true;
                 break;
             case "Casa":
                 edificio = new Edificio("Casa", pos, Nombre);
@@ -57,6 +58,7 @@ public class Celda {
                 break;
             case "Cuartel":
                 edificio = new Edificio("Cuartel", pos, Nombre);
+                visible = true;
                 break;
             case "Bosque":
                 recurso = new Recurso("Bosque", 200);   //De momento dejaremos 200 por defecto
