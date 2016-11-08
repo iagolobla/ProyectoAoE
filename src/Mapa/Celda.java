@@ -53,6 +53,7 @@ public class Celda {
                 break;
             case "Casa":
                 edificio = new Edificio("Casa", pos, Nombre);
+                visible = true;
                 break;
             case "Cuartel":
                 edificio = new Edificio("Cuartel", pos, Nombre);

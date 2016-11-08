@@ -46,21 +46,37 @@ public class Personaje {
 
         }
     }
+    public void crearCasa(Mapa mapa,String direccion){
+        Posicion pos = new Posicion(posicion);
+        
 
-    public Edificio crearCuartel(String Nombre, String direccion) {
         switch (direccion) {
-            case "NORTE":
-                return new Edificio("Cuartel", new Posicion(posicion.getX(), posicion.getY() + 1), "Cuartel");    //Posteriormente hay que calcular el nombre
-            case "SUR":
-                return new Edificio("Cuartel", new Posicion(posicion.getX(), posicion.getY() - 1), "Cuartel");    //Posteriormente hay que calcular el nombre
-            case "ESTE":
-                return new Edificio("Cuartel", new Posicion(posicion.getX() + 1, posicion.getY()), "Cuartel");    //Posteriormente hay que calcular el nombre
-            case "OESTE":
-                return new Edificio("Cuartel", new Posicion(posicion.getX() - 1, posicion.getY() + 1), "Cuartel");    //Posteriormente hay que calcular el nombre
+            case "S":
+                pos.moverX(1);
+                break;
+            case "N":
+                pos.moverX(-1);
+                break;
+            case "E":
+                pos.moverY(1);
+                break;
+            case "O":
+                pos.moverY(-1);
+                break;
             default:
-                return null;
+                System.out.println("Error, direccion no valida!");
+
         }
+        if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+            String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
+            mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+        } else {
+            System.out.println("No se puede Contruir en esa direccion!");
+        }
+        
     }
+
+
 
     public void moverPj(Mapa mapa, String direccion) {
         Celda cell = mapa.getCelda(posicion);

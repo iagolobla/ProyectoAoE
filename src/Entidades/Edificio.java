@@ -13,18 +13,20 @@ import Mapa.Celda;
  */
 public class Edificio {
 
-    private final int SALUDCIUDADELA = 200;
-    private final int SALUDCASA = 50;
-    private final int SALUDCUARTEL = 150;
+    private static final int SALUDCIUDADELA = 200;
+    private static final int SALUDCASA = 50;
+    private static final int SALUDCUARTEL = 150;
+    private static final int CAPACIDADCUARTEL = 15;
+    private static final int CAPACIDADCASA = 10;
 
     private String tipo;
     private int salud;
     private Posicion punto;
-    
+
     private int madera;
     private int piedra;
     private int comida;
-    
+
     public Edificio(String tipe, Posicion posicion, String Nombre) {
         //Igualar punto y posicion evitando aliasing
         punto = new Posicion(posicion.getX(), posicion.getY());
@@ -46,13 +48,11 @@ public class Edificio {
         }
     }
 
-    public Personaje crearPaisano(String Nombre) {
+    public void crearPaisano(String Nombre) {
         if (!this.tipo.equals("Ciudadela")) {
             System.out.println("Este edificio no puede crear Paisanos");
-            return null;
         }
-
-        return new Personaje("Paisano", Nombre, punto);
+        
     }
 
     public Personaje crearSoldado(String Nombre) {
@@ -62,14 +62,13 @@ public class Edificio {
         }
         return new Personaje("Soldado", Nombre, punto);
     }
-    
+
     @Override
     public String toString() {
         String impresion = "";
-        impresion+="Tipo: "+tipo+"\n";
-        impresion+="Salud: "+salud+"\n";
-        impresion+="Posicion: "+punto+"\n";
-        
+        impresion += "Tipo: " + tipo + "\n";
+        impresion += "Salud: " + salud + "\n";
+        impresion += "Posicion: " + punto + "\n";
 
         return impresion;
     }

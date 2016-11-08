@@ -36,7 +36,7 @@ public class Principal {
                             System.out.println(comando[1]);
                             System.out.println(comando[2]);
                             if (map.getPersonajes().containsKey(comando[1])) {
-                                Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
+                                Personaje personaje = map.getPersonajes().get(comando[1]);
                                 personaje.moverPj(map, comando[2]);
                                 //personaje.mover(comando[2]);
                             } else {
@@ -66,16 +66,41 @@ public class Principal {
                                 break;
                         }
                         break;
+                    case "construir":
+                        if (comando.length == 4) {
+                            switch (comando[2].toLowerCase()) {
+                                case "casa":
+                                    if (map.getPersonajes().containsKey(comando[1])) {
+                                        Personaje personaje = map.getPersonajes().get(comando[1]);
+                                        personaje.crearCasa(map, comando[3]);
+                                    } else {
+                                        System.out.println("El personaje no existe");
+                                    }
+                                    break;
+                                case "ciudadela":
+
+                                    break;
+                                case "cuartel":
+                                    break;
+                                default:
+                                    System.out.println("comando incorrecto. Debe introducir listar personajes o listar edificios.");
+                                    break;
+                            }
+
+                        } else {
+                            System.out.println("Comando construir incorrecto");
+                        }
+                        break;
                     case "describir":
-                        if(map.getPersonajes().containsKey(comando[1])){
-                            Personaje personaje=map.getPersonajes().get(comando[1]);
+                        if (map.getPersonajes().containsKey(comando[1])) {
+                            Personaje personaje = map.getPersonajes().get(comando[1]);
                             System.out.println(personaje);
-                        }else if(map.getEdificios().containsKey(comando[1])){
-                            Edificio edificio=map.getEdificios().get(comando[1]);
+                        } else if (map.getEdificios().containsKey(comando[1])) {
+                            Edificio edificio = map.getEdificios().get(comando[1]);
                             System.out.println(edificio);
-                        }else if(map.getRecursos().containsKey(comando[1])){
-                            Recurso recurso=map.getRecursos().get(comando[1]);
-                        }else{
+                        } else if (map.getRecursos().containsKey(comando[1])) {
+                            Recurso recurso = map.getRecursos().get(comando[1]);
+                        } else {
                             System.out.println("No existe la entidad introducida");
                         }
                         break;

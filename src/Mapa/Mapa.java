@@ -200,4 +200,9 @@ public class Mapa {
         return new HashMap<String, Recurso>(recursos);
     }
 
+    public int[] getCantidades() {
+        return cantidades;
+    }
+    
+
 }
