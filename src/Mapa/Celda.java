@@ -16,12 +16,12 @@ import Entidades.Recurso;
  */
 public class Celda {
 
-    Personaje personaje;
-    Edificio edificio;
-    Recurso recurso;
-    Posicion pos;
-    String tipo;
-    boolean visible;
+    private Personaje personaje;
+    private Edificio edificio;
+    private Recurso recurso;
+    private Posicion pos;
+    private String tipo;
+    private boolean visible;
 
     public Celda(Posicion posicion) {
         if (posicion == null) {
