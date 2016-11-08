@@ -84,15 +84,10 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
-        if (mapa.checkCoords(pos)) {
+        if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
             this.setPosicion(pos);
             Celda newcell = mapa.getCelda(posicion);
 
-            /*if(!this.checkCeldaCoords(newcell) && !newcell.getTipo().equals("Pradera")){    //Compruebo que la celda sea valida y que no haya nada en ella
-            System.out.println("Imposible mover en esa direccion");
-            return;
-        }*/
-            //Pj.setPosicion(pos);    //Actualizamos la posicion del personaje
             newcell.setPersonaje(this);   //Metemos el personaje en la nueva celda
 
             mapa.getMapa().get(posicion.getX()).set(posicion.getY(), newcell); //Metemos la celda en su posicion del mapa
