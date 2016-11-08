@@ -47,7 +47,7 @@ public class Personaje {
         }
     }
 
-    public void construir(Mapa mapa, String direccion, String Edificio) {
+    public void construir(Mapa mapa, String direccion, String Edificio) {//DESCONTAR RECURSOS AL CONSTRUIR.
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
             case "S":
