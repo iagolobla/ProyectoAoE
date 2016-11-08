@@ -18,10 +18,12 @@ import java.util.HashMap;
 
 public class Mapa {
 
-    ArrayList<ArrayList<Celda>> mapa;
-    HashMap<String, Personaje> personajes;
-    HashMap<String, Edificio> edificios;
-    HashMap<String, Recurso> recursos;
+    private ArrayList<ArrayList<Celda>> mapa;
+    private HashMap<String, Personaje> personajes;
+    private HashMap<String, Edificio> edificios;
+    private HashMap<String, Recurso> recursos;
+    private int[] cantidades;
+    
 
     public final int MAPAX = 16;
     public final int MAPAY = 8;
@@ -30,6 +32,17 @@ public class Mapa {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
+        cantidades=new int[8];//guardara las cantidades de personajes, soldados,etc.
+        /*
+        0--Paisano
+        1--Soldado
+        2--Ciudadela
+        3--Casa
+        4--Cuartel
+        5--Bosque
+        6--Cantera
+        7--Arbusto
+        */
         mapa = new ArrayList<>();
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
@@ -42,12 +55,15 @@ public class Mapa {
         }
 
         //Creacion de la ciudadela
-        String Name = "Ciudadela-" + (edificios.size() + 1);    //edificios.size() ayuda a crear el nombre
+        
+        String Name = "Ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
+        cantidades[2]++;
         mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
         edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
 
         //creacion un personaje
-        Name = "Paisano-" + (personajes.size() + 1);
+        Name = "Paisano-" + (cantidades[0] + 1);
+        cantidades[0]++;
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
 
