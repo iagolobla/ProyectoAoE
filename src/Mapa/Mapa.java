@@ -72,6 +72,24 @@ public class Mapa {
                 recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
             }
         }
+        
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                Name = "Cantera-" + (cantidades[6] + 1);
+                cantidades[6]++;
+                mapa.get(i).set(j, new Celda("Cantera", new Posicion(i, j), Name));
+                recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
+            }
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 6; j < 8; j++) {
+                Name = "Arbusto-" + (cantidades[7] + 1);
+                cantidades[7]++;
+                mapa.get(i).set(j, new Celda("Arbusto", new Posicion(i, j), Name));
+                recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
+            }
+        }
         //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
 
         //Recorremos mapa para actualizar las visibilidades
