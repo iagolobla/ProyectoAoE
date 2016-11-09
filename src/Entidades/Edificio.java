@@ -61,46 +61,33 @@ public class Edificio {
             System.out.println("Este edificio no puede crear Paisanos");
         }
         Posicion pos1 = new Posicion(punto);
-        Posicion pos2 = new Posicion(punto);
-        Posicion pos3 = new Posicion(punto);
-        Posicion pos4 = new Posicion(punto);
         pos1.moverX(-1);
-        pos2.moverX(1);
-        pos3.moverY(-1);
-        pos4.moverY(1);
-        if (mapa.checkCoords(pos1) && mapa.checkBuilding(pos1)){
-            String Name = "Paisano-" + (mapa.getCantidades()[0] + 1);
-            mapa.getCantidades()[0]++;
-            mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("Paisano", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
-            mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPj());
-            mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida()-10);
-            System.out.println("Se han gastado 10 unidades de comida en crear el personaje");
-        }else if(mapa.checkCoords(pos2) && mapa.checkBuilding(pos2)){
-            String Name = "Paisano-" + (mapa.getCantidades()[0] + 1);
-            mapa.getCantidades()[0]++;
-            mapa.getMapa().get(pos2.getX()).set(pos2.getY(), new Celda("Paisano", new Posicion(pos2), Name)); //Metemos la celda en su posicion del mapa
-            mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos2)).getPj());
-            mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida()-10);
-            System.out.println("Se han gastado 10 unidades de comida en crear el personaje");
-        }else if(mapa.checkCoords(pos3) && mapa.checkBuilding(pos3)){
-            String Name = "Paisano-" + (mapa.getCantidades()[0] + 1);
-            mapa.getCantidades()[0]++;
-            mapa.getMapa().get(pos3.getX()).set(pos3.getY(), new Celda("Paisano", new Posicion(pos3), Name)); //Metemos la celda en su posicion del mapa
-            mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos3)).getPj());
-            mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida()-10);
-            System.out.println("Se han gastado 10 unidades de comida en crear el personaje");
-        }else if(mapa.checkCoords(pos4) && mapa.checkBuilding(pos4)){
-            String Name = "Paisano-" + (mapa.getCantidades()[0] + 1);
-            mapa.getCantidades()[0]++;
-            mapa.getMapa().get(pos4.getX()).set(pos4.getY(), new Celda("Paisano", new Posicion(pos4), Name)); //Metemos la celda en su posicion del mapa
-            mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos4)).getPj());
-            mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida()-10);
-            System.out.println("Se han gastado 10 unidades de comida en crear el personaje");
-        }else{
-            System.out.println("No es posible crear el paisano");
+
+
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la primera posicion, si no es valida
+            pos1.moverX(2);
+        } 
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la segunda posicion, si no es valida
+            pos1.moverX(-1);
+            pos1.moverY(1);
+        } 
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la tercera posicion, si no es valida
+            pos1.moverY(-2);
+        } 
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la cuarta posicion, si no es valida
+            System.out.println("No es posible crear el paisano, todas las posiciones en torno a la Ciudadela estan ocupadas");
+            return;
         }
+
+        String Name = "Paisano-" + (mapa.getCantidades()[0] + 1);
+        mapa.getCantidades()[0]++;
+        mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("Paisano", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
+        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPj());
+        mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
+        System.out.println("Se han gastado 10 unidades de comida en crear el personaje");
         
-        
+        //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
+        mapa.actualizarVisibilidad();
     }
 
     public Personaje crearSoldado(String Nombre) {
@@ -112,7 +99,7 @@ public class Edificio {
     }
 
     @Override
-        public String toString() {
+    public String toString() {
         String impresion = "";
         impresion += "Tipo: " + tipo + "\n";
         impresion += "Salud: " + salud + "\n";
@@ -164,5 +151,5 @@ public class Edificio {
     public void setComida(int comida) {
         this.comida = comida;
     }
-    
+
 }

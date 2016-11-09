@@ -154,12 +154,7 @@ public class Personaje {
             System.out.println("No se puede Mover en esa direccion!");
         }
         //Recorremos mapa para actualizar las visibilidades
-        for (int i = 0; i < mapa.MAPAY; i++) {
-            for (int j = 0; j < mapa.MAPAX; j++) {
-                cell = mapa.getCelda(new Posicion(i, j));
-                mapa.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
-            }
-        }
+        mapa.actualizarVisibilidad();
         return new Posicion(posicion);
     }
 

@@ -93,12 +93,7 @@ public class Mapa {
         //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
 
         //Recorremos mapa para actualizar las visibilidades
-        for (int i = 0; i < MAPAY; i++) {
-            for (int j = 0; j < MAPAX; j++) {
-                cell = this.getCelda(new Posicion(i, j));
-                this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
-            }
-        }
+        this.actualizarVisibilidad();
     }
 
     public Celda getCelda(Posicion p) {
@@ -143,11 +138,23 @@ public class Mapa {
             }
         }
     }
+    
+    public void actualizarVisibilidad(){
+        Celda cell;
+        for (int i = 0; i < MAPAY; i++) {
+            for (int j = 0; j < MAPAX; j++) {
+                cell = this.getCelda(new Posicion(i, j));
+                this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
+            }
+        }
+    }
 
     public void imprimir() {
         Celda cell;
         Celda aux;
         Posicion pos;
+        
+        this.actualizarVisibilidad();
 
         for (int i = 0; i < MAPAX + 2; i++) {
             System.out.print("&");
