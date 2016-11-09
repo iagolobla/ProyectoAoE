@@ -5,6 +5,8 @@
  */
 package Entidades;
 
+import Mapa.Mapa;
+
 /**
  *
  * @author iagolobla
@@ -66,5 +68,20 @@ public class Recurso {
         return new Posicion(pos);
     }
     
+    public int restarCantidad(int cantidadRestada, Mapa map){
+        if(cantidadRestada < 0){
+            System.out.println("Cantidad no valida!");
+            return 0;
+        }
+        if(cantidadRestada <= cantidad){  //En caso de que le restemos al recurso una cantidad igual o inferior a su cantidad
+            this.setCantidad(cantidad-cantidadRestada); //restamos y devolvemos la cantidad restada
+            return cantidadRestada;
+        } else {    //En caso de que intentemos sacar mas que lo que hay
+            //Destruimos el recurso
+            map.getCelda(new Posicion(this.getPos())).liberarCelda();   //Libera la celda del mapa
+            return(this.getCantidad()); //Devolvemos la cantidad obtenida
+            
+        }
+    }
 
 }

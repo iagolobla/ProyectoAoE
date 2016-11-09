@@ -104,6 +104,7 @@ public class Principal {
                         break;
 
                     case "mirar":
+                        if(comando.length == 2){
                         Posicion posMirar = new Posicion(comando[1]);  //guarda la posicion pasada
 
                         if (map.checkCoords(posMirar)) {
@@ -160,7 +161,42 @@ public class Principal {
                         } else {
                             System.out.println("Esa celda no esta disponible!");
                         }
-
+                        } else {
+                            System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: mirar (x,y)");
+                        }
+                        break;
+                    case "recolectar":
+                        if(comando.length == 3){
+                            Personaje paisanito = map.getPersonajes().get(comando[1]);  //Recoge al paisano del mapa
+                            Posicion posPaisanito = paisanito.getPosicion();
+                            
+                            switch(comando[2]){
+                                case "N":
+                                    posPaisanito.moverX(-1);
+                                    break;
+                                case "S":
+                                    posPaisanito.moverX(1);
+                                    break;
+                                case "O":
+                                    posPaisanito.moverY(-1);
+                                    break;
+                                case "E":
+                                    posPaisanito.moverY(1);
+                                    break;
+                            }
+                            if(map.checkCoords(posPaisanito)){  //En caso de que la coordenada este bien
+                                Celda celdita = map.getCelda(posPaisanito);
+                                //Comprobamos que la celda tiene un recurso
+                                if(celdita.getTipo().equals("Arbusto") || celdita.getTipo().equals("Cantera") || celdita.getTipo().equals("Bosque")){
+                                    Recurso recursito = map.getCelda(posPaisanito).getRs();
+                                    paisanito.recolectar(recursito, map);
+                                } else {
+                                    System.out.println("No hay un recurso aqui!");
+                                }
+                            }
+                        } else {
+                            System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: recolectar Paisano-x Direccion(N,S,E,O)");
+                        }
                         break;
                     case "mapa":
                         map.imprimir();
