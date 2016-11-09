@@ -22,6 +22,7 @@ public class Edificio {
     private String tipo;
     private int salud;
     private Posicion punto;
+    private String nombre;
 
     private int madera;
     private int piedra;
@@ -34,14 +35,17 @@ public class Edificio {
             case ("Ciudadela"):
                 tipo = tipe;
                 salud = SALUDCIUDADELA;
+                nombre=Nombre;
                 break;
             case ("Cuartel"):
                 tipo = tipe;
                 salud = SALUDCUARTEL;
+                nombre=Nombre;
                 break;
             case ("Casa"):
                 tipo = tipe;
                 salud = SALUDCASA;
+                nombre=Nombre;
                 break;
             default:
                 System.out.println("Error, tipo de edificio incorrecto");

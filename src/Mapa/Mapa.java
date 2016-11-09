@@ -23,7 +23,6 @@ public class Mapa {
     private HashMap<String, Edificio> edificios;
     private HashMap<String, Recurso> recursos;
     private int[] cantidades;
-    
 
     public final int MAPAX = 16;
     public final int MAPAY = 8;
@@ -32,7 +31,7 @@ public class Mapa {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
-        cantidades=new int[8];//guardara las cantidades de personajes, soldados,etc.
+        cantidades = new int[8];//guardara las cantidades de personajes, soldados,etc.
         /*
         0--Paisano
         1--Soldado
@@ -42,7 +41,7 @@ public class Mapa {
         5--Bosque
         6--Cantera
         7--Arbusto
-        */
+         */
         mapa = new ArrayList<>();
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
@@ -55,7 +54,6 @@ public class Mapa {
         }
 
         //Creacion de la ciudadela
-        
         String Name = "Ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
         cantidades[2]++;
         mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
@@ -66,14 +64,14 @@ public class Mapa {
         cantidades[0]++;
         mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
-        /*for(int i=6;i<8;i++){
-            for(int j=6;j<8;j++){
+        for (int i = 6; i < 8; i++) {
+            for (int j = 6; j < 8; j++) {
                 Name = "Bosque-" + (cantidades[5] + 1);
                 cantidades[5]++;
                 mapa.get(i).set(j, new Celda("Bosque", new Posicion(i, j), Name));
                 recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
             }
-        }*/
+        }
         //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
 
         //Recorremos mapa para actualizar las visibilidades
@@ -161,6 +159,15 @@ public class Mapa {
                         case "Paisano":
                             System.out.print("P");
                             break;
+                        case "Bosque":
+                            System.out.print("B");
+                            break;
+                        case "Cantera":
+                            System.out.print("p");
+                            break;
+                        case "Arbusto":
+                            System.out.print("^");
+                            break;
                         default:
                             System.out.println("Error, tipo de edificio incorrecto");
                     }
@@ -176,9 +183,9 @@ public class Mapa {
         }
         System.out.println("");
     }
-    
+
     public boolean checkBuilding(Posicion pos) {
-        if(this.getCelda(pos).getTipo().equals("Pradera")){
+        if (this.getCelda(pos).getTipo().equals("Pradera")) {
             return true;
         }
         return false;
@@ -198,20 +205,19 @@ public class Mapa {
     }
 
     public HashMap<String, Personaje> getPersonajes() {
-        return new HashMap<String, Personaje>(personajes);
+        return personajes;
     }
 
     public HashMap<String, Edificio> getEdificios() {
-        return new HashMap<String, Edificio>(edificios);
+        return edificios;
     }
 
     public HashMap<String, Recurso> getRecursos() {
-        return new HashMap<String, Recurso>(recursos);
+        return recursos;
     }
 
     public int[] getCantidades() {
         return cantidades;
     }
-    
 
 }

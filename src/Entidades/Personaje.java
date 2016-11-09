@@ -73,7 +73,7 @@ public class Personaje {
                     String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
                     mapa.getCantidades()[3]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                    //COMPROBAR ESTO//mapa.getEdificios().put(Name, getCelda(new Posicion(3, 3)).getEf());
+                    mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
                 }
@@ -84,6 +84,7 @@ public class Personaje {
                     String Name = "Cuartel-" + (mapa.getCantidades()[4] + 1);
                     mapa.getCantidades()[4]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                    mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
                 }
@@ -94,6 +95,7 @@ public class Personaje {
                     String Name = "Ciudadela-" + (mapa.getCantidades()[2] + 1);
                     mapa.getCantidades()[2]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                    mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
                 }
@@ -102,6 +104,7 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
+        
 
     }
 

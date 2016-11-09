@@ -61,13 +61,16 @@ public class Celda {
                 visible = true;
                 break;
             case "Bosque":
-                recurso = new Recurso("Bosque", 200);   //De momento dejaremos 200 por defecto
+                recurso = new Recurso("Bosque", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
+                visible= false;
                 break;
             case "Cantera":
-                recurso = new Recurso("Cantera", 200);   //De momento dejaremos 200 por defecto
+                recurso = new Recurso("Cantera", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
+                visible= false;
                 break;
             case "Arbusto":
-                recurso = new Recurso("Arbusto", 200);   //De momento dejaremos 200 por defecto
+                recurso = new Recurso("Arbusto", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
+                visible= false;
                 break;
             default:
                 System.out.println("Tipo mal introducido");

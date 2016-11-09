@@ -9,8 +9,7 @@ package Entidades;
  *
  * @author iagolobla
  */
-import java.util.Iterator;
-import java.util.Map;
+
 import java.util.Scanner;
 import Mapa.Mapa;
 import Mapa.Celda;
@@ -94,6 +93,11 @@ public class Principal {
                             System.out.println(edificio);
                         } else if (map.getRecursos().containsKey(comando[1])) {
                             Recurso recurso = map.getRecursos().get(comando[1]);
+                            if(map.getCelda(recurso.getPos()).getVisible()){
+                                System.out.println(recurso);
+                            }else{
+                                System.out.println("La celda no es visible.");
+                            }
                         } else {
                             System.out.println("No existe la entidad introducida");
                         }

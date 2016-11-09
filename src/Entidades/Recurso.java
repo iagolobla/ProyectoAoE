@@ -15,10 +15,14 @@ public class Recurso {
 
     private final String tipo;  //El tipo de una instancia no puede cambiar
     private int cantidad;
+    private String nombre;
+    private Posicion pos;
 
-    public Recurso(String tipe) {
+    public Recurso(String tipe,String nombre,Posicion pos) {
         tipo = tipe;
         cantidad = DFLCANTIDAD;
+        this.nombre=nombre;
+        this.pos=new Posicion(pos);
         /*switch(tipe){
             case("Bosque"):
                 break;
@@ -29,9 +33,11 @@ public class Recurso {
         }*/
     }
 
-    public Recurso(String tipe, int cantidad) {
+    public Recurso(String tipe, int cantidad, String nombre,Posicion pos) {
         tipo = tipe;
         this.cantidad = cantidad;
+        this.nombre=nombre;
+        this.pos=new Posicion(pos);
     }
 
     @Override
@@ -55,5 +61,10 @@ public class Recurso {
     public int getCantidad() {
         return cantidad;
     }
+
+    public Posicion getPos() {
+        return new Posicion(pos);
+    }
+    
 
 }
