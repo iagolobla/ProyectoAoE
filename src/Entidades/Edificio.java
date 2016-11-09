@@ -112,6 +112,10 @@ public class Edificio {
     }
 
     //GETTERS Y SETTERS
+    public String getNombre() {
+        return new String(nombre);
+    }
+    
     public Posicion getPosicion() {
         return new Posicion(punto);
     }

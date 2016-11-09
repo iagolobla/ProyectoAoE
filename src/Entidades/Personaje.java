@@ -50,6 +50,39 @@ public class Personaje {
 
         }
     }
+    
+    public void almacenarRecurso(Edificio ciudadela){
+        if(ciudadela == null){  //Si el parametro es nulo
+            System.out.println("Ciudadela pasada nula!");
+            return;
+        }
+        if(this.getTipo().equals("Soldado")){   //Comprueba si es un paisano o un soldado
+            System.out.println("Los soldados no cargan Recursos!");
+            return;
+        }
+        if(this.getCantidadRecolectada() < 0){  //Comprobamos si tiene algun recurso
+            System.out.println("Este Paisano no tiene recursos!");
+            return;
+        }
+        
+        switch(this.tipoRecurso){
+            case "Bosque":
+                System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Madera en " + ciudadela.getNombre());
+                ciudadela.setMadera(ciudadela.getMadera() + cantidadRecolectada);
+                cantidadRecolectada = 0;
+                break;
+            case "Cantera":
+                System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Piedra en " + ciudadela.getNombre());
+                ciudadela.setPiedra(ciudadela.getPiedra() + cantidadRecolectada);
+                cantidadRecolectada = 0;
+                break;
+            case "Arbusto":
+                System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Comida en " + ciudadela.getNombre());
+                ciudadela.setComida(ciudadela.getComida() + cantidadRecolectada);
+                cantidadRecolectada = 0;
+                break;
+        }
+    }
 
     public void construir(Mapa mapa, String direccion, String Edificio) {//DESCONTAR RECURSOS AL CONSTRUIR.
         Posicion pos = new Posicion(posicion);
@@ -206,6 +239,10 @@ public class Personaje {
     }
 
     //GETTERS Y SETTERS
+    public int getCantidadRecolectada(){
+        return cantidadRecolectada;
+    }
+    
     public Posicion getPosicion() {
         return new Posicion(posicion);
     }

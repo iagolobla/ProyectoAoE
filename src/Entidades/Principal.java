@@ -197,7 +197,7 @@ public class Principal {
                             System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: recolectar Paisano-x Direccion(N,S,E,O)");
                         }
                         break;
-                    case "crear":
+                    case "crear":   //Quizas deberiamos comprobar que el usuario escribe Paisano bien
                         if (comando.length == 3) {
                             if (map.getEdificios().containsKey(comando[1])) {
                                 Edificio ciudadela = map.getEdificios().get(comando[1]);
@@ -211,6 +211,9 @@ public class Principal {
                             System.out.println("Comando construir incorrecto");
                         }
                         map.imprimir();
+                        break;
+                    case "almacenar":
+                        
                         break;
                     case "mapa":
                         map.imprimir();
