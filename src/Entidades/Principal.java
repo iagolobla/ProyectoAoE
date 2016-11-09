@@ -9,7 +9,6 @@ package Entidades;
  *
  * @author iagolobla
  */
-
 import java.util.Scanner;
 import Mapa.Mapa;
 import Mapa.Celda;
@@ -57,7 +56,7 @@ public class Principal {
                         switch (comando[1].toLowerCase()) {
                             case "personajes":
                                 for (String k : map.getPersonajes().keySet()) {
-                                    System.out.println("clave : " + k + ", Posicion: " + map.getPersonajes().get(k).getPosicion());
+                                    System.out.println("Nombre : " + k + ", Posicion: " + map.getPersonajes().get(k).getPosicion());
                                 }
                                 break;
                             case "edificios":
@@ -93,9 +92,9 @@ public class Principal {
                             System.out.println(edificio);
                         } else if (map.getRecursos().containsKey(comando[1])) {
                             Recurso recurso = map.getRecursos().get(comando[1]);
-                            if(map.getCelda(recurso.getPos()).getVisible()){
+                            if (map.getCelda(recurso.getPos()).getVisible()) {
                                 System.out.println(recurso);
-                            }else{
+                            } else {
                                 System.out.println("La celda no es visible.");
                             }
                         } else {
@@ -161,6 +160,21 @@ public class Principal {
                             System.out.println("Esa celda no esta disponible!");
                         }
 
+                        break;
+                    case "crear":
+                        if (comando.length == 3) {
+                            if (map.getEdificios().containsKey(comando[1])) {
+                                Edificio ciudadela = map.getEdificios().get(comando[1]);
+                                ciudadela.crearPaisano(map);
+                                
+                            } else {
+                                System.out.println("La ciudadela no existe");
+                            }
+
+                        } else {
+                            System.out.println("Comando construir incorrecto");
+                        }
+                        map.imprimir();
                         break;
                     case "mapa":
                         map.imprimir();
