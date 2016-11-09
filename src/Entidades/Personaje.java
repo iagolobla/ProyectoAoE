@@ -68,12 +68,15 @@ public class Personaje {
         }
         switch (Edificio.toLowerCase()) {
             case "casa":
-
-                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada//COMPROBAR INTRODUCIR EN HASHMAP
+//COMPROBAR QUE HAY RECURSOS SUFICIENTES PARA CONSTRUIR.
+                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                     String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
                     mapa.getCantidades()[3]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                     mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                    System.out.println("Casa construida.Se han gastado 20 unidades de piedra y 50 de madera");
+                    mapa.getEdificios().get("Ciudadela-1").setMadera(mapa.getEdificios().get("Ciudadela-1").getMadera()-50);
+                    mapa.getEdificios().get("Ciudadela-1").setPiedra(mapa.getEdificios().get("Ciudadela-1").getPiedra()-20);
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
                 }
@@ -85,6 +88,9 @@ public class Personaje {
                     mapa.getCantidades()[4]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                     mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                    System.out.println("Cuartel construida.Se han gastado 20 unidades de piedra y 50 de madera");
+                    mapa.getEdificios().get("Ciudadela-1").setMadera(mapa.getEdificios().get("Ciudadela-1").getMadera()-50);
+                    mapa.getEdificios().get("Ciudadela-1").setPiedra(mapa.getEdificios().get("Ciudadela-1").getPiedra()-20);
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
                 }
@@ -96,6 +102,9 @@ public class Personaje {
                     mapa.getCantidades()[2]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                     mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                    System.out.println("Ciudadela construida.Se han gastado 20 unidades de piedra y 50 de madera");
+                    mapa.getEdificios().get("Ciudadela-1").setMadera(mapa.getEdificios().get("Ciudadela-1").getMadera()-50);
+                    mapa.getEdificios().get("Ciudadela-1").setPiedra(mapa.getEdificios().get("Ciudadela-1").getPiedra()-20);
                 } else {
                     System.out.println("No se puede Contruir en esa direccion!");
                 }

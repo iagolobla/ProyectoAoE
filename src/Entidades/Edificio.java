@@ -36,6 +36,9 @@ public class Edificio {
                 tipo = tipe;
                 salud = SALUDCIUDADELA;
                 nombre=Nombre;
+                madera=100;//son los valores iniciales que toman(se los damos nosotros).
+                piedra=100;
+                comida=100;
                 break;
             case ("Cuartel"):
                 tipo = tipe;
@@ -73,6 +76,9 @@ public class Edificio {
         impresion += "Tipo: " + tipo + "\n";
         impresion += "Salud: " + salud + "\n";
         impresion += "Posicion: " + punto + "\n";
+        impresion += "Comida: " + comida + "\n";
+        impresion += "Piedra: " + piedra + "\n";
+        impresion += "Madera: " + madera + "\n";
 
         return impresion;
     }
@@ -93,4 +99,29 @@ public class Edificio {
     public void setSalud(int salud) {
         this.salud = salud;
     }
+
+    public int getMadera() {
+        return madera;
+    }
+
+    public void setMadera(int madera) {
+        this.madera = madera;
+    }
+
+    public int getPiedra() {
+        return piedra;
+    }
+
+    public void setPiedra(int piedra) {
+        this.piedra = piedra;
+    }
+
+    public int getComida() {
+        return comida;
+    }
+
+    public void setComida(int comida) {
+        this.comida = comida;
+    }
+    
 }
