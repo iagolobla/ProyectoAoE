@@ -50,22 +50,22 @@ public class Personaje {
 
         }
     }
-    
-    public void almacenarRecurso(Edificio ciudadela){
-        if(ciudadela == null){  //Si el parametro es nulo
+
+    public void almacenarRecurso(Edificio ciudadela) {
+        if (ciudadela == null) {  //Si el parametro es nulo
             System.out.println("Ciudadela pasada nula!");
             return;
         }
-        if(this.getTipo().equals("Soldado")){   //Comprueba si es un paisano o un soldado
+        if (this.getTipo().equals("Soldado")) {   //Comprueba si es un paisano o un soldado
             System.out.println("Los soldados no cargan Recursos!");
             return;
         }
-        if(this.getCantidadRecolectada() < 0){  //Comprobamos si tiene algun recurso
+        if (this.getCantidadRecolectada() < 0) {  //Comprobamos si tiene algun recurso
             System.out.println("Este Paisano no tiene recursos!");
             return;
         }
-        
-        switch(this.tipoRecurso){
+
+        switch (this.tipoRecurso) {
             case "Bosque":
                 System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Madera en " + ciudadela.getNombre());
                 ciudadela.setMadera(ciudadela.getMadera() + cantidadRecolectada);
@@ -103,47 +103,72 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
+        Edificio Ciudadela = mapa.getEdificios().get("Ciudadela-1");
         switch (Edificio.toLowerCase()) {
             case "casa":
-//COMPROBAR QUE HAY RECURSOS SUFICIENTES PARA CONSTRUIR.
-                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                    String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
-                    mapa.getCantidades()[3]++;
-                    mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                    mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
-                    System.out.println("Casa construida.Se han gastado 20 unidades de piedra y 50 de madera");
-                    mapa.getEdificios().get("Ciudadela-1").setMadera(mapa.getEdificios().get("Ciudadela-1").getMadera() - 50);
-                    mapa.getEdificios().get("Ciudadela-1").setPiedra(mapa.getEdificios().get("Ciudadela-1").getPiedra() - 20);
+                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                    if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                        String Name = "Casa-" + (mapa.getCantidades()[3] + 1);
+                        mapa.getCantidades()[3]++;
+                        mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                        System.out.println("Casa construida en "+pos+"Se han gastado 20 unidades de piedra y 50 de madera");
+                        
+                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
+                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                        System.out.println("Quedan los siguientes recursos: ");
+                        System.out.println("Comida: "+ Ciudadela.getComida());
+                        System.out.println("Madera: "+ Ciudadela.getMadera());
+                        System.out.println("Piedra: "+ Ciudadela.getPiedra());
+                    } else {
+                        System.out.println("No se puede Contruir en esa direccion!");
+                    }
                 } else {
-                    System.out.println("No se puede Contruir en esa direccion!");
+                    System.out.println("No hay suficientes recursos para construir la casa");
                 }
                 break;
             case "cuartel":
-
-                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                    String Name = "Cuartel-" + (mapa.getCantidades()[4] + 1);
-                    mapa.getCantidades()[4]++;
-                    mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                    mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
-                    System.out.println("Cuartel construida.Se han gastado 20 unidades de piedra y 50 de madera");
-                    mapa.getEdificios().get("Ciudadela-1").setMadera(mapa.getEdificios().get("Ciudadela-1").getMadera() - 50);
-                    mapa.getEdificios().get("Ciudadela-1").setPiedra(mapa.getEdificios().get("Ciudadela-1").getPiedra() - 20);
+                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                    if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                        String Name = "Cuartel-" + (mapa.getCantidades()[4] + 1);
+                        mapa.getCantidades()[4]++;
+                        mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                        System.out.println("Cuartel construido en "+pos+"Se han gastado 20 unidades de piedra y 50 de madera");
+                        
+                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
+                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                        System.out.println("Quedan los siguientes recursos: ");
+                        System.out.println("Comida: "+ Ciudadela.getComida());
+                        System.out.println("Madera: "+ Ciudadela.getMadera());
+                        System.out.println("Piedra: "+ Ciudadela.getPiedra());
+                    } else {
+                        System.out.println("No se puede Contruir en esa direccion!");
+                    }
                 } else {
-                    System.out.println("No se puede Contruir en esa direccion!");
+                    System.out.println("No hay suficientes recursos para construir el cuartel");
                 }
                 break;
             case "ciudadela":
-
-                if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                    String Name = "Ciudadela-" + (mapa.getCantidades()[2] + 1);
-                    mapa.getCantidades()[2]++;
-                    mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                    mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
-                    System.out.println("Ciudadela construida.Se han gastado 20 unidades de piedra y 50 de madera");
-                    mapa.getEdificios().get("Ciudadela-1").setMadera(mapa.getEdificios().get("Ciudadela-1").getMadera() - 50);
-                    mapa.getEdificios().get("Ciudadela-1").setPiedra(mapa.getEdificios().get("Ciudadela-1").getPiedra() - 20);
+                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                    if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                        String Name = "Ciudadela-" + (mapa.getCantidades()[2] + 1);
+                        mapa.getCantidades()[2]++;
+                        mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                        System.out.println("Ciudadela construida en "+pos+"Se han gastado 20 unidades de piedra y 50 de madera");
+                        
+                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
+                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                        System.out.println("Quedan los siguientes recursos: ");
+                        System.out.println("Comida: "+ Ciudadela.getComida());
+                        System.out.println("Madera: "+ Ciudadela.getMadera());
+                        System.out.println("Piedra: "+ Ciudadela.getPiedra());
+                    } else {
+                        System.out.println("No se puede Contruir en esa direccion!");
+                    }
                 } else {
-                    System.out.println("No se puede Contruir en esa direccion!");
+                    System.out.println("No hay suficientes recursos para construir la ciudadela");
                 }
                 break;
             default:
@@ -206,7 +231,7 @@ public class Personaje {
                 cantidadRecolectada = recurso.restarCantidad(capRecolectar, mapa);    //Devuelve la cantidad obtenida y en caso de agotarse el recurso lo elimina
                 tipoRecurso = recurso.getTipo();   //Establece el tipo de recurso que carga el personaje
                 System.out.println("El Paisano ha recogido " + cantidadRecolectada + "uds de " + tipoRecurso);  //Esto va a haber que cambiarlo, el tipoRecurso imprime bosque, no madera
-                if(cantidadRecolectada == capRecolectar){
+                if (cantidadRecolectada == capRecolectar) {
                     System.out.println("El Paisano no puede recolectar mas");
                 }
             } else {    //Si ya ha recogido recursos de algun tipo
@@ -230,8 +255,10 @@ public class Personaje {
         impresion += "Ataque: " + ataque + "\n";
         impresion += "Capacidad Total Recolección: " + capRecolectar + "\n";
         impresion += "Cantidad de Recurso: " + cantidadRecolectada + "\n";
-        if(cantidadRecolectada > 0) //En caso de que lleve algun recurso se imprime el tipo
+        if (cantidadRecolectada > 0) //En caso de que lleve algun recurso se imprime el tipo
+        {
             impresion += "Tipo de Recurso: " + tipoRecurso + "\n";
+        }
         impresion += "Nombre: " + Nombre + "\n";
         impresion += "Posicion: " + posicion + "\n";
 
@@ -239,10 +266,10 @@ public class Personaje {
     }
 
     //GETTERS Y SETTERS
-    public int getCantidadRecolectada(){
+    public int getCantidadRecolectada() {
         return cantidadRecolectada;
     }
-    
+
     public Posicion getPosicion() {
         return new Posicion(posicion);
     }

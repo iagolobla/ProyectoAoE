@@ -63,17 +63,16 @@ public class Edificio {
         Posicion pos1 = new Posicion(punto);
         pos1.moverX(-1);
 
-
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la primera posicion, si no es valida
             pos1.moverX(2);
-        } 
+        }
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la segunda posicion, si no es valida
             pos1.moverX(-1);
             pos1.moverY(1);
-        } 
+        }
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la tercera posicion, si no es valida
             pos1.moverY(-2);
-        } 
+        }
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la cuarta posicion, si no es valida
             System.out.println("No es posible crear el paisano, todas las posiciones en torno a la Ciudadela estan ocupadas");
             return;
@@ -84,18 +83,50 @@ public class Edificio {
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("Paisano", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
         mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPj());
         mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
-        System.out.println("Se han gastado 10 unidades de comida en crear el personaje");
-        
+        System.out.println("Se han gastado 10 unidades de comida en crear el paisano");
+        System.out.println("Quedan los siguientes recursos: ");
+        System.out.println("Comida: " + mapa.getEdificios().get(nombre).getComida());
+        System.out.println("Madera: " + mapa.getEdificios().get(nombre).getMadera());
+        System.out.println("Piedra: " + mapa.getEdificios().get(nombre).getPiedra());
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
     }
 
-    public Personaje crearSoldado(String Nombre) {
+    public void crearSoldado(Mapa mapa) {
         if (!this.tipo.equals("Cuartel")) {
             System.out.println("Este edificio no puede crear Soldados");
-            return null;
         }
-        return new Personaje("Soldado", Nombre, punto);
+        Posicion pos1 = new Posicion(punto);
+        pos1.moverX(-1);
+
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la primera posicion, si no es valida
+            pos1.moverX(2);
+        }
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la segunda posicion, si no es valida
+            pos1.moverX(-1);
+            pos1.moverY(1);
+        }
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la tercera posicion, si no es valida
+            pos1.moverY(-2);
+        }
+        if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la cuarta posicion, si no es valida
+            System.out.println("No es posible crear el paisano, todas las posiciones en torno a la Ciudadela estan ocupadas");
+            return;
+        }
+
+        String Name = "Soldado-" + (mapa.getCantidades()[1] + 1);
+        mapa.getCantidades()[1]++;
+        mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("Soldado", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
+        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPj());
+        mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get("Ciudadela-1").getComida() - 10);
+        System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
+        System.out.println("Quedan los siguientes recursos: ");
+        System.out.println("Comida: " + mapa.getEdificios().get("Ciudadela-1").getComida());
+        System.out.println("Madera: " + mapa.getEdificios().get("Ciudadela-1").getMadera());
+        System.out.println("Piedra: " + mapa.getEdificios().get("Ciudadela-1").getPiedra());
+        //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
+        mapa.actualizarVisibilidad();
+
     }
 
     @Override
@@ -115,7 +146,7 @@ public class Edificio {
     public String getNombre() {
         return new String(nombre);
     }
-    
+
     public Posicion getPosicion() {
         return new Posicion(punto);
     }
