@@ -56,11 +56,19 @@ public class Personaje {
             System.out.println("Ciudadela pasada nula!");
             return;
         }
+        if(ciudadela.getTipo().equals("Casa")){ //En caso de que el edificio sea una casa
+            System.out.println("No se pueden almacenar Recursos en una Casa!");
+            return;
+        }
+        if(ciudadela.getTipo().equals("Cuartel")){  //En caso de que el edificio sea un cuartel
+            System.out.println("No se pueden almacenar Recursos en un Cuartel!");
+            return;
+        }
         if(this.getTipo().equals("Soldado")){   //Comprueba si es un paisano o un soldado
             System.out.println("Los soldados no cargan Recursos!");
             return;
         }
-        if(this.getCantidadRecolectada() < 0){  //Comprobamos si tiene algun recurso
+        if(this.getCantidadRecolectada() <= 0){  //Comprobamos si tiene algun recurso
             System.out.println("Este Paisano no tiene recursos!");
             return;
         }
@@ -125,7 +133,7 @@ public class Personaje {
                     mapa.getCantidades()[4]++;
                     mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                     mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
-                    System.out.println("Cuartel construida.Se han gastado 20 unidades de piedra y 50 de madera");
+                    System.out.println("Cuartel construido.Se han gastado 20 unidades de piedra y 50 de madera");
                     mapa.getEdificios().get("Ciudadela-1").setMadera(mapa.getEdificios().get("Ciudadela-1").getMadera() - 50);
                     mapa.getEdificios().get("Ciudadela-1").setPiedra(mapa.getEdificios().get("Ciudadela-1").getPiedra() - 20);
                 } else {

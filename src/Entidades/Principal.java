@@ -213,7 +213,35 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "almacenar":
-                        
+                        if (comando.length == 3){
+                            Personaje paisanoAlmacenar = map.getPersonajes().get(comando[1]);
+                            Posicion pAlmacenar = new Posicion(paisanoAlmacenar.getPosicion());
+                            
+                            switch(comando[2]){
+                                case "N":
+                                    pAlmacenar.moverX(-1);
+                                    break;
+                                case "S":
+                                    pAlmacenar.moverX(1);
+                                    break;
+                                case "E":
+                                    pAlmacenar.moverY(1);
+                                    break;
+                                case "O":
+                                    pAlmacenar.moverY(-1);
+                                    break;
+                            }
+                            
+                            Celda celdaAlmacenar = map.getCelda(pAlmacenar);
+                            if(celdaAlmacenar.getTipo().equals("Ciudadela") || celdaAlmacenar.getTipo().equals("Cuartel") || celdaAlmacenar.getTipo().equals("Casa")){  //Comprueba que sea un edificio
+                                Edificio ciudadelaAlmacenar = celdaAlmacenar.getEf();
+                                paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
+                            } else {
+                                System.out.println("No hay un edificio aqui");
+                            }
+                        } else {
+                            System.out.println("Error sintactico en el comando, forma correcta: almacenar Paisano-x Direccion(N,S,E,O)");
+                        }
                         break;
                     case "mapa":
                         map.imprimir();
