@@ -199,27 +199,31 @@ public class Principal {
                         break;
                     case "crear":   //Quizas deberiamos comprobar que el usuario escribe Paisano bien
                         if (comando.length == 3) {
-                            switch (comando[2].toLowerCase()) {
-                                case "paisano":
-                                    if (map.getEdificios().containsKey(comando[1])) {
-                                        Edificio ciudadela = map.getEdificios().get(comando[1]);
-                                        ciudadela.crearPaisano(map);
+                            if (map.getEdificios().containsKey(comando[1])) {
+                                switch (comando[2].toLowerCase()) {
+                                    case "paisano":
+                                        if (map.getEdificios().get(comando[1]).getTipo().equals("Ciudadela")) {
+                                            Edificio ciudadela = map.getEdificios().get(comando[1]);
+                                            ciudadela.crearPaisano(map);
 
-                                    } else {
-                                        System.out.println("La ciudadela no existe");
-                                    }
-                                    break;
-                                case "soldado":
-                                    if (map.getEdificios().containsKey(comando[1])) {
-                                        Edificio cuartel = map.getEdificios().get(comando[1]);
-                                        cuartel.crearSoldado(map);
+                                        } else {
+                                            System.out.println("Este edificio no es  una ciudadela");
+                                        }
+                                        break;
+                                    case "soldado":
+                                        if (map.getEdificios().get(comando[1]).getTipo().equals("Cuartel")) {
+                                            Edificio cuartel = map.getEdificios().get(comando[1]);
+                                            cuartel.crearSoldado(map);
 
-                                    } else {
-                                        System.out.println("El cuartel no existe");
-                                    }
-                                    break;
-                                default:
-                                    System.out.println("Tipo personaje mal introducido");
+                                        } else {
+                                            System.out.println("Este edificio no es  un cuartel");
+                                        }
+                                        break;
+                                    default:
+                                        System.out.println("Tipo personaje mal introducido");
+                                }
+                            } else {
+                                System.out.println("El edificio indicado no existe");
                             }
 
                         } else {
@@ -229,11 +233,11 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "almacenar":
-                        if (comando.length == 3){
+                        if (comando.length == 3) {
                             Personaje paisanoAlmacenar = map.getPersonajes().get(comando[1]);
                             Posicion pAlmacenar = new Posicion(paisanoAlmacenar.getPosicion());
-                            
-                            switch(comando[2]){
+
+                            switch (comando[2]) {
                                 case "N":
                                     pAlmacenar.moverX(-1);
                                     break;
@@ -247,9 +251,9 @@ public class Principal {
                                     pAlmacenar.moverY(-1);
                                     break;
                             }
-                            
+
                             Celda celdaAlmacenar = map.getCelda(pAlmacenar);
-                            if(celdaAlmacenar.getTipo().equals("Ciudadela") || celdaAlmacenar.getTipo().equals("Cuartel") || celdaAlmacenar.getTipo().equals("Casa")){  //Comprueba que sea un edificio
+                            if (celdaAlmacenar.getTipo().equals("Ciudadela") || celdaAlmacenar.getTipo().equals("Cuartel") || celdaAlmacenar.getTipo().equals("Casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEf();
                                 paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
                             } else {
