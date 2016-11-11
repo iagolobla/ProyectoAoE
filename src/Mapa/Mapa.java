@@ -54,39 +54,39 @@ public class Mapa {
         }
 
         //Creacion de la ciudadela
-        String Name = "Ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
+        String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
         cantidades[2]++;
-        mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
+        mapa.get(3).set(3, new Celda("ciudadela", new Posicion(3, 3), Name));
         edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
 
         //creacion un personaje
-        Name = "Paisano-" + (cantidades[0] + 1);
+        Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
-        mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
+        mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
         for (int i = 6; i < 8; i++) {
             for (int j = 6; j < 8; j++) {
-                Name = "Bosque-" + (cantidades[5] + 1);
+                Name = "bosque-" + (cantidades[5] + 1);
                 cantidades[5]++;
-                mapa.get(i).set(j, new Celda("Bosque", new Posicion(i, j), Name));
+                mapa.get(i).set(j, new Celda("bosque", new Posicion(i, j), Name));
                 recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
             }
         }
         
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                Name = "Cantera-" + (cantidades[6] + 1);
+                Name = "cantera-" + (cantidades[6] + 1);
                 cantidades[6]++;
-                mapa.get(i).set(j, new Celda("Cantera", new Posicion(i, j), Name));
+                mapa.get(i).set(j, new Celda("cantera", new Posicion(i, j), Name));
                 recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
             }
         }
         
         for (int i = 0; i < 3; i++) {
             for (int j = 6; j < 8; j++) {
-                Name = "Arbusto-" + (cantidades[7] + 1);
+                Name = "arbusto-" + (cantidades[7] + 1);
                 cantidades[7]++;
-                mapa.get(i).set(j, new Celda("Arbusto", new Posicion(i, j), Name));
+                mapa.get(i).set(j, new Celda("arbusto", new Posicion(i, j), Name));
                 recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
             }
         }
@@ -110,7 +110,7 @@ public class Mapa {
     public void ponerVisible(Celda cell) {
         Celda aux;
         Posicion pos;
-        if (cell.getTipo().equals("Soldado") || cell.getTipo().equals("Paisano")) {   //Cuando localiza un soldado o paisano pone
+        if (cell.getTipo().equals("soldado") || cell.getTipo().equals("paisano") || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
             pos = new Posicion(cell.getPosicion());                                 //sus celdas adyacentes en visible
             aux = this.getCelda(pos);
             aux.setVisible(true);   //Pone visible la celda del personaje
@@ -169,28 +169,28 @@ public class Mapa {
                         case ("Pradera"):
                             System.out.print(" ");
                             break;
-                        case ("Ciudadela"):
+                        case ("ciudadela"):
                             System.out.print("C");
                             break;
-                        case ("Cuartel"):
+                        case ("cuartel"):
                             System.out.print("c");
                             break;
-                        case ("Casa"):
+                        case ("casa"):
                             System.out.print("Ç");
                             break;
-                        case "Soldado":
-                            System.out.print("S");
+                        case "soldado":
+                            System.out.print("s");
                             break;
-                        case "Paisano":
+                        case "paisano":
                             System.out.print("P");
                             break;
-                        case "Bosque":
+                        case "bosque":
                             System.out.print("B");
                             break;
-                        case "Cantera":
+                        case "cantera":
                             System.out.print("p");
                             break;
-                        case "Arbusto":
+                        case "arbusto":
                             System.out.print("^");
                             break;
                         default:

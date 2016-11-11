@@ -40,36 +40,36 @@ public class Celda {
         pos = new Posicion(posicion);
         this.tipo = tipo;
         switch (tipo) {
-            case "Soldado":
-                personaje = new Personaje("Soldado", Nombre, pos);
+            case "soldado":
+                personaje = new Personaje("soldado", Nombre, pos);
                 visible = true;
                 break;
-            case "Paisano":
-                personaje = new Personaje("Paisano", Nombre, pos);
+            case "paisano":
+                personaje = new Personaje("paisano", Nombre, pos);
                 visible = true;
                 break;
-            case "Ciudadela":
-                edificio = new Edificio("Ciudadela", pos, Nombre);
+            case "ciudadela":
+                edificio = new Edificio("ciudadela", pos, Nombre);
                 visible = true;
                 break;
-            case "Casa":
-                edificio = new Edificio("Casa", pos, Nombre);
+            case "casa":
+                edificio = new Edificio("casa", pos, Nombre);
                 visible = true;
                 break;
-            case "Cuartel":
-                edificio = new Edificio("Cuartel", pos, Nombre);
+            case "cuartel":
+                edificio = new Edificio("cuartel", pos, Nombre);
                 visible = true;
                 break;
-            case "Bosque":
-                recurso = new Recurso("Bosque", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
+            case "bosque":
+                recurso = new Recurso("bosque", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
                 visible= false;
                 break;
-            case "Cantera":
-                recurso = new Recurso("Cantera", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
+            case "cantera":
+                recurso = new Recurso("cantera", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
                 visible= false;
                 break;
-            case "Arbusto":
-                recurso = new Recurso("Arbusto", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
+            case "arbusto":
+                recurso = new Recurso("arbusto", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
                 visible= false;
                 break;
             default:
