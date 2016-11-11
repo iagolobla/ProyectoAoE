@@ -22,7 +22,8 @@ public class Principal {
         while (seguir) {
             System.out.print("$ ");
             String linea = scanner.nextLine();
-            String[] comando = linea.split(" ");
+            String lineaLowerCase = linea.toLowerCase();    //Pasamos todo a minusculas
+            String[] comando = lineaLowerCase.split(" ");
             if (comando.length > 0) {
                 switch (comando[0].toLowerCase()) {
                     case "salir":
@@ -111,42 +112,42 @@ public class Principal {
 
                                 if (cellMirar.getVisible()) {
                                     switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
-                                        case "Soldado":
+                                        case "soldado":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
                                             Personaje soldadito = cellMirar.getPj();
                                             System.out.println(soldadito);
                                             break;
-                                        case "Paisano":
+                                        case "paisano":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
                                             Personaje paisanito = cellMirar.getPj();
                                             System.out.println(paisanito);
                                             break;
-                                        case "Ciudadela":
+                                        case "ciudadela":
                                             System.out.println("Celda tipo Edificio");
                                             Edificio ciudadelita = cellMirar.getEf();
                                             System.out.println(ciudadelita);
                                             break;
-                                        case "Casa":
+                                        case "casa":
                                             System.out.println("Celda tipo Edificio");
                                             Edificio casita = cellMirar.getEf();
                                             System.out.println(casita);
                                             break;
-                                        case "Cuartel":
+                                        case "cuartel":
                                             System.out.println("Celda tipo Edificio");
                                             Edificio cuartelito = cellMirar.getEf();
                                             System.out.println(cuartelito);
                                             break;
-                                        case "Bosque":
+                                        case "bosque":
                                             System.out.println("Celda tipo Recurso");
                                             Recurso bosquecillo = cellMirar.getRs();
                                             System.out.println(bosquecillo);
                                             break;
-                                        case "Cantera":
+                                        case "cantera":
                                             System.out.println("Celda tipo Recurso");
                                             Recurso canterilla = cellMirar.getRs();
                                             System.out.println(canterilla);
                                             break;
-                                        case "Arbusto":
+                                        case "arbusto":
                                             System.out.println("Celda tipo Recurso");
                                             Recurso arbustillo = cellMirar.getRs();
                                             System.out.println(arbustillo);
@@ -170,23 +171,23 @@ public class Principal {
                             Posicion posPaisanito = paisanito.getPosicion();
 
                             switch (comando[2]) {
-                                case "N":
+                                case "n":
                                     posPaisanito.moverX(-1);
                                     break;
-                                case "S":
+                                case "s":
                                     posPaisanito.moverX(1);
                                     break;
-                                case "O":
+                                case "o":
                                     posPaisanito.moverY(-1);
                                     break;
-                                case "E":
+                                case "e":
                                     posPaisanito.moverY(1);
                                     break;
                             }
                             if (map.checkCoords(posPaisanito)) {  //En caso de que la coordenada este bien
                                 Celda celdita = map.getCelda(posPaisanito);
                                 //Comprobamos que la celda tiene un recurso
-                                if (celdita.getTipo().equals("Arbusto") || celdita.getTipo().equals("Cantera") || celdita.getTipo().equals("Bosque")) {
+                                if (celdita.getTipo().equals("arbusto") || celdita.getTipo().equals("cantera") || celdita.getTipo().equals("bosque")) {
                                     Recurso recursito = map.getCelda(posPaisanito).getRs();
                                     paisanito.recolectar(recursito, map);
                                 } else {
@@ -194,7 +195,7 @@ public class Principal {
                                 }
                             }
                         } else {
-                            System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: recolectar Paisano-x Direccion(N,S,E,O)");
+                            System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: recolectar paisano-x Direccion(N,S,E,O)");
                         }
                         break;
                     case "crear":   //Quizas deberiamos comprobar que el usuario escribe Paisano bien
@@ -202,7 +203,7 @@ public class Principal {
                             if (map.getEdificios().containsKey(comando[1])) {
                                 switch (comando[2].toLowerCase()) {
                                     case "paisano":
-                                        if (map.getEdificios().get(comando[1]).getTipo().equals("Ciudadela")) {
+                                        if (map.getEdificios().get(comando[1]).getTipo().equals("ciudadela")) {
                                             Edificio ciudadela = map.getEdificios().get(comando[1]);
                                             ciudadela.crearPaisano(map);
 
@@ -211,7 +212,7 @@ public class Principal {
                                         }
                                         break;
                                     case "soldado":
-                                        if (map.getEdificios().get(comando[1]).getTipo().equals("Cuartel")) {
+                                        if (map.getEdificios().get(comando[1]).getTipo().equals("cuartel")) {
                                             Edificio cuartel = map.getEdificios().get(comando[1]);
                                             cuartel.crearSoldado(map);
 
@@ -238,29 +239,29 @@ public class Principal {
                             Posicion pAlmacenar = new Posicion(paisanoAlmacenar.getPosicion());
 
                             switch (comando[2]) {
-                                case "N":
+                                case "n":
                                     pAlmacenar.moverX(-1);
                                     break;
-                                case "S":
+                                case "s":
                                     pAlmacenar.moverX(1);
                                     break;
-                                case "E":
+                                case "e":
                                     pAlmacenar.moverY(1);
                                     break;
-                                case "O":
+                                case "o":
                                     pAlmacenar.moverY(-1);
                                     break;
                             }
 
                             Celda celdaAlmacenar = map.getCelda(pAlmacenar);
-                            if (celdaAlmacenar.getTipo().equals("Ciudadela") || celdaAlmacenar.getTipo().equals("Cuartel") || celdaAlmacenar.getTipo().equals("Casa")) {  //Comprueba que sea un edificio
+                            if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEf();
                                 paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }
                         } else {
-                            System.out.println("Error sintactico en el comando, forma correcta: almacenar Paisano-x Direccion(N,S,E,O)");
+                            System.out.println("Error sintactico en el comando, forma correcta: almacenar paisano-x Direccion(N,S,E,O)");
                         }
                         break;
                     case "reparar":

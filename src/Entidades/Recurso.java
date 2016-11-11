@@ -26,11 +26,11 @@ public class Recurso {
         this.nombre=nombre;
         this.pos=new Posicion(pos);
         /*switch(tipe){
-            case("Bosque"):
+            case("bosque"):
                 break;
-            case("Cantera"):
+            case("cantera"):
                 break;
-            case("Arbusto"):
+            case("arbusto"):
                 break;
         }*/
     }
