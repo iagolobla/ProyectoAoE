@@ -28,7 +28,7 @@ public class Mapa {
     public final int MAPAX = 16;
     public final int MAPAY = 8;
 
-    /*public Mapa(int bosques,int canteras, int arbustos) {
+    public Mapa(int bosques,int canteras, int arbustos) {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
@@ -43,7 +43,7 @@ public class Mapa {
         6--Cantera
         7--Arbusto
          */
-       /* mapa = new ArrayList<>();
+        mapa = new ArrayList<>();
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             mapa.add(new ArrayList<>());
@@ -79,7 +79,7 @@ public class Mapa {
 
         //Recorremos mapa para actualizar las visibilidades
         this.actualizarVisibilidad();
-    }*/
+    }
 
     public Mapa() {
         edificios = new HashMap<String, Edificio>();

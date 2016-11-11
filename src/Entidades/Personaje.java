@@ -210,7 +210,7 @@ public class Personaje {
 
         switch (edificio.getTipo()) {
             case "casa":
-                if (mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud) && mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud)) {
+                if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud)) {
                     edificio.setSalud(Edificio.SALUDCASA);
                     System.out.println("Se han recuperado " + (Edificio.SALUDCASA - salud) + " puntos de salud");
                 } else {
@@ -218,7 +218,7 @@ public class Personaje {
                 }
                 break;
             case "ciudadela":
-                if (mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud) && mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud)) {
+                if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud)) {
                     edificio.setSalud(Edificio.SALUDCIUDADELA);
                     System.out.println("Se han recuperado " + (Edificio.SALUDCIUDADELA - salud) + " puntos de salud");
                 } else {
@@ -226,7 +226,7 @@ public class Personaje {
                 }
                 break;
             case "cuartel":
-                if (mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud) && mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud)) {
+                if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud)) {
                     edificio.setSalud(Edificio.SALUDCUARTEL);
                     System.out.println("Se han recuperado " + (Edificio.SALUDCUARTEL - salud) + " puntos de salud");
                 } else {
