@@ -14,11 +14,11 @@ import Mapa.Mapa;
  */
 public class Edificio {
 
-    private static final int SALUDCIUDADELA = 200;
-    private static final int SALUDCASA = 50;
-    private static final int SALUDCUARTEL = 150;
-    private static final int CAPACIDADCUARTEL = 15;
-    private static final int CAPACIDADCASA = 10;
+    public static final int SALUDCIUDADELA = 200;
+    public static final int SALUDCASA = 50;
+    public static final int SALUDCUARTEL = 150;
+    public static final int CAPACIDADCUARTEL = 15;
+    public static final int CAPACIDADCASA = 10;
 
     private String tipo;
     private int salud;
@@ -35,7 +35,7 @@ public class Edificio {
         switch (tipe) {
             case ("Ciudadela"):
                 tipo = tipe;
-                salud = SALUDCIUDADELA;
+                salud = SALUDCIUDADELA;//solo es para hacer la prueba
                 nombre = Nombre;
                 madera = 100;//son los valores iniciales que toman(se los damos nosotros).
                 piedra = 100;

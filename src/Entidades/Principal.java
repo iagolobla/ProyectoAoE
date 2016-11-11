@@ -263,6 +263,16 @@ public class Principal {
                             System.out.println("Error sintactico en el comando, forma correcta: almacenar Paisano-x Direccion(N,S,E,O)");
                         }
                         break;
+                    case "reparar":
+                        if (comando.length == 3) {
+                            if (map.getPersonajes().containsKey(comando[1])) {
+                                Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
+                                personaje.reparar(map, comando[2]);
+                            }
+                        } else {
+                            System.out.println("Comando reparar mal intruducido. Ejemplo: reparar Paisano-1 S");
+                        }
+                        break;
                     case "mapa":
                         map.imprimir();
                         break;

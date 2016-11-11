@@ -56,19 +56,19 @@ public class Personaje {
             System.out.println("Ciudadela pasada nula!");
             return;
         }
-        if(ciudadela.getTipo().equals("Casa")){ //En caso de que el edificio sea una casa
+        if (ciudadela.getTipo().equals("Casa")) { //En caso de que el edificio sea una casa
             System.out.println("No se pueden almacenar Recursos en una Casa!");
             return;
         }
-        if(ciudadela.getTipo().equals("Cuartel")){  //En caso de que el edificio sea un cuartel
+        if (ciudadela.getTipo().equals("Cuartel")) {  //En caso de que el edificio sea un cuartel
             System.out.println("No se pueden almacenar Recursos en un Cuartel!");
             return;
         }
-        if(this.getTipo().equals("Soldado")){   //Comprueba si es un paisano o un soldado
+        if (this.getTipo().equals("Soldado")) {   //Comprueba si es un paisano o un soldado
             System.out.println("Los soldados no cargan Recursos!");
             return;
         }
-        if(this.getCantidadRecolectada() <= 0){  //Comprobamos si tiene algun recurso
+        if (this.getCantidadRecolectada() <= 0) {  //Comprobamos si tiene algun recurso
             System.out.println("Este Paisano no tiene recursos!");
             return;
         }
@@ -120,14 +120,14 @@ public class Personaje {
                         mapa.getCantidades()[3]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
-                        System.out.println("Casa construida en "+pos+"Se han gastado 20 unidades de piedra y 50 de madera");
-                        
+                        System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
+
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
                         Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
                         System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: "+ Ciudadela.getComida());
-                        System.out.println("Madera: "+ Ciudadela.getMadera());
-                        System.out.println("Piedra: "+ Ciudadela.getPiedra());
+                        System.out.println("Comida: " + Ciudadela.getComida());
+                        System.out.println("Madera: " + Ciudadela.getMadera());
+                        System.out.println("Piedra: " + Ciudadela.getPiedra());
                     } else {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
@@ -142,14 +142,14 @@ public class Personaje {
                         mapa.getCantidades()[4]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
-                        System.out.println("Cuartel construido en "+pos+"Se han gastado 20 unidades de piedra y 50 de madera");
-                        
+                        System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
+
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
                         Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
                         System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: "+ Ciudadela.getComida());
-                        System.out.println("Madera: "+ Ciudadela.getMadera());
-                        System.out.println("Piedra: "+ Ciudadela.getPiedra());
+                        System.out.println("Comida: " + Ciudadela.getComida());
+                        System.out.println("Madera: " + Ciudadela.getMadera());
+                        System.out.println("Piedra: " + Ciudadela.getPiedra());
                     } else {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
@@ -164,14 +164,14 @@ public class Personaje {
                         mapa.getCantidades()[2]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("Ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
-                        System.out.println("Ciudadela construida en "+pos+"Se han gastado 20 unidades de piedra y 50 de madera");
-                        
+                        System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
+
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
                         Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
                         System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: "+ Ciudadela.getComida());
-                        System.out.println("Madera: "+ Ciudadela.getMadera());
-                        System.out.println("Piedra: "+ Ciudadela.getPiedra());
+                        System.out.println("Comida: " + Ciudadela.getComida());
+                        System.out.println("Madera: " + Ciudadela.getMadera());
+                        System.out.println("Piedra: " + Ciudadela.getPiedra());
                     } else {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
@@ -184,6 +184,59 @@ public class Personaje {
 
         }
 
+    }
+
+    public void reparar(Mapa mapa, String direccion) {
+        Posicion pos = new Posicion(posicion);
+        switch (direccion) {
+            case "S":
+                pos.moverX(1);
+                break;
+            case "N":
+                pos.moverX(-1);
+                break;
+            case "E":
+                pos.moverY(1);
+                break;
+            case "O":
+                pos.moverY(-1);
+                break;
+            default:
+                System.out.println("Error, direccion no valida!");
+
+        }
+        Edificio edificio = mapa.getCelda(pos).getEf();
+        int salud = edificio.getSalud();
+
+        switch (edificio.getTipo()) {
+            case "Casa":
+                if (mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud) && mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud)) {
+                    edificio.setSalud(Edificio.SALUDCASA);
+                    System.out.println("Se han recuperado " + (Edificio.SALUDCASA - salud) + " puntos de salud");
+                } else {
+                    System.out.println("No hay recursos suficientes para reparar el edificio");
+                }
+                break;
+            case "Ciudadela":
+                if (mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud) && mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud)) {
+                    edificio.setSalud(Edificio.SALUDCIUDADELA);
+                    System.out.println("Se han recuperado " + (Edificio.SALUDCIUDADELA - salud) + " puntos de salud");
+                } else {
+                    System.out.println("No hay recursos suficientes para reparar el edificio");
+                }
+                break;
+            case "Cuartel":
+                if (mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud) && mapa.getEdificios().get("Ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud)) {
+                    edificio.setSalud(Edificio.SALUDCUARTEL);
+                    System.out.println("Se han recuperado " + (Edificio.SALUDCUARTEL - salud) + " puntos de salud");
+                } else {
+                    System.out.println("No hay recursos suficientes para reparar el edificio");
+                }
+                break;
+            default:
+                System.out.println("Error, direccion no valida!");
+
+        }
     }
 
     public Posicion moverPj(Mapa mapa, String direccion) {

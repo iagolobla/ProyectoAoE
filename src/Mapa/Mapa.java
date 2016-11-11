@@ -15,6 +15,7 @@ import Entidades.Recurso;
 import Entidades.Edificio;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Mapa {
 
@@ -26,6 +27,59 @@ public class Mapa {
 
     public final int MAPAX = 16;
     public final int MAPAY = 8;
+
+    /*public Mapa(int bosques,int canteras, int arbustos) {
+        edificios = new HashMap<String, Edificio>();
+        personajes = new HashMap<String, Personaje>();
+        recursos = new HashMap<String, Recurso>();
+        cantidades = new int[8];//guardara las cantidades de personajes, soldados,etc.
+        /*
+        0--Paisano
+        1--Soldado
+        2--Ciudadela
+        3--Casa
+        4--Cuartel
+        5--Bosque
+        6--Cantera
+        7--Arbusto
+         */
+       /* mapa = new ArrayList<>();
+        Celda cell;
+        for (int i = 0; i < MAPAY; i++) {
+            mapa.add(new ArrayList<>());
+            for (int j = 0; j < MAPAX; j++) {   //Inicializamos visible a false para todas las celdas
+                cell = new Celda(new Posicion(i, j));
+                cell.setVisible(false);
+                mapa.get(i).add(cell);
+            }
+        }
+
+        //Creacion de la ciudadela
+        String Name = "Ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
+        cantidades[2]++;
+        mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
+        edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
+
+        //creacion un personaje
+        Name = "Paisano-" + (cantidades[0] + 1);
+        cantidades[0]++;
+        mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
+        personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        
+        
+        for(int i=0;i<bosques;i++){
+            Random rn = new Random();
+            int x = rn.nextInt(mapa.size());
+            int y = rn.nextInt(mapa.get(0).size());
+            
+        }
+
+        
+        //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
+
+        //Recorremos mapa para actualizar las visibilidades
+        this.actualizarVisibilidad();
+    }*/
 
     public Mapa() {
         edificios = new HashMap<String, Edificio>();
@@ -72,7 +126,7 @@ public class Mapa {
                 recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
             }
         }
-        
+
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 Name = "Cantera-" + (cantidades[6] + 1);
@@ -81,7 +135,7 @@ public class Mapa {
                 recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
             }
         }
-        
+
         for (int i = 0; i < 3; i++) {
             for (int j = 6; j < 8; j++) {
                 Name = "Arbusto-" + (cantidades[7] + 1);
@@ -138,8 +192,8 @@ public class Mapa {
             }
         }
     }
-    
-    public void actualizarVisibilidad(){
+
+    public void actualizarVisibilidad() {
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {
@@ -153,7 +207,7 @@ public class Mapa {
         Celda cell;
         Celda aux;
         Posicion pos;
-        
+
         this.actualizarVisibilidad();
 
         for (int i = 0; i < MAPAX + 2; i++) {
