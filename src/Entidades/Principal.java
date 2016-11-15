@@ -18,7 +18,7 @@ public class Principal {
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
-        Mapa map = new Mapa();
+        Mapa map = new Mapa(5,5,5);
         while (seguir) {
             System.out.print("$ ");
             String linea = scanner.nextLine();

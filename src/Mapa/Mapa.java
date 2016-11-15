@@ -55,15 +55,15 @@ public class Mapa {
         }
 
         //Creacion de la ciudadela
-        String Name = "Ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
+        String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
         cantidades[2]++;
-        mapa.get(3).set(3, new Celda("Ciudadela", new Posicion(3, 3), Name));
+        mapa.get(3).set(3, new Celda("ciudadela", new Posicion(3, 3), Name));
         edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
 
         //creacion un personaje
-        Name = "Paisano-" + (cantidades[0] + 1);
+        Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
-        mapa.get(3).set(4, new Celda("Paisano", new Posicion(3, 4), Name));
+        mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
         
         
@@ -71,7 +71,28 @@ public class Mapa {
             Random rn = new Random();
             int x = rn.nextInt(mapa.size());
             int y = rn.nextInt(mapa.get(0).size());
-            
+            Name = "bosque-" + (cantidades[5] + 1);
+            cantidades[5]++;
+            mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
+            recursos.put(Name, getCelda(new Posicion(x,y)).getRs());
+        }
+        for(int i=0;i<canteras;i++){
+            Random rn = new Random();
+            int x = rn.nextInt(mapa.size());
+            int y = rn.nextInt(mapa.get(0).size());
+            Name = "cantera-" + (cantidades[6] + 1);
+            cantidades[6]++;
+            mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
+            recursos.put(Name, getCelda(new Posicion(x,y)).getRs());
+        }
+        for(int i=0;i<bosques;i++){
+            Random rn = new Random();
+            int x = rn.nextInt(mapa.size());
+            int y = rn.nextInt(mapa.get(0).size());
+            Name = "arbusto-" + (cantidades[7] + 1);
+            cantidades[7]++;
+            mapa.get(x).set(y, new Celda("arbusto", new Posicion(x, y), Name));
+            recursos.put(Name, getCelda(new Posicion(x,y)).getRs());
         }
 
         
