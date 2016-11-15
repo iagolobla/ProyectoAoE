@@ -221,37 +221,37 @@ public class Mapa {
                 if (mapa.get(i).get(j).getVisible()) {
                     switch (mapa.get(i).get(j).getTipo()) {
                         case ("Pradera"):
-                            System.out.print(" ");
+                            System.out.print(Colores.BACK_VERDE + " " + Colores.BACK_RESET);
                             break;
                         case ("ciudadela"):
-                            System.out.print("C");
+                            System.out.print(Colores.BACK_VERDE + "C" + Colores.BACK_RESET);
                             break;
                         case ("cuartel"):
-                            System.out.print("c");
+                            System.out.print(Colores.BACK_VERDE + "c" + Colores.BACK_RESET);
                             break;
                         case ("casa"):
-                            System.out.print("Ç");
+                            System.out.print(Colores.BACK_VERDE + "Ç" + Colores.BACK_RESET);
                             break;
                         case "soldado":
-                            System.out.print("s");
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "paisano":
-                            System.out.print("P");
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "bosque":
-                            System.out.print("B");
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "B" + Colores.BACK_RESET + Colores.TEXT_RESET);
                             break;
                         case "cantera":
-                            System.out.print("p");
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "^" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Ahora la piedra son ^
                             break;
                         case "arbusto":
-                            System.out.print("^");
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "*" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Y los arbustos *
                             break;
                         default:
                             System.out.println("Error, tipo de edificio incorrecto");
                     }
                 } else {
-                    System.out.print("*");
+                    System.out.print(Colores.BACK_NEGRO + " " + Colores.BACK_RESET);
                 }
             }
             System.out.print("&");
