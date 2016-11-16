@@ -304,19 +304,19 @@ public class Mapa {
     }
 
     public ArrayList<ArrayList<Celda>> getMapa() {
-        return new ArrayList<>(mapa);
+        return mapa;
     }
 
     public HashMap<String, Personaje> getPersonajes() {
-        return new HashMap<>(personajes);
+        return personajes;
     }
 
     public HashMap<String, Edificio> getEdificios() {
-        return new HashMap<>(edificios);
+        return edificios;
     }
 
     public HashMap<String, Recurso> getRecursos() {
-        return new HashMap<>(recursos);
+        return recursos;
     }
 
     public int[] getCantidades() {
