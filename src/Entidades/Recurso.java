@@ -13,18 +13,18 @@ import Mapa.Mapa;
  */
 public class Recurso {
 
-    private final int DFLCANTIDAD = 100;
+    public static final int DFLCANTIDAD = 100;
 
-    private final String tipo;  //El tipo de una instancia no puede cambiar
+    private String tipo;  //El tipo de una instancia no puede cambiar
     private int cantidad;
     private String nombre;
     private Posicion pos;
 
-    public Recurso(String tipe,String nombre,Posicion pos) {
+    public Recurso(String tipe, String nombre, Posicion pos) {
         tipo = tipe;
         cantidad = DFLCANTIDAD;
-        this.nombre=nombre;
-        this.pos=new Posicion(pos);
+        this.nombre = nombre;
+        this.pos = new Posicion(pos);
         /*switch(tipe){
             case("bosque"):
                 break;
@@ -35,11 +35,11 @@ public class Recurso {
         }*/
     }
 
-    public Recurso(String tipe, int cantidad, String nombre,Posicion pos) {
+    public Recurso(String tipe, int cantidad, String nombre, Posicion pos) {
         tipo = tipe;
         this.cantidad = cantidad;
-        this.nombre=nombre;
-        this.pos=new Posicion(pos);
+        this.nombre = nombre;
+        this.pos = new Posicion(pos);
     }
 
     @Override
@@ -50,44 +50,65 @@ public class Recurso {
 
         return impresion;
     }
-
+    //GETTERS Y SETTERS
     public void setCantidad(int cantidad) {  //Este metodo es para el caso en el que un personaje sin suficiente
-        this.cantidad = cantidad;           //capacidad de carga intenta recolectar un recurso, hay que mermar
+        if (cantidad > 0) {
+            this.cantidad = cantidad;
+        }                                   //capacidad de carga intenta recolectar un recurso, hay que mermar
     }                                       //la cantidad de ese recurso, es decir, solo quitar la capRecoleccion
 
-    //GETTERS Y SETTERS
+    
     public String getTipo() {
         return tipo;
+    }
+    
+    public void setTipo(String tipo){
+        this.tipo=tipo;
     }
 
     public int getCantidad() {
         return cantidad;
     }
+    
 
     public Posicion getPos() {
         return new Posicion(pos);
     }
-    
-    public int restarCantidad(int cantidadRestada, Mapa map){
-        if(cantidadRestada < 0){
+
+    public void setPos(Posicion p) {
+        if (p.getX() >= 0 && p.getX() < Mapa.MAPAX && p.getY() >= 0 && p.getY() < Mapa.MAPAY) {
+            pos = new Posicion(p);
+        }
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int restarCantidad(int cantidadRestada, Mapa map) {
+        if (cantidadRestada < 0) {
             System.out.println("Cantidad no valida!");
             return 0;
         }
-        if(cantidadRestada < cantidad){  //En caso de que le restemos al recurso una cantidad igual o inferior a su cantidad
-            this.setCantidad(cantidad-cantidadRestada); //restamos y devolvemos la cantidad restada
+        if (cantidadRestada < cantidad) {  //En caso de que le restemos al recurso una cantidad igual o inferior a su cantidad
+            this.setCantidad(cantidad - cantidadRestada); //restamos y devolvemos la cantidad restada
             return cantidadRestada;
-        }else if(cantidadRestada == cantidad){  //En caso de que tengan la misma cantidad debe hacer ambas
-            this.setCantidad(cantidad-cantidadRestada); //restamos y devolvemos la cantidad restada
+        } else if (cantidadRestada == cantidad) {  //En caso de que tengan la misma cantidad debe hacer ambas
+            this.setCantidad(cantidad - cantidadRestada); //restamos y devolvemos la cantidad restada
             map.getCelda(new Posicion(this.getPos())).liberarCelda();   //Libera la celda del mapa
             System.out.println("Se ha agotado el recurso!");
             map.imprimir();
-            return(cantidadRestada); //Devolvemos la cantidad obtenida
+            return (cantidadRestada); //Devolvemos la cantidad obtenida
         } else {    //En caso de que intentemos sacar mas que lo que hay
             //Destruimos el recurso
             map.getCelda(new Posicion(this.getPos())).liberarCelda();   //Libera la celda del mapa
             System.out.println("Se ha agotado el recurso!");
-            return(this.getCantidad()); //Devolvemos la cantidad obtenida
-            
+            return (this.getCantidad()); //Devolvemos la cantidad obtenida
+
         }
     }
 

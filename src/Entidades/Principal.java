@@ -114,42 +114,42 @@ public class Principal {
                                     switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
                                         case "soldado":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                            Personaje soldadito = cellMirar.getPj();
+                                            Personaje soldadito = cellMirar.getPersonaje();
                                             System.out.println(soldadito);
                                             break;
                                         case "paisano":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                            Personaje paisanito = cellMirar.getPj();
+                                            Personaje paisanito = cellMirar.getPersonaje();
                                             System.out.println(paisanito);
                                             break;
                                         case "ciudadela":
                                             System.out.println("Celda tipo Edificio");
-                                            Edificio ciudadelita = cellMirar.getEf();
+                                            Edificio ciudadelita = cellMirar.getEdificio();
                                             System.out.println(ciudadelita);
                                             break;
                                         case "casa":
                                             System.out.println("Celda tipo Edificio");
-                                            Edificio casita = cellMirar.getEf();
+                                            Edificio casita = cellMirar.getEdificio();
                                             System.out.println(casita);
                                             break;
                                         case "cuartel":
                                             System.out.println("Celda tipo Edificio");
-                                            Edificio cuartelito = cellMirar.getEf();
+                                            Edificio cuartelito = cellMirar.getEdificio();
                                             System.out.println(cuartelito);
                                             break;
                                         case "bosque":
                                             System.out.println("Celda tipo Recurso");
-                                            Recurso bosquecillo = cellMirar.getRs();
+                                            Recurso bosquecillo = cellMirar.getRecurso();
                                             System.out.println(bosquecillo);
                                             break;
                                         case "cantera":
                                             System.out.println("Celda tipo Recurso");
-                                            Recurso canterilla = cellMirar.getRs();
+                                            Recurso canterilla = cellMirar.getRecurso();
                                             System.out.println(canterilla);
                                             break;
                                         case "arbusto":
                                             System.out.println("Celda tipo Recurso");
-                                            Recurso arbustillo = cellMirar.getRs();
+                                            Recurso arbustillo = cellMirar.getRecurso();
                                             System.out.println(arbustillo);
                                             break;
                                     }
@@ -188,7 +188,7 @@ public class Principal {
                                 Celda celdita = map.getCelda(posPaisanito);
                                 //Comprobamos que la celda tiene un recurso
                                 if (celdita.getTipo().equals("arbusto") || celdita.getTipo().equals("cantera") || celdita.getTipo().equals("bosque")) {
-                                    Recurso recursito = map.getCelda(posPaisanito).getRs();
+                                    Recurso recursito = map.getCelda(posPaisanito).getRecurso();
                                     paisanito.recolectar(recursito, map);
                                 } else {
                                     System.out.println("No hay un recurso aqui!");
@@ -255,7 +255,7 @@ public class Principal {
 
                             Celda celdaAlmacenar = map.getCelda(pAlmacenar);
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
-                                Edificio ciudadelaAlmacenar = celdaAlmacenar.getEf();
+                                Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
                                 paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
                             } else {
                                 System.out.println("No hay un edificio aqui");

@@ -56,15 +56,15 @@ public class Personaje {
             System.out.println("Ciudadela pasada nula!");
             return;
         }
-        if(ciudadela.getTipo().equals("casa")){ //En caso de que el edificio sea una casa
+        if (ciudadela.getTipo().equals("casa")) { //En caso de que el edificio sea una casa
             System.out.println("No se pueden almacenar Recursos en una Casa!");
             return;
         }
-        if(ciudadela.getTipo().equals("cuartel")){  //En caso de que el edificio sea un cuartel
+        if (ciudadela.getTipo().equals("cuartel")) {  //En caso de que el edificio sea un cuartel
             System.out.println("No se pueden almacenar Recursos en un Cuartel!");
             return;
         }
-        if(this.getTipo().equals("soldado")){   //Comprueba si es un paisano o un soldado
+        if (this.getTipo().equals("soldado")) {   //Comprueba si es un paisano o un soldado
             System.out.println("Los soldados no cargan Recursos!");
             return;
         }
@@ -119,7 +119,7 @@ public class Personaje {
                         String Name = "casa-" + (mapa.getCantidades()[3] + 1);
                         mapa.getCantidades()[3]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
@@ -141,7 +141,7 @@ public class Personaje {
                         String Name = "cuartel-" + (mapa.getCantidades()[4] + 1);
                         mapa.getCantidades()[4]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
@@ -163,7 +163,7 @@ public class Personaje {
                         String Name = "ciudadela-" + (mapa.getCantidades()[2] + 1);
                         mapa.getCantidades()[2]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEf());
+                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
@@ -205,7 +205,7 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
-        Edificio edificio = mapa.getCelda(pos).getEf();
+        Edificio edificio = mapa.getCelda(pos).getEdificio();
         int salud = edificio.getSalud();
 
         switch (edificio.getTipo()) {
@@ -325,14 +325,28 @@ public class Personaje {
 
         return impresion;
     }
-
     //GETTERS Y SETTERS
+
+    public String getTipoRecurso() {
+        return tipoRecurso;
+    }
+
+    public void setTipoRecurso(String tipoRecurso) {
+        this.tipoRecurso = tipoRecurso;
+    }
+
     public int getCantidadRecolectada() {
         return cantidadRecolectada;
     }
 
     public Posicion getPosicion() {
         return new Posicion(posicion);
+    }
+
+    public void setPosicion(Posicion p) {
+        if (p.getX() >= 0 && p.getX() < Mapa.MAPAX && p.getY() >= 0 && p.getY() < Mapa.MAPAY) {
+            posicion = new Posicion(p);
+        }
     }
 
     public String getTipo() {
@@ -348,7 +362,9 @@ public class Personaje {
     }
 
     public void setSalud(int salud) {
-        this.salud = salud;
+        if (salud > 0) {
+            this.salud = salud;
+        }
     }
 
     public int getAtaque() {
@@ -360,7 +376,9 @@ public class Personaje {
     }
 
     public void setCapRecolectar(int capRecolectar) {
-        this.capRecolectar = capRecolectar;
+        if (capRecolectar >= 0) {
+            this.capRecolectar = capRecolectar;
+        }
     }
 
     public String getNombre() {
@@ -371,7 +389,23 @@ public class Personaje {
         this.Nombre = Nombre;
     }
 
-    public void setPosicion(Posicion pos) {
-        this.posicion = new Posicion(pos);
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
+
+    public void setArmadura(int armadura) {
+        if (armadura >= 0) {
+            this.armadura = armadura;
+        }
+    }
+
+    public void setAtaque(int ataque) {
+        if (ataque >= 0) {
+            this.ataque = ataque;
+        }
+    }
+
+    /*public void setCantidadRecolectada(int cantidadRecolectada) {
+        this.cantidadRecolectada = cantidadRecolectada;
+    }*///NO TIENE SENTIDO
 }

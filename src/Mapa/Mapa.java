@@ -25,8 +25,8 @@ public class Mapa {
     private HashMap<String, Recurso> recursos;
     private int[] cantidades;
 
-    public final int MAPAX = 16;
-    public final int MAPAY = 8;
+    public static final int MAPAX = 16;
+    public static final int MAPAY = 8;
 
     public Mapa(int bosques, int canteras, int arbustos) {
         edificios = new HashMap<String, Edificio>();
@@ -58,13 +58,13 @@ public class Mapa {
         String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
         cantidades[2]++;
         mapa.get(3).set(3, new Celda("ciudadela", new Posicion(3, 3), Name));
-        edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
+        edificios.put(Name, getCelda(new Posicion(3, 3)).getEdificio());
 
         //creacion un personaje
         Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
         mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
-        personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        personajes.put(Name, getCelda(new Posicion(3, 4)).getPersonaje());//Aqui creo que hay ALIASING Assign return variable to new variable.
 
         for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
@@ -74,7 +74,7 @@ public class Mapa {
                 Name = "bosque-" + (cantidades[5] + 1);
                 cantidades[5]++;
                 mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
-                recursos.put(Name, getCelda(new Posicion(x, y)).getRs());
+                recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             }
         }
         for (int i = 0; i < canteras; i++) {
@@ -85,7 +85,7 @@ public class Mapa {
                 Name = "cantera-" + (cantidades[6] + 1);
                 cantidades[6]++;
                 mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
-                recursos.put(Name, getCelda(new Posicion(x, y)).getRs());
+                recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             }
         }
         for (int i = 0; i < bosques; i++) {
@@ -96,7 +96,7 @@ public class Mapa {
                 Name = "arbusto-" + (cantidades[7] + 1);
                 cantidades[7]++;
                 mapa.get(x).set(y, new Celda("arbusto", new Posicion(x, y), Name));
-                recursos.put(Name, getCelda(new Posicion(x, y)).getRs());
+                recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             }
         }
 
@@ -135,19 +135,19 @@ public class Mapa {
         String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
         cantidades[2]++;
         mapa.get(3).set(3, new Celda("ciudadela", new Posicion(3, 3), Name));
-        edificios.put(Name, getCelda(new Posicion(3, 3)).getEf());
+        edificios.put(Name, getCelda(new Posicion(3, 3)).getEdificio());
 
         //creacion un personaje
         Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
         mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
-        personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        personajes.put(Name, getCelda(new Posicion(3, 4)).getPersonaje());//Aqui creo que hay ALIASING Assign return variable to new variable.
         for (int i = 6; i < 8; i++) {
             for (int j = 6; j < 8; j++) {
                 Name = "bosque-" + (cantidades[5] + 1);
                 cantidades[5]++;
                 mapa.get(i).set(j, new Celda("bosque", new Posicion(i, j), Name));
-                recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
+                recursos.put(Name, getCelda(new Posicion(i, j)).getRecurso());
             }
         }
 
@@ -156,7 +156,7 @@ public class Mapa {
                 Name = "cantera-" + (cantidades[6] + 1);
                 cantidades[6]++;
                 mapa.get(i).set(j, new Celda("cantera", new Posicion(i, j), Name));
-                recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
+                recursos.put(Name, getCelda(new Posicion(i, j)).getRecurso());
             }
         }
 
@@ -165,7 +165,7 @@ public class Mapa {
                 Name = "arbusto-" + (cantidades[7] + 1);
                 cantidades[7]++;
                 mapa.get(i).set(j, new Celda("arbusto", new Posicion(i, j), Name));
-                recursos.put(Name, getCelda(new Posicion(i, j)).getRs());
+                recursos.put(Name, getCelda(new Posicion(i, j)).getRecurso());
             }
         }
         //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
@@ -322,5 +322,27 @@ public class Mapa {
     public int[] getCantidades() {
         return cantidades;
     }
+
+    public void setMapa(ArrayList<ArrayList<Celda>> mapa) {
+        this.mapa = new ArrayList<>(mapa);
+    }
+
+    public void setPersonajes(HashMap<String, Personaje> personajes) {
+        this.personajes = new HashMap<>(personajes);
+    }
+
+    public void setEdificios(HashMap<String, Edificio> edificios) {
+        this.edificios = new HashMap<>(edificios);
+    }
+
+    public void setRecursos(HashMap<String, Recurso> recursos) {
+        this.recursos = new HashMap<>(recursos);
+    }
+
+    public void setCantidades(int[] cantidades) {
+        this.cantidades = cantidades;
+    }
+    
+    
 
 }

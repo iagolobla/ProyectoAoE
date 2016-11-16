@@ -57,14 +57,14 @@ public class Edificio {
     }
 
     public void crearPaisano(Mapa mapa) {
-        if(mapa == null){
+        if (mapa == null) {
             System.out.println("Mapa pasado nulo!");
             return;
         }
         if (!this.tipo.equals("ciudadela")) {
             System.out.println("Este edificio no puede crear Paisanos");
         }
-        if(mapa.getCantidades()[3]*CAPACIDADCASA <= mapa.getCantidades()[0]+mapa.getCantidades()[1]){   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
+        if (mapa.getCantidades()[3] * CAPACIDADCASA <= mapa.getCantidades()[0] + mapa.getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
             System.out.println("No hay sitio para mas Paisanos, se necesitan mas casas!");
             return;
         }
@@ -89,7 +89,7 @@ public class Edificio {
         String Name = "paisano-" + (mapa.getCantidades()[0] + 1);
         mapa.getCantidades()[0]++;
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("paisano", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
-        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPj());
+        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
         mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
         System.out.println("Se han gastado 10 unidades de comida en crear el paisano");
         System.out.println("Quedan los siguientes recursos: ");
@@ -104,7 +104,7 @@ public class Edificio {
         if (!this.tipo.equals("cuartel")) {
             System.out.println("Este edificio no puede crear Soldados");
         }
-        if(mapa.getCantidades()[3]*CAPACIDADCASA <= mapa.getCantidades()[0]+mapa.getCantidades()[1]){   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
+        if (mapa.getCantidades()[3] * CAPACIDADCASA <= mapa.getCantidades()[0] + mapa.getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
             System.out.println("No hay sitio para mas Soldados, se necesitan mas casas!");
             return;
         }
@@ -129,7 +129,7 @@ public class Edificio {
         String Name = "soldado-" + (mapa.getCantidades()[1] + 1);
         mapa.getCantidades()[1]++;
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("soldado", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
-        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPj());
+        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
         mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get("ciudadela-1").getComida() - 10);
         System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
         System.out.println("Quedan los siguientes recursos: ");
@@ -159,8 +159,22 @@ public class Edificio {
         return new String(nombre);
     }
 
-    public Posicion getPosicion() {
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Posicion getPosicion() {//A LO MEJOR HAY QUE CAMBIAR EL NOMBRE DEL ATRIBUTO
         return new Posicion(punto);
+    }
+
+    public void setPunto(Posicion p) {
+        if (p.getX() >= 0 && p.getX() < Mapa.MAPAX && p.getY() >= 0 && p.getY() < Mapa.MAPAY) {
+            punto = new Posicion(p);
+        }
     }
 
     public String getTipo() {
@@ -172,7 +186,9 @@ public class Edificio {
     }
 
     public void setSalud(int salud) {
-        this.salud = salud;
+        if (salud>=0) {
+            this.salud = salud;
+        }
     }
 
     public int getMadera() {

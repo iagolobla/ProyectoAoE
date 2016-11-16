@@ -78,7 +78,7 @@ public class Celda {
         }
     }
 
-    public Personaje getPj() {
+    public Personaje getPersonaje() {// CAMBIAR EL NOMBRE DE ESTE GETTER
         if (personaje != null) {
             return personaje;
         }
@@ -86,7 +86,7 @@ public class Celda {
         return null;
     }
 
-    public Edificio getEf() {
+    public Edificio getEdificio() {
         if (edificio != null) {
             return edificio;
         }
@@ -94,7 +94,7 @@ public class Celda {
         return null;
     }
 
-    public Recurso getRs() {
+    public Recurso getRecurso() {
         if (recurso != null) {
             return recurso;
         }
@@ -137,5 +137,30 @@ public class Celda {
     public String getTipo() {
         return tipo;
     }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+
+    public Posicion getPos() {
+        return new Posicion(pos);
+    }
+
+    public void setPos(Posicion p) {
+        if (p.getX() >= 0 && p.getX() < Mapa.MAPAX && p.getY() >= 0 && p.getY() < Mapa.MAPAY) {
+            pos = new Posicion(p);
+        }
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
 
 }
