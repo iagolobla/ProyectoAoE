@@ -16,6 +16,7 @@ public class Colores {  //http://misc.flogisoft.com/bash/tip_colors_and_formatti
     public static final String TEXT_NEGRO = "\u001B[30m";
     public static final String TEXT_ROJO = "\u001B[31m";
     public static final String TEXT_VERDE = "\u001B[32m";
+    public static final String TEXT_VERDELIGHT = "\u001B[92m";
     public static final String TEXT_AMARILLO = "\u001B[33m";
     public static final String TEXT_AZUL = "\u001B[34m";
     public static final String TEXT_VIOLETA = "\u001B[35m";
