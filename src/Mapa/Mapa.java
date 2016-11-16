@@ -235,12 +235,12 @@ public class Mapa {
         this.actualizarVisibilidad();
 
         for (int i = 0; i < MAPAX + 2; i++) {
-            System.out.print(Colores.BACK_AZUL + "&" + Colores.BACK_RESET);
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
         }
         System.out.println("");
 
         for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
-            System.out.print(Colores.BACK_AZUL + "&" + Colores.BACK_RESET);
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
             for (int j = 0; j < MAPAX; j++) {
                 if (mapa.get(i).get(j).getVisible()) {
                     switch (mapa.get(i).get(j).getTipo()) {
@@ -278,11 +278,11 @@ public class Mapa {
                     System.out.print(Colores.BACK_GRIS + " " + Colores.BACK_RESET);
                 }
             }
-            System.out.print(Colores.BACK_AZUL + "&" + Colores.BACK_RESET);
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
             System.out.println("");
         }
         for (int i = 0; i < MAPAX + 2; i++) {
-            System.out.print(Colores.BACK_AZUL + "&" + Colores.BACK_RESET);
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
         }
         System.out.println("");
     }
