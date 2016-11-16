@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package Juego;
 
 /**
  *
  * @author iagolobla
  */
+import Entidades.Edificio;
+import Entidades.Personaje;
+import Entidades.Posicion;
+import Entidades.Recurso;
 import java.util.Scanner;
 import Mapa.Mapa;
 import Mapa.Celda;
@@ -18,7 +22,7 @@ public class Principal {
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
-        Mapa map = new Mapa(5,5,5);
+        Mapa map = new Mapa();
         while (seguir) {
             System.out.print("$ ");
             String linea = scanner.nextLine();

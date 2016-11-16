@@ -119,6 +119,7 @@ public class Personaje {
                         String Name = "casa-" + (mapa.getCantidades()[3] + 1);
                         mapa.getCantidades()[3]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                        
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
@@ -141,6 +142,7 @@ public class Personaje {
                         String Name = "cuartel-" + (mapa.getCantidades()[4] + 1);
                         mapa.getCantidades()[4]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                        
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
@@ -163,6 +165,7 @@ public class Personaje {
                         String Name = "ciudadela-" + (mapa.getCantidades()[2] + 1);
                         mapa.getCantidades()[2]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                        
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
@@ -344,7 +347,7 @@ public class Personaje {
     }
 
     public void setPosicion(Posicion p) {
-        if (p.getX() >= 0 && p.getX() < Mapa.MAPAX && p.getY() >= 0 && p.getY() < Mapa.MAPAY) {
+        if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
             posicion = new Posicion(p);
         }
     }

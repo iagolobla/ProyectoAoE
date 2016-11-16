@@ -149,7 +149,7 @@ public class Celda {
     }
 
     public void setPos(Posicion p) {
-        if (p.getX() >= 0 && p.getX() < Mapa.MAPAX && p.getY() >= 0 && p.getY() < Mapa.MAPAY) {
+        if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
             pos = new Posicion(p);
         }
     }
