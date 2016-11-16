@@ -28,7 +28,7 @@ public class Mapa {
     public final int MAPAX = 16;
     public final int MAPAY = 8;
 
-    public Mapa(int bosques,int canteras, int arbustos) {
+    public Mapa(int bosques, int canteras, int arbustos) {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
@@ -65,39 +65,42 @@ public class Mapa {
         cantidades[0]++;
         mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
         personajes.put(Name, getCelda(new Posicion(3, 4)).getPj());//Aqui creo que hay ALIASING Assign return variable to new variable.
-        
-        
-        for(int i=0;i<bosques;i++){
+
+        for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
             int x = rn.nextInt(mapa.size());
             int y = rn.nextInt(mapa.get(0).size());
-            Name = "bosque-" + (cantidades[5] + 1);
-            cantidades[5]++;
-            mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
-            recursos.put(Name, getCelda(new Posicion(x,y)).getRs());
+            if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
+                Name = "bosque-" + (cantidades[5] + 1);
+                cantidades[5]++;
+                mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
+                recursos.put(Name, getCelda(new Posicion(x, y)).getRs());
+            }
         }
-        for(int i=0;i<canteras;i++){
+        for (int i = 0; i < canteras; i++) {
             Random rn = new Random();
             int x = rn.nextInt(mapa.size());
             int y = rn.nextInt(mapa.get(0).size());
-            Name = "cantera-" + (cantidades[6] + 1);
-            cantidades[6]++;
-            mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
-            recursos.put(Name, getCelda(new Posicion(x,y)).getRs());
+            if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
+                Name = "cantera-" + (cantidades[6] + 1);
+                cantidades[6]++;
+                mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
+                recursos.put(Name, getCelda(new Posicion(x, y)).getRs());
+            }
         }
-        for(int i=0;i<bosques;i++){
+        for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
             int x = rn.nextInt(mapa.size());
             int y = rn.nextInt(mapa.get(0).size());
-            Name = "arbusto-" + (cantidades[7] + 1);
-            cantidades[7]++;
-            mapa.get(x).set(y, new Celda("arbusto", new Posicion(x, y), Name));
-            recursos.put(Name, getCelda(new Posicion(x,y)).getRs());
+            if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
+                Name = "arbusto-" + (cantidades[7] + 1);
+                cantidades[7]++;
+                mapa.get(x).set(y, new Celda("arbusto", new Posicion(x, y), Name));
+                recursos.put(Name, getCelda(new Posicion(x, y)).getRs());
+            }
         }
 
-        
         //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
-
         //Recorremos mapa para actualizar las visibilidades
         this.actualizarVisibilidad();
     }
@@ -272,7 +275,7 @@ public class Mapa {
                             System.out.println("Error, tipo de edificio incorrecto");
                     }
                 } else {
-                    System.out.print(Colores.BACK_NEGRO + " " + Colores.BACK_RESET);
+                    System.out.print(Colores.BACK_GRIS + " " + Colores.BACK_RESET);
                 }
             }
             System.out.print("&");

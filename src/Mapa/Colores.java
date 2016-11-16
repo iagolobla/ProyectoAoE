@@ -25,6 +25,7 @@ public class Colores {  //http://misc.flogisoft.com/bash/tip_colors_and_formatti
     //Colores para el fondo
     public static final String BACK_RESET = "\u001B[49m";
     public static final String BACK_NEGRO = "\u001B[40m";
+    public static final String BACK_GRIS = "\u001B[47m";
     public static final String BACK_ROJO = "\u001B[41m";
     public static final String BACK_VERDE = "\u001B[42m";
     public static final String BACK_AMARILLO = "\u001B[43m";
