@@ -61,16 +61,16 @@ public class Celda {
                 visible = true;
                 break;
             case "bosque":
-                recurso = new Recurso("bosque", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
-                visible= false;
+                recurso = new Recurso("bosque", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
+                visible = false;
                 break;
             case "cantera":
-                recurso = new Recurso("cantera", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
-                visible= false;
+                recurso = new Recurso("cantera", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
+                visible = false;
                 break;
             case "arbusto":
-                recurso = new Recurso("arbusto", 200,Nombre,pos);   //De momento dejaremos 200 por defecto
-                visible= false;
+                recurso = new Recurso("arbusto", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
+                visible = false;
                 break;
             default:
                 System.out.println("Tipo mal introducido");
@@ -114,26 +114,38 @@ public class Celda {
     }
 
     public void setPersonaje(Personaje personaje) {
-        this.personaje = personaje;
-        tipo = personaje.getTipo();
+        if (personaje != null) {
+            this.personaje = personaje;
+            tipo = personaje.getTipo();
+        } else {
+            System.out.println("El personaje pasado es nulo!");
+        }
     }
 
     public void setEdificio(Edificio edificio) {
-        this.edificio = edificio;
+        if (edificio != null) {
+            this.edificio = edificio;
+        } else {
+            System.out.println("El edificio pasado es nulo!");
+        }
     }
 
     public void setRecurso(Recurso recurso) {
-        this.recurso = recurso;
+        if (recurso != null) {
+            this.recurso = recurso;
+        } else {
+            System.out.println("El recurso pasado es nulo!");
+        }
     }
-    
-    public boolean getVisible(){
+
+    public boolean getVisible() {
         return visible;
     }
-    
-    public void setVisible(Boolean estado){
+
+    public void setVisible(boolean estado) {
         visible = estado;
     }
-    
+
     public String getTipo() {
         return tipo;
     }
@@ -141,8 +153,6 @@ public class Celda {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    
 
     public Posicion getPos() {
         return new Posicion(pos);
@@ -151,6 +161,8 @@ public class Celda {
     public void setPos(Posicion p) {
         if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
             pos = new Posicion(p);
+        } else {
+            System.out.println("Posicion pasada fuera de los limites del mapa!");
         }
     }
 

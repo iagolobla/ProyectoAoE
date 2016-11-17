@@ -211,28 +211,46 @@ public class Personaje {
         if (mapa.getCelda(pos).getTipo().equals("casa") || mapa.getCelda(pos).getTipo().equals("ciudadela") || mapa.getCelda(pos).getTipo().equals("cuartel")) {
             Edificio edificio = mapa.getCelda(pos).getEdificio();
             int vida = edificio.getSalud();
-
+            if (vida == 0) {  //Comprobamos si el edificio esta destruido
+                System.out.println("Este edificio esta destruido, no se puede reparar");
+                return;
+            }
+            if (Edificio.SALUDCASA - vida == 0) {
+                System.out.println("El edificio ya esta a full vida");
+                return;
+            }
+            Edificio ciudadelilla = mapa.getEdificios().get("ciudadela-1");
             switch (edificio.getTipo()) {
                 case "casa":
-                    if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - vida) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - vida)) {
+                    if (ciudadelilla.getMadera() > (Edificio.SALUDCASA - vida) && ciudadelilla.getMadera() > (Edificio.SALUDCASA - vida)) {
                         edificio.setSalud(Edificio.SALUDCASA);
                         System.out.println("Se han recuperado " + (Edificio.SALUDCASA - vida) + " puntos de salud");
+                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (Edificio.SALUDCASA - vida));
+                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (Edificio.SALUDCASA - vida));
+                        System.out.println("Costes de la reparacion: " + (Edificio.SALUDCASA - vida) + " uds. de Madera y " + (Edificio.SALUDCASA - vida) + " uds de Piedra");
                     } else {
                         System.out.println("No hay recursos suficientes para reparar el edificio");
                     }
                     break;
                 case "ciudadela":
-                    if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - vida) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - vida)) {
+                    if (ciudadelilla.getMadera() > (Edificio.SALUDCIUDADELA - vida) && ciudadelilla.getMadera() > (Edificio.SALUDCIUDADELA - vida)) {
                         edificio.setSalud(Edificio.SALUDCIUDADELA);
                         System.out.println("Se han recuperado " + (Edificio.SALUDCIUDADELA - vida) + " puntos de salud");
+                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (Edificio.SALUDCASA - vida));
+                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (Edificio.SALUDCASA - vida));
+                        System.out.println("Costes de la reparacion: " + (Edificio.SALUDCASA - vida) + " uds. de Madera y " + (Edificio.SALUDCASA - vida) + " uds de Piedra");
+
                     } else {
                         System.out.println("No hay recursos suficientes para reparar el edificio");
                     }
                     break;
                 case "cuartel":
-                    if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - vida) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - vida)) {
+                    if (ciudadelilla.getMadera() > (Edificio.SALUDCUARTEL - vida) && ciudadelilla.getMadera() > (Edificio.SALUDCUARTEL - vida)) {
                         edificio.setSalud(Edificio.SALUDCUARTEL);
                         System.out.println("Se han recuperado " + (Edificio.SALUDCUARTEL - vida) + " puntos de salud");
+                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (Edificio.SALUDCASA - vida));
+                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (Edificio.SALUDCASA - vida));
+                        System.out.println("Costes de la reparacion: " + (Edificio.SALUDCASA - vida) + " uds. de Madera y " + (Edificio.SALUDCASA - vida) + " uds de Piedra");
                     } else {
                         System.out.println("No hay recursos suficientes para reparar el edificio");
                     }
@@ -339,7 +357,11 @@ public class Personaje {
     }
 
     public void setTipoRecurso(String tipoRecurso) {
-        this.tipoRecurso = tipoRecurso;
+        if (tipo.equals("arbusto") || tipo.equals("bosque") || tipo.equals("cantera")) {
+            this.tipoRecurso = tipoRecurso;
+        } else {
+            System.out.println("Tipo Recurso introducido incorrecto!");
+        }
     }
 
     public int getCantidadRecolectada() {
@@ -353,6 +375,8 @@ public class Personaje {
     public void setPosicion(Posicion p) {
         if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
             posicion = new Posicion(p);
+        } else {
+            System.out.println("Posicion introducida fuera de los limites del mapa!");
         }
     }
 
@@ -369,8 +393,10 @@ public class Personaje {
     }
 
     public void setSalud(int salud) {
-        if (salud > 0) {
+        if (salud >= 0) {
             this.salud = salud;
+        } else {
+            System.out.println("Salud introducida debe ser mayor que 0!");
         }
     }
 
@@ -385,6 +411,8 @@ public class Personaje {
     public void setCapRecolectar(int capRecolectar) {
         if (capRecolectar >= 0) {
             this.capRecolectar = capRecolectar;
+        } else {
+            System.out.println("Capacidad de Recolectar introducida debe ser mayor que 0!");
         }
     }
 
@@ -397,22 +425,34 @@ public class Personaje {
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        if (tipo.equals("paisano") || tipo.equals("soldado")) {
+            this.tipo = tipo;
+        } else {
+            System.out.println("Tipo Personaje mal introducido!");
+        }
     }
 
     public void setArmadura(int armadura) {
         if (armadura >= 0) {
             this.armadura = armadura;
+        } else {
+            System.out.println("Armadura introducida debe ser mayor que 0!");
         }
     }
 
     public void setAtaque(int ataque) {
         if (ataque >= 0) {
             this.ataque = ataque;
+        } else {
+            System.out.println("Ataque introducido debe ser mayor que 0!");
         }
     }
 
-    /*public void setCantidadRecolectada(int cantidadRecolectada) {
-        this.cantidadRecolectada = cantidadRecolectada;
-    }*///NO TIENE SENTIDO
+    public void setCantidadRecolectada(int cantidadRecolectada) {
+        if (cantidadRecolectada >= 0) {
+            this.cantidadRecolectada = cantidadRecolectada;
+        } else {
+            System.out.println("Cantidad Recolectada introducida debe ser mayor que 0!");
+        }
+    }
 }

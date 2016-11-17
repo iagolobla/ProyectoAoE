@@ -324,23 +324,38 @@ public class Mapa {
     }
 
     public void setMapa(ArrayList<ArrayList<Celda>> mapa) {
+        if (mapa != null)
         this.mapa = new ArrayList<>(mapa);
+        else 
+            System.out.println("Mapa pasado es nulo!");
     }
 
     public void setPersonajes(HashMap<String, Personaje> personajes) {
+        if (personajes != null)
         this.personajes = new HashMap<>(personajes);
+        else
+            System.out.println("HashMap de personajes pasado nulo!");
     }
 
     public void setEdificios(HashMap<String, Edificio> edificios) {
+        if (edificios != null)
         this.edificios = new HashMap<>(edificios);
+        else
+            System.out.println("HashMap de edificios pasado nulo!");
     }
 
     public void setRecursos(HashMap<String, Recurso> recursos) {
+        if(recursos != null)
         this.recursos = new HashMap<>(recursos);
+        else
+            System.out.println("HashMap de recursos pasado nulo!");
     }
 
     public void setCantidades(int[] cantidades) {
+        if(cantidades != null)
         this.cantidades = cantidades;
+        else 
+            System.out.println("Array de cantidades pasado nulo!");
     }
     
     

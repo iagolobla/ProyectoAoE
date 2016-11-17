@@ -25,14 +25,6 @@ public class Recurso {
         cantidad = DFLCANTIDAD;
         this.nombre = nombre;
         this.pos = new Posicion(pos);
-        /*switch(tipe){
-            case("bosque"):
-                break;
-            case("cantera"):
-                break;
-            case("arbusto"):
-                break;
-        }*/
     }
 
     public Recurso(String tipe, int cantidad, String nombre, Posicion pos) {
@@ -50,26 +42,31 @@ public class Recurso {
 
         return impresion;
     }
+
     //GETTERS Y SETTERS
     public void setCantidad(int cantidad) {  //Este metodo es para el caso en el que un personaje sin suficiente
-        if (cantidad > 0) {
-            this.cantidad = cantidad;
-        }                                   //capacidad de carga intenta recolectar un recurso, hay que mermar
-    }                                       //la cantidad de ese recurso, es decir, solo quitar la capRecoleccion
+        if (cantidad >= 0) {                //capacidad de carga intenta recolectar un recurso, hay que mermar
+            this.cantidad = cantidad;       //la cantidad de ese recurso, es decir, solo quitar la capRecoleccion
+        } else {
+            System.out.println("Cantidad Recurso introducida debe ser mayor que 0!");
+        }
+    }
 
-    
     public String getTipo() {
         return tipo;
     }
-    
-    public void setTipo(String tipo){
-        this.tipo=tipo;
+
+    public void setTipo(String tipo) {
+        if (tipo.equals("arbusto") || tipo.equals("bosque") || tipo.equals("cantera")) {
+            this.tipo = tipo;
+        } else {
+            System.out.println("Tipo Recurso Mal introducido!");
+        }
     }
 
     public int getCantidad() {
         return cantidad;
     }
-    
 
     public Posicion getPos() {
         return new Posicion(pos);
@@ -78,6 +75,8 @@ public class Recurso {
     public void setPos(Posicion p) {
         if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
             pos = new Posicion(p);
+        } else {
+            System.out.println("Posicion introducidad fuera de los limites del mapa!");
         }
     }
 

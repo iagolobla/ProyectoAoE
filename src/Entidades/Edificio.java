@@ -22,7 +22,7 @@ public class Edificio {
 
     private String tipo;
     private int salud;
-    private Posicion punto;
+    private Posicion posicion;
     private String nombre;
 
     private int madera;
@@ -30,8 +30,8 @@ public class Edificio {
     private int comida;
 
     public Edificio(String tipe, Posicion posicion, String Nombre) {
-        //Igualar punto y posicion evitando aliasing
-        punto = new Posicion(posicion.getX(), posicion.getY());
+        //Igualar posicion y posicion evitando aliasing
+        this.posicion = new Posicion(posicion);
         switch (tipe) {
             case ("ciudadela"):
                 tipo = tipe;
@@ -45,11 +45,17 @@ public class Edificio {
                 tipo = tipe;
                 salud = SALUDCUARTEL;
                 nombre = Nombre;
+                madera = 0;
+                piedra = 0;
+                comida = 0;
                 break;
             case ("casa"):
                 tipo = tipe;
                 salud = SALUDCASA;
                 nombre = Nombre;
+                madera = 0;
+                piedra = 0;
+                comida = 0;
                 break;
             default:
                 System.out.println("Error, tipo de edificio incorrecto");
@@ -68,7 +74,7 @@ public class Edificio {
             System.out.println("No hay sitio para mas Paisanos, se necesitan mas casas!");
             return;
         }
-        Posicion pos1 = new Posicion(punto);
+        Posicion pos1 = new Posicion(posicion);
         pos1.moverX(-1);
 
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la primera posicion, si no es valida
@@ -89,11 +95,11 @@ public class Edificio {
         String Name = "paisano-" + (mapa.getCantidades()[0] + 1);
         mapa.getCantidades()[0]++;
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("paisano", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
-        
+
         mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
-        
+
         mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
-        
+
         System.out.println("Se han gastado 10 unidades de comida en crear el paisano");
         System.out.println("Quedan los siguientes recursos: ");
         System.out.println("Comida: " + mapa.getEdificios().get(nombre).getComida());
@@ -111,7 +117,7 @@ public class Edificio {
             System.out.println("No hay sitio para mas Soldados, se necesitan mas casas!");
             return;
         }
-        Posicion pos1 = new Posicion(punto);
+        Posicion pos1 = new Posicion(posicion);
         pos1.moverX(-1);
 
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la primera posicion, si no es valida
@@ -125,16 +131,16 @@ public class Edificio {
             pos1.moverY(-2);
         }
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la cuarta posicion, si no es valida
-            System.out.println("No es posible crear el paisano, todas las posiciones en torno a la Ciudadela estan ocupadas");
+            System.out.println("No es posible crear el soldado, todas las posiciones en torno al Cuartel estan ocupadas");
             return;
         }
 
         String Name = "soldado-" + (mapa.getCantidades()[1] + 1);
         mapa.getCantidades()[1]++;
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("soldado", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
-        
+
         mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
-        mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get("ciudadela-1").getComida() - 10);
+        mapa.getEdificios().get("ciudadela-1").setComida(mapa.getEdificios().get("ciudadela-1").getComida() - 10);
         System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
         System.out.println("Quedan los siguientes recursos: ");
         System.out.println("Comida: " + mapa.getEdificios().get("ciudadela-1").getComida());
@@ -150,7 +156,7 @@ public class Edificio {
         String impresion = "";
         impresion += "Tipo: " + tipo + "\n";
         impresion += "Salud: " + salud + "\n";
-        impresion += "Posicion: " + punto + "\n";
+        impresion += "Posicion: " + posicion + "\n";
         impresion += "Comida: " + comida + "\n";
         impresion += "Piedra: " + piedra + "\n";
         impresion += "Madera: " + madera + "\n";
@@ -164,20 +170,24 @@ public class Edificio {
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        if (tipo.equals("casa") || tipo.equals("ciudadela") || tipo.equals("cuartel")) {
+            this.tipo = tipo;
+        } else {
+            System.out.println("Tipo edificio introducido incorrecto!");
+        }
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public Posicion getPosicion() {//A LO MEJOR HAY QUE CAMBIAR EL NOMBRE DEL ATRIBUTO
-        return new Posicion(punto);
+    public Posicion getPosicion() {
+        return new Posicion(posicion);
     }
 
-    public void setPunto(Posicion p) {
+    public void setPosicion(Posicion p) {
         if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
-            punto = new Posicion(p);
+            posicion = new Posicion(p);
         }
     }
 
@@ -190,8 +200,10 @@ public class Edificio {
     }
 
     public void setSalud(int salud) {
-        if (salud>=0) {
+        if (salud >= 0) {
             this.salud = salud;
+        } else {
+            System.out.println("Salud introducida debe ser mayor que 0!");
         }
     }
 
@@ -200,7 +212,11 @@ public class Edificio {
     }
 
     public void setMadera(int madera) {
-        this.madera = madera;
+        if (madera >= 0) {
+            this.madera = madera;
+        } else {
+            System.out.println("Cantidad Madera mal introducida!");
+        }
     }
 
     public int getPiedra() {
@@ -208,7 +224,11 @@ public class Edificio {
     }
 
     public void setPiedra(int piedra) {
-        this.piedra = piedra;
+        if (piedra >= 0) {
+            this.piedra = piedra;
+        } else {
+            System.out.println("Cantidad Piedra mal introducida!");
+        }
     }
 
     public int getComida() {
@@ -216,7 +236,11 @@ public class Edificio {
     }
 
     public void setComida(int comida) {
-        this.comida = comida;
+        if (comida >= 0) {
+            this.comida = comida;
+        } else {
+            System.out.println("Cantidad Comida mal introducida!");
+        }
     }
 
 }

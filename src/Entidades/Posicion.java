@@ -10,6 +10,7 @@ package Entidades;
  * @author iagolobla
  */
 public class Posicion {
+
     private int x;
     private int y;
 
@@ -21,22 +22,24 @@ public class Posicion {
     public Posicion(int valorX, int valorY) {
         x = valorX;
         y = valorY;
-    } 
-    public Posicion(String pos){    //Pasa de un string de una posicion a una posicion tipo Posicion
+    }
+
+    public Posicion(String pos) {    //Pasa de un string de una posicion a una posicion tipo Posicion
         String[] cord = pos.split(",");
-        
+
         String xs = cord[0].replace("(", "");  //Pasamos el string a otro quitando posibles espacios
         String ys = cord[1].replace(")", "");
-        
+
         int xi = Integer.parseInt(xs);   //Pasamos del string sin espacios a int con el metodo parseInt
         int yi = Integer.parseInt(ys);
-        
+
         x = xi; //Finalmente iniciamos los valores
         y = yi;
     }
-    public Posicion(Posicion p){
-        x=p.getX();
-        y=p.getY();
+
+    public Posicion(Posicion p) {
+        x = p.getX();
+        y = p.getY();
     }
 
     public int getX() {
@@ -65,7 +68,7 @@ public class Posicion {
 
     @Override
     public String toString() {
-        return "Posicion("+x+","+y+")";
+        return "Posicion(" + x + "," + y + ")";
     }
 
     @Override
