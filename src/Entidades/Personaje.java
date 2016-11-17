@@ -119,7 +119,7 @@ public class Personaje {
                         String Name = "casa-" + (mapa.getCantidades()[3] + 1);
                         mapa.getCantidades()[3]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                        
+
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
@@ -142,7 +142,7 @@ public class Personaje {
                         String Name = "cuartel-" + (mapa.getCantidades()[4] + 1);
                         mapa.getCantidades()[4]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                        
+
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
@@ -165,7 +165,7 @@ public class Personaje {
                         String Name = "ciudadela-" + (mapa.getCantidades()[2] + 1);
                         mapa.getCantidades()[2]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
-                        
+
                         mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
@@ -208,37 +208,41 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
-        Edificio edificio = mapa.getCelda(pos).getEdificio();
-        int salud = edificio.getSalud();
+        if (mapa.getCelda(pos).getTipo().equals("casa")||mapa.getCelda(pos).getTipo().equals("ciudadela")||mapa.getCelda(pos).getTipo().equals("cuartel")) {
+            Edificio edificio = mapa.getCelda(pos).getEdificio();
+            int vida = edificio.getSalud();
 
-        switch (edificio.getTipo()) {
-            case "casa":
-                if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - salud)) {
-                    edificio.setSalud(Edificio.SALUDCASA);
-                    System.out.println("Se han recuperado " + (Edificio.SALUDCASA - salud) + " puntos de salud");
-                } else {
-                    System.out.println("No hay recursos suficientes para reparar el edificio");
-                }
-                break;
-            case "ciudadela":
-                if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - salud)) {
-                    edificio.setSalud(Edificio.SALUDCIUDADELA);
-                    System.out.println("Se han recuperado " + (Edificio.SALUDCIUDADELA - salud) + " puntos de salud");
-                } else {
-                    System.out.println("No hay recursos suficientes para reparar el edificio");
-                }
-                break;
-            case "cuartel":
-                if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - salud)) {
-                    edificio.setSalud(Edificio.SALUDCUARTEL);
-                    System.out.println("Se han recuperado " + (Edificio.SALUDCUARTEL - salud) + " puntos de salud");
-                } else {
-                    System.out.println("No hay recursos suficientes para reparar el edificio");
-                }
-                break;
-            default:
-                System.out.println("Error, direccion no valida!");
+            switch (edificio.getTipo()) {
+                case "casa":
+                    if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - vida) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCASA - vida)) {
+                        edificio.setSalud(Edificio.SALUDCASA);
+                        System.out.println("Se han recuperado " + (Edificio.SALUDCASA - vida) + " puntos de salud");
+                    } else {
+                        System.out.println("No hay recursos suficientes para reparar el edificio");
+                    }
+                    break;
+                case "ciudadela":
+                    if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - vida) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCIUDADELA - vida)) {
+                        edificio.setSalud(Edificio.SALUDCIUDADELA);
+                        System.out.println("Se han recuperado " + (Edificio.SALUDCIUDADELA - vida) + " puntos de salud");
+                    } else {
+                        System.out.println("No hay recursos suficientes para reparar el edificio");
+                    }
+                    break;
+                case "cuartel":
+                    if (mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - vida) && mapa.getEdificios().get("ciudadela-1").getMadera() > (Edificio.SALUDCUARTEL - vida)) {
+                        edificio.setSalud(Edificio.SALUDCUARTEL);
+                        System.out.println("Se han recuperado " + (Edificio.SALUDCUARTEL - vida) + " puntos de salud");
+                    } else {
+                        System.out.println("No hay recursos suficientes para reparar el edificio");
+                    }
+                    break;
+                default:
+                    System.out.println("Error, direccion no valida!");
 
+            }
+        } else {
+            System.out.println("No hay un edificio en esta celda!");
         }
     }
 
