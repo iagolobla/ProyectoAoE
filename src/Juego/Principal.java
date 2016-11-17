@@ -22,7 +22,10 @@ public class Principal {
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
-        Mapa map = new Mapa(6, 6, 6);
+        Mapa map = new Mapa(-1, 6, 6);
+        if(map == null){
+            map = new Mapa();
+        }
         while (seguir) {
             System.out.print("$ ");
             String linea = scanner.nextLine();

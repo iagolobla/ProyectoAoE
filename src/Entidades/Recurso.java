@@ -21,6 +21,10 @@ public class Recurso {
     private Posicion pos;
 
     public Recurso(String tipe, String nombre, Posicion pos) {
+        if (pos == null) {
+            System.out.println("Posicion pasada a Recurso nula!");
+            return;
+        }
         tipo = tipe;
         cantidad = DFLCANTIDAD;
         this.nombre = nombre;
@@ -28,6 +32,14 @@ public class Recurso {
     }
 
     public Recurso(String tipe, int cantidad, String nombre, Posicion pos) {
+        if (pos == null) {
+            System.out.println("Posicion pasada a Recurso nula!");
+            return;
+        }
+        if (cantidad < 0) {
+            System.out.println("Cantidad pasada a Recurso menor que 0!");
+            return;
+        }
         tipo = tipe;
         this.cantidad = cantidad;
         this.nombre = nombre;

@@ -25,6 +25,10 @@ public class Personaje {
     private String tipoRecurso; //Como solo se puede recolectar un tipo de recurso de cada vez, guardaremos aqui cual
 
     public Personaje(String tipo, String Nombre, Posicion pos) {
+        if(pos == null){
+            System.out.println("Posicion pasada a Personaje nula!");
+            return;
+        }
         posicion = new Posicion(pos);
         switch (tipo) {
             case "soldado":

@@ -31,6 +31,11 @@ public class Edificio {
 
     public Edificio(String tipe, Posicion posicion, String Nombre) {
         //Igualar posicion y posicion evitando aliasing
+        if(posicion == null){
+            System.out.println("Posicion pasada a Edificio nula!");
+            return;
+        }
+        
         this.posicion = new Posicion(posicion);
         switch (tipe) {
             case ("ciudadela"):

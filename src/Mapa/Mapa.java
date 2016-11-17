@@ -29,6 +29,11 @@ public class Mapa {
     public static final int MAPAY = 8;
 
     public Mapa(int bosques, int canteras, int arbustos) {
+        if(bosques < 0 || canteras < 0 || arbustos < 0){
+            System.out.println("Valores pasados al mapa menores que 0!");
+            return;
+        }
+        
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
@@ -269,7 +274,7 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + "♜" + Colores.BACK_RESET);
                             break;
                         case ("casa"):
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "🏡" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "soldado":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
