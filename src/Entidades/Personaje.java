@@ -208,7 +208,7 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
-        if (mapa.getCelda(pos).getTipo().equals("casa")||mapa.getCelda(pos).getTipo().equals("ciudadela")||mapa.getCelda(pos).getTipo().equals("cuartel")) {
+        if (mapa.getCelda(pos).getTipo().equals("casa") || mapa.getCelda(pos).getTipo().equals("ciudadela") || mapa.getCelda(pos).getTipo().equals("cuartel")) {
             Edificio edificio = mapa.getCelda(pos).getEdificio();
             int vida = edificio.getSalud();
 

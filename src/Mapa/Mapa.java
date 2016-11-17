@@ -68,8 +68,8 @@ public class Mapa {
 
         for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
-            int x = rn.nextInt(mapa.size());
-            int y = rn.nextInt(mapa.get(0).size());
+            int x = rn.nextInt(MAPAY);
+            int y = rn.nextInt(MAPAX);
             if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
                 Name = "bosque-" + (cantidades[5] + 1);
                 cantidades[5]++;
@@ -79,8 +79,8 @@ public class Mapa {
         }
         for (int i = 0; i < canteras; i++) {
             Random rn = new Random();
-            int x = rn.nextInt(mapa.size());
-            int y = rn.nextInt(mapa.get(0).size());
+            int x = rn.nextInt(MAPAY);
+            int y = rn.nextInt(MAPAX);
             if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
                 Name = "cantera-" + (cantidades[6] + 1);
                 cantidades[6]++;
@@ -90,8 +90,8 @@ public class Mapa {
         }
         for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
-            int x = rn.nextInt(mapa.size());
-            int y = rn.nextInt(mapa.get(0).size());
+            int x = rn.nextInt(MAPAY);
+            int y = rn.nextInt(MAPAX);
             if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
                 Name = "arbusto-" + (cantidades[7] + 1);
                 cantidades[7]++;
@@ -132,7 +132,7 @@ public class Mapa {
         }
 
         //Creacion de la ciudadela
-        String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
+        String Name = "ciudadela-" + (cantidades[2] + 1);
         cantidades[2]++;
         mapa.get(3).set(3, new Celda("ciudadela", new Posicion(3, 3), Name));
         edificios.put(Name, getCelda(new Posicion(3, 3)).getEdificio());
@@ -235,12 +235,12 @@ public class Mapa {
         this.actualizarVisibilidad();
 
         for (int i = 0; i < MAPAX + 2; i++) {
-            System.out.print("&");
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
         }
         System.out.println("");
 
         for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
-            System.out.print("&");
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
             for (int j = 0; j < MAPAX; j++) {
                 if (mapa.get(i).get(j).getVisible()) {
                     switch (mapa.get(i).get(j).getTipo()) {
@@ -263,13 +263,13 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "bosque":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "B" + Colores.BACK_RESET + Colores.TEXT_RESET);
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "B" + Colores.BACK_RESET + Colores.TEXT_RESET);
                             break;
                         case "cantera":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "^" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Ahora la piedra son ^
                             break;
                         case "arbusto":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "*" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Y los arbustos *
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "*" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Y los arbustos *
                             break;
                         default:
                             System.out.println("Error, tipo de edificio incorrecto");
@@ -278,11 +278,11 @@ public class Mapa {
                     System.out.print(Colores.BACK_GRIS + " " + Colores.BACK_RESET);
                 }
             }
-            System.out.print("&");
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
             System.out.println("");
         }
         for (int i = 0; i < MAPAX + 2; i++) {
-            System.out.print("&");
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
         }
         System.out.println("");
     }
