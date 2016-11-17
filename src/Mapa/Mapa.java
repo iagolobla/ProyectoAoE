@@ -191,6 +191,15 @@ public class Mapa {
         return mapa.get(x).get(y);
     }
 
+    public Celda getCelda(int x, int y) {//sobrecarga de metodo.
+        if (x >= 0 && x < Mapa.MAPAY && y >= 0 && y < Mapa.MAPAX) {
+            return mapa.get(x).get(y);
+        } else {
+            System.out.println("Coordenadas fuera del mapa");
+            return null;
+        }
+    }
+
     public void ponerVisible(Celda cell) {
         Celda aux;
         Posicion pos;
