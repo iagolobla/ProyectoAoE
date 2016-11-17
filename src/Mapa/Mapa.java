@@ -254,7 +254,7 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + "♜" + Colores.BACK_RESET);
                             break;
                         case ("casa"):
-                            System.out.print(Colores.BACK_VERDE + "Ç" + Colores.BACK_RESET);
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "🏡" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "soldado":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
@@ -263,13 +263,13 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "bosque":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "B" + Colores.BACK_RESET + Colores.TEXT_RESET);
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
                             break;
                         case "cantera":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "^" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Ahora la piedra son ^
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "♦" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Ahora la piedra son ^
                             break;
                         case "arbusto":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "*" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Y los arbustos *
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "♣" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Y los arbustos *
                             break;
                         default:
                             System.out.println("Error, tipo de edificio incorrecto");
@@ -324,40 +324,43 @@ public class Mapa {
     }
 
     public void setMapa(ArrayList<ArrayList<Celda>> mapa) {
-        if (mapa != null)
-        this.mapa = new ArrayList<>(mapa);
-        else 
+        if (mapa != null) {
+            this.mapa = new ArrayList<>(mapa);
+        } else {
             System.out.println("Mapa pasado es nulo!");
+        }
     }
 
     public void setPersonajes(HashMap<String, Personaje> personajes) {
-        if (personajes != null)
-        this.personajes = new HashMap<>(personajes);
-        else
+        if (personajes != null) {
+            this.personajes = new HashMap<>(personajes);
+        } else {
             System.out.println("HashMap de personajes pasado nulo!");
+        }
     }
 
     public void setEdificios(HashMap<String, Edificio> edificios) {
-        if (edificios != null)
-        this.edificios = new HashMap<>(edificios);
-        else
+        if (edificios != null) {
+            this.edificios = new HashMap<>(edificios);
+        } else {
             System.out.println("HashMap de edificios pasado nulo!");
+        }
     }
 
     public void setRecursos(HashMap<String, Recurso> recursos) {
-        if(recursos != null)
-        this.recursos = new HashMap<>(recursos);
-        else
+        if (recursos != null) {
+            this.recursos = new HashMap<>(recursos);
+        } else {
             System.out.println("HashMap de recursos pasado nulo!");
+        }
     }
 
     public void setCantidades(int[] cantidades) {
-        if(cantidades != null)
-        this.cantidades = cantidades;
-        else 
+        if (cantidades != null) {
+            this.cantidades = cantidades;
+        } else {
             System.out.println("Array de cantidades pasado nulo!");
+        }
     }
-    
-    
 
 }
