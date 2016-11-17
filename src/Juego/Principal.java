@@ -22,7 +22,7 @@ public class Principal {
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
-        Mapa map = new Mapa(-1, 6, 6);
+        Mapa map = new Mapa(6, 6, 6);
         if(map == null){
             map = new Mapa();
         }
@@ -40,8 +40,6 @@ public class Principal {
                         if (comando.length != 3) {
                             System.out.println("Errorsintactico: MOVER ...");
                         } else {
-                            System.out.println(comando[1]);
-                            System.out.println(comando[2]);
                             if (map.getPersonajes().containsKey(comando[1])) {
                                 Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
                                 Posicion p = new Posicion(personaje.getPosicion());
