@@ -269,7 +269,7 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + "♜" + Colores.BACK_RESET);
                             break;
                         case ("casa"):
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "🏡" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "soldado":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
