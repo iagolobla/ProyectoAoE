@@ -104,7 +104,8 @@ public class Edificio {
         mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
 
         mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
-
+        System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
+        System.out.println("Quedan "+((mapa.getCantidades()[3] * CAPACIDADCASA)- (mapa.getCantidades()[0] + mapa.getCantidades()[1]))+ " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el paisano");
         System.out.println("Quedan los siguientes recursos: ");
         System.out.println("Comida: " + mapa.getEdificios().get(nombre).getComida());
@@ -146,6 +147,8 @@ public class Edificio {
 
         mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
         mapa.getEdificios().get("ciudadela-1").setComida(mapa.getEdificios().get("ciudadela-1").getComida() - 10);
+        System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
+        System.out.println("Quedan "+((mapa.getCantidades()[3] * CAPACIDADCASA)- (mapa.getCantidades()[0] + mapa.getCantidades()[1]))+ " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
         System.out.println("Quedan los siguientes recursos: ");
         System.out.println("Comida: " + mapa.getEdificios().get("ciudadela-1").getComida());

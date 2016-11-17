@@ -40,8 +40,6 @@ public class Principal {
                         if (comando.length != 3) {
                             System.out.println("Errorsintactico: MOVER ...");
                         } else {
-                            System.out.println(comando[1]);
-                            System.out.println(comando[2]);
                             if (map.getPersonajes().containsKey(comando[1])) {
                                 Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
                                 Posicion p = new Posicion(personaje.getPosicion());
