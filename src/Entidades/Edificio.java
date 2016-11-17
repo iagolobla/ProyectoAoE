@@ -157,10 +157,11 @@ public class Edificio {
         impresion += "Tipo: " + tipo + "\n";
         impresion += "Salud: " + salud + "\n";
         impresion += "Posicion: " + posicion + "\n";
-        impresion += "Comida: " + comida + "\n";
-        impresion += "Piedra: " + piedra + "\n";
-        impresion += "Madera: " + madera + "\n";
-
+        if (getTipo().equals("ciudadela")) {
+            impresion += "Comida: " + comida + "\n";
+            impresion += "Piedra: " + piedra + "\n";
+            impresion += "Madera: " + madera + "\n";
+        }
         return impresion;
     }
 

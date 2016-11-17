@@ -75,6 +75,8 @@ public class Mapa {
                 cantidades[5]++;
                 mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
+            } else {
+                i--;
             }
         }
         for (int i = 0; i < canteras; i++) {
@@ -86,6 +88,8 @@ public class Mapa {
                 cantidades[6]++;
                 mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
+            }else{
+                i--;
             }
         }
         for (int i = 0; i < bosques; i++) {
@@ -97,6 +101,8 @@ public class Mapa {
                 cantidades[7]++;
                 mapa.get(x).set(y, new Celda("arbusto", new Posicion(x, y), Name));
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
+            } else {
+                i--;
             }
         }
 
@@ -263,7 +269,7 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "bosque":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
                             break;
                         case "cantera":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_BLANCO + "♦" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Ahora la piedra son ^

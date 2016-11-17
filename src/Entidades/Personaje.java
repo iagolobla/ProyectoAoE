@@ -263,6 +263,95 @@ public class Personaje {
             System.out.println("No hay un edificio en esta celda!");
         }
     }
+    
+    public void reparar(Mapa mapa, String direccion, int cantidad) {   //Sobrecarga: solo repara la cantidad pasada
+        Posicion pos = new Posicion(posicion);
+        switch (direccion) {
+            case "s":
+                pos.moverX(1);
+                break;
+            case "n":
+                pos.moverX(-1);
+                break;
+            case "e":
+                pos.moverY(1);
+                break;
+            case "o":
+                pos.moverY(-1);
+                break;
+            default:
+                System.out.println("Error, direccion no valida!");
+
+        }
+        if (mapa.getCelda(pos).getTipo().equals("casa") || mapa.getCelda(pos).getTipo().equals("ciudadela") || mapa.getCelda(pos).getTipo().equals("cuartel")) {
+            Edificio edificio = mapa.getCelda(pos).getEdificio();
+            int vida = edificio.getSalud();
+            if (vida == 0) {  //Comprobamos si el edificio esta destruido
+                System.out.println("Este edificio esta destruido, no se puede reparar");
+                return;
+            }
+            if (Edificio.SALUDCASA - vida == 0) {
+                System.out.println("El edificio ya esta a full vida");
+                return;
+            }
+            int cantidadReparar;
+            
+            Edificio ciudadelilla = mapa.getEdificios().get("ciudadela-1");
+            switch (edificio.getTipo()) {
+                case "casa":
+                    cantidadReparar = Edificio.SALUDCASA - vida;
+                    if(cantidad < cantidadReparar){
+                        cantidadReparar = cantidad;
+                    }
+                    if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
+                        edificio.setSalud(vida + cantidadReparar);
+                        System.out.println("Se han recuperado " + (cantidadReparar) + " puntos de salud");
+                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (cantidadReparar));
+                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (cantidadReparar));
+                        System.out.println("Costes de la reparacion: " + (cantidadReparar) + " uds. de Madera y " + (cantidadReparar) + " uds de Piedra");
+                    } else {
+                        System.out.println("No hay recursos suficientes para reparar el edificio");
+                    }
+                    break;
+                case "ciudadela":
+                    cantidadReparar = Edificio.SALUDCIUDADELA - vida;
+                    if(cantidad < cantidadReparar){
+                        cantidadReparar = cantidad;
+                    }
+                    if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
+                        edificio.setSalud(vida + cantidadReparar);
+                        System.out.println("Se han recuperado " + (cantidadReparar) + " puntos de salud");
+                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (cantidadReparar));
+                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (cantidadReparar));
+                        System.out.println("Costes de la reparacion: " + (cantidadReparar) + " uds. de Madera y " + (cantidadReparar) + " uds de Piedra");
+
+                    } else {
+                        System.out.println("No hay recursos suficientes para reparar el edificio");
+                    }
+                    break;
+                case "cuartel":
+                    cantidadReparar = Edificio.SALUDCUARTEL - vida;
+                    if(cantidad < cantidadReparar){
+                        cantidadReparar = cantidad;
+                    }
+                    if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
+                        edificio.setSalud(vida + cantidadReparar);
+                        System.out.println("Se han recuperado " + (cantidadReparar) + " puntos de salud");
+                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (cantidadReparar));
+                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (cantidadReparar));
+                        System.out.println("Costes de la reparacion: " + (cantidadReparar) + " uds. de Madera y " + cantidadReparar + " uds de Piedra");
+                    } else {
+                        System.out.println("No hay recursos suficientes para reparar el edificio");
+                    }
+                    break;
+                default:
+                    System.out.println("Error, direccion no valida!");
+
+            }
+        } else {
+            System.out.println("No hay un edificio en esta celda!");
+        }
+    }
 
     public Posicion moverPj(Mapa mapa, String direccion) {
         Celda cell = mapa.getCelda(posicion);
