@@ -248,10 +248,10 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + " " + Colores.BACK_RESET);
                             break;
                         case ("ciudadela"):
-                            System.out.print(Colores.BACK_VERDE + "C" + Colores.BACK_RESET);
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);    //⍟♜♛
                             break;
                         case ("cuartel"):
-                            System.out.print(Colores.BACK_VERDE + "c" + Colores.BACK_RESET);
+                            System.out.print(Colores.BACK_VERDE + "♜" + Colores.BACK_RESET);
                             break;
                         case ("casa"):
                             System.out.print(Colores.BACK_VERDE + "Ç" + Colores.BACK_RESET);
