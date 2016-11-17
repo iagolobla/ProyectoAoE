@@ -29,6 +29,11 @@ public class Mapa {
     public static final int MAPAY = 8;
 
     public Mapa(int bosques, int canteras, int arbustos) {
+        if(bosques < 0 || canteras < 0 || arbustos < 0){
+            System.out.println("Valores pasados al mapa menores que 0!");
+            return;
+        }
+        
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
