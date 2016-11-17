@@ -61,7 +61,7 @@ public class Celda {
                 visible = true;
                 break;
             case "bosque":
-                recurso = new Recurso("bosque", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
+                recurso = new Recurso("bosque", 150, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible = false;
                 break;
             case "cantera":

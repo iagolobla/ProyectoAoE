@@ -418,7 +418,10 @@ public class Personaje {
                     System.out.println("No se puede recolectar ese recurso, ya se esta cargando " + tipoRecurso);
                     return;
                 }
+                int cantidadRestante = cantidadRecolectada;
                 cantidadRecolectada += recurso.restarCantidad(capRecolectar - cantidadRecolectada, mapa);   //Si el recurso es del mismo tipo se añade recurso al personaje y se resta la capacidad restante del personaje al recurso
+                cantidadRestante = cantidadRecolectada - cantidadRestante;
+                System.out.println("El Paisano ha recogido " + cantidadRestante + "uds de " + tipoRecurso);
             }
         } else {
             System.out.println("El paisano no puede recolectar mas! Deben dejarse los recursos en la Ciudadela");
