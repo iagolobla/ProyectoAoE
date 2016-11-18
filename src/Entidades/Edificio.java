@@ -5,6 +5,7 @@
  */
 package Entidades;
 
+import java.util.ArrayList;
 import Mapa.Celda;
 import Mapa.Mapa;
 
@@ -99,9 +100,12 @@ public class Edificio {
 
         String Name = "paisano-" + (mapa.getCantidades()[0] + 1);
         mapa.getCantidades()[0]++;
-        mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("paisano", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
-
-        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
+        Celda newcell=mapa.getCelda(pos1);
+        newcell.setPersonaje(new Personaje("paisano", Name, pos1));
+        mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
+        
+        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonaje();
+        mapa.getPersonajes().put(Name,person.get(person.size()-1));
 
         mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
         System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
@@ -143,9 +147,13 @@ public class Edificio {
 
         String Name = "soldado-" + (mapa.getCantidades()[1] + 1);
         mapa.getCantidades()[1]++;
-        mapa.getMapa().get(pos1.getX()).set(pos1.getY(), new Celda("soldado", new Posicion(pos1), Name)); //Metemos la celda en su posicion del mapa
+        Celda newcell=mapa.getCelda(pos1);
+        newcell.setPersonaje(new Personaje("soldado", Name, pos1));
+        mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
 
-        mapa.getPersonajes().put(Name, mapa.getCelda(new Posicion(pos1)).getPersonaje());
+        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonaje();
+        mapa.getPersonajes().put(Name,person.get(person.size()-1));
+        
         mapa.getEdificios().get("ciudadela-1").setComida(mapa.getEdificios().get("ciudadela-1").getComida() - 10);
         System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
         System.out.println("Quedan "+((mapa.getCantidades()[3] * CAPACIDADCASA)- (mapa.getCantidades()[0] + mapa.getCantidades()[1]))+ " espacios de almacenamiento");

@@ -13,17 +13,19 @@ import Entidades.Edificio;
 import Entidades.Personaje;
 import Entidades.Posicion;
 import Entidades.Recurso;
-import java.util.Scanner; 
+import java.util.Scanner;
+import java.util.ArrayList;
 import Mapa.Mapa;
 import Mapa.Celda;
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
+
 public class Principal {
 
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
         Mapa map = new Mapa(6, 6, 6);
-        if(map == null){
+        if (map == null) {
             map = new Mapa();
         }
         while (seguir) {
@@ -39,23 +41,20 @@ public class Principal {
                     case "mover":
                         if (comando.length != 3) {
                             System.out.println("Errorsintactico: MOVER ...");
-                        } else {
-                            if (map.getPersonajes().containsKey(comando[1])) {
-                                Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
-                                Posicion p = new Posicion(personaje.getPosicion());
-                                Posicion pos = personaje.moverPj(map, comando[2]);
-                                if (!(p.equals(pos))) {
-                                    System.out.println("El " + comando[1] + " se ha movido a la " + pos);
-                                }
-                                //personaje.mover(comando[2]);
-                            } else {
-                                System.out.println("El personaje no existe");
+                        } else if (map.getPersonajes().containsKey(comando[1])) {
+                            Personaje personaje = (Personaje) map.getPersonajes().get(comando[1]);
+                            Posicion p = new Posicion(personaje.getPosicion());
+                            Posicion pos = personaje.moverPj(map, comando[2]);
+                            if (!(p.equals(pos))) {
+                                System.out.println("El " + comando[1] + " se ha movido a la " + pos);
                             }
-                            //procesar comando
-                            //obtener personaje del mapa
-                            //comprobar si se puede mover a esa posicion
-                            //....
-                        }
+                            //personaje.mover(comando[2]);
+                        } else {
+                            System.out.println("El personaje no existe");
+                        } //procesar comando
+                        //obtener personaje del mapa
+                        //comprobar si se puede mover a esa posicion
+                        //....
                         map.imprimir();
                         break;
                     case "listar":
@@ -119,13 +118,17 @@ public class Principal {
                                     switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
                                         case "soldado":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                            Personaje soldadito = cellMirar.getPersonaje();
-                                            System.out.println(soldadito);
+                                            ArrayList<Personaje> soldadito = cellMirar.getPersonaje();
+                                            for (Personaje person : soldadito) {
+                                                System.out.println(person);
+                                            }
                                             break;
                                         case "paisano":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                            Personaje paisanito = cellMirar.getPersonaje();
-                                            System.out.println(paisanito);
+                                            ArrayList<Personaje> paisanito = cellMirar.getPersonaje();
+                                            for (Personaje person : paisanito) {
+                                                System.out.println(person);
+                                            }
                                             break;
                                         case "ciudadela":
                                             System.out.println("Celda tipo Edificio");

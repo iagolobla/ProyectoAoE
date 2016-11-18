@@ -9,6 +9,7 @@ import Entidades.Personaje;
 import Entidades.Edificio;
 import Entidades.Posicion;
 import Entidades.Recurso;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,7 +17,7 @@ import Entidades.Recurso;
  */
 public class Celda {
 
-    private Personaje personaje;
+    private ArrayList<Personaje> personaje;
     private Edificio edificio;
     private Recurso recurso;
     private Posicion pos;
@@ -28,6 +29,7 @@ public class Celda {
             System.out.println("ERROR EN LA POSICION ->NULL");
             return;
         }
+        personaje=new ArrayList<Personaje>();
         tipo = "Pradera";
         pos = new Posicion(posicion);
     }
@@ -41,11 +43,13 @@ public class Celda {
         this.tipo = tipo;
         switch (tipo) {
             case "soldado":
-                personaje = new Personaje("soldado", Nombre, pos);
+                personaje=new ArrayList<Personaje>();
+                personaje.add(new Personaje("soldado", Nombre, pos));
                 visible = true;
                 break;
             case "paisano":
-                personaje = new Personaje("paisano", Nombre, pos);
+                personaje=new ArrayList<Personaje>();
+                personaje.add(new Personaje("paisano", Nombre, pos));
                 visible = true;
                 break;
             case "ciudadela":
@@ -78,7 +82,7 @@ public class Celda {
         }
     }
 
-    public Personaje getPersonaje() {// CAMBIAR EL NOMBRE DE ESTE GETTER
+    public ArrayList<Personaje> getPersonaje() {// CAMBIAR EL NOMBRE DE ESTE GETTER
         if (personaje != null) {
             return personaje;
         }
@@ -115,7 +119,7 @@ public class Celda {
 
     public void setPersonaje(Personaje personaje) {
         if (personaje != null) {
-            this.personaje = personaje;
+            this.personaje.add(personaje);
             tipo = personaje.getTipo();
         } else {
             System.out.println("El personaje pasado es nulo!");

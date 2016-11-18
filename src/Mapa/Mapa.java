@@ -69,7 +69,11 @@ public class Mapa {
         Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
         mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
-        personajes.put(Name, getCelda(new Posicion(3, 4)).getPersonaje());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        Celda newcell=getCelda(new Posicion(3,4));
+        newcell.setPersonaje(new Personaje("paisano", Name, new Posicion(3, 4)));
+        ArrayList<Personaje> person=getCelda(new Posicion(new Posicion(3, 4))).getPersonaje();
+        personajes.put(Name,person.get(person.size()-1));
+        
 
         for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
@@ -152,7 +156,10 @@ public class Mapa {
         Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
         mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
-        personajes.put(Name, getCelda(new Posicion(3, 4)).getPersonaje());//Aqui creo que hay ALIASING Assign return variable to new variable.
+        Celda newcell=getCelda(new Posicion(3,4));
+        newcell.setPersonaje(new Personaje("paisano", Name, new Posicion(3, 4)));
+        ArrayList<Personaje> person=getCelda(new Posicion(new Posicion(3, 4))).getPersonaje();
+        personajes.put(Name,person.get(person.size()-1));
         for (int i = 6; i < 8; i++) {
             for (int j = 6; j < 8; j++) {
                 Name = "bosque-" + (cantidades[5] + 1);
@@ -308,7 +315,7 @@ public class Mapa {
     }
 
     public boolean checkBuilding(Posicion pos) {
-        if (this.getCelda(pos).getTipo().equals("Pradera")) {
+        if (this.getCelda(pos).getTipo().equals("Pradera")||this.getCelda(pos).getTipo().equals("paisano")||this.getCelda(pos).getTipo().equals("soldado")) {
             return true;
         }
         return false;
