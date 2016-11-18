@@ -13,10 +13,10 @@ import Entidades.Edificio;
 import Entidades.Personaje;
 import Entidades.Posicion;
 import Entidades.Recurso;
-import java.util.Scanner;
+import java.util.Scanner; 
 import Mapa.Mapa;
 import Mapa.Celda;
-
+//Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
 public class Principal {
 
     public Principal() {
