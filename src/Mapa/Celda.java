@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class Celda {
 
-    private ArrayList<Personaje> personaje;
+    private ArrayList<Personaje> personajes;
     private Edificio edificio;
     private Recurso recurso;
     private Posicion pos;
@@ -29,7 +29,7 @@ public class Celda {
             System.out.println("ERROR EN LA POSICION ->NULL");
             return;
         }
-        personaje=new ArrayList<Personaje>();
+        personajes = new ArrayList<Personaje>();
         tipo = "Pradera";
         pos = new Posicion(posicion);
     }
@@ -39,42 +39,47 @@ public class Celda {
             System.out.println("ERROR EN LA POSICION ->NULL");
             return;
         }
+        personajes = new ArrayList<Personaje>();
         pos = new Posicion(posicion);
-        this.tipo = tipo;
+        this.tipo = "Pradera";
         switch (tipo) {
             case "soldado":
-                personaje=new ArrayList<Personaje>();
-                personaje.add(new Personaje("soldado", Nombre, pos));
+                personajes.add(new Personaje("soldado", Nombre, pos));
                 visible = true;
                 break;
             case "paisano":
-                personaje=new ArrayList<Personaje>();
-                personaje.add(new Personaje("paisano", Nombre, pos));
+                personajes.add(new Personaje("paisano", Nombre, pos));
                 visible = true;
                 break;
             case "ciudadela":
                 edificio = new Edificio("ciudadela", pos, Nombre);
                 visible = true;
+                this.tipo = tipo;
                 break;
             case "casa":
                 edificio = new Edificio("casa", pos, Nombre);
                 visible = true;
+                this.tipo = tipo;
                 break;
             case "cuartel":
                 edificio = new Edificio("cuartel", pos, Nombre);
                 visible = true;
+                this.tipo = tipo;
                 break;
             case "bosque":
                 recurso = new Recurso("bosque", 150, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible = false;
+                this.tipo = tipo;
                 break;
             case "cantera":
                 recurso = new Recurso("cantera", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible = false;
+                this.tipo = tipo;
                 break;
             case "arbusto":
                 recurso = new Recurso("arbusto", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible = false;
+                this.tipo = tipo;
                 break;
             default:
                 System.out.println("Tipo mal introducido");
@@ -82,9 +87,9 @@ public class Celda {
         }
     }
 
-    public ArrayList<Personaje> getPersonaje() {// CAMBIAR EL NOMBRE DE ESTE GETTER
-        if (personaje != null) {
-            return personaje;
+    public ArrayList<Personaje> getPersonajes() {// CAMBIAR EL NOMBRE DE ESTE GETTER
+        if (personajes != null) {
+            return personajes;
         }
         System.out.println("Celda Vacia!");
         return null;
@@ -106,21 +111,47 @@ public class Celda {
         return null;
     }
 
-    public Posicion getPosicion() {
-        return new Posicion(pos);
+    public boolean isLibre() {
+        if (tipo.equals("Pradera")) {
+            return !(isPaisano() || isSoldado());
+        }
+        return false;
+    }
+
+    public boolean isPaisano() {
+        int Tam = personajes.size();
+        if (Tam == 0) {
+            return false;
+        }
+        return personajes.get(Tam - 1).isPaisano();
+    }
+
+    public boolean isSoldado() {
+        int Tam = personajes.size();
+        if (Tam == 0) {
+            return false;
+        }
+        return personajes.get(Tam - 1).isSoldado();
+    }
+
+    public void quitarPersonaje(Personaje P) {
+        if (personajes.size() > 1) {
+            personajes.remove(P);
+        } else {
+            liberarCelda();
+        }
     }
 
     public void liberarCelda() {
         edificio = null;
-        personaje = null;
+        personajes = new ArrayList<Personaje>();
         recurso = null;
         tipo = "Pradera";
     }
 
-    public void setPersonaje(Personaje personaje) {
+    public void setPersonajes(Personaje personaje) {
         if (personaje != null) {
-            this.personaje.add(personaje);
-            tipo = personaje.getTipo();
+            this.personajes.add(personaje);
         } else {
             System.out.println("El personaje pasado es nulo!");
         }

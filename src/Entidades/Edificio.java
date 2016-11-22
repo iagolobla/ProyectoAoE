@@ -101,10 +101,10 @@ public class Edificio {
         String Name = "paisano-" + (mapa.getCantidades()[0] + 1);
         mapa.getCantidades()[0]++;
         Celda newcell=mapa.getCelda(pos1);
-        newcell.setPersonaje(new Personaje("paisano", Name, pos1));
+        newcell.setPersonajes(new Personaje("paisano", Name, pos1));
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
         
-        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonaje();
+        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonajes();
         mapa.getPersonajes().put(Name,person.get(person.size()-1));
 
         mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
@@ -148,10 +148,10 @@ public class Edificio {
         String Name = "soldado-" + (mapa.getCantidades()[1] + 1);
         mapa.getCantidades()[1]++;
         Celda newcell=mapa.getCelda(pos1);
-        newcell.setPersonaje(new Personaje("soldado", Name, pos1));
+        newcell.setPersonajes(new Personaje("soldado", Name, pos1));
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
 
-        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonaje();
+        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonajes();
         mapa.getPersonajes().put(Name,person.get(person.size()-1));
         
         mapa.getEdificios().get("ciudadela-1").setComida(mapa.getEdificios().get("ciudadela-1").getComida() - 10);

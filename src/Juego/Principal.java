@@ -58,20 +58,24 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "listar":
-                        switch (comando[1].toLowerCase()) {
-                            case "personajes":
-                                for (String k : map.getPersonajes().keySet()) {
-                                    System.out.println("Nombre : " + k + ", Posicion: " + map.getPersonajes().get(k).getPosicion());
-                                }
-                                break;
-                            case "edificios":
-                                for (String k : map.getEdificios().keySet()) {
-                                    System.out.println("Nombre : " + k + ", Posicion: " + map.getEdificios().get(k).getPosicion());
-                                }
-                                break;
-                            default:
-                                System.out.println("comando incorrecto. Debe introducir listar personajes o listar edificios.");
-                                break;
+                        if (comando.length == 2) {
+                            switch (comando[1].toLowerCase()) {
+                                case "personajes":
+                                    for (String k : map.getPersonajes().keySet()) {
+                                        System.out.println("Nombre : " + k + ", Posicion: " + map.getPersonajes().get(k).getPosicion());
+                                    }
+                                    break;
+                                case "edificios":
+                                    for (String k : map.getEdificios().keySet()) {
+                                        System.out.println("Nombre : " + k + ", Posicion: " + map.getEdificios().get(k).getPosicion());
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("comando incorrecto. Debe introducir listar personajes o listar edificios.");
+                                    break;
+                            }
+                        } else {
+                            System.out.println("Error sintactico!");
                         }
                         break;
                     case "construir":
@@ -118,14 +122,14 @@ public class Principal {
                                     switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
                                         case "soldado":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                            ArrayList<Personaje> soldadito = cellMirar.getPersonaje();
+                                            ArrayList<Personaje> soldadito = cellMirar.getPersonajes();
                                             for (Personaje person : soldadito) {
                                                 System.out.println(person);
                                             }
                                             break;
                                         case "paisano":
                                             System.out.println("Celda tipo Pradera, hay un Personaje aqui");
-                                            ArrayList<Personaje> paisanito = cellMirar.getPersonaje();
+                                            ArrayList<Personaje> paisanito = cellMirar.getPersonajes();
                                             for (Personaje person : paisanito) {
                                                 System.out.println(person);
                                             }

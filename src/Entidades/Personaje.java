@@ -7,6 +7,7 @@ package Entidades;
 
 import Mapa.Celda;
 import Mapa.Mapa;
+import java.util.HashMap;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Personaje {
     private String tipoRecurso; //Como solo se puede recolectar un tipo de recurso de cada vez, guardaremos aqui cual
 
     public Personaje(String tipo, String Nombre, Posicion pos) {
-        if(pos == null){
+        if (pos == null) {
             System.out.println("Posicion pasada a Personaje nula!");
             return;
         }
@@ -267,6 +268,14 @@ public class Personaje {
             System.out.println("No hay un edificio en esta celda!");
         }
     }
+
+    public boolean isPaisano(){
+        return tipo.equals("paisano");
+    }
+    
+    public boolean isSoldado(){
+        return tipo.equals("soldado");
+    }
     
     public void reparar(Mapa mapa, String direccion, int cantidad) {   //Sobrecarga: solo repara la cantidad pasada
         Posicion pos = new Posicion(posicion);
@@ -299,12 +308,12 @@ public class Personaje {
                 return;
             }
             int cantidadReparar;
-            
+
             Edificio ciudadelilla = mapa.getEdificios().get("ciudadela-1");
             switch (edificio.getTipo()) {
                 case "casa":
                     cantidadReparar = Edificio.SALUDCASA - vida;
-                    if(cantidad < cantidadReparar){
+                    if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
                     if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
@@ -319,7 +328,7 @@ public class Personaje {
                     break;
                 case "ciudadela":
                     cantidadReparar = Edificio.SALUDCIUDADELA - vida;
-                    if(cantidad < cantidadReparar){
+                    if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
                     if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
@@ -335,7 +344,7 @@ public class Personaje {
                     break;
                 case "cuartel":
                     cantidadReparar = Edificio.SALUDCUARTEL - vida;
-                    if(cantidad < cantidadReparar){
+                    if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
                     if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
@@ -382,11 +391,11 @@ public class Personaje {
             this.setPosicion(pos);
             Celda newcell = mapa.getCelda(posicion);
 
-            newcell.setPersonaje(this);   //Metemos el personaje en la nueva celda
+            newcell.setPersonajes(this);   //Metemos el personaje en la nueva celda
 
             mapa.getMapa().get(posicion.getX()).set(posicion.getY(), newcell); //Metemos la celda en su posicion del mapa
 
-            cell.liberarCelda();    //Ponemos la celda donde estaba el personaje como pradera
+            cell.quitarPersonaje(this);    //Ponemos la celda donde estaba el personaje como pradera
         } else {
             System.out.println("No se puede Mover en esa direccion!");
         }

@@ -29,11 +29,11 @@ public class Mapa {
     public static final int MAPAY = 8;
 
     public Mapa(int bosques, int canteras, int arbustos) {
-        if(bosques < 0 || canteras < 0 || arbustos < 0){
+        if (bosques < 0 || canteras < 0 || arbustos < 0) {
             System.out.println("Valores pasados al mapa menores que 0!");
             return;
         }
-        
+
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
@@ -68,18 +68,16 @@ public class Mapa {
         //creacion un personaje
         Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
-        mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
-        Celda newcell=getCelda(new Posicion(3,4));
-        newcell.setPersonaje(new Personaje("paisano", Name, new Posicion(3, 4)));
-        ArrayList<Personaje> person=getCelda(new Posicion(new Posicion(3, 4))).getPersonaje();
-        personajes.put(Name,person.get(person.size()-1));
-        
+        Celda newcell = getCelda(new Posicion(3, 4));
+        newcell.setPersonajes(new Personaje("paisano", Name, new Posicion(3, 4)));
+        ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(3, 4))).getPersonajes();
+        personajes.put(Name, person.get(person.size() - 1));
 
         for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
             int x = rn.nextInt(MAPAY);
             int y = rn.nextInt(MAPAX);
-            if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
+            if (getCelda(new Posicion(x, y)).isLibre()) {
                 Name = "bosque-" + (cantidades[5] + 1);
                 cantidades[5]++;
                 mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
@@ -97,7 +95,7 @@ public class Mapa {
                 cantidades[6]++;
                 mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
-            }else{
+            } else {
                 i--;
             }
         }
@@ -155,11 +153,10 @@ public class Mapa {
         //creacion un personaje
         Name = "paisano-" + (cantidades[0] + 1);
         cantidades[0]++;
-        mapa.get(3).set(4, new Celda("paisano", new Posicion(3, 4), Name));
-        Celda newcell=getCelda(new Posicion(3,4));
-        newcell.setPersonaje(new Personaje("paisano", Name, new Posicion(3, 4)));
-        ArrayList<Personaje> person=getCelda(new Posicion(new Posicion(3, 4))).getPersonaje();
-        personajes.put(Name,person.get(person.size()-1));
+        Celda newcell = getCelda(new Posicion(3, 4));
+        newcell.setPersonajes(new Personaje("paisano", Name, new Posicion(3, 4)));
+        ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(3, 4))).getPersonajes();
+        personajes.put(Name, person.get(person.size() - 1));
         for (int i = 6; i < 8; i++) {
             for (int j = 6; j < 8; j++) {
                 Name = "bosque-" + (cantidades[5] + 1);
@@ -215,8 +212,8 @@ public class Mapa {
     public void ponerVisible(Celda cell) {
         Celda aux;
         Posicion pos;
-        if (cell.getTipo().equals("soldado") || cell.getTipo().equals("paisano") || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
-            pos = new Posicion(cell.getPosicion());                                 //sus celdas adyacentes en visible
+        if (cell.isPaisano() || cell.isSoldado() || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
+            pos = new Posicion(cell.getPos());                                 //sus celdas adyacentes en visible
             aux = this.getCelda(pos);
             aux.setVisible(true);   //Pone visible la celda del personaje
 
@@ -272,7 +269,13 @@ public class Mapa {
                 if (mapa.get(i).get(j).getVisible()) {
                     switch (mapa.get(i).get(j).getTipo()) {
                         case ("Pradera"):
-                            System.out.print(Colores.BACK_VERDE + " " + Colores.BACK_RESET);
+                            if (getCelda(i, j).isPaisano()) {   //Si tiene un paisano
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else if (getCelda(i, j).isSoldado()) {    //Si tiene un soldado
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {    //Si no tiene ninguno
+                                System.out.print(Colores.BACK_VERDE + " " + Colores.BACK_RESET);
+                            }
                             break;
                         case ("ciudadela"):
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);    //⍟♜♛
@@ -282,12 +285,6 @@ public class Mapa {
                             break;
                         case ("casa"):
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                            break;
-                        case "soldado":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                            break;
-                        case "paisano":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
                         case "bosque":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
@@ -299,7 +296,7 @@ public class Mapa {
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_VERDELIGHT + "♣" + Colores.BACK_RESET + Colores.TEXT_RESET);  //Y los arbustos *
                             break;
                         default:
-                            System.out.println("Error, tipo de edificio incorrecto");
+                            System.out.println("Error, tipo pasado incorrecto!");
                     }
                 } else {
                     System.out.print(Colores.BACK_GRIS + " " + Colores.BACK_RESET);
@@ -315,7 +312,7 @@ public class Mapa {
     }
 
     public boolean checkBuilding(Posicion pos) {
-        if (this.getCelda(pos).getTipo().equals("Pradera")||this.getCelda(pos).getTipo().equals("paisano")||this.getCelda(pos).getTipo().equals("soldado")) {
+        if (this.getCelda(pos).getTipo().equals("Pradera") || this.getCelda(pos).getTipo().equals("paisano") || this.getCelda(pos).getTipo().equals("soldado")) {
             return true;
         }
         return false;
