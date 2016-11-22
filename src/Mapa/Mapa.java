@@ -209,7 +209,7 @@ public class Mapa {
         Celda aux;
         Posicion pos;
         if (cell.getTipo().equals("soldado") || cell.getTipo().equals("paisano") || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
-            pos = new Posicion(cell.getPosicion());                                 //sus celdas adyacentes en visible
+            pos = new Posicion(cell.getPos());                                 //sus celdas adyacentes en visible
             aux = this.getCelda(pos);
             aux.setVisible(true);   //Pone visible la celda del personaje
 

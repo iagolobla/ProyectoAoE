@@ -102,9 +102,6 @@ public class Celda {
         return null;
     }
 
-    public Posicion getPosicion() {
-        return new Posicion(pos);
-    }
 
     public void liberarCelda() {
         edificio = null;
