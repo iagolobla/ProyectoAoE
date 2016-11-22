@@ -15,6 +15,8 @@ import Entidades.Posicion;
 import Entidades.Recurso;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
+import Mapa.Civilizacion;
 import Mapa.Mapa;
 import Mapa.Celda;
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
@@ -24,7 +26,36 @@ public class Principal {
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
-        Mapa map = new Mapa(6, 6, 6);
+        System.out.println("Bienvenido al juego.");
+        int numciv;
+        
+        Civilizacion C;
+        HashMap<String,Civilizacion> civilizaciones=new HashMap<String,Civilizacion>();
+        do {
+            System.out.println("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
+            numciv = scanner.nextInt();
+        } while (numciv > 3 || numciv < 1);
+        String nombre;
+        nombre=scanner.nextLine();//para coger el \0
+        for(int i=1;i<=numciv;i++){
+            System.out.println("Introduzca el nombre de la civilizacion "+i+": ");
+            nombre=scanner.nextLine();
+            C=new Civilizacion(nombre);
+            
+            if(i==1){
+                C.setColor("azul");
+            }else if(i==2){
+                C.setColor("rojo");
+            }else{
+                C.setColor("morado");
+            }
+            civilizaciones.put(nombre, C);
+            
+        }
+        
+        C=civilizaciones.get(nombre);
+        
+        Mapa map = new Mapa(6, 6, 6,civilizaciones.values());
         if (map == null) {
             map = new Mapa();
         }
@@ -37,6 +68,13 @@ public class Principal {
                 switch (comando[0].toLowerCase()) {
                     case "salir":
                         seguir = false;
+                        break;
+                    case "cambiar":
+                        if(comando.length==2){
+                            C=civilizaciones.get(comando[1]);
+                        }else{
+                            System.out.println("La civilizacion no existe.");
+                        }
                         break;
                     case "mover":
                         if (comando.length != 3) {

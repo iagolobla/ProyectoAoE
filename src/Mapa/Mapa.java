@@ -16,6 +16,7 @@ import Entidades.Edificio;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Collection;
 
 public class Mapa {
 
@@ -28,7 +29,7 @@ public class Mapa {
     public static final int MAPAX = 16;
     public static final int MAPAY = 8;
 
-    public Mapa(int bosques, int canteras, int arbustos) {
+    public Mapa(int bosques, int canteras, int arbustos, Collection<Civilizacion> civ) {
         if (bosques < 0 || canteras < 0 || arbustos < 0) {
             System.out.println("Valores pasados al mapa menores que 0!");
             return;
@@ -58,9 +59,34 @@ public class Mapa {
                 mapa.get(i).add(cell);
             }
         }
+        int j = 2;
+        String Namec = "ciudadela-1";    //edificios.size() ayuda a crear el nombre
+        String Namep = "paisano-1";
+        for (Civilizacion c : civ) {
+            c.getCantidades()[2]++;
+            c.getCantidades()[0]++;
+            mapa.get(j).set(j, new Celda("ciudadela", new Posicion(j, j), Namec));
+            c.getEdificios().put(Namec, getCelda(new Posicion(j, j)).getEdificio());
 
+            Celda newcell = getCelda(new Posicion(j, j+1));
+            newcell.setPersonajes(new Personaje("paisano", Namep, new Posicion(j, j+1)));
+            ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(j, j+1))).getPersonajes();
+            c.getPersonajes().put(Namep, person.get(person.size() - 1));
+            
+            j=j+2;
+
+        }
+        String Name;
+        
+        /*
+        AHORA A PARTIR DE AQUI DEBEREIAMOS METER LOS RECURSOS EN TODAS YA LAS CIVILIZACIONES YA QUE SON RECURSOSCOMPARTIDOS
+        */
+        
+        
+        
+        
         //Creacion de la ciudadela
-        String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
+        /*String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
         cantidades[2]++;
         mapa.get(3).set(3, new Celda("ciudadela", new Posicion(3, 3), Name));
         edificios.put(Name, getCelda(new Posicion(3, 3)).getEdificio());
@@ -71,7 +97,7 @@ public class Mapa {
         Celda newcell = getCelda(new Posicion(3, 4));
         newcell.setPersonajes(new Personaje("paisano", Name, new Posicion(3, 4)));
         ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(3, 4))).getPersonajes();
-        personajes.put(Name, person.get(person.size() - 1));
+        personajes.put(Name, person.get(person.size() - 1));*/
 
         for (int i = 0; i < bosques; i++) {
             Random rn = new Random();
