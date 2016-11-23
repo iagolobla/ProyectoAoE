@@ -28,16 +28,13 @@ public class Civilizacion {
     public Civilizacion(String nombre) {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
-        cantidades = new int[8];//guardara las cantidades de personajes, soldados,etc.
+        cantidades = new int[4];//guardara las cantidades de personajes, soldados,etc.
         /*
         0--Paisano
         1--Soldado
         2--Ciudadela
         3--Casa
         4--Cuartel
-        5--Bosque
-        6--Cantera
-        7--Arbusto
          */
         this.nombre = nombre;
         color = "rojo";
