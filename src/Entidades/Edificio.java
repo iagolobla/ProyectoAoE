@@ -76,7 +76,7 @@ public class Edificio {
         if (!this.tipo.equals("ciudadela")) {
             System.out.println("Este edificio no puede crear Paisanos");
         }
-        if (mapa.getCantidades()[3] * CAPACIDADCASA <= mapa.getCantidades()[0] + mapa.getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
+        if (mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
             System.out.println("No hay sitio para mas Paisanos, se necesitan mas casas!");
             return;
         }
@@ -98,23 +98,23 @@ public class Edificio {
             return;
         }
 
-        String Name = "paisano-" + (mapa.getCantidades()[0] + 1);
-        mapa.getCantidades()[0]++;
+        String Name = "paisano-" + (mapa.getCivilizacion().getCantidades()[0] + 1);
+        mapa.getCivilizacion().getCantidades()[0]++;
         Celda newcell=mapa.getCelda(pos1);
-        newcell.setPersonajes(new Personaje("paisano", Name, pos1));
+        newcell.setPersonajes(new Personaje("paisano", Name, pos1,mapa.getCivilizacion().getNombre()));
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
         
         ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonajes();
-        mapa.getPersonajes().put(Name,person.get(person.size()-1));
+        mapa.getCivilizacion().getPersonajes().put(Name,person.get(person.size()-1));
 
-        mapa.getEdificios().get(nombre).setComida(mapa.getEdificios().get(nombre).getComida() - 10);
+        mapa.getCivilizacion().getEdificios().get(nombre).setComida(mapa.getCivilizacion().getEdificios().get(nombre).getComida() - 10);
         System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
-        System.out.println("Quedan "+((mapa.getCantidades()[3] * CAPACIDADCASA)- (mapa.getCantidades()[0] + mapa.getCantidades()[1]))+ " espacios de almacenamiento");
+        System.out.println("Quedan "+((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA)- (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]))+ " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el paisano");
         System.out.println("Quedan los siguientes recursos: ");
-        System.out.println("Comida: " + mapa.getEdificios().get(nombre).getComida());
-        System.out.println("Madera: " + mapa.getEdificios().get(nombre).getMadera());
-        System.out.println("Piedra: " + mapa.getEdificios().get(nombre).getPiedra());
+        System.out.println("Comida: " + mapa.getCivilizacion().getEdificios().get(nombre).getComida());
+        System.out.println("Madera: " + mapa.getCivilizacion().getEdificios().get(nombre).getMadera());
+        System.out.println("Piedra: " + mapa.getCivilizacion().getEdificios().get(nombre).getPiedra());
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
     }
@@ -123,7 +123,7 @@ public class Edificio {
         if (!this.tipo.equals("cuartel")) {
             System.out.println("Este edificio no puede crear Soldados");
         }
-        if (mapa.getCantidades()[3] * CAPACIDADCASA <= mapa.getCantidades()[0] + mapa.getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
+        if (mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
             System.out.println("No hay sitio para mas Soldados, se necesitan mas casas!");
             return;
         }
@@ -145,23 +145,23 @@ public class Edificio {
             return;
         }
 
-        String Name = "soldado-" + (mapa.getCantidades()[1] + 1);
-        mapa.getCantidades()[1]++;
+        String Name = "soldado-" + (mapa.getCivilizacion().getCantidades()[1] + 1);
+        mapa.getCivilizacion().getCantidades()[1]++;
         Celda newcell=mapa.getCelda(pos1);
-        newcell.setPersonajes(new Personaje("soldado", Name, pos1));
+        newcell.setPersonajes(new Personaje("soldado", Name, pos1,mapa.getCivilizacion().getNombre()));
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
 
         ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonajes();
-        mapa.getPersonajes().put(Name,person.get(person.size()-1));
+        mapa.getCivilizacion().getPersonajes().put(Name,person.get(person.size()-1));
         
-        mapa.getEdificios().get("ciudadela-1").setComida(mapa.getEdificios().get("ciudadela-1").getComida() - 10);
+        mapa.getCivilizacion().getEdificios().get("ciudadela-1").setComida(mapa.getCivilizacion().getEdificios().get("ciudadela-1").getComida() - 10);
         System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
-        System.out.println("Quedan "+((mapa.getCantidades()[3] * CAPACIDADCASA)- (mapa.getCantidades()[0] + mapa.getCantidades()[1]))+ " espacios de almacenamiento");
+        System.out.println("Quedan "+((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA)- (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]))+ " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
         System.out.println("Quedan los siguientes recursos: ");
-        System.out.println("Comida: " + mapa.getEdificios().get("ciudadela-1").getComida());
-        System.out.println("Madera: " + mapa.getEdificios().get("ciudadela-1").getMadera());
-        System.out.println("Piedra: " + mapa.getEdificios().get("ciudadela-1").getPiedra());
+        System.out.println("Comida: " + mapa.getCivilizacion().getEdificios().get("ciudadela-1").getComida());
+        System.out.println("Madera: " + mapa.getCivilizacion().getEdificios().get("ciudadela-1").getMadera());
+        System.out.println("Piedra: " + mapa.getCivilizacion().getEdificios().get("ciudadela-1").getPiedra());
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
 

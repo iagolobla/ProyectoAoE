@@ -16,6 +16,7 @@ import java.util.HashMap;
 public class Personaje {
 
     private String tipo;
+    private String nombreCivilizacion;
     private int armadura;
     private int salud;
     private int ataque;
@@ -31,6 +32,38 @@ public class Personaje {
             return;
         }
         posicion = new Posicion(pos);
+        switch (tipo) {
+            case "soldado":
+                this.tipo = tipo;
+                armadura = 100;
+                salud = 200;
+                ataque = 50;
+                capRecolectar = 0;
+                cantidadRecolectada = 0;
+                this.Nombre = Nombre;   //El parametro nombre debe ser unico para cada personaje
+                break;
+            case "paisano":
+                this.tipo = tipo;
+                armadura = 50;
+                salud = 150;
+                ataque = 10;
+                capRecolectar = 100;
+                cantidadRecolectada = 0;
+                this.Nombre = Nombre;
+                break;
+            default:
+                System.out.println("Tipo mal introducido");
+
+        }
+    }
+
+    public Personaje(String tipo, String Nombre, Posicion pos, String civilizacion) {
+        if (pos == null) {
+            System.out.println("Posicion pasada a Personaje nula!");
+            return;
+        }
+        posicion = new Posicion(pos);
+        nombreCivilizacion = civilizacion;
         switch (tipo) {
             case "soldado":
                 this.tipo = tipo;
@@ -116,16 +149,16 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
-        Edificio Ciudadela = mapa.getEdificios().get("ciudadela-1");
+        Edificio Ciudadela = mapa.getCivilizacion().getEdificios().get("ciudadela-1");
         switch (Edificio.toLowerCase()) {
             case "casa":
                 if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                        String Name = "casa-" + (mapa.getCantidades()[3] + 1);
-                        mapa.getCantidades()[3]++;
+                        String Name = "casa-" + (mapa.getCivilizacion().getCantidades()[3] + 1);
+                        mapa.getCivilizacion().getCantidades()[3]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
 
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
+                        mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
@@ -144,11 +177,11 @@ public class Personaje {
             case "cuartel":
                 if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                        String Name = "cuartel-" + (mapa.getCantidades()[4] + 1);
-                        mapa.getCantidades()[4]++;
+                        String Name = "cuartel-" + (mapa.getCivilizacion().getCantidades()[4] + 1);
+                        mapa.getCivilizacion().getCantidades()[4]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
 
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
+                        mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
@@ -167,11 +200,11 @@ public class Personaje {
             case "ciudadela":
                 if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                        String Name = "ciudadela-" + (mapa.getCantidades()[2] + 1);
-                        mapa.getCantidades()[2]++;
+                        String Name = "ciudadela-" + (mapa.getCivilizacion().getCantidades()[2] + 1);
+                        mapa.getCivilizacion().getCantidades()[2]++;
                         mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
 
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
+                        mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
                         System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
@@ -224,7 +257,7 @@ public class Personaje {
                 System.out.println("El edificio ya esta a full vida");
                 return;
             }
-            Edificio ciudadelilla = mapa.getEdificios().get("ciudadela-1");
+            Edificio ciudadelilla = mapa.getCivilizacion().getEdificios().get("ciudadela-1");
             switch (edificio.getTipo()) {
                 case "casa":
                     if (ciudadelilla.getMadera() > (Edificio.SALUDCASA - vida) && ciudadelilla.getMadera() > (Edificio.SALUDCASA - vida)) {
@@ -269,14 +302,14 @@ public class Personaje {
         }
     }
 
-    public boolean isPaisano(){
+    public boolean isPaisano() {
         return tipo.equals("paisano");
     }
-    
-    public boolean isSoldado(){
+
+    public boolean isSoldado() {
         return tipo.equals("soldado");
     }
-    
+
     public void reparar(Mapa mapa, String direccion, int cantidad) {   //Sobrecarga: solo repara la cantidad pasada
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
@@ -309,7 +342,7 @@ public class Personaje {
             }
             int cantidadReparar;
 
-            Edificio ciudadelilla = mapa.getEdificios().get("ciudadela-1");
+            Edificio ciudadelilla = mapa.getCivilizacion().getEdificios().get("ciudadela-1");
             switch (edificio.getTipo()) {
                 case "casa":
                     cantidadReparar = Edificio.SALUDCASA - vida;
@@ -369,7 +402,7 @@ public class Personaje {
     public Posicion moverPj(Mapa mapa, String direccion) {
         Celda cell = mapa.getCelda(posicion);
         Posicion pos = new Posicion(posicion);
-
+        
         switch (direccion) {
             case "s":
                 pos.moverX(1);
@@ -388,20 +421,39 @@ public class Personaje {
 
         }
         if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-            this.setPosicion(pos);
-            Celda newcell = mapa.getCelda(posicion);
+            
+            Celda newcell = mapa.getCelda(pos);
 
-            newcell.setPersonajes(this);   //Metemos el personaje en la nueva celda
+            if (newcell.isPaisano() || newcell.isSoldado()) {
+                if (newcell.getPersonajes().get(0).getNombreCivilizacion().equals(nombreCivilizacion)) {
+                    this.setPosicion(pos);
+                    newcell.setPersonajes(this);   //Metemos el personaje en la nueva celda
+                    mapa.getMapa().get(posicion.getX()).set(posicion.getY(), newcell); //Metemos la celda en su posicion del mapa
 
-            mapa.getMapa().get(posicion.getX()).set(posicion.getY(), newcell); //Metemos la celda en su posicion del mapa
+                    cell.quitarPersonaje(this);    //Ponemos la celda donde estaba el personaje como pradera
+                    //Recorremos mapa para actualizar las visibilidades
+                    mapa.actualizarVisibilidad();
+                    return new Posicion(posicion);
+                } else {
+                    System.out.println("El personaje intenta mover a una celda con personajes enemigos!");
+                    
+                }
+            } else {
+                this.setPosicion(pos);
+                newcell.setPersonajes(this);   //Metemos el personaje en la nueva celda
+                mapa.getMapa().get(posicion.getX()).set(posicion.getY(), newcell); //Metemos la celda en su posicion del mapa
 
-            cell.quitarPersonaje(this);    //Ponemos la celda donde estaba el personaje como pradera
+                cell.quitarPersonaje(this);    //Ponemos la celda donde estaba el personaje como pradera
+                //Recorremos mapa para actualizar las visibilidades
+                mapa.actualizarVisibilidad();
+                return new Posicion(posicion);
+            }
+
         } else {
             System.out.println("No se puede Mover en esa direccion!");
         }
-        //Recorremos mapa para actualizar las visibilidades
-        mapa.actualizarVisibilidad();
-        return new Posicion(posicion);
+        return posicion;
+
     }
 
     public void recolectar(Recurso recurso, Mapa mapa) {
@@ -560,4 +612,13 @@ public class Personaje {
             System.out.println("Cantidad Recolectada introducida debe ser mayor que 0!");
         }
     }
+
+    public String getNombreCivilizacion() {
+        return nombreCivilizacion;
+    }
+
+    public void setNombreCivilizacion(String nombreCivilizacion) {
+        this.nombreCivilizacion = nombreCivilizacion;
+    }
+
 }

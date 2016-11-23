@@ -21,14 +21,13 @@ public class Civilizacion {
     private String nombre;
     private HashMap<String, Personaje> personajes;
     private HashMap<String, Edificio> edificios;
-    private HashMap<String, Recurso> recursos;
+
     private int[] cantidades;
     private String color;
 
     public Civilizacion(String nombre) {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
-        recursos = new HashMap<String, Recurso>();
         cantidades = new int[8];//guardara las cantidades de personajes, soldados,etc.
         /*
         0--Paisano
@@ -52,9 +51,7 @@ public class Civilizacion {
         return edificios;
     }
 
-    public HashMap<String, Recurso> getRecursos() {
-        return recursos;
-    }
+
 
     public int[] getCantidades() {
         return cantidades;
@@ -93,13 +90,7 @@ public class Civilizacion {
         }
     }
 
-    public void setRecursos(HashMap<String, Recurso> recursos) {
-        if (recursos != null) {
-            this.recursos = new HashMap<>(recursos);
-        } else {
-            System.out.println("HashMap de recursos pasado nulo!");
-        }
-    }
+
 
     public void setCantidades(int[] cantidades) {
         if (cantidades != null) {

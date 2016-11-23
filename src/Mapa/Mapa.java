@@ -21,10 +21,9 @@ import java.util.Collection;
 public class Mapa {
 
     private ArrayList<ArrayList<Celda>> mapa;
-    private HashMap<String, Personaje> personajes;
-    private HashMap<String, Edificio> edificios;
-    private HashMap<String, Recurso> recursos;
-    private int[] cantidades;
+        private HashMap<String, Recurso> recursos;
+        int[] cantidades;
+        Civilizacion civilizacion;
 
     public static final int MAPAX = 16;
     public static final int MAPAY = 8;
@@ -34,20 +33,14 @@ public class Mapa {
             System.out.println("Valores pasados al mapa menores que 0!");
             return;
         }
-
-        edificios = new HashMap<String, Edificio>();
-        personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
-        cantidades = new int[8];//guardara las cantidades de personajes, soldados,etc.
+        civilizacion=null;
+        cantidades=new int[3];
         /*
-        0--Paisano
-        1--Soldado
-        2--Ciudadela
-        3--Casa
-        4--Cuartel
-        5--Bosque
-        6--Cantera
-        7--Arbusto
+       
+        0--Bosque
+        1--Cantera
+        2--Arbusto
          */
         mapa = new ArrayList<>();
         Celda cell;
@@ -59,32 +52,43 @@ public class Mapa {
                 mapa.get(i).add(cell);
             }
         }
-        int j = 2;
+        int j = 0;
+        int x1=0;
+        int y1=0;
         String Namec = "ciudadela-1";    //edificios.size() ayuda a crear el nombre
         String Namep = "paisano-1";
         for (Civilizacion c : civ) {
+            switch (j) {
+                case 0:
+                    x1=MAPAY-3;
+                    y1=MAPAY-3;
+                    break;
+                case 1:
+                    x1=MAPAY-5;
+                    y1=MAPAX-3;
+                    break;
+                case 2:
+                    x1=MAPAY-6;
+                    y1=MAPAX-14;
+                    break;
+
+            }
             c.getCantidades()[2]++;
             c.getCantidades()[0]++;
-            mapa.get(j).set(j, new Celda("ciudadela", new Posicion(j, j), Namec));
-            c.getEdificios().put(Namec, getCelda(new Posicion(j, j)).getEdificio());
+            mapa.get(x1).set(y1, new Celda("ciudadela", new Posicion(x1,y1), Namec));
+            c.getEdificios().put(Namec, getCelda(new Posicion(x1,y1)).getEdificio());
 
-            Celda newcell = getCelda(new Posicion(j, j+1));
-            newcell.setPersonajes(new Personaje("paisano", Namep, new Posicion(j, j+1)));
-            ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(j, j+1))).getPersonajes();
+            Celda newcell = getCelda(new Posicion(x1,y1 + 1));
+            newcell.setPersonajes(new Personaje("paisano", Namep, new Posicion(x1,y1 + 1),c.getNombre()));
+            ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(x1,y1 + 1))).getPersonajes();
             c.getPersonajes().put(Namep, person.get(person.size() - 1));
-            
-            j=j+2;
-
+            j++;
         }
         String Name;
-        
+
         /*
         AHORA A PARTIR DE AQUI DEBEREIAMOS METER LOS RECURSOS EN TODAS YA LAS CIVILIZACIONES YA QUE SON RECURSOSCOMPARTIDOS
-        */
-        
-        
-        
-        
+         */
         //Creacion de la ciudadela
         /*String Name = "ciudadela-" + (cantidades[2] + 1);    //edificios.size() ayuda a crear el nombre
         cantidades[2]++;
@@ -98,44 +102,43 @@ public class Mapa {
         newcell.setPersonajes(new Personaje("paisano", Name, new Posicion(3, 4)));
         ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(3, 4))).getPersonajes();
         personajes.put(Name, person.get(person.size() - 1));*/
-
-        for (int i = 0; i < bosques; i++) {
+        for (int k = 0; k < bosques; k++) {
             Random rn = new Random();
             int x = rn.nextInt(MAPAY);
             int y = rn.nextInt(MAPAX);
             if (getCelda(new Posicion(x, y)).isLibre()) {
-                Name = "bosque-" + (cantidades[5] + 1);
-                cantidades[5]++;
+                Name = "bosque-" + (cantidades[0] + 1);
+                cantidades[0]++;
                 mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             } else {
-                i--;
+                k--;
             }
         }
-        for (int i = 0; i < canteras; i++) {
+        for (int k = 0; k < canteras; k++) {
             Random rn = new Random();
             int x = rn.nextInt(MAPAY);
             int y = rn.nextInt(MAPAX);
-            if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
-                Name = "cantera-" + (cantidades[6] + 1);
-                cantidades[6]++;
+            if (getCelda(new Posicion(x, y)).isLibre()) {
+                Name = "cantera-" + (cantidades[1] + 1);
+                cantidades[1]++;
                 mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             } else {
-                i--;
+                k--;
             }
         }
-        for (int i = 0; i < bosques; i++) {
+        for (int k = 0; k < bosques; k++) {
             Random rn = new Random();
             int x = rn.nextInt(MAPAY);
             int y = rn.nextInt(MAPAX);
-            if (getCelda(new Posicion(x, y)).getTipo() == "Pradera") {
-                Name = "arbusto-" + (cantidades[7] + 1);
-                cantidades[7]++;
+            if (getCelda(new Posicion(x, y)).isLibre()) {
+                Name = "arbusto-" + (cantidades[2] + 1);
+                cantidades[2]++;
                 mapa.get(x).set(y, new Celda("arbusto", new Posicion(x, y), Name));
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             } else {
-                i--;
+                k--;
             }
         }
 
@@ -144,7 +147,7 @@ public class Mapa {
         this.actualizarVisibilidad();
     }
 
-    public Mapa() {
+    /*public Mapa() {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         recursos = new HashMap<String, Recurso>();
@@ -159,7 +162,7 @@ public class Mapa {
         6--Cantera
         7--Arbusto
          */
-        mapa = new ArrayList<>();
+        /*mapa = new ArrayList<>();
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             mapa.add(new ArrayList<>());
@@ -213,7 +216,7 @@ public class Mapa {
 
         //Recorremos mapa para actualizar las visibilidades
         this.actualizarVisibilidad();
-    }
+    }*/
 
     public Celda getCelda(Posicion p) {
         if (p == null) {
@@ -338,7 +341,7 @@ public class Mapa {
     }
 
     public boolean checkBuilding(Posicion pos) {
-        if (this.getCelda(pos).getTipo().equals("Pradera") || this.getCelda(pos).getTipo().equals("paisano") || this.getCelda(pos).getTipo().equals("soldado")) {
+        if (this.getCelda(pos).getTipo().equals("Pradera")) {
             return true;
         }
         return false;
@@ -357,13 +360,7 @@ public class Mapa {
         return mapa;
     }
 
-    public HashMap<String, Personaje> getPersonajes() {
-        return personajes;
-    }
 
-    public HashMap<String, Edificio> getEdificios() {
-        return edificios;
-    }
 
     public HashMap<String, Recurso> getRecursos() {
         return recursos;
@@ -381,21 +378,7 @@ public class Mapa {
         }
     }
 
-    public void setPersonajes(HashMap<String, Personaje> personajes) {
-        if (personajes != null) {
-            this.personajes = new HashMap<>(personajes);
-        } else {
-            System.out.println("HashMap de personajes pasado nulo!");
-        }
-    }
 
-    public void setEdificios(HashMap<String, Edificio> edificios) {
-        if (edificios != null) {
-            this.edificios = new HashMap<>(edificios);
-        } else {
-            System.out.println("HashMap de edificios pasado nulo!");
-        }
-    }
 
     public void setRecursos(HashMap<String, Recurso> recursos) {
         if (recursos != null) {
@@ -412,5 +395,14 @@ public class Mapa {
             System.out.println("Array de cantidades pasado nulo!");
         }
     }
+
+    public Civilizacion getCivilizacion() {
+        return civilizacion;
+    }
+
+    public void setCivilizacion(Civilizacion civilizacion) {
+        this.civilizacion = civilizacion;
+    }
+    
 
 }
