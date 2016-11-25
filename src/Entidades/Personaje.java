@@ -131,6 +131,10 @@ public class Personaje {
     }
 
     public void construir(Mapa mapa, String direccion, String Edificio) {//DESCONTAR RECURSOS AL CONSTRUIR.
+        if (this.getTipo().equals("soldado")) {   //Comprueba si es un paisano o un soldado
+            System.out.println("Los soldados no pueden construir!");
+            return;
+        }
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
             case "s":
@@ -228,6 +232,10 @@ public class Personaje {
     }
 
     public void reparar(Mapa mapa, String direccion) {
+        if (this.getTipo().equals("soldado")) {   //Comprueba si es un paisano o un soldado
+            System.out.println("Los soldados no pueden reparar!");
+            return;
+        }
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
             case "s":
@@ -311,6 +319,10 @@ public class Personaje {
     }
 
     public void reparar(Mapa mapa, String direccion, int cantidad) {   //Sobrecarga: solo repara la cantidad pasada
+        if (this.getTipo().equals("soldado")) {   //Comprueba si es un paisano o un soldado
+            System.out.println("Los soldados no pueden reparar!");
+            return;
+        }
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
             case "s":
