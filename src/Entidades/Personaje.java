@@ -25,7 +25,7 @@ public class Personaje {
     private String tipoRecurso; //Como solo se puede recolectar un tipo de recurso de cada vez, guardaremos aqui cual
 
     public Personaje(String tipo, String Nombre, Posicion pos) {
-        if(pos == null){
+        if (pos == null) {
             System.out.println("Posicion pasada a Personaje nula!");
             return;
         }
@@ -97,103 +97,111 @@ public class Personaje {
     }
 
     public void construir(Mapa mapa, String direccion, String Edificio) {//DESCONTAR RECURSOS AL CONSTRUIR.
-        Posicion pos = new Posicion(posicion);
-        switch (direccion) {
-            case "s":
-                pos.moverX(1);
-                break;
-            case "n":
-                pos.moverX(-1);
-                break;
-            case "e":
-                pos.moverY(1);
-                break;
-            case "o":
-                pos.moverY(-1);
-                break;
-            default:
-                System.out.println("Error, direccion no valida!");
+        if (this.tipo.equals("paisano")) {
+            Posicion pos = new Posicion(posicion);
+            switch (direccion) {
+                case "s":
+                    pos.moverX(1);
+                    break;
+                case "n":
+                    pos.moverX(-1);
+                    break;
+                case "e":
+                    pos.moverY(1);
+                    break;
+                case "o":
+                    pos.moverY(-1);
+                    break;
+                default:
+                    System.out.println("Error, direccion no valida!");
 
-        }
-        Edificio Ciudadela = mapa.getEdificios().get("ciudadela-1");
-        switch (Edificio.toLowerCase()) {
-            case "casa":
-                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
-                    if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                        String Name = "casa-" + (mapa.getCantidades()[3] + 1);
-                        mapa.getCantidades()[3]++;
-                        mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+            }
+            Edificio Ciudadela = mapa.getEdificios().get("ciudadela-1");
+            switch (Edificio.toLowerCase()) {
+                case "casa":
+                    if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                        if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                            String Name = "casa-" + (mapa.getCantidades()[3] + 1);
+                            mapa.getCantidades()[3]++;
+                            mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("casa", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
 
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
-                        System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
+                            mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
+                            System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
-                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
-                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
-                        System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: " + Ciudadela.getComida());
-                        System.out.println("Madera: " + Ciudadela.getMadera());
-                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                            Ciudadela.setMadera(Ciudadela.getMadera() - 50);
+                            Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                            System.out.println("Quedan los siguientes recursos: ");
+                            System.out.println("Comida: " + Ciudadela.getComida());
+                            System.out.println("Madera: " + Ciudadela.getMadera());
+                            System.out.println("Piedra: " + Ciudadela.getPiedra());
+                        } else {
+                            System.out.println("No se puede Contruir en esa direccion!");
+                        }
                     } else {
-                        System.out.println("No se puede Contruir en esa direccion!");
+                        System.out.println("No hay suficientes recursos para construir la casa");
                     }
-                } else {
-                    System.out.println("No hay suficientes recursos para construir la casa");
-                }
-                break;
-            case "cuartel":
-                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
-                    if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                        String Name = "cuartel-" + (mapa.getCantidades()[4] + 1);
-                        mapa.getCantidades()[4]++;
-                        mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                    break;
+                case "cuartel":
+                    if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                        if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                            String Name = "cuartel-" + (mapa.getCantidades()[4] + 1);
+                            mapa.getCantidades()[4]++;
+                            mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("cuartel", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
 
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
-                        System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
+                            mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
+                            System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
-                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
-                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
-                        System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: " + Ciudadela.getComida());
-                        System.out.println("Madera: " + Ciudadela.getMadera());
-                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                            Ciudadela.setMadera(Ciudadela.getMadera() - 50);
+                            Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                            System.out.println("Quedan los siguientes recursos: ");
+                            System.out.println("Comida: " + Ciudadela.getComida());
+                            System.out.println("Madera: " + Ciudadela.getMadera());
+                            System.out.println("Piedra: " + Ciudadela.getPiedra());
+                        } else {
+                            System.out.println("No se puede Contruir en esa direccion!");
+                        }
                     } else {
-                        System.out.println("No se puede Contruir en esa direccion!");
+                        System.out.println("No hay suficientes recursos para construir el cuartel");
                     }
-                } else {
-                    System.out.println("No hay suficientes recursos para construir el cuartel");
-                }
-                break;
-            case "ciudadela":
-                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
-                    if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-                        String Name = "ciudadela-" + (mapa.getCantidades()[2] + 1);
-                        mapa.getCantidades()[2]++;
-                        mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+                    break;
+                case "ciudadela":
+                    if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                        if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                            String Name = "ciudadela-" + (mapa.getCantidades()[2] + 1);
+                            mapa.getCantidades()[2]++;
+                            mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("ciudadela", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
 
-                        mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
-                        System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
+                            mapa.getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
+                            System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
-                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
-                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
-                        System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: " + Ciudadela.getComida());
-                        System.out.println("Madera: " + Ciudadela.getMadera());
-                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                            Ciudadela.setMadera(Ciudadela.getMadera() - 50);
+                            Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                            System.out.println("Quedan los siguientes recursos: ");
+                            System.out.println("Comida: " + Ciudadela.getComida());
+                            System.out.println("Madera: " + Ciudadela.getMadera());
+                            System.out.println("Piedra: " + Ciudadela.getPiedra());
+                        } else {
+                            System.out.println("No se puede Contruir en esa direccion!");
+                        }
                     } else {
-                        System.out.println("No se puede Contruir en esa direccion!");
+                        System.out.println("No hay suficientes recursos para construir la ciudadela");
                     }
-                } else {
-                    System.out.println("No hay suficientes recursos para construir la ciudadela");
-                }
-                break;
-            default:
-                System.out.println("Error, direccion no valida!");
+                    break;
+                default:
+                    System.out.println("Error, direccion no valida!");
 
+            }
+        } else {
+            System.out.println("Los soldados no pueden construir!");
         }
 
     }
 
     public void reparar(Mapa mapa, String direccion) {
+        if (this.getTipo().equals("soldado")) {   //Comprueba si es un paisano o un soldado
+            System.out.println("Los soldados no pueden reparar!");
+            return;
+        }
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
             case "s":
@@ -267,8 +275,12 @@ public class Personaje {
             System.out.println("No hay un edificio en esta celda!");
         }
     }
-    
+
     public void reparar(Mapa mapa, String direccion, int cantidad) {   //Sobrecarga: solo repara la cantidad pasada
+        if (this.getTipo().equals("soldado")) {   //Comprueba si es un paisano o un soldado
+            System.out.println("Los soldados no pueden reparar!");
+            return;
+        }
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
             case "s":
@@ -299,12 +311,12 @@ public class Personaje {
                 return;
             }
             int cantidadReparar;
-            
+
             Edificio ciudadelilla = mapa.getEdificios().get("ciudadela-1");
             switch (edificio.getTipo()) {
                 case "casa":
                     cantidadReparar = Edificio.SALUDCASA - vida;
-                    if(cantidad < cantidadReparar){
+                    if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
                     if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
@@ -319,7 +331,7 @@ public class Personaje {
                     break;
                 case "ciudadela":
                     cantidadReparar = Edificio.SALUDCIUDADELA - vida;
-                    if(cantidad < cantidadReparar){
+                    if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
                     if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
@@ -335,7 +347,7 @@ public class Personaje {
                     break;
                 case "cuartel":
                     cantidadReparar = Edificio.SALUDCUARTEL - vida;
-                    if(cantidad < cantidadReparar){
+                    if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
                     if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
