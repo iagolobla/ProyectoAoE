@@ -66,6 +66,11 @@ public class Celda {
                 visible = true;
                 this.tipo = tipo;
                 break;
+            case "torre":
+                edificio = new Edificio("torre", pos, Nombre);
+                visible = true;
+                this.tipo = tipo;
+                break;
             case "bosque":
                 recurso = new Recurso("bosque", 150, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible = false;
@@ -81,6 +86,7 @@ public class Celda {
                 visible = false;
                 this.tipo = tipo;
                 break;
+
             default:
                 System.out.println("Tipo mal introducido");
 

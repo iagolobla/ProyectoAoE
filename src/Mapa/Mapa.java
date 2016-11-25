@@ -315,6 +315,9 @@ public class Mapa {
                         case ("casa"):
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             break;
+                        case "torre":
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            break;
                         case "bosque":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
                             break;

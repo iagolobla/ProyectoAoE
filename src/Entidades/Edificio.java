@@ -16,6 +16,7 @@ import Mapa.Mapa;
 public class Edificio {
 
     public static final int SALUDCIUDADELA = 200;
+    public static final int SALUDTORRE = 400;
     public static final int SALUDCASA = 50;
     public static final int SALUDCUARTEL = 150;
     public static final int CAPACIDADCUARTEL = 15;
@@ -58,6 +59,14 @@ public class Edificio {
             case ("casa"):
                 tipo = tipe;
                 salud = SALUDCASA;
+                nombre = Nombre;
+                madera = 0;
+                piedra = 0;
+                comida = 0;
+                break;
+            case "torre":
+                tipo = tipe;
+                salud = SALUDTORRE;
                 nombre = Nombre;
                 madera = 0;
                 piedra = 0;

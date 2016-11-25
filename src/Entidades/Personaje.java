@@ -25,6 +25,7 @@ public class Personaje {
     private Posicion posicion;
     private int cantidadRecolectada;
     private String tipoRecurso; //Como solo se puede recolectar un tipo de recurso de cada vez, guardaremos aqui cual
+    private boolean grupo;
 
     public Personaje(String tipo, String Nombre, Posicion pos) {
         if (pos == null) {
@@ -41,6 +42,7 @@ public class Personaje {
                 capRecolectar = 0;
                 cantidadRecolectada = 0;
                 this.Nombre = Nombre;   //El parametro nombre debe ser unico para cada personaje
+                grupo = false;
                 break;
             case "paisano":
                 this.tipo = tipo;
@@ -50,6 +52,7 @@ public class Personaje {
                 capRecolectar = 100;
                 cantidadRecolectada = 0;
                 this.Nombre = Nombre;
+                grupo = false;
                 break;
             default:
                 System.out.println("Tipo mal introducido");
@@ -73,6 +76,7 @@ public class Personaje {
                 capRecolectar = 0;
                 cantidadRecolectada = 0;
                 this.Nombre = Nombre;   //El parametro nombre debe ser unico para cada personaje
+                grupo = false;
                 break;
             case "paisano":
                 this.tipo = tipo;
@@ -82,6 +86,7 @@ public class Personaje {
                 capRecolectar = 100;
                 cantidadRecolectada = 0;
                 this.Nombre = Nombre;
+                grupo = false;
                 break;
             default:
                 System.out.println("Tipo mal introducido");
@@ -213,6 +218,29 @@ public class Personaje {
 
                         Ciudadela.setMadera(Ciudadela.getMadera() - 50);
                         Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                        System.out.println("Quedan los siguientes recursos: ");
+                        System.out.println("Comida: " + Ciudadela.getComida());
+                        System.out.println("Madera: " + Ciudadela.getMadera());
+                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                    } else {
+                        System.out.println("No se puede Contruir en esa direccion!");
+                    }
+                } else {
+                    System.out.println("No hay suficientes recursos para construir la ciudadela");
+                }
+                break;
+            case "torre":
+                if (Ciudadela.getMadera() >= 80 && Ciudadela.getPiedra() >= 40) {
+                    if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
+                        String Name = "torre-" + (mapa.getCivilizacion().getCantidades()[5] + 1);
+                        mapa.getCivilizacion().getCantidades()[5]++;
+                        mapa.getMapa().get(pos.getX()).set(pos.getY(), new Celda("torre", new Posicion(pos), Name)); //Metemos la celda en su posicion del mapa
+
+                        mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());
+                        System.out.println("Torre construida en " + pos + "Se han gastado 40 unidades de piedra y 80 de madera");
+
+                        Ciudadela.setMadera(Ciudadela.getMadera() - 80);
+                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 40);
                         System.out.println("Quedan los siguientes recursos: ");
                         System.out.println("Comida: " + Ciudadela.getComida());
                         System.out.println("Madera: " + Ciudadela.getMadera());
@@ -412,9 +440,13 @@ public class Personaje {
     }
 
     public Posicion moverPj(Mapa mapa, String direccion) {
+        if (grupo) {
+            System.out.println("El personaje pertenece a un grupo, no se puede mover individualmente");
+            return posicion;
+        }
         Celda cell = mapa.getCelda(posicion);
         Posicion pos = new Posicion(posicion);
-        
+
         switch (direccion) {
             case "s":
                 pos.moverX(1);
@@ -433,7 +465,7 @@ public class Personaje {
 
         }
         if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
-            
+
             Celda newcell = mapa.getCelda(pos);
 
             if (newcell.isPaisano() || newcell.isSoldado()) {
@@ -448,7 +480,7 @@ public class Personaje {
                     return new Posicion(posicion);
                 } else {
                     System.out.println("El personaje intenta mover a una celda con personajes enemigos!");
-                    
+
                 }
             } else {
                 this.setPosicion(pos);
