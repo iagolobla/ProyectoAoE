@@ -63,6 +63,23 @@ public class Grupo {
         }
     }
 
+    @Override
+    public String toString(){
+        String imprimir;
+        int salud = 0;
+        
+        imprimir = "\n";
+        imprimir += "La lista de personajes del grupo es:\n";
+        for(Personaje P : personajes){
+            salud += P.getSalud();
+            imprimir += "\t" + P.getNombre() + "\n";
+        }
+        imprimir += "Salud total del Grupo: " + salud + "\n";
+        imprimir += "Armadura del Grupo: " + armadura;
+        return imprimir;
+    }
+    
+    
     public void moverGrupo(Mapa mapa, String direccion) {
         for (Personaje person : personajes) {
             person.moverPj(mapa, direccion);
