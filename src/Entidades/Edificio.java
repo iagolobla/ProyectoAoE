@@ -6,6 +6,7 @@
 package Entidades;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import Mapa.Celda;
 import Mapa.Mapa;
 
@@ -22,24 +23,29 @@ public class Edificio {
     public static final int CAPACIDADCUARTEL = 15;
     public static final int CAPACIDADCASA = 10;
 
+    private HashMap<String, Personaje> Personajes;
     private String tipo;
     private int salud;
     private Posicion posicion;
     private String nombre;
     private String nombreCivilizacion;
-
+    private int capPersonajes;  //Establece cuantos personajes pueden entrar a defender un edificio
+    private int NPersonajes;
+    private int ataque;
     private int madera;
     private int piedra;
     private int comida;
 
     public Edificio(String tipe, Posicion posicion, String Nombre) {
         //Igualar posicion y posicion evitando aliasing
-        if(posicion == null){
+        if (posicion == null) {
             System.out.println("Posicion pasada a Edificio nula!");
             return;
         }
-        
+
+        Personajes = new HashMap<String, Personaje>();
         this.posicion = new Posicion(posicion);
+        NPersonajes = 0;
         switch (tipe) {
             case ("ciudadela"):
                 tipo = tipe;
@@ -48,6 +54,7 @@ public class Edificio {
                 madera = 100;//son los valores iniciales que toman(se los damos nosotros).
                 piedra = 100;
                 comida = 100;
+                capPersonajes = 10;
                 break;
             case ("cuartel"):
                 tipo = tipe;
@@ -56,6 +63,7 @@ public class Edificio {
                 madera = 0;
                 piedra = 0;
                 comida = 0;
+                capPersonajes = 15;
                 break;
             case ("casa"):
                 tipo = tipe;
@@ -64,6 +72,7 @@ public class Edificio {
                 madera = 0;
                 piedra = 0;
                 comida = 0;
+                capPersonajes = 5;
                 break;
             case "torre":
                 tipo = tipe;
@@ -72,19 +81,23 @@ public class Edificio {
                 madera = 0;
                 piedra = 0;
                 comida = 0;
+                capPersonajes = 2;
                 break;
             default:
                 System.out.println("Error, tipo de edificio incorrecto");
         }
     }
-    
-     public Edificio(String tipe, Posicion posicion, String Nombre, String civilizacion) {
+
+    public Edificio(String tipe, Posicion posicion, String Nombre, String civilizacion) {
         //Igualar posicion y posicion evitando aliasing
-        if(posicion == null){
+        if (posicion == null) {
             System.out.println("Posicion pasada a Edificio nula!");
             return;
         }
-        nombreCivilizacion=civilizacion;
+
+        Personajes = new HashMap<String, Personaje>();
+        nombreCivilizacion = civilizacion;
+        NPersonajes = 0;
         this.posicion = new Posicion(posicion);
         switch (tipe) {
             case ("ciudadela"):
@@ -94,6 +107,7 @@ public class Edificio {
                 madera = 100;//son los valores iniciales que toman(se los damos nosotros).
                 piedra = 100;
                 comida = 100;
+                capPersonajes = 10;
                 break;
             case ("cuartel"):
                 tipo = tipe;
@@ -102,6 +116,7 @@ public class Edificio {
                 madera = 0;
                 piedra = 0;
                 comida = 0;
+                capPersonajes = 15;
                 break;
             case ("casa"):
                 tipo = tipe;
@@ -110,6 +125,7 @@ public class Edificio {
                 madera = 0;
                 piedra = 0;
                 comida = 0;
+                capPersonajes = 5;
                 break;
             case "torre":
                 tipo = tipe;
@@ -118,6 +134,7 @@ public class Edificio {
                 madera = 0;
                 piedra = 0;
                 comida = 0;
+                capPersonajes = 2;
                 break;
             default:
                 System.out.println("Error, tipo de edificio incorrecto");
@@ -156,16 +173,16 @@ public class Edificio {
 
         String Name = "paisano-" + (mapa.getCivilizacion().getCantidades()[0] + 1);
         mapa.getCivilizacion().getCantidades()[0]++;
-        Celda newcell=mapa.getCelda(pos1);
-        newcell.setPersonajes(new Personaje("paisano", Name, pos1,mapa.getCivilizacion().getNombre()));
+        Celda newcell = mapa.getCelda(pos1);
+        newcell.setPersonajes(new Personaje("paisano", Name, pos1, mapa.getCivilizacion().getNombre()));
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
-        
-        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonajes();
-        mapa.getCivilizacion().getPersonajes().put(Name,person.get(person.size()-1));
+
+        ArrayList<Personaje> person = mapa.getCelda(new Posicion(pos1)).getPersonajes();
+        mapa.getCivilizacion().getPersonajes().put(Name, person.get(person.size() - 1));
 
         mapa.getCivilizacion().getEdificios().get(nombre).setComida(mapa.getCivilizacion().getEdificios().get(nombre).getComida() - 10);
-        System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
-        System.out.println("Quedan "+((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA)- (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]))+ " espacios de almacenamiento");
+        System.out.println("El " + Name + " se encuentra en la posicion " + pos1);
+        System.out.println("Quedan " + ((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA) - (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1])) + " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el paisano");
         System.out.println("Quedan los siguientes recursos: ");
         System.out.println("Comida: " + mapa.getCivilizacion().getEdificios().get(nombre).getComida());
@@ -203,16 +220,16 @@ public class Edificio {
 
         String Name = "soldado-" + (mapa.getCivilizacion().getCantidades()[1] + 1);
         mapa.getCivilizacion().getCantidades()[1]++;
-        Celda newcell=mapa.getCelda(pos1);
-        newcell.setPersonajes(new Personaje("soldado", Name, pos1,mapa.getCivilizacion().getNombre()));
+        Celda newcell = mapa.getCelda(pos1);
+        newcell.setPersonajes(new Personaje("soldado", Name, pos1, mapa.getCivilizacion().getNombre()));
         mapa.getMapa().get(pos1.getX()).set(pos1.getY(), newcell); //Metemos la celda en su posicion del mapa
 
-        ArrayList<Personaje> person=mapa.getCelda(new Posicion(pos1)).getPersonajes();
-        mapa.getCivilizacion().getPersonajes().put(Name,person.get(person.size()-1));
-        
+        ArrayList<Personaje> person = mapa.getCelda(new Posicion(pos1)).getPersonajes();
+        mapa.getCivilizacion().getPersonajes().put(Name, person.get(person.size() - 1));
+
         mapa.getCivilizacion().getEdificios().get("ciudadela-1").setComida(mapa.getCivilizacion().getEdificios().get("ciudadela-1").getComida() - 10);
-        System.out.println("El "+ Name + " se encuentra en la posicion "+pos1);
-        System.out.println("Quedan "+((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA)- (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]))+ " espacios de almacenamiento");
+        System.out.println("El " + Name + " se encuentra en la posicion " + pos1);
+        System.out.println("Quedan " + ((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA) - (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1])) + " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
         System.out.println("Quedan los siguientes recursos: ");
         System.out.println("Comida: " + mapa.getCivilizacion().getEdificios().get("ciudadela-1").getComida());
@@ -226,14 +243,24 @@ public class Edificio {
     @Override
     public String toString() {
         String impresion = "";
+        int salud_total = salud;
+        if (Personajes.size() > 0) {
+            impresion += "Personajes dentro del edificio:\n";
+            for (Personaje p : Personajes.values()) {
+                impresion += "\t" + p.getNombre() + "\n";
+                salud_total += p.getSalud();
+            }
+        }
         impresion += "Tipo: " + tipo + "\n";
-        impresion += "Salud: " + salud + "\n";
+        impresion += "Salud: " + salud_total + "\n";
+        impresion += "Ataque: " + ataque + "\n";
         impresion += "Posicion: " + posicion + "\n";
         if (getTipo().equals("ciudadela")) {
             impresion += "Comida: " + comida + "\n";
             impresion += "Piedra: " + piedra + "\n";
             impresion += "Madera: " + madera + "\n";
         }
+
         return impresion;
     }
 
@@ -316,6 +343,44 @@ public class Edificio {
         }
     }
 
+    public int getCapPersonajes() {
+
+        return capPersonajes;
+    }
+
+    public void setCapPersonajes(int cap) {
+        if (cap >= 0);
+        capPersonajes = cap;
+    }
+
+    public int getNPersonajes() {
+        return NPersonajes;
+    }
+
+    public void setNPersonajes(int NPersonajes) {
+        if (NPersonajes >= 0) {
+            this.NPersonajes = NPersonajes;
+        }
+    }
+
+    public HashMap<String, Personaje> getPersonajes() {
+        return Personajes;
+    }
+
+    public void setPersonajes(HashMap<String, Personaje> Personajes) {
+        this.Personajes = Personajes;
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
+    public void setAtaque(int ataque) {
+        if (ataque >= 0) {
+            this.ataque = ataque;
+        }
+    }
+
     public String getNombreCivilizacion() {
         return nombreCivilizacion;
     }
@@ -323,7 +388,5 @@ public class Edificio {
     public void setNombreCivilizacion(String nombreCivilizacion) {
         this.nombreCivilizacion = nombreCivilizacion;
     }
-    
-    
 
 }
