@@ -104,6 +104,7 @@ public class Celda {
     }
     
     public void agrupar(Mapa mapa){//PUEDE DAR PROBLEMAS DE ALIASING. CUANDO METAS UN PERSONAJES CON UN GRUPO EN LA CELDA
+        if(personajes.size()>1){
         String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
         mapa.getCivilizacion().getCantidades()[6]++;
         Grupo group=new Grupo(personajes,Name,pos,mapa.getCivilizacion().getNombre());
@@ -112,6 +113,9 @@ public class Celda {
         System.out.println("Se ha creado el "+Name+". El grupo esta formado por:");
         for(Personaje x:group.getPersonajes()){
             System.out.println(x.getNombre());
+        }
+        }else{
+            System.out.println("No se puede crear el grupo, solo hay un personaje");
         }
     }
 

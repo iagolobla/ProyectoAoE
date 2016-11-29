@@ -98,11 +98,19 @@ public class Grupo {
         }
 
     }
-    
-    
-    public void desligar(Personaje person){
+
+    public void desligar(Personaje person) {
         personajes.remove(person);
         person.setGrupo(false);
+    }
+
+    public void desagrupar(Mapa mapa) {
+        mapa.getCivilizacion().getGrupos().remove(this);
+        mapa.getCivilizacion().getCantidades()[6]--;
+        for (Personaje p : personajes) {
+            p.setGrupo(false);
+        }
+        mapa.getCelda(posicion).getGrupos().remove(this);
     }
 
     public ArrayList<Personaje> getPersonajes() {

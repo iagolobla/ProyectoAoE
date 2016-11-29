@@ -106,20 +106,30 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "desligar":
-                        if (comando.length == 3){
-                            Grupo group=C.getGrupos().get(comando[2]);
+                        if (comando.length == 3) {
+                            Grupo group = C.getGrupos().get(comando[2]);
                             Personaje personaje = map.getCivilizacion().getPersonajes().get(comando[1]);
                             group.desligar(personaje);
-                            if(group.getPersonajes().size()==1){
-                                Personaje p=group.getPersonajes().get(0);
+                            if (group.getPersonajes().size() == 1) {
+                                Personaje p = group.getPersonajes().get(0);
                                 group.desligar(p);
                                 map.getCelda(group.getPosicion()).getGrupos().remove(group);
                                 map.getCivilizacion().getGrupos().remove(group.getNombre());
                                 map.getCivilizacion().getCantidades()[6]--;
                             }
-                        }else{
-                            System.out.println("Comando agrupar incorrecto");
+                        } else {
+                            System.out.println("Comando desligar incorrecto");
                         }
+                        map.imprimir();
+                        break;
+                    case "desagrupar":
+                        if (comando.length == 2) {
+                            Grupo g = C.getGrupos().get(comando[1]);
+                            g.desagrupar(map);
+                        } else {
+                            System.out.println("Comando desagrupar incorrecto");
+                        }
+                        map.imprimir();
                         break;
                     case "mover":
                         if (comando.length != 3) {
@@ -134,16 +144,16 @@ public class Principal {
                             Posicion pos = personaje.moverPj(map, comando[2]);
                             if (!(p.equals(pos))) {
                                 System.out.println("El " + comando[1] + " se ha movido a la " + pos);
-                                if(map.getCelda(p).isEdificio()){   //Comprueba si el personaje venia de un ef
+                                if (map.getCelda(p).isEdificio()) {   //Comprueba si el personaje venia de un ef
                                     Edificio ef = map.getCelda(p).getEdificio();
-                                    ef.setAtaque(ef.getAtaque()-personaje.getAtaque());
+                                    ef.setAtaque(ef.getAtaque() - personaje.getAtaque());
                                 }
-                            }else{
+                            } else {
                                 System.out.println("No se puede mover en esa direccion!");
                             }
                             //personaje.mover(comando[2]);
                         } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
-                            Grupo group=map.getCivilizacion().getGrupos().get(comando[1]);
+                            Grupo group = map.getCivilizacion().getGrupos().get(comando[1]);
                             group.moverGrupo(map, comando[2]);
                         } else {
                             System.out.println("Ese personaje no es de los autenticos " + C.getNombre() + "!");
@@ -154,18 +164,18 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "defender":    //No se puede usar por grupos
-                        if(comando.length == 3){
-                            if(C.getPersonajes().containsKey(comando[1])){ //Si existe el personaje pasado
+                        if (comando.length == 3) {
+                            if (C.getPersonajes().containsKey(comando[1])) { //Si existe el personaje pasado
                                 Personaje pers = C.getPersonajes().get(comando[1]);
-                                if(pers.isGrupo()){
+                                if (pers.isGrupo()) {
                                     System.out.println("El personaje tiene un compromiso con su grupo!");
                                 } else {
                                     pers.defender(map, comando[2]);
-                                    
+
                                 }
-                                
+
                             } else {
-                                System.out.println("Ese personaje no es de los autenticos "+ C.getNombre() + "!");
+                                System.out.println("Ese personaje no es de los autenticos " + C.getNombre() + "!");
                             }
                         } else {
                             System.out.println("Error sintactico!");
