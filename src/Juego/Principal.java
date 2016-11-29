@@ -114,6 +114,8 @@ public class Principal {
                                 Personaje p=group.getPersonajes().get(0);
                                 group.desligar(p);
                                 map.getCelda(group.getPosicion()).getGrupos().remove(group);
+                                map.getCivilizacion().getGrupos().remove(group.getNombre());
+                                map.getCivilizacion().getCantidades()[6]--;
                             }
                         }else{
                             System.out.println("Comando agrupar incorrecto");
