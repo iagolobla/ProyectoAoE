@@ -15,6 +15,9 @@ import java.util.HashMap;
  */
 public class Personaje {
 
+    public static final int SALUD_PAISANO = 150;
+    public static final int SALUD_SOLDADO = 200;
+    
     private String tipo;
     private String nombreCivilizacion;
     private int armadura;
@@ -464,6 +467,60 @@ public class Personaje {
         }
     }
 
+    public boolean defender(Mapa mapa, String direccion){   //Si funciona devuelve true
+        if(mapa == null){   
+            System.out.println("Mapa pasado nulo!");
+            return false;
+        }
+        Posicion pos = new Posicion(posicion);
+        Celda cell = mapa.getCelda(pos);
+        switch(direccion){
+            case "n":
+                pos.moverX(-1);
+                break;
+            case "s":
+                pos.moverX(1);
+                break;
+            case "e":
+                pos.moverY(1);
+                break;
+            case "o":
+                pos.moverY(-1);
+                break;
+            default:
+                System.out.println("Direccion pasada no valida!");
+                return false;
+        }
+        Celda newCell = mapa.getCelda(pos);
+        Edificio ef = newCell.getEdificio();
+        if(ef == null){
+            System.out.println("En esta posicion no hay ningun edificio!");
+            return false;
+        }
+        if (!(ef.getNombreCivilizacion().equals(this.getNombreCivilizacion()))){
+            System.out.println("Este no es un edificio aliado!");
+            return false;
+        }
+        if ((ef.getCapPersonajes() - ef.getNPersonajes()) <= 0){
+            System.out.println("No hay mas sitio aqui dentro!");
+            return false;
+        }
+        if(this.isPaisano())
+            salud = SALUD_PAISANO;
+        else
+            salud = SALUD_SOLDADO;
+        
+        ef.setAtaque(ef.getAtaque() + ataque);
+        posicion = pos; //Actualizamos posicion del personaje
+        ef.getPersonajes().put(Nombre, this);
+        ef.setNPersonajes(ef.getNPersonajes() + 1);
+        cell.quitarPersonaje(this); //Quitamos al personaje de la celda
+        
+        mapa.actualizarVisibilidad();
+        mapa.imprimir();
+        return true;
+    }
+    
     public Posicion moverPj(Mapa mapa, String direccion) {
 
         Celda cell = mapa.getCelda(posicion);
@@ -502,7 +559,6 @@ public class Personaje {
                     return new Posicion(posicion);
                 } else {
                     System.out.println("El personaje intenta mover a una celda con personajes enemigos!");
-
                 }
             } else {
                 this.setPosicion(pos);
@@ -514,7 +570,9 @@ public class Personaje {
                 mapa.actualizarVisibilidad();
                 return new Posicion(posicion);
             }
-
+            
+            
+            
         } else {
             System.out.println("No se puede Mover en esa direccion!");
         }

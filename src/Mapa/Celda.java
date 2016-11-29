@@ -46,7 +46,7 @@ public class Celda {
         }
         personajes = new ArrayList<Personaje>();
         pos = new Posicion(posicion);
-        
+
         this.tipo = "Pradera";
         switch (tipo) {
             case "soldado":
@@ -143,11 +143,31 @@ public class Celda {
         return personajes.get(Tam - 1).isSoldado();
     }
 
+    public boolean isEdificio() {
+        return (edificio != null);
+    }
+
+    public boolean isPersonaje() {
+        if (personajes.size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public void quitarPersonaje(Personaje P) {
-        if (personajes.size() > 1) {
-            personajes.remove(P);
-        } else {
-            liberarCelda();
+        if (this.isPersonaje()) {
+            if (personajes.size() > 1) {
+                personajes.remove(P);
+            } else {
+                liberarCelda();
+            }
+        } else if (this.isEdificio()) {
+            if (edificio.getNPersonajes() > 0) {
+                if (edificio.getPersonajes().containsKey(P.getNombre())) {
+                    edificio.getPersonajes().remove(P.getNombre());
+                    edificio.setNPersonajes(edificio.getNPersonajes() - 1);
+                }
+            }
         }
     }
 

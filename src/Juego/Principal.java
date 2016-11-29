@@ -102,7 +102,7 @@ public class Principal {
                     case "mover":
                         if (comando.length != 3) {
                             System.out.println("Errorsintactico: MOVER ...");
-                        } else if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
+                        } else if (C.getPersonajes().containsKey(comando[1])) {
                             Personaje personaje = (Personaje) map.getCivilizacion().getPersonajes().get(comando[1]);
                             if (personaje.isGrupo()) {
                                 System.out.println("El personaje pertenece a un grupo, no se puede mover individualmente");
@@ -112,15 +112,37 @@ public class Principal {
                             Posicion pos = personaje.moverPj(map, comando[2]);
                             if (!(p.equals(pos))) {
                                 System.out.println("El " + comando[1] + " se ha movido a la " + pos);
+                                if(map.getCelda(p).isEdificio()){   //Comprueba si el personaje venia de un ef
+                                    Edificio ef = map.getCelda(p).getEdificio();
+                                    ef.setAtaque(ef.getAtaque()-personaje.getAtaque());
+                                }
                             }
                             //personaje.mover(comando[2]);
                         } else {
-                            System.out.println("El personaje no existe");
+                            System.out.println("Ese personaje no es de los autenticos " + C.getNombre() + "!");
                         } //procesar comando
                         //obtener personaje del mapa
                         //comprobar si se puede mover a esa posicion
                         //....
                         map.imprimir();
+                        break;
+                    case "defender":    //No se puede usar por grupos
+                        if(comando.length == 3){
+                            if(C.getPersonajes().containsKey(comando[1])){ //Si existe el personaje pasado
+                                Personaje pers = C.getPersonajes().get(comando[1]);
+                                if(pers.isGrupo()){
+                                    System.out.println("El personaje tiene un compromiso con su grupo!");
+                                } else {
+                                    pers.defender(map, comando[2]);
+                                    
+                                }
+                                
+                            } else {
+                                System.out.println("Ese personaje no es de los autenticos "+ C.getNombre() + "!");
+                            }
+                        } else {
+                            System.out.println("Error sintactico!");
+                        }
                         break;
                     case "listar":
                         if (comando.length == 2) {
@@ -350,7 +372,7 @@ public class Principal {
                                 personaje.reparar(map, comando[2]);
                             }
                         } else {
-                            System.out.println("Comando reparar mal intruducido. Ejemplo: reparar Paisano-1 S");
+                            System.out.println("Comando reparar mal introducido. Ejemplo: reparar Paisano-1 S");
                         }
                         break;
                     case "mapa":
