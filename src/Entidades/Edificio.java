@@ -260,7 +260,7 @@ public class Edificio {
             impresion += "Piedra: " + piedra + "\n";
             impresion += "Madera: " + madera + "\n";
         }
-        
+
         return impresion;
     }
 
@@ -344,10 +344,12 @@ public class Edificio {
     }
 
     public int getCapPersonajes() {
+
         return capPersonajes;
     }
 
     public void setCapPersonajes(int cap) {
+        if (cap >= 0);
         capPersonajes = cap;
     }
 
@@ -356,7 +358,9 @@ public class Edificio {
     }
 
     public void setNPersonajes(int NPersonajes) {
-        this.NPersonajes = NPersonajes;
+        if (NPersonajes >= 0) {
+            this.NPersonajes = NPersonajes;
+        }
     }
 
     public HashMap<String, Personaje> getPersonajes() {
@@ -372,9 +376,10 @@ public class Edificio {
     }
 
     public void setAtaque(int ataque) {
-        this.ataque = ataque;
+        if (ataque >= 0) {
+            this.ataque = ataque;
+        }
     }
-    
 
     public String getNombreCivilizacion() {
         return nombreCivilizacion;

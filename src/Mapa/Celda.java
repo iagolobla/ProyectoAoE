@@ -11,6 +11,7 @@ import Entidades.Posicion;
 import Entidades.Recurso;
 import java.util.ArrayList;
 import java.util.HashMap;
+import Entidades.Grupo;
 
 /**
  *
@@ -19,6 +20,7 @@ import java.util.HashMap;
 public class Celda {
 
     private ArrayList<Personaje> personajes;
+    private ArrayList<Grupo> grupos;
     private Edificio edificio;
     private Recurso recurso;
     private Posicion pos;
@@ -32,6 +34,7 @@ public class Celda {
         }
         personajes = new ArrayList<Personaje>();
         visible = new HashMap<String, Boolean>();
+        grupos= new ArrayList<Grupo>();
         tipo = "Pradera";
         pos = new Posicion(posicion);
     }
@@ -45,6 +48,7 @@ public class Celda {
             visible = new HashMap<String, Boolean>();
         }
         personajes = new ArrayList<Personaje>();
+        grupos= new ArrayList<Grupo>();
         pos = new Posicion(posicion);
 
         this.tipo = "Pradera";
@@ -98,6 +102,18 @@ public class Celda {
 
         }
     }
+    
+    public void agrupar(Mapa mapa){//PUEDE DAR PROBLEMAS DE ALIASING. CUANDO METAS UN PERSONAJES CON UN GRUPO EN LA CELDA
+        String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
+        mapa.getCivilizacion().getCantidades()[6]++;
+        Grupo group=new Grupo(personajes,Name,pos,mapa.getCivilizacion().getNombre());
+        grupos.add(group);
+        mapa.getCivilizacion().getGrupos().put(Name, group);
+        System.out.println("Se ha creado el "+Name+". El grupo esta formado por:");
+        for(Personaje x:group.getPersonajes()){
+            System.out.println(x.getNombre());
+        }
+    }
 
     public ArrayList<Personaje> getPersonajes() {
         if (personajes != null) {
@@ -141,6 +157,12 @@ public class Celda {
             return false;
         }
         return personajes.get(Tam - 1).isSoldado();
+    }
+    public boolean isGrupo(){
+        if(grupos.size()>0){
+            return true;
+        }
+        return false;
     }
 
     public boolean isEdificio() {
@@ -236,6 +258,22 @@ public class Celda {
 
     public void ponerVisible(String civilizacion) {
         visible.replace(civilizacion, Boolean.TRUE);
+    }
+
+    public ArrayList<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(ArrayList<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+    
+    public void setGrupo(Grupo grupo){
+        if(grupo!=null){
+            grupos.add(grupo);
+        }else{
+            System.out.println("grupo pasado null");
+        }
     }
 
 }

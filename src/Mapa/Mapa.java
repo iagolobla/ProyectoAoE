@@ -327,7 +327,9 @@ public class Mapa {
                 if (mapa.get(i).get(j).isVisible(civilizacion.getNombre())) {
                     switch (mapa.get(i).get(j).getTipo()) {
                         case ("Pradera"):
-                            if (getCelda(i, j).isPaisano()) {   //Si tiene un paisano
+                            if(getCelda(i,j).isGrupo()){
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }else if (getCelda(i, j).isPaisano()) {   //Si tiene un paisano
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else if (getCelda(i, j).isSoldado()) {    //Si tiene un soldado
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);

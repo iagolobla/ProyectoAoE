@@ -19,6 +19,7 @@ import java.util.HashMap;
 import Mapa.Civilizacion;
 import Mapa.Mapa;
 import Mapa.Celda;
+import Entidades.Grupo;
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
 
 public class Principal {
@@ -99,6 +100,25 @@ public class Principal {
                         }
                         map.imprimir();
                         break;
+                    case "agrupar":
+                        Posicion posAgrupar = new Posicion(comando[1]);  //guarda la posicion pasada
+                        map.getCelda(posAgrupar).agrupar(map);
+                        map.imprimir();
+                        break;
+                    case "desligar":
+                        if (comando.length == 3){
+                            Grupo group=C.getGrupos().get(comando[2]);
+                            Personaje personaje = map.getCivilizacion().getPersonajes().get(comando[1]);
+                            group.desligar(personaje);
+                            if(group.getPersonajes().size()==1){
+                                Personaje p=group.getPersonajes().get(0);
+                                group.desligar(p);
+                                map.getCelda(group.getPosicion()).getGrupos().remove(group);
+                            }
+                        }else{
+                            System.out.println("Comando agrupar incorrecto");
+                        }
+                        break;
                     case "mover":
                         if (comando.length != 3) {
                             System.out.println("Errorsintactico: MOVER ...");
@@ -116,8 +136,13 @@ public class Principal {
                                     Edificio ef = map.getCelda(p).getEdificio();
                                     ef.setAtaque(ef.getAtaque()-personaje.getAtaque());
                                 }
+                            }else{
+                                System.out.println("No se puede mover en esa direccion!");
                             }
                             //personaje.mover(comando[2]);
+                        } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
+                            Grupo group=map.getCivilizacion().getGrupos().get(comando[1]);
+                            group.moverGrupo(map, comando[2]);
                         } else {
                             System.out.println("Ese personaje no es de los autenticos " + C.getNombre() + "!");
                         } //procesar comando
@@ -375,8 +400,12 @@ public class Principal {
                             System.out.println("Comando reparar mal introducido. Ejemplo: reparar Paisano-1 S");
                         }
                         break;
-                    case "mapa":
-                        map.imprimir();
+                    case "imprimir":
+                        if (comando[1].equals("mapa")) {
+                            map.imprimir();
+                        } else {
+                            System.out.println("Comando incorrecto!");
+                        }
                         break;
                     default:
                         System.out.println("Comando incorrecto");

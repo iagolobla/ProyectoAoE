@@ -557,8 +557,6 @@ public class Personaje {
                     //Recorremos mapa para actualizar las visibilidades
                     mapa.actualizarVisibilidad();
                     return new Posicion(posicion);
-                } else {
-                    System.out.println("El personaje intenta mover a una celda con personajes enemigos!");
                 }
             } else {
                 this.setPosicion(pos);
@@ -570,12 +568,8 @@ public class Personaje {
                 mapa.actualizarVisibilidad();
                 return new Posicion(posicion);
             }
-            
-            
-            
-        } else {
-            System.out.println("No se puede Mover en esa direccion!");
-        }
+
+        } 
         return posicion;
 
     }
@@ -752,5 +746,8 @@ public class Personaje {
     public void setGrupo(boolean grupo) {
         this.grupo = grupo;
     }
+
+    
+    
 
 }
