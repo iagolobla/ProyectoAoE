@@ -99,11 +99,10 @@ public class Celda {
         }
     }
 
-    public ArrayList<Personaje> getPersonajes() {// CAMBIAR EL NOMBRE DE ESTE GETTER
+    public ArrayList<Personaje> getPersonajes() {
         if (personajes != null) {
             return personajes;
         }
-        System.out.println("Celda Vacia pp!");
         return null;
     }
 
@@ -111,7 +110,6 @@ public class Celda {
         if (edificio != null) {
             return edificio;
         }
-        System.out.println("Celda Vacia ee!"+pos);
         return null;
     }
 
@@ -119,7 +117,6 @@ public class Celda {
         if (recurso != null) {
             return recurso;
         }
-        System.out.println("Celda Vacia rr!");
         return null;
     }
 

@@ -79,7 +79,7 @@ public class Mapa {
                     break;
 
             }
-            c.getCantidades()[2]++;
+            c.getCantidades()[2]++; //Sumamos uno a los paisanos y ciudadelas de esa civ
             c.getCantidades()[0]++;
             Celda nueva=getCelda(x1, y1);
             nueva.setEdificio(new Edificio("ciudadela",new Posicion(x1,y1),Namec,c.getNombre()));
@@ -256,7 +256,7 @@ public class Mapa {
         }
     }
 
-    public void ponerVisible(Celda cell) {
+    public void ponerVisible(Celda cell) {  //Pone visible cell y sus adyacentes
         Celda aux;
         Posicion pos;
         if (cell.isPaisano() || cell.isSoldado() || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
@@ -271,7 +271,7 @@ public class Mapa {
                     return;
                 }
             }
-            pos = new Posicion(cell.getPos());                                 //sus celdas adyacentes en visible
+            pos = new Posicion(cell.getPos());    //sus celdas adyacentes en visible
             aux = this.getCelda(pos);
             aux.ponerVisible(civilizacion.getNombre());  //Pone visible la celda del personaje
 
