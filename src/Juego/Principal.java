@@ -56,11 +56,14 @@ public class Principal {
 
         C = civilizaciones.get(nombre);
 
+        System.out.println("Estas jugando con los: " + C.getNombre());
+
         Mapa map = new Mapa(6, 6, 6, civilizaciones.values());
         map.setCivilizacion(C);
         if (map == null) {
             //map = new Mapa();
         }
+        map.imprimir();
         while (seguir) {
             System.out.print("$ ");
             String linea = scanner.nextLine();
@@ -81,11 +84,21 @@ public class Principal {
                         break;
                     case "cambiar":
                         if (comando.length == 2) {
-                            C = civilizaciones.get(comando[1]);
-                            map.setCivilizacion(C);
+                            if (civilizaciones.containsKey(comando[1])) {
+                                if (comando[1].equals(C.getNombre())) {
+                                    System.out.println("Ya se esta jugando con los " + comando[1]);
+                                } else {
+                                    C = civilizaciones.get(comando[1]);
+                                    map.setCivilizacion(C);
+                                    System.out.println("Ha cambiado a la civilizacion: " + C.getNombre());
+                                }
+                            } else {
+                                System.out.println("La civilizacion indicada no existe!");
+                            }
                         } else {
-                            System.out.println("La civilizacion no existe.");
+                            System.out.println("Error sintactico!");
                         }
+                        map.imprimir();
                         break;
                     case "agrupar":
                         Posicion posAgrupar = new Posicion(comando[1]);  //guarda la posicion pasada
