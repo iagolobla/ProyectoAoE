@@ -107,15 +107,20 @@ public class Principal {
                         break;
                     case "desligar":
                         if (comando.length == 3) {
-                            Grupo group = C.getGrupos().get(comando[2]);
-                            Personaje personaje = map.getCivilizacion().getPersonajes().get(comando[1]);
-                            group.desligar(personaje);
-                            if (group.getPersonajes().size() == 1) {
-                                Personaje p = group.getPersonajes().get(0);
-                                group.desligar(p);
-                                map.getCelda(group.getPosicion()).getGrupos().remove(group);
-                                map.getCivilizacion().getGrupos().remove(group.getNombre());
-                                map.getCivilizacion().getCantidades()[6]--;
+                            if (map.getCivilizacion().getGrupos().containsKey(comando[2]) && map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
+                                Grupo group = map.getCivilizacion().getGrupos().get(comando[2]);
+
+                                Personaje personaje = map.getCivilizacion().getPersonajes().get(comando[1]);
+                                group.desligar(personaje);
+                                if (group.getPersonajes().size() == 1) {
+                                    Personaje p = group.getPersonajes().get(0);
+                                    group.desligar(p);
+                                    map.getCelda(group.getPosicion()).getGrupos().remove(group);
+                                    map.getCivilizacion().getGrupos().remove(group.getNombre());
+                                    map.getCivilizacion().getCantidades()[6]--;
+                                }
+                            } else {
+                                System.out.println("No existe el grupo o el personaje introducido");
                             }
                         } else {
                             System.out.println("Comando desligar incorrecto");
@@ -124,7 +129,7 @@ public class Principal {
                         break;
                     case "desagrupar":
                         if (comando.length == 2) {
-                            Grupo g = C.getGrupos().get(comando[1]);
+                            Grupo g = map.getCivilizacion().getGrupos().get(comando[1]);
                             g.desagrupar(map);
                         } else {
                             System.out.println("Comando desagrupar incorrecto");
@@ -240,7 +245,7 @@ public class Principal {
                             } else {
                                 System.out.println("La celda no es visible.");
                             }
-                        } else if (C.getGrupos().containsKey(comando[1])){
+                        } else if (C.getGrupos().containsKey(comando[1])) {
                             Grupo G = C.getGrupos().get(comando[1]);
                             System.out.println(G);
                         } else {

@@ -122,7 +122,7 @@ public class Grupo {
     }
 
     public void desagrupar(Mapa mapa) {
-        mapa.getCivilizacion().getGrupos().remove(this);
+        mapa.getCivilizacion().getGrupos().remove(Nombre);
         mapa.getCivilizacion().getCantidades()[6]--;
         for (Personaje p : personajes) {
             p.setGrupo(false);
