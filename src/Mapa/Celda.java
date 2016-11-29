@@ -34,7 +34,7 @@ public class Celda {
         }
         personajes = new ArrayList<Personaje>();
         visible = new HashMap<String, Boolean>();
-        grupos= new ArrayList<Grupo>();
+        grupos = new ArrayList<Grupo>();
         tipo = "Pradera";
         pos = new Posicion(posicion);
     }
@@ -48,7 +48,7 @@ public class Celda {
             visible = new HashMap<String, Boolean>();
         }
         personajes = new ArrayList<Personaje>();
-        grupos= new ArrayList<Grupo>();
+        grupos = new ArrayList<Grupo>();
         pos = new Posicion(posicion);
 
         this.tipo = "Pradera";
@@ -102,16 +102,37 @@ public class Celda {
 
         }
     }
-    
-    public void agrupar(Mapa mapa){//PUEDE DAR PROBLEMAS DE ALIASING. CUANDO METAS UN PERSONAJES CON UN GRUPO EN LA CELDA
-        String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
-        mapa.getCivilizacion().getCantidades()[6]++;
-        Grupo group=new Grupo(personajes,Name,pos,mapa.getCivilizacion().getNombre());
-        grupos.add(group);
-        mapa.getCivilizacion().getGrupos().put(Name, group);
-        System.out.println("Se ha creado el "+Name+". El grupo esta formado por:");
-        for(Personaje x:group.getPersonajes()){
-            System.out.println(x.getNombre());
+
+    public void agrupar(Mapa mapa) {//PUEDE DAR PROBLEMAS DE ALIASING. CUANDO METAS UN PERSONAJES CON UN GRUPO EN LA CELDA
+        if (grupos.size() > 0) {
+            Grupo g;
+            int tam=grupos.size();
+            for (int i=0;i<tam;i++) {
+                g=grupos.get(0);
+                g.desagrupar(mapa);
+            }
+            String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
+            mapa.getCivilizacion().getCantidades()[6]++;
+            Grupo group = new Grupo(personajes, Name, pos, mapa.getCivilizacion().getNombre());
+            grupos.add(group);
+            mapa.getCivilizacion().getGrupos().put(Name, group);
+            System.out.println("Se ha creado el " + Name + ". El grupo esta formado por:");
+            for (Personaje x : group.getPersonajes()) {
+                System.out.println(x.getNombre());
+            }
+
+        } else if (personajes.size() > 1) {
+            String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
+            mapa.getCivilizacion().getCantidades()[6]++;
+            Grupo group = new Grupo(personajes, Name, pos, mapa.getCivilizacion().getNombre());
+            grupos.add(group);
+            mapa.getCivilizacion().getGrupos().put(Name, group);
+            System.out.println("Se ha creado el " + Name + ". El grupo esta formado por:");
+            for (Personaje x : group.getPersonajes()) {
+                System.out.println(x.getNombre());
+            }
+        } else {
+            System.out.println("No se puede crear el grupo, solo hay un personaje");
         }
     }
 
@@ -158,8 +179,9 @@ public class Celda {
         }
         return personajes.get(Tam - 1).isSoldado();
     }
-    public boolean isGrupo(){
-        if(grupos.size()>0){
+
+    public boolean isGrupo() {
+        if (grupos.size() > 0) {
             return true;
         }
         return false;
@@ -267,11 +289,11 @@ public class Celda {
     public void setGrupos(ArrayList<Grupo> grupos) {
         this.grupos = grupos;
     }
-    
-    public void setGrupo(Grupo grupo){
-        if(grupo!=null){
+
+    public void setGrupo(Grupo grupo) {
+        if (grupo != null) {
             grupos.add(grupo);
-        }else{
+        } else {
             System.out.println("grupo pasado null");
         }
     }

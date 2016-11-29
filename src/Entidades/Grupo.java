@@ -182,6 +182,15 @@ public class Grupo {
         person.setGrupo(false);
     }
 
+    public void desagrupar(Mapa mapa) {
+        mapa.getCivilizacion().getGrupos().remove(Nombre);
+        mapa.getCivilizacion().getCantidades()[6]--;
+        for (Personaje p : personajes) {
+            p.setGrupo(false);
+        }
+        mapa.getCelda(posicion).getGrupos().remove(this);
+    }
+
     public ArrayList<Personaje> getPersonajes() {
         return personajes;
     }
