@@ -40,7 +40,7 @@ public class Personaje {
             case "soldado":
                 this.tipo = tipo;
                 armadura = 100;
-                salud = 200;
+                salud = SALUD_SOLDADO;
                 ataque = 50;
                 capRecolectar = 0;
                 cantidadRecolectada = 0;
@@ -50,7 +50,7 @@ public class Personaje {
             case "paisano":
                 this.tipo = tipo;
                 armadura = 50;
-                salud = 150;
+                salud = SALUD_PAISANO;
                 ataque = 10;
                 capRecolectar = 100;
                 cantidadRecolectada = 0;
@@ -74,7 +74,7 @@ public class Personaje {
             case "soldado":
                 this.tipo = tipo;
                 armadura = 100;
-                salud = 200;
+                salud = SALUD_SOLDADO;
                 ataque = 50;
                 capRecolectar = 0;
                 cantidadRecolectada = 0;
@@ -84,7 +84,7 @@ public class Personaje {
             case "paisano":
                 this.tipo = tipo;
                 armadura = 50;
-                salud = 150;
+                salud = SALUD_PAISANO;
                 ataque = 10;
                 capRecolectar = 100;
                 cantidadRecolectada = 0;

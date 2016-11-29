@@ -106,16 +106,16 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "desligar":
-                        if (comando.length == 3){
-                            Grupo group=C.getGrupos().get(comando[2]);
+                        if (comando.length == 3) {
+                            Grupo group = C.getGrupos().get(comando[2]);
                             Personaje personaje = map.getCivilizacion().getPersonajes().get(comando[1]);
                             group.desligar(personaje);
-                            if(group.getPersonajes().size()==1){
-                                Personaje p=group.getPersonajes().get(0);
+                            if (group.getPersonajes().size() == 1) {
+                                Personaje p = group.getPersonajes().get(0);
                                 group.desligar(p);
                                 map.getCelda(group.getPosicion()).getGrupos().remove(group);
                             }
-                        }else{
+                        } else {
                             System.out.println("Comando agrupar incorrecto");
                         }
                         break;
@@ -132,17 +132,27 @@ public class Principal {
                             Posicion pos = personaje.moverPj(map, comando[2]);
                             if (!(p.equals(pos))) {
                                 System.out.println("El " + comando[1] + " se ha movido a la " + pos);
-                                if(map.getCelda(p).isEdificio()){   //Comprueba si el personaje venia de un ef
+                                if (map.getCelda(p).isEdificio()) {   //Comprueba si el personaje venia de un ef
                                     Edificio ef = map.getCelda(p).getEdificio();
-                                    ef.setAtaque(ef.getAtaque()-personaje.getAtaque());
+                                    ef.setAtaque(ef.getAtaque() - personaje.getAtaque());
                                 }
-                            }else{
+                            } else {
                                 System.out.println("No se puede mover en esa direccion!");
                             }
                             //personaje.mover(comando[2]);
                         } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
-                            Grupo group=map.getCivilizacion().getGrupos().get(comando[1]);
-                            group.moverGrupo(map, comando[2]);
+                            Grupo group = map.getCivilizacion().getGrupos().get(comando[1]);
+                            Posicion pG = new Posicion(group.getPosicion());
+                            Posicion posG = group.moverGrupo(map, comando[2]);
+                            if (!(pG.equals(posG))) {
+                                System.out.println("El " + comando[1] + " se ha movido a la " + posG);
+                                if (map.getCelda(pG).isEdificio()) {   //Comprueba si el personaje venia de un ef
+                                    Edificio ef = map.getCelda(pG).getEdificio();
+                                    ef.setAtaque(ef.getAtaque() - group.getAtaque());
+                                }
+                            } else {
+                                System.out.println("No se puede mover en esa direccion!");
+                            }
                         } else {
                             System.out.println("Ese personaje no es de los autenticos " + C.getNombre() + "!");
                         } //procesar comando
@@ -152,18 +162,26 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "defender":    //No se puede usar por grupos
-                        if(comando.length == 3){
-                            if(C.getPersonajes().containsKey(comando[1])){ //Si existe el personaje pasado
+                        if (comando.length == 3) {
+                            if (C.getPersonajes().containsKey(comando[1])) { //Si existe el personaje pasado
                                 Personaje pers = C.getPersonajes().get(comando[1]);
-                                if(pers.isGrupo()){
+                                if (pers.isGrupo()) {
                                     System.out.println("El personaje tiene un compromiso con su grupo!");
+                                } else if (pers.defender(map, comando[2])) {
+                                    System.out.println("El Personaje servira a su patria en este edificio!");
                                 } else {
-                                    pers.defender(map, comando[2]);
-                                    
+                                    System.out.println("El personaje no pudo defender, una autentica deshonra");
                                 }
-                                
+
+                            } else if (C.getGrupos().containsKey(comando[1])) { //Si es un grupo
+                                Grupo G = C.getGrupos().get(comando[1]);
+                                if (G.defender(map, comando[2])) {
+                                    System.out.println("Este grupo de compatriotas ha entrado a defender el edificio");
+                                } else {
+                                    System.out.println("Este atajo de individuos no han sido capaces de defender");
+                                }
                             } else {
-                                System.out.println("Ese personaje no es de los autenticos "+ C.getNombre() + "!");
+                                System.out.println("Este no es de los autenticos " + C.getNombre() + "!");
                             }
                         } else {
                             System.out.println("Error sintactico!");
@@ -228,7 +246,7 @@ public class Principal {
                             } else {
                                 System.out.println("La celda no es visible.");
                             }
-                        } else if (C.getGrupos().containsKey(comando[1])){
+                        } else if (C.getGrupos().containsKey(comando[1])) {
                             Grupo G = C.getGrupos().get(comando[1]);
                             System.out.println(G);
                         } else {
@@ -409,10 +427,14 @@ public class Principal {
                         }
                         break;
                     case "imprimir":
-                        if (comando[1].equals("mapa")) {
-                            map.imprimir();
+                        if (comando.length == 2) {
+                            if (comando[1].equals("mapa")) {
+                                map.imprimir();
+                            } else {
+                                System.out.println("Comando incorrecto!");
+                            }
                         } else {
-                            System.out.println("Comando incorrecto!");
+                            System.out.println("Error sintactico!");
                         }
                         break;
                     default:

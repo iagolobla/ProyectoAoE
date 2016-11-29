@@ -11,6 +11,7 @@ package Entidades;
  */
 import java.util.ArrayList;
 import Mapa.Mapa;
+import Mapa.Celda;
 
 public class Grupo {
 
@@ -75,12 +76,13 @@ public class Grupo {
             imprimir += "\t" + P.getNombre() + "\n";
         }
         imprimir += "Salud total del Grupo: " + salud + "\n";
-        imprimir += "Armadura del Grupo: " + armadura;
+        imprimir += "Armadura del Grupo: " + armadura + "\n";
+        imprimir += "Ataque del Grupo: " + ataque + "\n";
         return imprimir;
     }
     
     
-    public void moverGrupo(Mapa mapa, String direccion) {
+    public Posicion moverGrupo(Mapa mapa, String direccion) {
         for (Personaje person : personajes) {
             person.moverPj(mapa, direccion);
         }
@@ -100,22 +102,80 @@ public class Grupo {
                 break;
             default:
                 System.out.println("Error, direccion no valida!");
-
+                return posicion;
         }
         if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) {
             if (mapa.getCelda(pos).getPersonajes().get(0).getNombreCivilizacion().equals(nombreCivilizacion)) {
                 mapa.getCelda(pos).setGrupo(this);
                 mapa.getCelda(posicion).getGrupos().remove(this);
                 posicion = new Posicion(pos);
+                return posicion;
             } else {
-                System.out.println("El personaje intenta mover a una celda con personajes enemigos!");
+                return posicion;
             }
         } else {
-            System.out.println("No se puede Mover en esa direccion!");
+            return posicion;
         }
-
     }
     
+    public boolean defender(Mapa mapa, String direccion){   //Si funciona devuelve true
+        if(mapa == null){   
+            System.out.println("Mapa pasado nulo!");
+            return false;
+        }
+        Posicion pos = new Posicion(posicion);
+        Celda cell = mapa.getCelda(pos);
+        switch(direccion){
+            case "n":
+                pos.moverX(-1);
+                break;
+            case "s":
+                pos.moverX(1);
+                break;
+            case "e":
+                pos.moverY(1);
+                break;
+            case "o":
+                pos.moverY(-1);
+                break;
+            default:
+                System.out.println("Direccion pasada no valida!");
+                return false;
+        }
+        Celda newCell = mapa.getCelda(pos);
+        Edificio ef = newCell.getEdificio();
+        if(ef == null){
+            System.out.println("En esta posicion no hay ningun edificio!");
+            return false;
+        }
+        if (!(ef.getNombreCivilizacion().equals(this.getNombreCivilizacion()))){
+            System.out.println("Este no es un edificio aliado!");
+            return false;
+        }
+        if ((ef.getCapPersonajes() - ef.getNPersonajes() - personajes.size()) <= 0){
+            System.out.println("No hay mas sitio para todos aqui dentro!");
+            return false;
+        }
+        //Restaurar la salud de todos los personajes
+        for(Personaje P : personajes){
+            if(P.isPaisano())
+                P.setSalud(Personaje.SALUD_PAISANO);
+            if(P.isSoldado())
+                P.setSalud(Personaje.SALUD_SOLDADO);
+            P.setPosicion(pos); //Actualizamos posicion del Pj
+            ef.getPersonajes().put(P.getNombre(), P);
+            cell.quitarPersonaje(P); //Quitamos al personaje de la celda
+        }
+        
+        ef.setAtaque(ef.getAtaque() + ataque);
+        ef.setNPersonajes(ef.getNPersonajes() + personajes.size());
+        cell.getGrupos().remove(this);
+        this.setPosicion(pos);
+        
+        mapa.actualizarVisibilidad();
+        mapa.imprimir();
+        return true;
+    }
     
     public void desligar(Personaje person){
         personajes.remove(person);
