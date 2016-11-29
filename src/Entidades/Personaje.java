@@ -511,7 +511,7 @@ public class Personaje {
             salud = SALUD_SOLDADO;
         
         ef.setAtaque(ef.getAtaque() + ataque);
-        posicion = pos; //Actualizamos posicion del personaje
+        posicion = pos; //Actualizamos posicion del Pj
         ef.getPersonajes().put(Nombre, this);
         ef.setNPersonajes(ef.getNPersonajes() + 1);
         cell.quitarPersonaje(this); //Quitamos al personaje de la celda

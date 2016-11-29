@@ -187,6 +187,11 @@ public class Principal {
                                         System.out.println("Nombre : " + k);
                                     }
                                     break;
+                                case "grupos":
+                                    for (String G : C.getGrupos().keySet()) {
+                                        System.out.println("Grupo: " + G);
+                                    }
+                                    break;
                                 default:
                                     System.out.println("comando incorrecto. Debe introducir listar personajes o listar edificios.");
                                     break;
@@ -223,6 +228,9 @@ public class Principal {
                             } else {
                                 System.out.println("La celda no es visible.");
                             }
+                        } else if (C.getGrupos().containsKey(comando[1])){
+                            Grupo G = C.getGrupos().get(comando[1]);
+                            System.out.println(G);
                         } else {
                             System.out.println("No existe la entidad introducida");
                         }
