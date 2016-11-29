@@ -26,6 +26,7 @@ public class Edificio {
     private int salud;
     private Posicion posicion;
     private String nombre;
+    private String nombreCivilizacion;
 
     private int madera;
     private int piedra;
@@ -38,6 +39,52 @@ public class Edificio {
             return;
         }
         
+        this.posicion = new Posicion(posicion);
+        switch (tipe) {
+            case ("ciudadela"):
+                tipo = tipe;
+                salud = SALUDCIUDADELA;//solo es para hacer la prueba
+                nombre = Nombre;
+                madera = 100;//son los valores iniciales que toman(se los damos nosotros).
+                piedra = 100;
+                comida = 100;
+                break;
+            case ("cuartel"):
+                tipo = tipe;
+                salud = SALUDCUARTEL;
+                nombre = Nombre;
+                madera = 0;
+                piedra = 0;
+                comida = 0;
+                break;
+            case ("casa"):
+                tipo = tipe;
+                salud = SALUDCASA;
+                nombre = Nombre;
+                madera = 0;
+                piedra = 0;
+                comida = 0;
+                break;
+            case "torre":
+                tipo = tipe;
+                salud = SALUDTORRE;
+                nombre = Nombre;
+                madera = 0;
+                piedra = 0;
+                comida = 0;
+                break;
+            default:
+                System.out.println("Error, tipo de edificio incorrecto");
+        }
+    }
+    
+     public Edificio(String tipe, Posicion posicion, String Nombre, String civilizacion) {
+        //Igualar posicion y posicion evitando aliasing
+        if(posicion == null){
+            System.out.println("Posicion pasada a Edificio nula!");
+            return;
+        }
+        nombreCivilizacion=civilizacion;
         this.posicion = new Posicion(posicion);
         switch (tipe) {
             case ("ciudadela"):
@@ -268,5 +315,15 @@ public class Edificio {
             System.out.println("Cantidad Comida mal introducida!");
         }
     }
+
+    public String getNombreCivilizacion() {
+        return nombreCivilizacion;
+    }
+
+    public void setNombreCivilizacion(String nombreCivilizacion) {
+        this.nombreCivilizacion = nombreCivilizacion;
+    }
+    
+    
 
 }

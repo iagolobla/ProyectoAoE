@@ -10,6 +10,7 @@ import Entidades.Edificio;
 import Entidades.Posicion;
 import Entidades.Recurso;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Celda {
     private Recurso recurso;
     private Posicion pos;
     private String tipo;
-    private boolean visible;
+    HashMap<String, Boolean> visible;
 
     public Celda(Posicion posicion) {
         if (posicion == null) {
@@ -30,60 +31,65 @@ public class Celda {
             return;
         }
         personajes = new ArrayList<Personaje>();
+        visible = new HashMap<String, Boolean>();
         tipo = "Pradera";
         pos = new Posicion(posicion);
     }
 
-    public Celda(String tipo, Posicion posicion, String Nombre) {
+    public Celda(String tipo, Posicion posicion, String Nombre, String civilizacion) {
         if (posicion == null) {
             System.out.println("ERROR EN LA POSICION ->NULL");
             return;
         }
+        if (visible == null) {
+            visible = new HashMap<String, Boolean>();
+        }
         personajes = new ArrayList<Personaje>();
         pos = new Posicion(posicion);
+        
         this.tipo = "Pradera";
         switch (tipo) {
             case "soldado":
                 personajes.add(new Personaje("soldado", Nombre, pos));
-                visible = true;
+                visible.put(civilizacion, Boolean.TRUE);
                 break;
             case "paisano":
                 personajes.add(new Personaje("paisano", Nombre, pos));
-                visible = true;
+                visible.put(civilizacion, Boolean.TRUE);
                 break;
             case "ciudadela":
                 edificio = new Edificio("ciudadela", pos, Nombre);
-                visible = true;
+                visible.put(civilizacion, Boolean.TRUE);
                 this.tipo = tipo;
                 break;
             case "casa":
                 edificio = new Edificio("casa", pos, Nombre);
-                visible = true;
+                visible.put(civilizacion, Boolean.TRUE);
                 this.tipo = tipo;
                 break;
             case "cuartel":
                 edificio = new Edificio("cuartel", pos, Nombre);
-                visible = true;
+                visible.put(civilizacion, Boolean.TRUE);
                 this.tipo = tipo;
                 break;
             case "torre":
                 edificio = new Edificio("torre", pos, Nombre);
-                visible = true;
+                visible.put(civilizacion, Boolean.TRUE);
                 this.tipo = tipo;
                 break;
             case "bosque":
                 recurso = new Recurso("bosque", 150, Nombre, pos);   //De momento dejaremos 200 por defecto
-                visible = false;
+                visible.put(civilizacion, Boolean.FALSE);
                 this.tipo = tipo;
                 break;
             case "cantera":
                 recurso = new Recurso("cantera", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
-                visible = false;
+                visible.put(civilizacion, Boolean.FALSE);
                 this.tipo = tipo;
                 break;
             case "arbusto":
                 recurso = new Recurso("arbusto", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
-                visible = false;
+                visible.put(civilizacion, Boolean.FALSE);
                 this.tipo = tipo;
                 break;
 
@@ -97,7 +103,7 @@ public class Celda {
         if (personajes != null) {
             return personajes;
         }
-        System.out.println("Celda Vacia!");
+        System.out.println("Celda Vacia pp!");
         return null;
     }
 
@@ -105,7 +111,7 @@ public class Celda {
         if (edificio != null) {
             return edificio;
         }
-        System.out.println("Celda Vacia!");
+        System.out.println("Celda Vacia ee!"+pos);
         return null;
     }
 
@@ -113,7 +119,7 @@ public class Celda {
         if (recurso != null) {
             return recurso;
         }
-        System.out.println("Celda Vacia!");
+        System.out.println("Celda Vacia rr!");
         return null;
     }
 
@@ -179,12 +185,12 @@ public class Celda {
         }
     }
 
-    public boolean getVisible() {
+    public HashMap<String, Boolean> getVisible() {
         return visible;
     }
 
-    public void setVisible(boolean estado) {
-        visible = estado;
+    public void setVisible(HashMap<String, Boolean> visible) {
+        this.visible = visible;
     }
 
     public String getTipo() {
@@ -207,8 +213,12 @@ public class Celda {
         }
     }
 
-    public boolean isVisible() {
-        return visible;
+    public boolean isVisible(String civilizacion) {
+        return visible.get(civilizacion);
+    }
+
+    public void ponerVisible(String civilizacion) {
+        visible.replace(civilizacion, Boolean.TRUE);
     }
 
 }

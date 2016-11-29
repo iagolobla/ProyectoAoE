@@ -21,9 +21,9 @@ import java.util.Collection;
 public class Mapa {
 
     private ArrayList<ArrayList<Celda>> mapa;
-        private HashMap<String, Recurso> recursos;
-        int[] cantidades;
-        Civilizacion civilizacion;
+    private HashMap<String, Recurso> recursos;
+    int[] cantidades;
+    Civilizacion civilizacion;
 
     public static final int MAPAX = 16;
     public static final int MAPAY = 8;
@@ -34,53 +34,63 @@ public class Mapa {
             return;
         }
         recursos = new HashMap<String, Recurso>();
-        civilizacion=null;
-        cantidades=new int[3];
+        civilizacion = null;
+        cantidades = new int[3];
         /*
        
         0--Bosque
         1--Cantera
         2--Arbusto
          */
+        HashMap<String, Boolean> aux = new HashMap<String, Boolean>();
+        for (Civilizacion x : civ) {
+            aux.put(x.getNombre(), Boolean.FALSE);
+            civilizacion = x;
+        }
         mapa = new ArrayList<>();
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             mapa.add(new ArrayList<>());
             for (int j = 0; j < MAPAX; j++) {   //Inicializamos visible a false para todas las celdas
                 cell = new Celda(new Posicion(i, j));
-                cell.setVisible(false);
+
+                cell.setVisible(new HashMap<String, Boolean>(aux));
                 mapa.get(i).add(cell);
             }
         }
         int j = 0;
-        int x1=0;
-        int y1=0;
+        int x1 = 0;
+        int y1 = 0;
         String Namec = "ciudadela-1";    //edificios.size() ayuda a crear el nombre
         String Namep = "paisano-1";
         for (Civilizacion c : civ) {
             switch (j) {
                 case 0:
-                    x1=MAPAY-3;
-                    y1=MAPAY-3;
+                    x1 = MAPAY - 3;
+                    y1 = MAPAY - 3;
                     break;
                 case 1:
-                    x1=MAPAY-5;
-                    y1=MAPAX-3;
+                    x1 = MAPAY - 5;
+                    y1 = MAPAX - 3;
                     break;
                 case 2:
-                    x1=MAPAY-6;
-                    y1=MAPAX-14;
+                    x1 = MAPAY - 6;
+                    y1 = MAPAX - 14;
                     break;
 
             }
             c.getCantidades()[2]++;
             c.getCantidades()[0]++;
-            mapa.get(x1).set(y1, new Celda("ciudadela", new Posicion(x1,y1), Namec));
-            c.getEdificios().put(Namec, getCelda(new Posicion(x1,y1)).getEdificio());
+            Celda nueva=getCelda(x1, y1);
+            nueva.setEdificio(new Edificio("ciudadela",new Posicion(x1,y1),Namec,c.getNombre()));
+            nueva.setTipo("ciudadela");
+            nueva.getVisible().replace(c.getNombre(), Boolean.TRUE);
+            c.getEdificios().put(Namec, getCelda(new Posicion(x1, y1)).getEdificio());
 
-            Celda newcell = getCelda(new Posicion(x1,y1 + 1));
-            newcell.setPersonajes(new Personaje("paisano", Namep, new Posicion(x1,y1 + 1),c.getNombre()));
-            ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(x1,y1 + 1))).getPersonajes();
+            Celda newcell = getCelda(new Posicion(x1, y1 + 1));
+            newcell.setPersonajes(new Personaje("paisano", Namep, new Posicion(x1, y1 + 1), c.getNombre()));
+            newcell.getVisible().replace(c.getNombre(), Boolean.TRUE);
+            ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(x1, y1 + 1))).getPersonajes();
             c.getPersonajes().put(Namep, person.get(person.size() - 1));
             j++;
         }
@@ -109,7 +119,9 @@ public class Mapa {
             if (getCelda(new Posicion(x, y)).isLibre()) {
                 Name = "bosque-" + (cantidades[0] + 1);
                 cantidades[0]++;
-                mapa.get(x).set(y, new Celda("bosque", new Posicion(x, y), Name));
+                Celda auxiliar = new Celda("bosque", new Posicion(x, y), Name, civilizacion.getNombre());
+                auxiliar.setVisible(new HashMap<String, Boolean>(aux));
+                mapa.get(x).set(y, auxiliar);
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             } else {
                 k--;
@@ -122,20 +134,24 @@ public class Mapa {
             if (getCelda(new Posicion(x, y)).isLibre()) {
                 Name = "cantera-" + (cantidades[1] + 1);
                 cantidades[1]++;
-                mapa.get(x).set(y, new Celda("cantera", new Posicion(x, y), Name));
+                Celda auxiliar = new Celda("cantera", new Posicion(x, y), Name, civilizacion.getNombre());
+                auxiliar.setVisible(new HashMap<String, Boolean>(aux));
+                mapa.get(x).set(y, auxiliar);
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             } else {
                 k--;
             }
         }
-        for (int k = 0; k < bosques; k++) {
+        for (int k = 0; k < arbustos; k++) {
             Random rn = new Random();
             int x = rn.nextInt(MAPAY);
             int y = rn.nextInt(MAPAX);
             if (getCelda(new Posicion(x, y)).isLibre()) {
                 Name = "arbusto-" + (cantidades[2] + 1);
                 cantidades[2]++;
-                mapa.get(x).set(y, new Celda("arbusto", new Posicion(x, y), Name));
+                Celda auxiliar = new Celda("arbusto", new Posicion(x, y), Name, civilizacion.getNombre());
+                auxiliar.setVisible(new HashMap<String, Boolean>(aux));
+                mapa.get(x).set(y, auxiliar);
                 recursos.put(Name, getCelda(new Posicion(x, y)).getRecurso());
             } else {
                 k--;
@@ -144,7 +160,10 @@ public class Mapa {
 
         //INTRODUCIR BIEN ELEMENTOS BOSQUE EN EL MAPA
         //Recorremos mapa para actualizar las visibilidades
-        this.actualizarVisibilidad();
+        for (Civilizacion civi : civ) {
+            civilizacion = civi;
+            this.actualizarVisibilidad();
+        }
     }
 
     /*public Mapa() {
@@ -161,8 +180,8 @@ public class Mapa {
         5--Bosque
         6--Cantera
         7--Arbusto
-         */
-        /*mapa = new ArrayList<>();
+     */
+ /*mapa = new ArrayList<>();
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             mapa.add(new ArrayList<>());
@@ -217,7 +236,6 @@ public class Mapa {
         //Recorremos mapa para actualizar las visibilidades
         this.actualizarVisibilidad();
     }*/
-
     public Celda getCelda(Posicion p) {
         if (p == null) {
             System.out.println("Posicion pasada nula!");
@@ -242,30 +260,41 @@ public class Mapa {
         Celda aux;
         Posicion pos;
         if (cell.isPaisano() || cell.isSoldado() || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
+            if(cell.getEdificio()!=null){
+                Edificio edif=cell.getEdificio();
+                if(edif.getNombreCivilizacion().equals(civilizacion.getNombre())==false){
+                    return;
+                }
+            }else if(cell.getPersonajes()!=null){
+                ArrayList<Personaje> person=cell.getPersonajes();
+                if(person.get(0).getNombreCivilizacion().equals(civilizacion.getNombre())==false){
+                    return;
+                }
+            }
             pos = new Posicion(cell.getPos());                                 //sus celdas adyacentes en visible
             aux = this.getCelda(pos);
-            aux.setVisible(true);   //Pone visible la celda del personaje
+            aux.ponerVisible(civilizacion.getNombre());  //Pone visible la celda del personaje
 
             pos.moverX(1);
             if (this.checkCoords(pos)) {
                 aux = this.getCelda(pos);
-                aux.setVisible(true);   //Pone visible la celda de abajo
+                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda de abajo
             }
             pos.moverX(-2);
             if (this.checkCoords(pos)) {
                 aux = this.getCelda(pos);
-                aux.setVisible(true);   //Pone visible la celda de arriba
+                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda de arriba
             }
             pos.moverX(1);
             pos.moverY(1);
             if (this.checkCoords(pos)) {
                 aux = this.getCelda(pos);
-                aux.setVisible(true);   //Pone visible la celda derecha
+                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda derecha
             }
             pos.moverY(-2);
             if (this.checkCoords(pos)) {
                 aux = this.getCelda(pos);
-                aux.setVisible(true);   //Pone visible la celda izquierda
+                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda izquierda
             }
         }
     }
@@ -295,7 +324,7 @@ public class Mapa {
         for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
             System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
             for (int j = 0; j < MAPAX; j++) {
-                if (mapa.get(i).get(j).getVisible()) {
+                if (mapa.get(i).get(j).isVisible(civilizacion.getNombre())) {
                     switch (mapa.get(i).get(j).getTipo()) {
                         case ("Pradera"):
                             if (getCelda(i, j).isPaisano()) {   //Si tiene un paisano
@@ -363,8 +392,6 @@ public class Mapa {
         return mapa;
     }
 
-
-
     public HashMap<String, Recurso> getRecursos() {
         return recursos;
     }
@@ -380,8 +407,6 @@ public class Mapa {
             System.out.println("Mapa pasado es nulo!");
         }
     }
-
-
 
     public void setRecursos(HashMap<String, Recurso> recursos) {
         if (recursos != null) {
@@ -406,6 +431,5 @@ public class Mapa {
     public void setCivilizacion(Civilizacion civilizacion) {
         this.civilizacion = civilizacion;
     }
-    
 
 }

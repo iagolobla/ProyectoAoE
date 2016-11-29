@@ -32,6 +32,8 @@ public class Grupo {
         int soldado=0;
         posicion = new Posicion(pos);
         for (Personaje p : person) {
+            p.setGrupo(true);
+            personajes.add(p);
             armadura += p.getArmadura();
             salud += p.getSalud();
             ataque += p.getAtaque();

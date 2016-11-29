@@ -91,6 +91,10 @@ public class Principal {
                             System.out.println("Errorsintactico: MOVER ...");
                         } else if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
                             Personaje personaje = (Personaje) map.getCivilizacion().getPersonajes().get(comando[1]);
+                            if (personaje.isGrupo()) {
+                                System.out.println("El personaje pertenece a un grupo, no se puede mover individualmente");
+                                break;
+                            }
                             Posicion p = new Posicion(personaje.getPosicion());
                             Posicion pos = personaje.moverPj(map, comando[2]);
                             if (!(p.equals(pos))) {
@@ -154,7 +158,7 @@ public class Principal {
                             System.out.println(edificio);
                         } else if (map.getRecursos().containsKey(comando[1])) {
                             Recurso recurso = map.getRecursos().get(comando[1]);
-                            if (map.getCelda(recurso.getPos()).getVisible()) {
+                            if (map.getCelda(recurso.getPos()).isVisible(map.getCivilizacion().getNombre())) {
                                 System.out.println(recurso);
                             } else {
                                 System.out.println("La celda no es visible.");
@@ -171,7 +175,7 @@ public class Principal {
                             if (map.checkCoords(posMirar)) {
                                 Celda cellMirar = map.getCelda(posMirar);
 
-                                if (cellMirar.getVisible()) {
+                                if (cellMirar.isVisible(map.getCivilizacion().getNombre())) {
                                     switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
                                         case "Pradera":
                                             System.out.println("Celda tipo Pradera");
