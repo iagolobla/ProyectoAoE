@@ -15,12 +15,14 @@ import Entidades.Recurso;
 import Entidades.Edificio;
 import java.util.ArrayList;
 import java.util.HashMap;
+import Entidades.Grupo;
 
 public class Civilizacion {
 
     private String nombre;
     private HashMap<String, Personaje> personajes;
     private HashMap<String, Edificio> edificios;
+    private HashMap<String, Grupo> grupos;
 
     private int[] cantidades;
     private String color;
@@ -28,7 +30,8 @@ public class Civilizacion {
     public Civilizacion(String nombre) {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
-        cantidades = new int[6];//guardara las cantidades de personajes, soldados,etc.
+        grupos= new HashMap<String, Grupo>();
+        cantidades = new int[7];//guardara las cantidades de personajes, soldados,etc.
         /*
         0--Paisano
         1--Soldado
@@ -36,6 +39,7 @@ public class Civilizacion {
         3--Casa
         4--Cuartel
         5--Torre
+        6--grupo
          */
         this.nombre = nombre;
         color = "rojo";
@@ -97,5 +101,18 @@ public class Civilizacion {
             System.out.println("Array de cantidades pasado nulo!");
         }
     }
+
+    public HashMap<String, Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(HashMap<String, Grupo> grupos) {
+        if (grupos != null) {
+            this.grupos = new HashMap<>(grupos);
+        } else {
+            System.out.println("HashMap de grupos pasado nulo!");
+        }
+    }
+    
 
 }
