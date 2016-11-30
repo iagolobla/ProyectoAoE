@@ -490,7 +490,7 @@ public class Principal {
                             Celda celdaAlmacenar = map.getCelda(gAlmacenar);
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
-                                grupoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
+                                grupoAlmacenar.almacenarRecurso(ciudadelaAlmacenar, C);
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }
