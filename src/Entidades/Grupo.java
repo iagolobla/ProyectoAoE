@@ -12,6 +12,7 @@ package Entidades;
 import java.util.ArrayList;
 import Mapa.Mapa;
 import Mapa.Celda;
+import Mapa.Civilizacion;
 
 public class Grupo {
 
@@ -20,12 +21,8 @@ public class Grupo {
     private int armadura;
     private int salud;
     private int ataque;
-    private int capRecolectar;
     private String Nombre;  //Aqui se necesita poner un nombre al personaje para usar eso como clave en el hashmap de personajes en el mapa
     private Posicion posicion;
-    private int madera;
-    private int piedra;
-    private int comida;
 
     public Grupo(ArrayList<Personaje> person, String Nombre, Posicion pos, String civilizacion) {
         personajes = new ArrayList<Personaje>();
@@ -40,39 +37,18 @@ public class Grupo {
             armadura += p.getArmadura();
             salud += p.getSalud();
             ataque += p.getAtaque();
-            capRecolectar += p.getCapRecolectar();
-            if (p.getTipoRecurso() != null) {
-                switch (p.getTipoRecurso()) {
-                    case "madera":
-                        madera += p.getCantidadRecolectada();
-                        break;
-                    case "piedra":
-                        piedra += p.getCantidadRecolectada();
-                        break;
-                    case "comida":
-                        comida += p.getCantidadRecolectada();
-                        break;
-                    default:
-                        System.out.println("Tipo de recurso incorrecto");
-                }
-            }
-            if (p.isSoldado()) {
-                soldado = 1;
-            }
-        }
-        if (soldado == 1) {
-            capRecolectar = 0;
+
         }
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String imprimir;
         int salud = 0;
-        
+
         imprimir = "\n";
         imprimir += "La lista de personajes del grupo es:\n";
-        for(Personaje P : personajes){
+        for (Personaje P : personajes) {
             salud += P.getSalud();
             imprimir += "\t" + P.getNombre() + "\n";
         }
@@ -81,8 +57,7 @@ public class Grupo {
         imprimir += "Ataque del Grupo: " + ataque + "\n";
         return imprimir;
     }
-    
-    
+
     public Posicion moverGrupo(Mapa mapa, String direccion) {
         for (Personaje person : personajes) {
             person.moverPj(mapa, direccion);
@@ -118,15 +93,15 @@ public class Grupo {
             return posicion;
         }
     }
-    
-    public boolean defender(Mapa mapa, String direccion){   //Si funciona devuelve true
-        if(mapa == null){   
+
+    public boolean defender(Mapa mapa, String direccion) {   //Si funciona devuelve true
+        if (mapa == null) {
             System.out.println("Mapa pasado nulo!");
             return false;
         }
         Posicion pos = new Posicion(posicion);
         Celda cell = mapa.getCelda(pos);
-        switch(direccion){
+        switch (direccion) {
             case "n":
                 pos.moverX(-1);
                 break;
@@ -145,42 +120,44 @@ public class Grupo {
         }
         Celda newCell = mapa.getCelda(pos);
         Edificio ef = newCell.getEdificio();
-        if(ef == null){
+        if (ef == null) {
             System.out.println("En esta posicion no hay ningun edificio!");
             return false;
         }
-        if (!(ef.getNombreCivilizacion().equals(this.getNombreCivilizacion()))){
+        if (!(ef.getNombreCivilizacion().equals(this.getNombreCivilizacion()))) {
             System.out.println("Este no es un edificio aliado!");
             return false;
         }
-        if ((ef.getCapPersonajes() - ef.getNPersonajes() - personajes.size()) <= 0){
+        if ((ef.getCapPersonajes() - ef.getNPersonajes() - personajes.size()) <= 0) {
             System.out.println("No hay mas sitio para todos aqui dentro!");
             return false;
         }
         //Restaurar la salud de todos los personajes
-        for(Personaje P : personajes){
-            if(P.isPaisano())
+        for (Personaje P : personajes) {
+            if (P.isPaisano()) {
                 P.setSalud(Personaje.SALUD_PAISANO);
-            if(P.isSoldado())
+            }
+            if (P.isSoldado()) {
                 P.setSalud(Personaje.SALUD_SOLDADO);
+            }
             P.setPosicion(pos); //Actualizamos posicion del Pj
             ef.getPersonajes().put(P.getNombre(), P);
             cell.quitarPersonaje(P); //Quitamos al personaje de la celda
         }
-        
+
         ef.setAtaque(ef.getAtaque() + ataque);
         ef.setDefensa(ef.getDefensa() + armadura);
-        
+
         ef.setNPersonajes(ef.getNPersonajes() + personajes.size());
         cell.getGrupos().remove(this);
         this.setPosicion(pos);
-        
+
         mapa.actualizarVisibilidad();
         mapa.imprimir();
         return true;
     }
-    
-    public void desligar(Personaje person){
+
+    public void desligar(Personaje person) {
         personajes.remove(person);
         person.setGrupo(false);
         person.setNombreGrupo(null);
@@ -194,21 +171,47 @@ public class Grupo {
         }
         mapa.getCelda(posicion).getGrupos().remove(this);
     }
-    
+
     public void recolectar(Recurso recurso, Mapa mapa) {
         if (recurso == null) {    //Comprobamos si se pasa bien el argumento
             System.out.println("Argumento Recurso pasado nulo!");
             return;
         }
-        for(Personaje person:personajes){
-            if(person.isSoldado()){
+        for (Personaje person : personajes) {
+            if (person.isSoldado()) {
                 System.out.println("El grupo no puede recolectar ya que no todos sus integrantes son paisanos");
                 return;
             }
         }
-        for(Personaje p:personajes){
+        for (Personaje p : personajes) {
             p.recolectar(recurso, mapa);
         }
+    }
+
+    public void almacenarRecurso(Edificio ciudadela, Civilizacion C) {
+        if (ciudadela == null) {  //Si el parametro es nulo
+            System.out.println("Ciudadela pasada nula!");
+            return;
+        }
+        for (Personaje person : personajes) {
+            if (person.isSoldado()) {
+                System.out.println("El grupo no puede almacenar ya que no todos sus integrantes son paisanos");
+                return;
+            }
+        }
+        for (Personaje p : personajes) {
+            p.almacenarRecurso(ciudadela, C);
+        }
+    }
+
+    public void reparar(Mapa mapa, String direccion) {
+        for (Personaje person : personajes) {
+            if (person.isSoldado()) {
+                System.out.println("El grupo no puede almacenar ya que no todos sus integrantes son paisanos");
+                return;
+            }
+        }
+        personajes.get(0).reparar(mapa, direccion);
     }
 
     public ArrayList<Personaje> getPersonajes() {
@@ -251,14 +254,6 @@ public class Grupo {
         this.ataque = ataque;
     }
 
-    public int getCapRecolectar() {
-        return capRecolectar;
-    }
-
-    public void setCapRecolectar(int capRecolectar) {
-        this.capRecolectar = capRecolectar;
-    }
-
     public String getNombre() {
         return Nombre;
     }
@@ -273,30 +268,6 @@ public class Grupo {
 
     public void setPosicion(Posicion posicion) {
         this.posicion = posicion;
-    }
-
-    public int getMadera() {
-        return madera;
-    }
-
-    public void setMadera(int madera) {
-        this.madera = madera;
-    }
-
-    public int getPiedra() {
-        return piedra;
-    }
-
-    public void setPiedra(int piedra) {
-        this.piedra = piedra;
-    }
-
-    public int getComida() {
-        return comida;
-    }
-
-    public void setComida(int comida) {
-        this.comida = comida;
     }
 
 }
