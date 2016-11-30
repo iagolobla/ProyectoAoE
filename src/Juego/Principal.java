@@ -437,7 +437,10 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "almacenar":
-                        if (comando.length == 3) {
+                        if (comando.length != 3) {
+                            System.out.println("Error sintactico!");
+                            
+                        }else if(map.getCivilizacion().getPersonajes().containsKey(comando[1])){
                             Personaje paisanoAlmacenar = map.getCivilizacion().getPersonajes().get(comando[1]);
                             Posicion pAlmacenar = new Posicion(paisanoAlmacenar.getPosicion());
 
@@ -460,6 +463,32 @@ public class Principal {
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
                                 paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
+                            } else {
+                                System.out.println("No hay un edificio aqui");
+                            }
+                        }else if(map.getCivilizacion().getGrupos().containsKey(comando[1])){
+                            Personaje grupoAlmacenar = map.getCivilizacion().getPersonajes().get(comando[1]);
+                            Posicion gAlmacenar = new Posicion(grupoAlmacenar.getPosicion());
+
+                            switch (comando[2]) {
+                                case "n":
+                                    gAlmacenar.moverX(-1);
+                                    break;
+                                case "s":
+                                    gAlmacenar.moverX(1);
+                                    break;
+                                case "e":
+                                    gAlmacenar.moverY(1);
+                                    break;
+                                case "o":
+                                    gAlmacenar.moverY(-1);
+                                    break;
+                            }
+
+                            Celda celdaAlmacenar = map.getCelda(gAlmacenar);
+                            if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
+                                Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
+                                grupoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }

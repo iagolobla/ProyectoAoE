@@ -590,9 +590,9 @@ public class Personaje {
             if (cantidadRecolectada == 0) {   //En caso de que el paisano no lleve nada encima, puede recolectar el recurso que sea
                 cantidadRecolectada = recurso.restarCantidad(capRecolectar, mapa);    //Devuelve la cantidad obtenida y en caso de agotarse el recurso lo elimina
                 tipoRecurso = recurso.getTipo();   //Establece el tipo de recurso que carga el personaje
-                System.out.println("El Paisano ha recogido " + cantidadRecolectada + "uds de " + tipoRecurso);  //Esto va a haber que cambiarlo, el tipoRecurso imprime bosque, no madera
+                System.out.println("El  " + Nombre + "  ha recogido " + cantidadRecolectada + "uds de " + tipoRecurso);  //Esto va a haber que cambiarlo, el tipoRecurso imprime bosque, no madera
                 if (cantidadRecolectada == capRecolectar) {
-                    System.out.println("El Paisano no puede recolectar mas");
+                    System.out.println("El  " + Nombre + "  no puede recolectar mas");
                 }
             } else {    //Si ya ha recogido recursos de algun tipo
                 if (!recurso.getTipo().equals(tipoRecurso)) { //Comprobamos que el recurso sea del tipo que estamos recolectando
@@ -602,10 +602,10 @@ public class Personaje {
                 int cantidadRestante = cantidadRecolectada;
                 cantidadRecolectada += recurso.restarCantidad(capRecolectar - cantidadRecolectada, mapa);   //Si el recurso es del mismo tipo se añade recurso al personaje y se resta la capacidad restante del personaje al recurso
                 cantidadRestante = cantidadRecolectada - cantidadRestante;
-                System.out.println("El Paisano ha recogido " + cantidadRestante + "uds de " + tipoRecurso);
+                System.out.println("El " + Nombre + " ha recogido " + cantidadRestante + "uds de " + tipoRecurso);
             }
         } else {
-            System.out.println("El paisano no puede recolectar mas! Deben dejarse los recursos en la Ciudadela");
+            System.out.println("El  " + Nombre + "  no puede recolectar mas!");
         }
     }
 

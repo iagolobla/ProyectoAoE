@@ -82,17 +82,17 @@ public class Celda {
                 this.tipo = tipo;
                 break;
             case "bosque":
-                recurso = new Recurso("bosque", 150, Nombre, pos);   //De momento dejaremos 200 por defecto
+                recurso = new Recurso("bosque", 400, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible.put(civilizacion, Boolean.FALSE);
                 this.tipo = tipo;
                 break;
             case "cantera":
-                recurso = new Recurso("cantera", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
+                recurso = new Recurso("cantera", 400, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible.put(civilizacion, Boolean.FALSE);
                 this.tipo = tipo;
                 break;
             case "arbusto":
-                recurso = new Recurso("arbusto", 200, Nombre, pos);   //De momento dejaremos 200 por defecto
+                recurso = new Recurso("arbusto", 400, Nombre, pos);   //De momento dejaremos 200 por defecto
                 visible.put(civilizacion, Boolean.FALSE);
                 this.tipo = tipo;
                 break;
