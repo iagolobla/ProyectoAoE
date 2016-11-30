@@ -164,6 +164,18 @@ public class Celda {
         return false;
     }
 
+    public boolean isPersonaje(){
+        if(this.isPaisano() || this.isSoldado()){
+            for(Personaje P : personajes){
+                if(P.isGrupo()){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+    
     public boolean isPaisano() {
         int Tam = personajes.size();
         if (Tam == 0) {
@@ -179,24 +191,21 @@ public class Celda {
         }
         return personajes.get(Tam - 1).isSoldado();
     }
-
-    public boolean isGrupo() {
-        if (grupos.size() > 0) {
-            return true;
-        }
-        return false;
+    
+    public boolean isGrupo(){
+        return (grupos.size() > 0);
     }
+
+    public boolean isRecurso() {
+        return (recurso != null);
+    }
+    
+
 
     public boolean isEdificio() {
         return (edificio != null);
     }
 
-    public boolean isPersonaje() {
-        if (personajes.size() > 0) {
-            return true;
-        }
-        return false;
-    }
 
     public void quitarPersonaje(Personaje P) {
         if (this.isPersonaje()) {
@@ -230,12 +239,8 @@ public class Celda {
         }
     }
 
-    public void setEdificio(Edificio edificio) {
-        if (edificio != null) {
-            this.edificio = edificio;
-        } else {
-            System.out.println("El edificio pasado es nulo!");
-        }
+    public void setEdificio(Edificio edificio) {    //Se puede poner el edificio a null(necesario)
+        this.edificio = edificio;
     }
 
     public void setRecurso(Recurso recurso) {

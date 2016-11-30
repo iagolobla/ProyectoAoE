@@ -135,6 +135,25 @@ public class Principal {
                         }
                         map.imprimir();
                         break;
+                    case "atacar":
+                        if(comando.length == 3){
+                            
+                            if(C.getPersonajes().containsKey(comando[1])){  //Si se hace "atacar personaje dir"
+                                Personaje P = C.getPersonajes().get(comando[1]);
+                                if(!P.atacar(map, comando[2])){
+                                    System.out.println("El personaje no ha sido quien de atacar!");
+                                }
+                            } else if(C.getGrupos().containsKey(comando[1])){   //Si se hace "atacar grupo dir"
+                                
+                            } else if(C.getEdificios().containsKey(comando[1])){    //Si se hace "atacar edificio dir"
+                                
+                            } else {
+                                System.out.println("La entidad especificada no existe!");
+                            }
+                        } else {
+                            System.out.println("Error Sintáctico!");
+                        }
+                        break;
                     case "mover":
                         if (comando.length != 3) {
                             System.out.println("Errorsintactico: MOVER ...");

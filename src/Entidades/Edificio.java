@@ -71,6 +71,7 @@ public class Edificio {
                 salud = SALUDTORRE;
                 nombre = Nombre;
                 ataque = 50;
+                defensa = 50;
                 capPersonajes = 2;
                 break;
             default:
@@ -111,6 +112,8 @@ public class Edificio {
             case "torre":
                 tipo = tipe;
                 salud = SALUDTORRE;
+                ataque = 50;
+                defensa = 50;
                 nombre = Nombre;
                 capPersonajes = 2;
                 break;
@@ -218,6 +221,15 @@ public class Edificio {
 
     }
 
+    public boolean recibirDaño(int daño) {   //Si muere devuelve true
+        salud -= daño;
+        if (salud <= 0) {
+            salud = 0;
+            return true;
+        }
+        return false;
+    }
+    
     @Override
     public String toString() {
         String impresion = "";

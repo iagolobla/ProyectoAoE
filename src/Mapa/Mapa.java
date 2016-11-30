@@ -21,6 +21,7 @@ import java.util.Collection;
 public class Mapa {
 
     private ArrayList<ArrayList<Celda>> mapa;
+    private HashMap<String, Civilizacion> civilizaciones;
     private HashMap<String, Recurso> recursos;
     int[] cantidades;
     Civilizacion civilizacion;
@@ -34,6 +35,7 @@ public class Mapa {
             return;
         }
         recursos = new HashMap<String, Recurso>();
+        civilizaciones = new HashMap<String, Civilizacion>();
         civilizacion = null;
         cantidades = new int[3];
         /*
@@ -46,6 +48,7 @@ public class Mapa {
         for (Civilizacion x : civ) {
             aux.put(x.getNombre(), Boolean.FALSE);
             civilizacion = x;
+            civilizaciones.put(x.getNombre(), x);
         }
         mapa = new ArrayList<>();
         Celda cell;
@@ -425,6 +428,16 @@ public class Mapa {
             System.out.println("Array de cantidades pasado nulo!");
         }
     }
+
+    public HashMap<String, Civilizacion> getCivilizaciones() {
+        return civilizaciones;
+    }
+
+    public void setCivilizaciones(HashMap<String, Civilizacion> civilizaciones) {
+        this.civilizaciones = civilizaciones;
+    }
+    
+    
 
     public Civilizacion getCivilizacion() {
         return civilizacion;
