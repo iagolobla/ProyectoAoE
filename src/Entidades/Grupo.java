@@ -35,6 +35,7 @@ public class Grupo {
         posicion = new Posicion(pos);
         for (Personaje p : person) {
             p.setGrupo(true);
+            p.setNombreGrupo(Nombre);
             personajes.add(p);
             armadura += p.getArmadura();
             salud += p.getSalud();
@@ -182,15 +183,32 @@ public class Grupo {
     public void desligar(Personaje person){
         personajes.remove(person);
         person.setGrupo(false);
+        person.setNombreGrupo(null);
     }
 
     public void desagrupar(Mapa mapa) {
         mapa.getCivilizacion().getGrupos().remove(Nombre);
-        mapa.getCivilizacion().getCantidades()[6]--;
         for (Personaje p : personajes) {
             p.setGrupo(false);
+            p.setNombreGrupo(null);
         }
         mapa.getCelda(posicion).getGrupos().remove(this);
+    }
+    
+    public void recolectar(Recurso recurso, Mapa mapa) {
+        if (recurso == null) {    //Comprobamos si se pasa bien el argumento
+            System.out.println("Argumento Recurso pasado nulo!");
+            return;
+        }
+        for(Personaje person:personajes){
+            if(person.isSoldado()){
+                System.out.println("El grupo no puede recolectar ya que no todos sus integrantes son paisanos");
+                return;
+            }
+        }
+        for(Personaje p:personajes){
+            p.recolectar(recurso, mapa);
+        }
     }
 
     public ArrayList<Personaje> getPersonajes() {

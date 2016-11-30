@@ -117,7 +117,6 @@ public class Principal {
                                     group.desligar(p);
                                     map.getCelda(group.getPosicion()).getGrupos().remove(group);
                                     map.getCivilizacion().getGrupos().remove(group.getNombre());
-                                    map.getCivilizacion().getCantidades()[6]--;
                                 }
                             } else {
                                 System.out.println("No existe el grupo o el personaje introducido");
@@ -173,7 +172,7 @@ public class Principal {
                                 System.out.println("No se puede mover en esa direccion!");
                             }
                         } else {
-                            System.out.println("Ese personaje no es de los autenticos " + C.getNombre() + "!");
+                            System.out.println("Ese grupo no es de los autenticos " + C.getNombre() + "!");
                         } //procesar comando
                         //obtener personaje del mapa
                         //comprobar si se puede mover a esa posicion
@@ -337,8 +336,14 @@ public class Principal {
                         }
                         break;
                     case "recolectar":
-                        if (comando.length == 3) {
+                        if (comando.length != 3) {
+                            System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: recolectar paisano-x Direccion(N,S,E,O)");
+                        } else if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
                             Personaje paisanito = map.getCivilizacion().getPersonajes().get(comando[1]);  //Recoge al paisano del mapa
+                            if(paisanito.isGrupo()){
+                                System.out.println("El paisano no puede recolectar ya que pertenece a un grupo");
+                                break;
+                            }
                             Posicion posPaisanito = paisanito.getPosicion();
 
                             switch (comando[2]) {
@@ -365,8 +370,37 @@ public class Principal {
                                     System.out.println("No hay un recurso aqui!");
                                 }
                             }
+                        } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
+                            Grupo group=map.getCivilizacion().getGrupos().get(comando[1]);
+                            Posicion posG=new Posicion(group.getPosicion());
+                            
+                            switch (comando[2]) {
+                                case "n":
+                                    posG.moverX(-1);
+                                    break;
+                                case "s":
+                                    posG.moverX(1);
+                                    break;
+                                case "o":
+                                    posG.moverY(-1);
+                                    break;
+                                case "e":
+                                    posG.moverY(1);
+                                    break;
+                            }
+                            if (map.checkCoords(posG)) {  //En caso de que la coordenada este bien
+                                Celda celdita = map.getCelda(posG);
+                                //Comprobamos que la celda tiene un recurso
+                                if (celdita.getTipo().equals("arbusto") || celdita.getTipo().equals("cantera") || celdita.getTipo().equals("bosque")) {
+                                    Recurso recursito = map.getCelda(posG).getRecurso();
+                                    group.recolectar(recursito, map);
+                                } else {
+                                    System.out.println("No hay un recurso aqui!");
+                                }
+                            }
+                            
                         } else {
-                            System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: recolectar paisano-x Direccion(N,S,E,O)");
+                            System.out.println("No existe la entidad introducida");
                         }
                         break;
                     case "crear":   //Quizas deberiamos comprobar que el usuario escribe Paisano bien
@@ -405,7 +439,10 @@ public class Principal {
                         map.imprimir();
                         break;
                     case "almacenar":
-                        if (comando.length == 3) {
+                        if (comando.length != 3) {
+                            System.out.println("Error sintactico!");
+                            
+                        }else if(map.getCivilizacion().getPersonajes().containsKey(comando[1])){
                             Personaje paisanoAlmacenar = map.getCivilizacion().getPersonajes().get(comando[1]);
                             Posicion pAlmacenar = new Posicion(paisanoAlmacenar.getPosicion());
 
@@ -428,6 +465,32 @@ public class Principal {
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
                                 paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar, C);
+                            } else {
+                                System.out.println("No hay un edificio aqui");
+                            }
+                        }else if(map.getCivilizacion().getGrupos().containsKey(comando[1])){
+                            Personaje grupoAlmacenar = map.getCivilizacion().getPersonajes().get(comando[1]);
+                            Posicion gAlmacenar = new Posicion(grupoAlmacenar.getPosicion());
+
+                            switch (comando[2]) {
+                                case "n":
+                                    gAlmacenar.moverX(-1);
+                                    break;
+                                case "s":
+                                    gAlmacenar.moverX(1);
+                                    break;
+                                case "e":
+                                    gAlmacenar.moverY(1);
+                                    break;
+                                case "o":
+                                    gAlmacenar.moverY(-1);
+                                    break;
+                            }
+
+                            Celda celdaAlmacenar = map.getCelda(gAlmacenar);
+                            if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
+                                Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
+                                grupoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }

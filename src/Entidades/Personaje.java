@@ -18,8 +18,9 @@ public class Personaje {
 
     public static final int SALUD_PAISANO = 150;
     public static final int SALUD_SOLDADO = 200;
-    
+
     private String tipo;
+    private String nombreGrupo;
     private String nombreCivilizacion;
     private int armadura;
     private int salud;
@@ -465,14 +466,14 @@ public class Personaje {
         }
     }
 
-    public boolean defender(Mapa mapa, String direccion){   //Si funciona devuelve true
-        if(mapa == null){   
+    public boolean defender(Mapa mapa, String direccion) {   //Si funciona devuelve true
+        if (mapa == null) {
             System.out.println("Mapa pasado nulo!");
             return false;
         }
         Posicion pos = new Posicion(posicion);
         Celda cell = mapa.getCelda(pos);
-        switch(direccion){
+        switch (direccion) {
             case "n":
                 pos.moverX(-1);
                 break;
@@ -491,35 +492,36 @@ public class Personaje {
         }
         Celda newCell = mapa.getCelda(pos);
         Edificio ef = newCell.getEdificio();
-        if(ef == null){
+        if (ef == null) {
             System.out.println("En esta posicion no hay ningun edificio!");
             return false;
         }
-        if (!(ef.getNombreCivilizacion().equals(this.getNombreCivilizacion()))){
+        if (!(ef.getNombreCivilizacion().equals(this.getNombreCivilizacion()))) {
             System.out.println("Este no es un edificio aliado!");
             return false;
         }
-        if ((ef.getCapPersonajes() - ef.getNPersonajes()) <= 0){
+        if ((ef.getCapPersonajes() - ef.getNPersonajes()) <= 0) {
             System.out.println("No hay mas sitio aqui dentro!");
             return false;
         }
-        if(this.isPaisano())
+        if (this.isPaisano()) {
             salud = SALUD_PAISANO;
-        else
+        } else {
             salud = SALUD_SOLDADO;
-        
+        }
+
         ef.setAtaque(ef.getAtaque() + ataque);
         ef.setDefensa(ef.getDefensa() + armadura);
         posicion = pos; //Actualizamos posicion del Pj
         ef.getPersonajes().put(Nombre, this);
         ef.setNPersonajes(ef.getNPersonajes() + 1);
         cell.quitarPersonaje(this); //Quitamos al personaje de la celda
-        
+
         mapa.actualizarVisibilidad();
         mapa.imprimir();
         return true;
     }
-    
+
     public Posicion moverPj(Mapa mapa, String direccion) {
 
         Celda cell = mapa.getCelda(posicion);
@@ -568,7 +570,7 @@ public class Personaje {
                 return new Posicion(posicion);
             }
 
-        } 
+        }
         return posicion;
 
     }
@@ -587,9 +589,9 @@ public class Personaje {
             if (cantidadRecolectada == 0) {   //En caso de que el paisano no lleve nada encima, puede recolectar el recurso que sea
                 cantidadRecolectada = recurso.restarCantidad(capRecolectar, mapa);    //Devuelve la cantidad obtenida y en caso de agotarse el recurso lo elimina
                 tipoRecurso = recurso.getTipo();   //Establece el tipo de recurso que carga el personaje
-                System.out.println("El Paisano ha recogido " + cantidadRecolectada + "uds de " + tipoRecurso);  //Esto va a haber que cambiarlo, el tipoRecurso imprime bosque, no madera
+                System.out.println("El  " + Nombre + "  ha recogido " + cantidadRecolectada + "uds de " + tipoRecurso);  //Esto va a haber que cambiarlo, el tipoRecurso imprime bosque, no madera
                 if (cantidadRecolectada == capRecolectar) {
-                    System.out.println("El Paisano no puede recolectar mas");
+                    System.out.println("El  " + Nombre + "  no puede recolectar mas");
                 }
             } else {    //Si ya ha recogido recursos de algun tipo
                 if (!recurso.getTipo().equals(tipoRecurso)) { //Comprobamos que el recurso sea del tipo que estamos recolectando
@@ -599,10 +601,10 @@ public class Personaje {
                 int cantidadRestante = cantidadRecolectada;
                 cantidadRecolectada += recurso.restarCantidad(capRecolectar - cantidadRecolectada, mapa);   //Si el recurso es del mismo tipo se añade recurso al personaje y se resta la capacidad restante del personaje al recurso
                 cantidadRestante = cantidadRecolectada - cantidadRestante;
-                System.out.println("El Paisano ha recogido " + cantidadRestante + "uds de " + tipoRecurso);
+                System.out.println("El " + Nombre + " ha recogido " + cantidadRestante + "uds de " + tipoRecurso);
             }
         } else {
-            System.out.println("El paisano no puede recolectar mas! Deben dejarse los recursos en la Ciudadela");
+            System.out.println("El  " + Nombre + "  no puede recolectar mas!");
         }
     }
 
@@ -620,6 +622,9 @@ public class Personaje {
             impresion += "Tipo de Recurso: " + tipoRecurso + "\n";
         }
         impresion += "Nombre: " + Nombre + "\n";
+        if (grupo) {
+            impresion += "Pertenece a: " + nombreGrupo + "\n";
+        }
         impresion += "Posicion: " + posicion + "\n";
 
         return impresion;
@@ -746,7 +751,12 @@ public class Personaje {
         this.grupo = grupo;
     }
 
-    
-    
+    public String getNombreGrupo() {
+        return nombreGrupo;
+    }
+
+    public void setNombreGrupo(String nombreGrupo) {
+        this.nombreGrupo = nombreGrupo;
+    }
 
 }
