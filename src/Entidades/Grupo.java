@@ -168,6 +168,8 @@ public class Grupo {
         }
         
         ef.setAtaque(ef.getAtaque() + ataque);
+        ef.setDefensa(ef.getDefensa() + armadura);
+        
         ef.setNPersonajes(ef.getNPersonajes() + personajes.size());
         cell.getGrupos().remove(this);
         this.setPosicion(pos);

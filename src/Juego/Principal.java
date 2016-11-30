@@ -152,6 +152,7 @@ public class Principal {
                                 if (map.getCelda(p).isEdificio()) {   //Comprueba si el personaje venia de un ef
                                     Edificio ef = map.getCelda(p).getEdificio();
                                     ef.setAtaque(ef.getAtaque() - personaje.getAtaque());
+                                    ef.setDefensa(ef.getDefensa() - personaje.getArmadura());
                                 }
                             } else {
                                 System.out.println("No se puede mover en esa direccion!");
@@ -166,6 +167,7 @@ public class Principal {
                                 if (map.getCelda(pG).isEdificio()) {   //Comprueba si el personaje venia de un ef
                                     Edificio ef = map.getCelda(pG).getEdificio();
                                     ef.setAtaque(ef.getAtaque() - group.getAtaque());
+                                    ef.setDefensa(ef.getDefensa() - group.getArmadura());
                                 }
                             } else {
                                 System.out.println("No se puede mover en esa direccion!");
@@ -425,7 +427,7 @@ public class Principal {
                             Celda celdaAlmacenar = map.getCelda(pAlmacenar);
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
-                                paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar);
+                                paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar, C);
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }

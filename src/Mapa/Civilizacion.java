@@ -26,11 +26,17 @@ public class Civilizacion {
 
     private int[] cantidades;
     private String color;
+    private int madera;
+    private int piedra;
+    private int comida;
 
     public Civilizacion(String nombre) {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
         grupos= new HashMap<String, Grupo>();
+        madera = 100;
+        piedra = 100;
+        comida = 100;
         cantidades = new int[7];//guardara las cantidades de personajes, soldados,etc.
         /*
         0--Paisano
@@ -112,6 +118,30 @@ public class Civilizacion {
         } else {
             System.out.println("HashMap de grupos pasado nulo!");
         }
+    }
+
+    public int getMadera() {
+        return madera;
+    }
+
+    public void setMadera(int madera) {
+        this.madera = madera;
+    }
+
+    public int getPiedra() {
+        return piedra;
+    }
+
+    public void setPiedra(int piedra) {
+        this.piedra = piedra;
+    }
+
+    public int getComida() {
+        return comida;
+    }
+
+    public void setComida(int comida) {
+        this.comida = comida;
     }
     
 

@@ -7,6 +7,7 @@ package Entidades;
 
 import Mapa.Celda;
 import Mapa.Mapa;
+import Mapa.Civilizacion;
 import java.util.HashMap;
 
 /**
@@ -97,7 +98,7 @@ public class Personaje {
         }
     }
 
-    public void almacenarRecurso(Edificio ciudadela) {
+    public void almacenarRecurso(Edificio ciudadela, Civilizacion C) {
         if (ciudadela == null) {  //Si el parametro es nulo
             System.out.println("Ciudadela pasada nula!");
             return;
@@ -122,17 +123,17 @@ public class Personaje {
         switch (this.tipoRecurso) {
             case "bosque":
                 System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Madera en " + ciudadela.getNombre());
-                ciudadela.setMadera(ciudadela.getMadera() + cantidadRecolectada);
+                C.setMadera(C.getMadera() + cantidadRecolectada);
                 cantidadRecolectada = 0;
                 break;
             case "cantera":
                 System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Piedra en " + ciudadela.getNombre());
-                ciudadela.setPiedra(ciudadela.getPiedra() + cantidadRecolectada);
+                C.setPiedra(C.getPiedra() + cantidadRecolectada);
                 cantidadRecolectada = 0;
                 break;
             case "arbusto":
                 System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Comida en " + ciudadela.getNombre());
-                ciudadela.setComida(ciudadela.getComida() + cantidadRecolectada);
+                C.setComida(C.getComida() + cantidadRecolectada);
                 cantidadRecolectada = 0;
                 break;
         }
@@ -166,10 +167,9 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
-        Edificio Ciudadela = mapa.getCivilizacion().getEdificios().get("ciudadela-1");
         switch (Edificio.toLowerCase()) {
             case "casa":
-                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                if (mapa.getCivilizacion().getMadera() >= 50 && mapa.getCivilizacion().getPiedra() >= 20) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "casa-" + (mapa.getCivilizacion().getCantidades()[3] + 1);
                         mapa.getCivilizacion().getCantidades()[3]++;
@@ -183,12 +183,12 @@ public class Personaje {
                         mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());*/
                         System.out.println("Casa construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
-                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
-                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - 50);
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - 20);
                         System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: " + Ciudadela.getComida());
-                        System.out.println("Madera: " + Ciudadela.getMadera());
-                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                        System.out.println("Comida: " + mapa.getCivilizacion().getComida());
+                        System.out.println("Madera: " + mapa.getCivilizacion().getMadera());
+                        System.out.println("Piedra: " + mapa.getCivilizacion().getPiedra());
                     } else {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
@@ -197,7 +197,7 @@ public class Personaje {
                 }
                 break;
             case "cuartel":
-                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                if (mapa.getCivilizacion().getMadera() >= 50 && mapa.getCivilizacion().getPiedra() >= 20) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "cuartel-" + (mapa.getCivilizacion().getCantidades()[4] + 1);
                         mapa.getCivilizacion().getCantidades()[4]++;
@@ -211,12 +211,12 @@ public class Personaje {
                         mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());*/
                         System.out.println("Cuartel construido en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
-                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
-                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - 50);
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - 20);
                         System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: " + Ciudadela.getComida());
-                        System.out.println("Madera: " + Ciudadela.getMadera());
-                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                        System.out.println("Comida: " + mapa.getCivilizacion().getComida());
+                        System.out.println("Madera: " + mapa.getCivilizacion().getMadera());
+                        System.out.println("Piedra: " + mapa.getCivilizacion().getPiedra());
                     } else {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
@@ -225,7 +225,7 @@ public class Personaje {
                 }
                 break;
             case "ciudadela":
-                if (Ciudadela.getMadera() >= 50 && Ciudadela.getPiedra() >= 20) {
+                if (mapa.getCivilizacion().getMadera() >= 50 && mapa.getCivilizacion().getPiedra() >= 20) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "ciudadela-" + (mapa.getCivilizacion().getCantidades()[2] + 1);
                         mapa.getCivilizacion().getCantidades()[2]++;
@@ -239,12 +239,12 @@ public class Personaje {
                         mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());*/
                         System.out.println("Ciudadela construida en " + pos + "Se han gastado 20 unidades de piedra y 50 de madera");
 
-                        Ciudadela.setMadera(Ciudadela.getMadera() - 50);
-                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 20);
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - 50);
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - 20);
                         System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: " + Ciudadela.getComida());
-                        System.out.println("Madera: " + Ciudadela.getMadera());
-                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                        System.out.println("Comida: " + mapa.getCivilizacion().getComida());
+                        System.out.println("Madera: " + mapa.getCivilizacion().getMadera());
+                        System.out.println("Piedra: " + mapa.getCivilizacion().getPiedra());
                     } else {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
@@ -253,7 +253,7 @@ public class Personaje {
                 }
                 break;
             case "torre":
-                if (Ciudadela.getMadera() >= 80 && Ciudadela.getPiedra() >= 40) {
+                if (mapa.getCivilizacion().getMadera() >= 80 && mapa.getCivilizacion().getPiedra() >= 40) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "torre-" + (mapa.getCivilizacion().getCantidades()[5] + 1);
                         mapa.getCivilizacion().getCantidades()[5]++;
@@ -267,12 +267,12 @@ public class Personaje {
                         mapa.getCivilizacion().getEdificios().put(Name, mapa.getCelda(new Posicion(pos)).getEdificio());*/
                         System.out.println("Torre construida en " + pos + "Se han gastado 40 unidades de piedra y 80 de madera");
 
-                        Ciudadela.setMadera(Ciudadela.getMadera() - 80);
-                        Ciudadela.setPiedra(Ciudadela.getPiedra() - 40);
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - 80);
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - 40);
                         System.out.println("Quedan los siguientes recursos: ");
-                        System.out.println("Comida: " + Ciudadela.getComida());
-                        System.out.println("Madera: " + Ciudadela.getMadera());
-                        System.out.println("Piedra: " + Ciudadela.getPiedra());
+                        System.out.println("Comida: " + mapa.getCivilizacion().getComida());
+                        System.out.println("Madera: " + mapa.getCivilizacion().getMadera());
+                        System.out.println("Piedra: " + mapa.getCivilizacion().getPiedra());
                     } else {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
@@ -321,25 +321,24 @@ public class Personaje {
                 System.out.println("El edificio ya esta a full vida");
                 return;
             }
-            Edificio ciudadelilla = mapa.getCivilizacion().getEdificios().get("ciudadela-1");
             switch (edificio.getTipo()) {
                 case "casa":
-                    if (ciudadelilla.getMadera() > (Edificio.SALUDCASA - vida) && ciudadelilla.getMadera() > (Edificio.SALUDCASA - vida)) {
+                    if (mapa.getCivilizacion().getMadera() > (Edificio.SALUDCASA - vida) && mapa.getCivilizacion().getMadera() > (Edificio.SALUDCASA - vida)) {
                         edificio.setSalud(Edificio.SALUDCASA);
                         System.out.println("Se han recuperado " + (Edificio.SALUDCASA - vida) + " puntos de salud");
-                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (Edificio.SALUDCASA - vida));
-                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (Edificio.SALUDCASA - vida));
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - (Edificio.SALUDCASA - vida));
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - (Edificio.SALUDCASA - vida));
                         System.out.println("Costes de la reparacion: " + (Edificio.SALUDCASA - vida) + " uds. de Madera y " + (Edificio.SALUDCASA - vida) + " uds de Piedra");
                     } else {
                         System.out.println("No hay recursos suficientes para reparar el edificio");
                     }
                     break;
                 case "ciudadela":
-                    if (ciudadelilla.getMadera() > (Edificio.SALUDCIUDADELA - vida) && ciudadelilla.getMadera() > (Edificio.SALUDCIUDADELA - vida)) {
+                    if (mapa.getCivilizacion().getMadera() > (Edificio.SALUDCIUDADELA - vida) && mapa.getCivilizacion().getMadera() > (Edificio.SALUDCIUDADELA - vida)) {
                         edificio.setSalud(Edificio.SALUDCIUDADELA);
                         System.out.println("Se han recuperado " + (Edificio.SALUDCIUDADELA - vida) + " puntos de salud");
-                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (Edificio.SALUDCASA - vida));
-                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (Edificio.SALUDCASA - vida));
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - (Edificio.SALUDCASA - vida));
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - (Edificio.SALUDCASA - vida));
                         System.out.println("Costes de la reparacion: " + (Edificio.SALUDCASA - vida) + " uds. de Madera y " + (Edificio.SALUDCASA - vida) + " uds de Piedra");
 
                     } else {
@@ -347,11 +346,11 @@ public class Personaje {
                     }
                     break;
                 case "cuartel":
-                    if (ciudadelilla.getMadera() > (Edificio.SALUDCUARTEL - vida) && ciudadelilla.getMadera() > (Edificio.SALUDCUARTEL - vida)) {
+                    if (mapa.getCivilizacion().getMadera() > (Edificio.SALUDCUARTEL - vida) && mapa.getCivilizacion().getMadera() > (Edificio.SALUDCUARTEL - vida)) {
                         edificio.setSalud(Edificio.SALUDCUARTEL);
                         System.out.println("Se han recuperado " + (Edificio.SALUDCUARTEL - vida) + " puntos de salud");
-                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (Edificio.SALUDCASA - vida));
-                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (Edificio.SALUDCASA - vida));
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - (Edificio.SALUDCASA - vida));
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - (Edificio.SALUDCASA - vida));
                         System.out.println("Costes de la reparacion: " + (Edificio.SALUDCASA - vida) + " uds. de Madera y " + (Edificio.SALUDCASA - vida) + " uds de Piedra");
                     } else {
                         System.out.println("No hay recursos suficientes para reparar el edificio");
@@ -410,18 +409,17 @@ public class Personaje {
             }
             int cantidadReparar;
 
-            Edificio ciudadelilla = mapa.getCivilizacion().getEdificios().get("ciudadela-1");
             switch (edificio.getTipo()) {
                 case "casa":
                     cantidadReparar = Edificio.SALUDCASA - vida;
                     if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
-                    if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
+                    if (mapa.getCivilizacion().getMadera() > (cantidadReparar) && mapa.getCivilizacion().getMadera() > (cantidadReparar)) {
                         edificio.setSalud(vida + cantidadReparar);
                         System.out.println("Se han recuperado " + (cantidadReparar) + " puntos de salud");
-                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (cantidadReparar));
-                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (cantidadReparar));
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - (cantidadReparar));
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - (cantidadReparar));
                         System.out.println("Costes de la reparacion: " + (cantidadReparar) + " uds. de Madera y " + (cantidadReparar) + " uds de Piedra");
                     } else {
                         System.out.println("No hay recursos suficientes para reparar el edificio");
@@ -432,11 +430,11 @@ public class Personaje {
                     if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
-                    if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
+                    if (mapa.getCivilizacion().getMadera() > (cantidadReparar) && mapa.getCivilizacion().getMadera() > (cantidadReparar)) {
                         edificio.setSalud(vida + cantidadReparar);
                         System.out.println("Se han recuperado " + (cantidadReparar) + " puntos de salud");
-                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (cantidadReparar));
-                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (cantidadReparar));
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - (cantidadReparar));
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - (cantidadReparar));
                         System.out.println("Costes de la reparacion: " + (cantidadReparar) + " uds. de Madera y " + (cantidadReparar) + " uds de Piedra");
 
                     } else {
@@ -448,11 +446,11 @@ public class Personaje {
                     if (cantidad < cantidadReparar) {
                         cantidadReparar = cantidad;
                     }
-                    if (ciudadelilla.getMadera() > (cantidadReparar) && ciudadelilla.getMadera() > (cantidadReparar)) {
+                    if (mapa.getCivilizacion().getMadera() > (cantidadReparar) && mapa.getCivilizacion().getMadera() > (cantidadReparar)) {
                         edificio.setSalud(vida + cantidadReparar);
                         System.out.println("Se han recuperado " + (cantidadReparar) + " puntos de salud");
-                        ciudadelilla.setMadera(ciudadelilla.getMadera() - (cantidadReparar));
-                        ciudadelilla.setPiedra(ciudadelilla.getPiedra() - (cantidadReparar));
+                        mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - (cantidadReparar));
+                        mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - (cantidadReparar));
                         System.out.println("Costes de la reparacion: " + (cantidadReparar) + " uds. de Madera y " + cantidadReparar + " uds de Piedra");
                     } else {
                         System.out.println("No hay recursos suficientes para reparar el edificio");
@@ -511,6 +509,7 @@ public class Personaje {
             salud = SALUD_SOLDADO;
         
         ef.setAtaque(ef.getAtaque() + ataque);
+        ef.setDefensa(ef.getDefensa() + armadura);
         posicion = pos; //Actualizamos posicion del Pj
         ef.getPersonajes().put(Nombre, this);
         ef.setNPersonajes(ef.getNPersonajes() + 1);

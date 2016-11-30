@@ -32,9 +32,8 @@ public class Edificio {
     private int capPersonajes;  //Establece cuantos personajes pueden entrar a defender un edificio
     private int NPersonajes;
     private int ataque;
-    private int madera;
-    private int piedra;
-    private int comida;
+    private int defensa;
+
 
     public Edificio(String tipe, Posicion posicion, String Nombre) {
         //Igualar posicion y posicion evitando aliasing
@@ -46,41 +45,32 @@ public class Edificio {
         Personajes = new HashMap<String, Personaje>();
         this.posicion = new Posicion(posicion);
         NPersonajes = 0;
+        ataque = 0;
+        defensa = 0;
         switch (tipe) {
             case ("ciudadela"):
                 tipo = tipe;
                 salud = SALUDCIUDADELA;//solo es para hacer la prueba
                 nombre = Nombre;
-                madera = 100;//son los valores iniciales que toman(se los damos nosotros).
-                piedra = 100;
-                comida = 100;
                 capPersonajes = 10;
                 break;
             case ("cuartel"):
                 tipo = tipe;
                 salud = SALUDCUARTEL;
                 nombre = Nombre;
-                madera = 0;
-                piedra = 0;
-                comida = 0;
                 capPersonajes = 15;
                 break;
             case ("casa"):
                 tipo = tipe;
                 salud = SALUDCASA;
                 nombre = Nombre;
-                madera = 0;
-                piedra = 0;
-                comida = 0;
                 capPersonajes = 5;
                 break;
             case "torre":
                 tipo = tipe;
                 salud = SALUDTORRE;
                 nombre = Nombre;
-                madera = 0;
-                piedra = 0;
-                comida = 0;
+                ataque = 50;
                 capPersonajes = 2;
                 break;
             default:
@@ -104,36 +94,24 @@ public class Edificio {
                 tipo = tipe;
                 salud = SALUDCIUDADELA;//solo es para hacer la prueba
                 nombre = Nombre;
-                madera = 100;//son los valores iniciales que toman(se los damos nosotros).
-                piedra = 100;
-                comida = 100;
                 capPersonajes = 10;
                 break;
             case ("cuartel"):
                 tipo = tipe;
                 salud = SALUDCUARTEL;
                 nombre = Nombre;
-                madera = 0;
-                piedra = 0;
-                comida = 0;
                 capPersonajes = 15;
                 break;
             case ("casa"):
                 tipo = tipe;
                 salud = SALUDCASA;
                 nombre = Nombre;
-                madera = 0;
-                piedra = 0;
-                comida = 0;
                 capPersonajes = 5;
                 break;
             case "torre":
                 tipo = tipe;
                 salud = SALUDTORRE;
                 nombre = Nombre;
-                madera = 0;
-                piedra = 0;
-                comida = 0;
                 capPersonajes = 2;
                 break;
             default:
@@ -180,14 +158,14 @@ public class Edificio {
         ArrayList<Personaje> person = mapa.getCelda(new Posicion(pos1)).getPersonajes();
         mapa.getCivilizacion().getPersonajes().put(Name, person.get(person.size() - 1));
 
-        mapa.getCivilizacion().getEdificios().get(nombre).setComida(mapa.getCivilizacion().getEdificios().get(nombre).getComida() - 10);
+        mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
         System.out.println("El " + Name + " se encuentra en la posicion " + pos1);
         System.out.println("Quedan " + ((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA) - (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1])) + " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el paisano");
         System.out.println("Quedan los siguientes recursos: ");
-        System.out.println("Comida: " + mapa.getCivilizacion().getEdificios().get(nombre).getComida());
-        System.out.println("Madera: " + mapa.getCivilizacion().getEdificios().get(nombre).getMadera());
-        System.out.println("Piedra: " + mapa.getCivilizacion().getEdificios().get(nombre).getPiedra());
+        System.out.println("Comida: " + mapa.getCivilizacion().getComida());
+        System.out.println("Madera: " + mapa.getCivilizacion().getMadera());
+        System.out.println("Piedra: " + mapa.getCivilizacion().getPiedra());
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
     }
@@ -227,14 +205,14 @@ public class Edificio {
         ArrayList<Personaje> person = mapa.getCelda(new Posicion(pos1)).getPersonajes();
         mapa.getCivilizacion().getPersonajes().put(Name, person.get(person.size() - 1));
 
-        mapa.getCivilizacion().getEdificios().get("ciudadela-1").setComida(mapa.getCivilizacion().getEdificios().get("ciudadela-1").getComida() - 10);
+        mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida()-10);
         System.out.println("El " + Name + " se encuentra en la posicion " + pos1);
         System.out.println("Quedan " + ((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA) - (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1])) + " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
         System.out.println("Quedan los siguientes recursos: ");
-        System.out.println("Comida: " + mapa.getCivilizacion().getEdificios().get("ciudadela-1").getComida());
-        System.out.println("Madera: " + mapa.getCivilizacion().getEdificios().get("ciudadela-1").getMadera());
-        System.out.println("Piedra: " + mapa.getCivilizacion().getEdificios().get("ciudadela-1").getPiedra());
+        System.out.println("Comida: " + mapa.getCivilizacion().getComida());
+        System.out.println("Madera: " + mapa.getCivilizacion().getMadera());
+        System.out.println("Piedra: " + mapa.getCivilizacion().getPiedra());
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
 
@@ -254,12 +232,9 @@ public class Edificio {
         impresion += "Tipo: " + tipo + "\n";
         impresion += "Salud: " + salud_total + "\n";
         impresion += "Ataque: " + ataque + "\n";
+        impresion += "Defensa: " + defensa + "\n";
         impresion += "Posicion: " + posicion + "\n";
-        if (getTipo().equals("ciudadela")) {
-            impresion += "Comida: " + comida + "\n";
-            impresion += "Piedra: " + piedra + "\n";
-            impresion += "Madera: " + madera + "\n";
-        }
+        
 
         return impresion;
     }
@@ -307,41 +282,7 @@ public class Edificio {
         }
     }
 
-    public int getMadera() {
-        return madera;
-    }
-
-    public void setMadera(int madera) {
-        if (madera >= 0) {
-            this.madera = madera;
-        } else {
-            System.out.println("Cantidad Madera mal introducida!");
-        }
-    }
-
-    public int getPiedra() {
-        return piedra;
-    }
-
-    public void setPiedra(int piedra) {
-        if (piedra >= 0) {
-            this.piedra = piedra;
-        } else {
-            System.out.println("Cantidad Piedra mal introducida!");
-        }
-    }
-
-    public int getComida() {
-        return comida;
-    }
-
-    public void setComida(int comida) {
-        if (comida >= 0) {
-            this.comida = comida;
-        } else {
-            System.out.println("Cantidad Comida mal introducida!");
-        }
-    }
+    
 
     public int getCapPersonajes() {
 
@@ -381,6 +322,16 @@ public class Edificio {
         }
     }
 
+    public int getDefensa() {
+        return defensa;
+    }
+
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
+    }
+
+    
+    
     public String getNombreCivilizacion() {
         return nombreCivilizacion;
     }
