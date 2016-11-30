@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import Mapa.Celda;
 import Mapa.Mapa;
+import Mapa.Civilizacion;
 
 /**
  *
@@ -216,6 +217,13 @@ public class Edificio {
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
 
+    }
+    public void imprimirCiudadela(Civilizacion civ){
+        System.out.println(this);
+        System.out.println("Recursos: ");
+        System.out.println("Piedra: "+civ.getPiedra());
+        System.out.println("Madera: "+civ.getMadera());
+        System.out.println("Comida: "+civ.getComida());
     }
 
     @Override

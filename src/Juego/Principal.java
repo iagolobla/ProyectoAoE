@@ -23,13 +23,13 @@ import Entidades.Grupo;
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
 
 public class Principal {
-
+    
     public Principal() {
         boolean seguir = true;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bienvenido al juego.");
         int numciv;
-
+        
         Civilizacion C;
         HashMap<String, Civilizacion> civilizaciones = new HashMap<String, Civilizacion>();
         do {
@@ -42,7 +42,7 @@ public class Principal {
             System.out.println("Introduzca el nombre de la civilizacion " + i + ": ");
             nombre = scanner.nextLine();
             C = new Civilizacion(nombre);
-
+            
             if (i == 1) {
                 C.setColor("azul");
             } else if (i == 2) {
@@ -51,13 +51,13 @@ public class Principal {
                 C.setColor("morado");
             }
             civilizaciones.put(nombre, C);
-
+            
         }
-
+        
         C = civilizaciones.get(nombre);
-
+        
         System.out.println("Estas jugando con los: " + C.getNombre());
-
+        
         Mapa map = new Mapa(6, 6, 6, civilizaciones.values());
         map.setCivilizacion(C);
         if (map == null) {
@@ -80,7 +80,7 @@ public class Principal {
                         } else {
                             System.out.println("Comando incorrecto");
                         }
-
+                        
                         break;
                     case "cambiar":
                         if (comando.length == 2) {
@@ -109,7 +109,7 @@ public class Principal {
                         if (comando.length == 3) {
                             if (map.getCivilizacion().getGrupos().containsKey(comando[2]) && map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
                                 Grupo group = map.getCivilizacion().getGrupos().get(comando[2]);
-
+                                
                                 Personaje personaje = map.getCivilizacion().getPersonajes().get(comando[1]);
                                 group.desligar(personaje);
                                 if (group.getPersonajes().size() == 1) {
@@ -190,7 +190,7 @@ public class Principal {
                                 } else {
                                     System.out.println("El personaje no pudo defender, una autentica deshonra");
                                 }
-
+                                
                             } else if (C.getGrupos().containsKey(comando[1])) { //Si es un grupo
                                 Grupo G = C.getGrupos().get(comando[1]);
                                 if (G.defender(map, comando[2])) {
@@ -244,7 +244,7 @@ public class Principal {
                             } else {
                                 System.out.println("El personaje no existe");
                             }
-
+                            
                         } else {
                             System.out.println("Comando construir incorrecto");
                         }
@@ -256,7 +256,11 @@ public class Principal {
                             System.out.println(personaje);
                         } else if (map.getCivilizacion().getEdificios().containsKey(comando[1])) {
                             Edificio edificio = map.getCivilizacion().getEdificios().get(comando[1]);
-                            System.out.println(edificio);
+                            if (edificio.getTipo().equals("ciudadela")) {
+                                edificio.imprimirCiudadela(map.getCivilizacion());
+                            } else {
+                                System.out.println(edificio);
+                            }
                         } else if (map.getRecursos().containsKey(comando[1])) {
                             Recurso recurso = map.getRecursos().get(comando[1]);
                             if (map.getCelda(recurso.getPos()).isVisible(map.getCivilizacion().getNombre())) {
@@ -271,14 +275,14 @@ public class Principal {
                             System.out.println("No existe la entidad introducida");
                         }
                         break;
-
+                    
                     case "mirar":
                         if (comando.length == 2) {
                             Posicion posMirar = new Posicion(comando[1]);  //guarda la posicion pasada
 
                             if (map.checkCoords(posMirar)) {
                                 Celda cellMirar = map.getCelda(posMirar);
-
+                                
                                 if (cellMirar.isVisible(map.getCivilizacion().getNombre())) {
                                     switch (cellMirar.getTipo()) {    //En funcion del tipo de la celda
                                         case "Pradera":
@@ -290,12 +294,12 @@ public class Principal {
                                                     System.out.println(person);
                                                 }
                                             }
-
+                                            
                                             break;
                                         case "ciudadela":
                                             System.out.println("Celda tipo Edificio");
                                             Edificio ciudadelita = cellMirar.getEdificio();
-                                            System.out.println(ciudadelita);
+                                            ciudadelita.imprimirCiudadela(map.getCivilizacion());
                                             break;
                                         case "casa":
                                             System.out.println("Celda tipo Edificio");
@@ -323,11 +327,11 @@ public class Principal {
                                             System.out.println(arbustillo);
                                             break;
                                     }
-
+                                    
                                 } else {
                                     System.out.println("La celda no es visible!");
                                 }
-
+                                
                             } else {
                                 System.out.println("Esa celda no esta disponible!");
                             }
@@ -340,12 +344,12 @@ public class Principal {
                             System.out.println("Error sintactico en el comando, la forma correcta de usarlo es: recolectar paisano-x Direccion(N,S,E,O)");
                         } else if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
                             Personaje paisanito = map.getCivilizacion().getPersonajes().get(comando[1]);  //Recoge al paisano del mapa
-                            if(paisanito.isGrupo()){
+                            if (paisanito.isGrupo()) {
                                 System.out.println("El paisano no puede recolectar ya que pertenece a un grupo");
                                 break;
                             }
                             Posicion posPaisanito = paisanito.getPosicion();
-
+                            
                             switch (comando[2]) {
                                 case "n":
                                     posPaisanito.moverX(-1);
@@ -371,8 +375,8 @@ public class Principal {
                                 }
                             }
                         } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
-                            Grupo group=map.getCivilizacion().getGrupos().get(comando[1]);
-                            Posicion posG=new Posicion(group.getPosicion());
+                            Grupo group = map.getCivilizacion().getGrupos().get(comando[1]);
+                            Posicion posG = new Posicion(group.getPosicion());
                             
                             switch (comando[2]) {
                                 case "n":
@@ -411,7 +415,7 @@ public class Principal {
                                         if (map.getCivilizacion().getEdificios().get(comando[1]).getTipo().equals("ciudadela")) {
                                             Edificio ciudadela = map.getCivilizacion().getEdificios().get(comando[1]);
                                             ciudadela.crearPaisano(map);
-
+                                            
                                         } else {
                                             System.out.println("Este edificio no es  una ciudadela");
                                         }
@@ -420,7 +424,7 @@ public class Principal {
                                         if (map.getCivilizacion().getEdificios().get(comando[1]).getTipo().equals("cuartel")) {
                                             Edificio cuartel = map.getCivilizacion().getEdificios().get(comando[1]);
                                             cuartel.crearSoldado(map);
-
+                                            
                                         } else {
                                             System.out.println("Este edificio no es  un cuartel");
                                         }
@@ -431,21 +435,21 @@ public class Principal {
                             } else {
                                 System.out.println("El edificio indicado no existe");
                             }
-
+                            
                         } else {
                             System.out.println("Comando construir incorrecto");
                         }
-
+                        
                         map.imprimir();
                         break;
                     case "almacenar":
                         if (comando.length != 3) {
                             System.out.println("Error sintactico!");
                             
-                        }else if(map.getCivilizacion().getPersonajes().containsKey(comando[1])){
+                        } else if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
                             Personaje paisanoAlmacenar = map.getCivilizacion().getPersonajes().get(comando[1]);
                             Posicion pAlmacenar = new Posicion(paisanoAlmacenar.getPosicion());
-
+                            
                             switch (comando[2]) {
                                 case "n":
                                     pAlmacenar.moverX(-1);
@@ -460,7 +464,7 @@ public class Principal {
                                     pAlmacenar.moverY(-1);
                                     break;
                             }
-
+                            
                             Celda celdaAlmacenar = map.getCelda(pAlmacenar);
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
@@ -468,10 +472,10 @@ public class Principal {
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }
-                        }else if(map.getCivilizacion().getGrupos().containsKey(comando[1])){
-                            Personaje grupoAlmacenar = map.getCivilizacion().getPersonajes().get(comando[1]);
+                        } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
+                            Grupo grupoAlmacenar = map.getCivilizacion().getGrupos().get(comando[1]);
                             Posicion gAlmacenar = new Posicion(grupoAlmacenar.getPosicion());
-
+                            
                             switch (comando[2]) {
                                 case "n":
                                     gAlmacenar.moverX(-1);
@@ -486,7 +490,7 @@ public class Principal {
                                     gAlmacenar.moverY(-1);
                                     break;
                             }
-
+                            
                             Celda celdaAlmacenar = map.getCelda(gAlmacenar);
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
@@ -499,11 +503,14 @@ public class Principal {
                         }
                         break;
                     case "reparar":
-                        if (comando.length == 3) {
-                            if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
-                                Personaje personaje = (Personaje) map.getCivilizacion().getPersonajes().get(comando[1]);
-                                personaje.reparar(map, comando[2]);
-                            }
+                        if (comando.length != 3) {
+                            System.out.println("Comando reparar mal introducido. Ejemplo: reparar Paisano-1 S");
+                        } else if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
+                            Personaje personaje = (Personaje) map.getCivilizacion().getPersonajes().get(comando[1]);
+                            personaje.reparar(map, comando[2]);
+                        } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
+                            Grupo group=map.getCivilizacion().getGrupos().get(comando[1]);
+                            group.reparar(map, comando[2]);
                         } else {
                             System.out.println("Comando reparar mal introducido. Ejemplo: reparar Paisano-1 S");
                         }
@@ -526,10 +533,10 @@ public class Principal {
             }
         }
     }
-
+    
     public static void main(String[] args) {
         // TODO code application logic here
         new Principal();
     }
-
+    
 }

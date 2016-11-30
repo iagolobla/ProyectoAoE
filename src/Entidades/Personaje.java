@@ -117,23 +117,23 @@ public class Personaje {
             return;
         }
         if (this.getCantidadRecolectada() <= 0) {  //Comprobamos si tiene algun recurso
-            System.out.println("Este Paisano no tiene recursos!");
+            System.out.println(Nombre + " no tiene recursos!");
             return;
         }
 
         switch (this.tipoRecurso) {
             case "bosque":
-                System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Madera en " + ciudadela.getNombre());
+                System.out.println("El " + Nombre + " va a almacenar " + cantidadRecolectada + " uds. de Madera en " + ciudadela.getNombre());
                 C.setMadera(C.getMadera() + cantidadRecolectada);
                 cantidadRecolectada = 0;
                 break;
             case "cantera":
-                System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Piedra en " + ciudadela.getNombre());
+                System.out.println("El " + Nombre + " va a almacenar " + cantidadRecolectada + " uds. de Piedra en " + ciudadela.getNombre());
                 C.setPiedra(C.getPiedra() + cantidadRecolectada);
                 cantidadRecolectada = 0;
                 break;
             case "arbusto":
-                System.out.println("Se van a almacenar " + cantidadRecolectada + " uds. de Comida en " + ciudadela.getNombre());
+                System.out.println("El " + Nombre + " a almacenar " + cantidadRecolectada + " uds. de Comida en " + ciudadela.getNombre());
                 C.setComida(C.getComida() + cantidadRecolectada);
                 cantidadRecolectada = 0;
                 break;
