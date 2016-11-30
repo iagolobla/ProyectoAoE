@@ -61,6 +61,7 @@ public class Grupo {
     public Posicion moverGrupo(Mapa mapa, String direccion) {
         for (Personaje person : personajes) {
             person.moverPj(mapa, direccion);
+            
         }
         Posicion pos = new Posicion(posicion);
         switch (direccion) {
@@ -84,6 +85,9 @@ public class Grupo {
             if (mapa.getCelda(pos).getPersonajes().get(0).getNombreCivilizacion().equals(nombreCivilizacion)) {
                 mapa.getCelda(pos).setGrupo(this);
                 mapa.getCelda(posicion).getGrupos().remove(this);
+                /*for(Personaje p:personajes){//GIT DEBIO DE QUITAR ESTO NO SE POR QUE(creo que no hace falta(cosas mias));
+                    mapa.getCelda(posicion).getPersonajes().remove(p);
+                }*/
                 posicion = new Posicion(pos);
                 return posicion;
             } else {

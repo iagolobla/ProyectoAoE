@@ -208,7 +208,7 @@ public class Celda {
 
 
     public void quitarPersonaje(Personaje P) {
-        if (this.isPersonaje()) {
+        if (this.isPaisano()||this.isSoldado()) {
             if (personajes.size() > 1) {
                 personajes.remove(P);
             } else {
