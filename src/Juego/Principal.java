@@ -214,8 +214,9 @@ public class Principal {
                         //obtener personaje del mapa
                         //comprobar si se puede mover a esa posicion
                         //....
-                        map.turnoTorres();
                         map.imprimir();
+                        
+                        map.turnoTorres();
                         break;
                     case "defender":    //No se puede usar por grupos
                         if (comando.length == 3) {

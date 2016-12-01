@@ -340,11 +340,13 @@ public class Mapa {
     }
 
     public void turnoTorres() {
-        Edificio torre;
+
         for (Civilizacion civ : civilizaciones.values()) {
             for (Edificio ef : civ.getEdificios().values()) {
                 if (ef.getTipo().equals("torre")) {
-                    ef.atacarTorre(this);
+                    if (!civ.getNombre().equals(civilizacion.getNombre())) {
+                        ef.atacarTorre(this);
+                    }
                 }
             }
         }
