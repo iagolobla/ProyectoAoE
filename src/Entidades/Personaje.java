@@ -599,10 +599,13 @@ public class Personaje {
             if (atack <= 0) {
                 atack = 1;
             }
-            
+
             if (ef.recibirDaño(atack)) {  //Le pega
                 System.out.println("El edificio " + ef.getNombre() + " ha sido fatalmente destruido!");
-                Collection<Personaje> pers=ef.getPersonajes().values();
+                ArrayList<Personaje> pers = new ArrayList<Personaje>();
+                for (Personaje P : ef.getPersonajes().values()) {
+                    pers.add(P);
+                }
                 for (Personaje P : pers) {
                     ef.getPersonajes().remove(P.getNombre());
                     cell.getPersonajes().remove(P);
@@ -648,7 +651,7 @@ public class Personaje {
                     G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
                     cell.getPersonajes().remove(P);
                     mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
-                    
+
                 } else {
                     System.out.println("Al personaje " + P.getNombre() + " de la civilizacion " + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }

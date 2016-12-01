@@ -232,8 +232,10 @@ public class Grupo {
 
             if (ef.recibirDaño(atack)) {  //Le pega
                 System.out.println("El edificio " + ef.getNombre() + " de la civilizacion " + ef.getNombreCivilizacion() + " ha sido fatalmente destruido!");
-                HashMap<String,Personaje> aux=new HashMap<String,Personaje>(ef.getPersonajes());
-                Collection<Personaje> pers = aux.values();
+                ArrayList<Personaje> pers= new ArrayList<Personaje> ();
+                for(Personaje P : ef.getPersonajes().values()){
+                    pers.add(P);
+                }
                 for (Personaje P : pers) {
                     ef.getPersonajes().remove(P.getNombre());
                     cell.getPersonajes().remove(P);

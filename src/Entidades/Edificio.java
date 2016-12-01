@@ -319,7 +319,11 @@ public class Edificio {
             
             if (ef.recibirDaño(atack)) {  //Si muere
                 System.out.println("El edificio " + ef.getNombre() + " ha sido fatalmente destruido!");
-                Collection<Personaje> pers=ef.getPersonajes().values();
+                ArrayList<Personaje> pers= new ArrayList<Personaje> ();
+                for(Personaje P : ef.getPersonajes().values()){
+                    pers.add(P);
+                }
+                
                 for (Personaje P : pers) {
                     ef.getPersonajes().remove(P.getNombre());
                     cell.getPersonajes().remove(P);
