@@ -146,6 +146,7 @@ public class Principal {
                                 Personaje P = C.getPersonajes().get(comando[1]);
                                 if(!P.atacar(map, comando[2])){
                                     System.out.println("El personaje no ha sido quien de atacar!");
+                                    map.turnoTorres();
                                 }else{
                                     map.turnoTorres();
                                 }
@@ -154,6 +155,7 @@ public class Principal {
                                 Grupo G=C.getGrupos().get(comando[1]);
                                 if(!G.atacar(map, comando[2])){
                                     System.out.println("El grupo no ha sido quien de atacar!");
+                                    map.turnoTorres();
                                 }else{
                                     map.turnoTorres();
                                 }
@@ -161,6 +163,7 @@ public class Principal {
                                 Edificio ef = C.getEdificios().get(comando[1]);
                                 if(!ef.atacar(map, comando[2])){
                                     System.out.println("Esta basura de edificio no ha tenido los santos cimientos de atacar!");
+                                    map.turnoTorres();
                                 }else{
                                     map.turnoTorres();
                                 }
