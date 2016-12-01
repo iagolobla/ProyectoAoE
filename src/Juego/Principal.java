@@ -128,8 +128,12 @@ public class Principal {
                         break;
                     case "desagrupar":
                         if (comando.length == 2) {
-                            Grupo g = map.getCivilizacion().getGrupos().get(comando[1]);
-                            g.desagrupar(map);
+                            if(map.getCivilizacion().getGrupos().containsKey(comando[1])){
+                                Grupo g = map.getCivilizacion().getGrupos().get(comando[1]);
+                                g.desagrupar(map);
+                            } else {
+                                System.out.println("Esa cofradia de los amigos de los niños no existe en el registro civil!");
+                            }
                         } else {
                             System.out.println("Comando desagrupar incorrecto");
                         }
@@ -146,7 +150,10 @@ public class Principal {
                             } else if(C.getGrupos().containsKey(comando[1])){   //Si se hace "atacar grupo dir"
                                 
                             } else if(C.getEdificios().containsKey(comando[1])){    //Si se hace "atacar edificio dir"
-                                
+                                Edificio ef = C.getEdificios().get(comando[1]);
+                                if(!ef.atacar(map, comando[2])){
+                                    System.out.println("Esta basura de edificio no ha tenido los santos cimientos de atacar!");
+                                }
                             } else {
                                 System.out.println("La entidad especificada no existe!");
                             }

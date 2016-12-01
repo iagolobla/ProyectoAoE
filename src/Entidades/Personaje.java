@@ -595,33 +595,11 @@ public class Personaje {
                 return false;
             }
 
-            int tam = ef.getPersonajes().size(); //Numero de personajes a repartir el daño
             int atack = ataque - ef.getDefensa();
             if (atack <= 0) {
                 atack = 1;
             }
-            /*if (tam != 0) {   //Si hay personajes en el edificio
-                int daño = atack / tam;
-
-                if (daño <= 0) {
-                    daño = 1;   //Nos aseguramos de que siempre se hace daño
-                }
-                ArrayList<Personaje> aux = new ArrayList<Personaje>(ef.getPersonajes().values());
-
-                for (Personaje P : aux) {   //Para cada personaje del grupo
-                    if (P.recibirDaño(daño)) {    //Si muere
-                        ef.getPersonajes().remove(P.getNombre());
-                        ef.setDefensa(ef.getDefensa() - P.getArmadura());   //Restamos la armadura al edificio
-                        cell.getPersonajes().remove(P);
-                        //mapa.getCivilizaciones().remove(P.getNombre());
-                        mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
-                        System.out.println("El personaje " + P.getNombre()  + " de la civilizacion" + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
-                    } else {
-                        System.out.println("Al personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
-                    }
-                }
-                return true;
-            } else */
+            
             if (ef.recibirDaño(atack)) {  //Le pega
                 System.out.println("El edificio " + ef.getNombre() + " ha sido fatalmente destruido!");
                 Collection<Personaje> pers=ef.getPersonajes().values();
@@ -643,7 +621,7 @@ public class Personaje {
                 mapa.imprimir();
 
             } else {
-                System.out.println("El edificio " + ef.getNombre() + " ha recibido " + atack + " puntos de daño!");
+                System.out.println("El edificio " + ef.getNombre() + " de la civilizacion " + ef.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
             }
             return true;
         } else if (cell.isGrupo()) {     //Si en la celda hay un grupo
@@ -670,13 +648,15 @@ public class Personaje {
                     G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
                     cell.getPersonajes().remove(P);
                     mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
-                    mapa.imprimir();
+                    
                 } else {
                     System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }
             }
             if (G.getPersonajes().size() == 0) {
                 cell.getGrupos().remove(G);
+                mapa.getCivilizaciones().get(G.getNombreCivilizacion()).getGrupos().remove(G.getNombre());
+                mapa.imprimir();
             }
             return true;
         }
