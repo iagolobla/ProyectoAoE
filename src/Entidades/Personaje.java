@@ -560,37 +560,30 @@ public class Personaje {
         if (cell.isLibre() || cell.isRecurso()) { //Si no hay nada en la celda o hay un recurso
             return false;   //Se termina
         }
-
-        if (cell.isGrupo()) {     //Si en la celda hay un grupo
-            Grupo G = cell.getGrupos().get(0);
-
-            if (G.getNombreCivilizacion().equals(nombreCivilizacion)) {
+        
+        if (cell.isPersonaje()) {    //Si en la celda hay un personaje individual
+            ArrayList<Personaje> pers = new ArrayList<Personaje>();
+            for (Personaje p : cell.getPersonajes()) {
+                if (!p.isGrupo()) {
+                    pers.add(p);
+                }
+            }
+            if (pers.get(0).getNombreCivilizacion().equals(nombreCivilizacion)) {
                 return false;
             }
 
-            int tam = G.getPersonajes().size(); //Numero de personajes a repartir el daño
-            int atack = ataque - G.getArmadura();
-            int daño = atack / tam;
-
-            if (daño <= 0) {
-                daño = 1;   //Nos aseguramos de que siempre se hace daño
+            Personaje P = pers.get(0);
+            int atack = ataque - P.getArmadura();
+            if (atack <= 0) {
+                atack = 1;
             }
-            ArrayList<Personaje> aux = new ArrayList<Personaje>(G.getPersonajes());
+            if (P.recibirDaño(atack)) {   //Si muere
+                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
 
-            for (Personaje P : aux) {   //Para cada personaje del grupo
-                if (P.recibirDaño(daño)) {    //Si muere
-                    System.out.println("El personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
-
-                    G.getPersonajes().remove(P);
-                    G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
-                    cell.getPersonajes().remove(P);
-                    mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
-                } else {
-                    System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
-                }
-            }
-            if(G.getPersonajes().size()==0){
-                cell.getGrupos().remove(G);
+                cell.getPersonajes().remove(P);
+                mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
+            } else {
+                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
             }
             return true;
         } else if (cell.isEdificio()) { //Si en la celda hay un edificio
@@ -636,29 +629,36 @@ public class Personaje {
                 System.out.println("El edificio " + ef.getNombre() + " ha recibido " + atack + " puntos de daño!");
             }
             return true;
-        } else if (cell.isPersonaje()) {    //Si en la celda hay un personaje individual
-            ArrayList<Personaje> pers = new ArrayList<Personaje>();
-            for (Personaje p : cell.getPersonajes()) {
-                if (!p.isGrupo()) {
-                    pers.add(p);
-                }
-            }
-            if (pers.get(0).getNombreCivilizacion().equals(nombreCivilizacion)) {
+        } else if (cell.isGrupo()) {     //Si en la celda hay un grupo
+            Grupo G = cell.getGrupos().get(0);
+
+            if (G.getNombreCivilizacion().equals(nombreCivilizacion)) {
                 return false;
             }
 
-            Personaje P = pers.get(0);
-            int atack = ataque - P.getArmadura();
-            if (atack <= 0) {
-                atack = 1;
-            }
-            if (P.recibirDaño(atack)) {   //Si muere
-                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
+            int tam = G.getPersonajes().size(); //Numero de personajes a repartir el daño
+            int atack = ataque - G.getArmadura();
+            int daño = atack / tam;
 
-                cell.getPersonajes().remove(P);
-                mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
-            } else {
-                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
+            if (daño <= 0) {
+                daño = 1;   //Nos aseguramos de que siempre se hace daño
+            }
+            ArrayList<Personaje> aux = new ArrayList<Personaje>(G.getPersonajes());
+
+            for (Personaje P : aux) {   //Para cada personaje del grupo
+                if (P.recibirDaño(daño)) {    //Si muere
+                    System.out.println("El personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
+
+                    G.getPersonajes().remove(P);
+                    G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
+                    cell.getPersonajes().remove(P);
+                    mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
+                } else {
+                    System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
+                }
+            }
+            if(G.getPersonajes().size()==0){
+                cell.getGrupos().remove(G);
             }
             return true;
         }
