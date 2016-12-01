@@ -626,7 +626,12 @@ public class Personaje {
                 mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).getEdificios().remove(ef.getNombre());
                 cell.setEdificio(null);
                 cell.setTipo("Pradera");
+                if(!(mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).civilizacionViva())){
+                    System.out.println("LA CIVILIZACION "+ef.getNombreCivilizacion()+" HA MUERTO");
+                    mapa.getCivilizaciones().remove(ef.getNombreCivilizacion());
+                }
                 mapa.imprimir();
+                
             } else {
                 System.out.println("El edificio " + ef.getNombre() + " ha recibido " + atack + " puntos de daño!");
             }
