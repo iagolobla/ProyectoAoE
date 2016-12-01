@@ -619,14 +619,14 @@ public class Personaje {
                         mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
                         System.out.println("El personaje " + P.getNombre()  + " de la civilizacion" + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
                     } else {
-                        System.out.println("Al personaje " + P.getNombre()  + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
+                        System.out.println("Al personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                     }
                 }
                 return true;
             } else if (ef.recibirDaño(atack)) {  //Le pega
                 System.out.println("El edificio " + ef.getNombre() + " ha sido fatalmente destruido!");
 
-                mapa.getCivilizaciones().get(nombreCivilizacion).getEdificios().remove(ef.getNombre());
+                mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).getEdificios().remove(ef.getNombre());
                 cell.setEdificio(null);
                 cell.setTipo("Pradera");
             } else {
