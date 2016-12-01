@@ -134,7 +134,7 @@ public class Grupo {
             System.out.println("Este no es un edificio aliado!");
             return false;
         }
-        if ((ef.getCapPersonajes() - ef.getNPersonajes() - personajes.size()) <= 0) {
+        if ((ef.getCapPersonajes() - ef.getNPersonajes() - personajes.size()) < 0) {
             System.out.println("No hay mas sitio para todos aqui dentro!");
             return false;
         }

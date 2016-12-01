@@ -408,11 +408,13 @@ public class Principal {
                                 case "e":
                                     posPaisanito.moverY(1);
                                     break;
+                                default:
+                                    System.out.println("No se ha introducido una direccion valida!");
                             }
                             if (map.checkCoords(posPaisanito)) {  //En caso de que la coordenada este bien
                                 Celda celdita = map.getCelda(posPaisanito);
                                 //Comprobamos que la celda tiene un recurso
-                                if (celdita.getTipo().equals("arbusto") || celdita.getTipo().equals("cantera") || celdita.getTipo().equals("bosque")) {
+                                if (celdita.isRecurso()) {
                                     Recurso recursito = map.getCelda(posPaisanito).getRecurso();
                                     paisanito.recolectar(recursito, map);
                                     map.turnoTorres();
@@ -437,11 +439,13 @@ public class Principal {
                                 case "e":
                                     posG.moverY(1);
                                     break;
+                                default:
+                                    System.out.println("No se ha introducido una direccion valida!");
                             }
                             if (map.checkCoords(posG)) {  //En caso de que la coordenada este bien
                                 Celda celdita = map.getCelda(posG);
                                 //Comprobamos que la celda tiene un recurso
-                                if (celdita.getTipo().equals("arbusto") || celdita.getTipo().equals("cantera") || celdita.getTipo().equals("bosque")) {
+                                if (celdita.isRecurso()) {
                                     Recurso recursito = map.getCelda(posG).getRecurso();
                                     group.recolectar(recursito, map);
                                     map.turnoTorres();
