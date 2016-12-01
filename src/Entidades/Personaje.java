@@ -582,6 +582,7 @@ public class Personaje {
 
                 cell.getPersonajes().remove(P);
                 mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
+                mapa.imprimir();
             } else {
                 System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
             }
@@ -625,6 +626,7 @@ public class Personaje {
                 mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).getEdificios().remove(ef.getNombre());
                 cell.setEdificio(null);
                 cell.setTipo("Pradera");
+                mapa.imprimir();
             } else {
                 System.out.println("El edificio " + ef.getNombre() + " ha recibido " + atack + " puntos de daño!");
             }
@@ -653,6 +655,7 @@ public class Personaje {
                     G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
                     cell.getPersonajes().remove(P);
                     mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
+                    mapa.imprimir();
                 } else {
                     System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }
