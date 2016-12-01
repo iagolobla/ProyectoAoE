@@ -72,8 +72,8 @@ public class Edificio {
                 tipo = tipe;
                 salud = SALUDTORRE;
                 nombre = Nombre;
-                ataque = 50;
-                defensa = 50;
+                ataque = 100;
+                defensa = 100;
                 capPersonajes = 2;
                 break;
             default:
@@ -114,8 +114,8 @@ public class Edificio {
             case "torre":
                 tipo = tipe;
                 salud = SALUDTORRE;
-                ataque = 50;
-                defensa = 50;
+                ataque = 100;
+                defensa = 100;
                 nombre = Nombre;
                 capPersonajes = 2;
                 break;
