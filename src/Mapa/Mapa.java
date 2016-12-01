@@ -85,8 +85,8 @@ public class Mapa {
             }
             c.getCantidades()[2]++; //Sumamos uno a los paisanos y ciudadelas de esa civ
             c.getCantidades()[0]++;
-            Celda nueva=getCelda(x1, y1);
-            nueva.setEdificio(new Edificio("ciudadela",new Posicion(x1,y1),Namec,c.getNombre()));
+            Celda nueva = getCelda(x1, y1);
+            nueva.setEdificio(new Edificio("ciudadela", new Posicion(x1, y1), Namec, c.getNombre()));
             nueva.setTipo("ciudadela");
             nueva.getVisible().replace(c.getNombre(), Boolean.TRUE);
             c.getEdificios().put(Namec, getCelda(new Posicion(x1, y1)).getEdificio());
@@ -264,14 +264,14 @@ public class Mapa {
         Celda aux;
         Posicion pos;
         if (cell.isPaisano() || cell.isSoldado() || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
-            if(cell.getEdificio()!=null){
-                Edificio edif=cell.getEdificio();
-                if(edif.getNombreCivilizacion().equals(civilizacion.getNombre())==false){
+            if (cell.getEdificio() != null) {
+                Edificio edif = cell.getEdificio();
+                if (edif.getNombreCivilizacion().equals(civilizacion.getNombre()) == false) {
                     return;
                 }
-            }else if(cell.getPersonajes()!=null){
-                ArrayList<Personaje> person=cell.getPersonajes();
-                if(person.get(0).getNombreCivilizacion().equals(civilizacion.getNombre())==false){
+            } else if (cell.getPersonajes() != null) {
+                ArrayList<Personaje> person = cell.getPersonajes();
+                if (person.get(0).getNombreCivilizacion().equals(civilizacion.getNombre()) == false) {
                     return;
                 }
             }
@@ -312,27 +312,39 @@ public class Mapa {
             }
         }
     }
-    public void borrarCivilizacion(String civ){
+
+    public void borrarCivilizacion(String civ) {
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {
-                cell=this.getCelda(i, j);
-                if(cell.isPersonaje()||cell.isGrupo()){
-                    Personaje p=cell.getPersonajes().get(0);
-                    
-                    if(p.getNombreCivilizacion().equals(civ)){
-                        Collection<Personaje> per=cell.getPersonajes();
-                        Collection<Grupo> gr=cell.getGrupos();
+                cell = this.getCelda(i, j);
+                if (cell.isPersonaje() || cell.isGrupo()) {
+                    Personaje p = cell.getPersonajes().get(0);
+
+                    if (p.getNombreCivilizacion().equals(civ)) {
+                        Collection<Personaje> per = cell.getPersonajes();
+                        Collection<Grupo> gr = cell.getGrupos();
                         cell.getGrupos().removeAll(gr);
                         cell.getPersonajes().removeAll(per);
-                        
+
                     }
-                }else if(cell.isEdificio()){
-                    Edificio ef=cell.getEdificio();
-                    if(ef.getNombreCivilizacion().equals(civ)){
+                } else if (cell.isEdificio()) {
+                    Edificio ef = cell.getEdificio();
+                    if (ef.getNombreCivilizacion().equals(civ)) {
                         cell.setEdificio(null);
                         cell.setTipo("Pradera");
                     }
+                }
+            }
+        }
+    }
+
+    public void turnoTorres() {
+        Edificio torre;
+        for (Civilizacion civ : civilizaciones.values()) {
+            for (Edificio ef : civ.getEdificios().values()) {
+                if (ef.getTipo().equals("torre")) {
+                    ef.atacarTorre(this);
                 }
             }
         }
@@ -356,27 +368,55 @@ public class Mapa {
                 if (mapa.get(i).get(j).isVisible(civilizacion.getNombre())) {
                     switch (mapa.get(i).get(j).getTipo()) {
                         case ("Pradera"):
-                            if(getCelda(i,j).isGrupo()){
-                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                            }else if (getCelda(i, j).isPaisano()) {   //Si tiene un paisano
-                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            if (getCelda(i, j).isGrupo()) {
+                                if (getCelda(i, j).getPersonajes().get(0).getNombreCivilizacion().equals(civilizacion.getNombre())) {
+                                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                } else {
+                                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                }
+                            } else if (getCelda(i, j).isPaisano()) {   //Si tiene un paisano
+                                if (getCelda(i, j).getPersonajes().get(0).getNombreCivilizacion().equals(civilizacion.getNombre())) {
+                                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                } else {
+                                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                }
                             } else if (getCelda(i, j).isSoldado()) {    //Si tiene un soldado
-                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                if (getCelda(i, j).getPersonajes().get(0).getNombreCivilizacion().equals(civilizacion.getNombre())) {
+                                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                } else {
+                                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "S" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                }
                             } else {    //Si no tiene ninguno
                                 System.out.print(Colores.BACK_VERDE + " " + Colores.BACK_RESET);
                             }
                             break;
                         case ("ciudadela"):
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);    //⍟♜♛
+                            if (getCelda(i, j).getEdificio().getNombreCivilizacion().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
                             break;
                         case ("cuartel"):
-                            System.out.print(Colores.BACK_VERDE + "♜" + Colores.BACK_RESET);
+                            if (getCelda(i, j).getEdificio().getNombreCivilizacion().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
                             break;
                         case ("casa"):
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            if (getCelda(i, j).getEdificio().getNombreCivilizacion().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
                             break;
                         case "torre":
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_NEGRO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            if (getCelda(i, j).getEdificio().getNombreCivilizacion().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
                             break;
                         case "bosque":
                             System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
@@ -462,8 +502,6 @@ public class Mapa {
     public void setCivilizaciones(HashMap<String, Civilizacion> civilizaciones) {
         this.civilizaciones = civilizaciones;
     }
-    
-    
 
     public Civilizacion getCivilizacion() {
         return civilizacion;

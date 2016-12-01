@@ -174,6 +174,13 @@ public class Edificio {
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
     }
+    
+    public void atacarTorre(Mapa mapa){
+        this.atacar(mapa,"n");
+        this.atacar(mapa,"s");
+        this.atacar(mapa,"e");
+        this.atacar(mapa,"o");
+    }
 
     public void crearSoldado(Mapa mapa) {
         if (!this.tipo.equals("cuartel")) {

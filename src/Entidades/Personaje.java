@@ -280,7 +280,7 @@ public class Personaje {
                         System.out.println("No se puede Contruir en esa direccion!");
                     }
                 } else {
-                    System.out.println("No hay suficientes recursos para construir la ciudadela");
+                    System.out.println("No hay suficientes recursos para construir la torre");
                 }
                 break;
             default:
