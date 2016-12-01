@@ -512,7 +512,7 @@ public class Principal {
                             }
                             
                             Celda celdaAlmacenar = map.getCelda(pAlmacenar);
-                            if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
+                            if (celdaAlmacenar.isEdificio()) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
                                 paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar, C);
                                 map.turnoTorres();

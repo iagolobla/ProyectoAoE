@@ -114,6 +114,10 @@ public class Personaje {
             System.out.println("No se pueden almacenar Recursos en un Cuartel!");
             return;
         }
+        if (ciudadela.getTipo().equals("torre")) {  //En caso de que el edificio sea un cuartel
+            System.out.println("No se pueden almacenar Recursos en una Torre!");
+            return;
+        }
         if (this.getTipo().equals("soldado")) {   //Comprueba si es un paisano o un soldado
             System.out.println("Los soldados no cargan Recursos!");
             return;
