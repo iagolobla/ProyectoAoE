@@ -649,7 +649,7 @@ public class Personaje {
 
             for (Personaje P : aux) {   //Para cada personaje del grupo
                 if (P.recibirDaño(daño)) {    //Si muere
-                    System.out.println("El personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
+                    System.out.println("El personaje " + P.getNombre() + " de la civilizacion " + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
 
                     G.getPersonajes().remove(P);
                     G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
@@ -657,7 +657,7 @@ public class Personaje {
                     mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
 
                 } else {
-                    System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
+                    System.out.println("Al personaje " + P.getNombre() + " de la civilizacion " + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }
             }
             if (G.getPersonajes().size() == 0) {

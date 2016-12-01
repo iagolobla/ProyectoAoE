@@ -14,6 +14,7 @@ import Mapa.Mapa;
 import Mapa.Celda;
 import Mapa.Civilizacion;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class Grupo {
 
