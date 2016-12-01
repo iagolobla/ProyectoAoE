@@ -12,6 +12,7 @@ package Mapa;
 import Entidades.Posicion;
 import Entidades.Personaje;
 import Entidades.Recurso;
+import Entidades.Grupo;
 import Entidades.Edificio;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -308,6 +309,31 @@ public class Mapa {
             for (int j = 0; j < MAPAX; j++) {
                 cell = this.getCelda(new Posicion(i, j));
                 this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
+            }
+        }
+    }
+    public void borrarCivilizacion(String civ){
+        Celda cell;
+        for (int i = 0; i < MAPAY; i++) {
+            for (int j = 0; j < MAPAX; j++) {
+                cell=this.getCelda(i, j);
+                if(cell.isPersonaje()||cell.isGrupo()){
+                    Personaje p=cell.getPersonajes().get(0);
+                    
+                    if(p.getNombreCivilizacion().equals(civ)){
+                        Collection<Personaje> per=cell.getPersonajes();
+                        Collection<Grupo> gr=cell.getGrupos();
+                        cell.getGrupos().removeAll(gr);
+                        cell.getPersonajes().removeAll(per);
+                        
+                    }
+                }else if(cell.isEdificio()){
+                    Edificio ef=cell.getEdificio();
+                    if(ef.getNombreCivilizacion().equals(civ)){
+                        cell.setEdificio(null);
+                        cell.setTipo("Pradera");
+                    }
+                }
             }
         }
     }

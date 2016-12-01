@@ -84,11 +84,11 @@ public class Principal {
                         break;
                     case "cambiar":
                         if (comando.length == 2) {
-                            if (civilizaciones.containsKey(comando[1])) {
-                                if (comando[1].equals(C.getNombre())) {
+                            if (map.getCivilizaciones().containsKey(comando[1])) {
+                                if (comando[1].equals(map.getCivilizacion())) {
                                     System.out.println("Ya se esta jugando con los " + comando[1]);
                                 } else {
-                                    C = civilizaciones.get(comando[1]);
+                                    C = map.getCivilizaciones().get(comando[1]);
                                     map.setCivilizacion(C);
                                     System.out.println("Ha cambiado a la civilizacion: " + C.getNombre());
                                 }
@@ -238,7 +238,7 @@ public class Principal {
                                     }
                                     break;
                                 case "civilizaciones":
-                                    for (String k : civilizaciones.keySet()) {
+                                    for (String k : map.getCivilizaciones().keySet()) {
                                         System.out.println("Nombre : " + k);
                                     }
                                     break;

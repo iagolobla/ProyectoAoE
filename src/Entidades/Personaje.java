@@ -629,6 +629,7 @@ public class Personaje {
                 if(!(mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).civilizacionViva())){
                     System.out.println("LA CIVILIZACION "+ef.getNombreCivilizacion()+" HA MUERTO");
                     mapa.getCivilizaciones().remove(ef.getNombreCivilizacion());
+                    mapa.borrarCivilizacion(ef.getNombreCivilizacion());
                 }
                 mapa.imprimir();
                 
