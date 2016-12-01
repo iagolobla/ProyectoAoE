@@ -141,6 +141,7 @@ public class Edificio {
 
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la primera posicion, si no es valida
             pos1.moverX(2);
+            
         }
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la segunda posicion, si no es valida
             pos1.moverX(-1);
