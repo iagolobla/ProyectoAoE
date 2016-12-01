@@ -52,9 +52,9 @@ public class Personaje {
                 break;
             case "paisano":
                 this.tipo = tipo;
-                armadura = 50;
+                armadura = 10;
                 salud = SALUD_PAISANO;
-                ataque = 10;
+                ataque = 20;
                 capRecolectar = 100;
                 cantidadRecolectada = 0;
                 this.Nombre = Nombre;
@@ -584,7 +584,7 @@ public class Personaje {
                     G.getPersonajes().remove(P);
                     G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
                     cell.getPersonajes().remove(P);
-                    mapa.getCivilizaciones().remove(P.getNombre());
+                    mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
                 } else {
                     System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }
@@ -615,7 +615,8 @@ public class Personaje {
                         ef.getPersonajes().remove(P.getNombre());
                         ef.setDefensa(ef.getDefensa() - P.getArmadura());   //Restamos la armadura al edificio
                         cell.getPersonajes().remove(P);
-                        mapa.getCivilizaciones().remove(P.getNombre());
+                        //mapa.getCivilizaciones().remove(P.getNombre());
+                        mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
                         System.out.println("El personaje " + P.getNombre()  + " de la civilizacion" + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
                     } else {
                         System.out.println("Al personaje " + P.getNombre()  + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
@@ -631,6 +632,7 @@ public class Personaje {
             } else {
                 System.out.println("El edificio " + ef.getNombre() + " ha recibido " + atack + " puntos de daño!");
             }
+            return true;
         } else if (cell.isPersonaje()) {    //Si en la celda hay un personaje individual
             ArrayList<Personaje> pers = new ArrayList<Personaje>();
             for (Personaje p : cell.getPersonajes()) {
@@ -648,12 +650,12 @@ public class Personaje {
                 atack = 1;
             }
             if (P.recibirDaño(atack)) {   //Si muere
-                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion" + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
+                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
 
                 cell.getPersonajes().remove(P);
-                mapa.getCivilizaciones().remove(P.getNombre());
+                mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
             } else {
-                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion" + P.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
+                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
             }
             return true;
         }
