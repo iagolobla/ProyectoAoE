@@ -174,13 +174,18 @@ public class Personaje {
                 System.out.println("Error, direccion no valida!");
 
         }
+        Celda nueva = mapa.getCelda(pos);
+        if(!nueva.isLibre()){
+            System.out.println("La celda en la que se quiere construir esta ocupada!");
+            return;
+        }
+        
         switch (Edificio.toLowerCase()) {
             case "casa":
                 if (mapa.getCivilizacion().getMadera() >= 50 && mapa.getCivilizacion().getPiedra() >= 20) {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "casa-" + (mapa.getCivilizacion().getCantidades()[3] + 1);
                         mapa.getCivilizacion().getCantidades()[3]++;
-                        Celda nueva = mapa.getCelda(pos);
                         nueva.setEdificio(new Edificio("casa", new Posicion(pos), Name, mapa.getCivilizacion().getNombre()));
                         nueva.setTipo("casa");
                         nueva.getVisible().replace(mapa.getCivilizacion().getNombre(), Boolean.TRUE);
@@ -208,7 +213,6 @@ public class Personaje {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "cuartel-" + (mapa.getCivilizacion().getCantidades()[4] + 1);
                         mapa.getCivilizacion().getCantidades()[4]++;
-                        Celda nueva = mapa.getCelda(pos);
                         nueva.setEdificio(new Edificio("cuartel", new Posicion(pos), Name, mapa.getCivilizacion().getNombre()));
                         nueva.setTipo("cuartel");
                         nueva.getVisible().replace(mapa.getCivilizacion().getNombre(), Boolean.TRUE);
@@ -236,7 +240,6 @@ public class Personaje {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "ciudadela-" + (mapa.getCivilizacion().getCantidades()[2] + 1);
                         mapa.getCivilizacion().getCantidades()[2]++;
-                        Celda nueva = mapa.getCelda(pos);
                         nueva.setEdificio(new Edificio("ciudadela", new Posicion(pos), Name, mapa.getCivilizacion().getNombre()));
                         nueva.setTipo("ciudadela");
                         nueva.getVisible().replace(mapa.getCivilizacion().getNombre(), Boolean.TRUE);
@@ -264,7 +267,6 @@ public class Personaje {
                     if (mapa.checkCoords(pos) && mapa.checkBuilding(pos)) { //Comprueba que la posicion esta en el mapa y que no esta ocupada
                         String Name = "torre-" + (mapa.getCivilizacion().getCantidades()[5] + 1);
                         mapa.getCivilizacion().getCantidades()[5]++;
-                        Celda nueva = mapa.getCelda(pos);
                         nueva.setEdificio(new Edificio("torre", new Posicion(pos), Name, mapa.getCivilizacion().getNombre()));
                         nueva.setTipo("torre");
                         nueva.getVisible().replace(mapa.getCivilizacion().getNombre(), Boolean.TRUE);
