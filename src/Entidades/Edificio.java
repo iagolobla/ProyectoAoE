@@ -251,8 +251,8 @@ public class Edificio {
             System.out.println("Mapa pasado nulo!");
             return false;
         }
-        if (this.getNPersonajes() < 1){
-            System.out.println("No hay personajes en el edificio, el ataque es 0!");
+        if (ataque <= 0){
+            System.out.println("El ataque del edificio es 0!");
             return false;
         }
         Posicion posp = new Posicion(this.posicion);
