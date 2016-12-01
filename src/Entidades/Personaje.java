@@ -10,6 +10,7 @@ import Mapa.Mapa;
 import Mapa.Civilizacion;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -560,7 +561,7 @@ public class Personaje {
         if (cell.isLibre() || cell.isRecurso()) { //Si no hay nada en la celda o hay un recurso
             return false;   //Se termina
         }
-        
+
         if (cell.isPersonaje()) {    //Si en la celda hay un personaje individual
             ArrayList<Personaje> pers = new ArrayList<Personaje>();
             for (Personaje p : cell.getPersonajes()) {
@@ -578,13 +579,13 @@ public class Personaje {
                 atack = 1;
             }
             if (P.recibirDaño(atack)) {   //Si muere
-                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
+                System.out.println("El personaje " + P.getNombre() + " de la civilizacion " + P.getNombreCivilizacion() + " ha sufrido una horrible y dolorosa muerte!");
 
                 cell.getPersonajes().remove(P);
                 mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
                 mapa.imprimir();
             } else {
-                System.out.println("El personaje " + P.getNombre()  + " de la civilizacion " + P.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
+                System.out.println("El personaje " + P.getNombre() + " de la civilizacion " + P.getNombreCivilizacion() + " ha recibido " + atack + " puntos de daño!");
             }
             return true;
         } else if (cell.isEdificio()) { //Si en la celda hay un edificio
@@ -599,7 +600,7 @@ public class Personaje {
             if (atack <= 0) {
                 atack = 1;
             }
-            if (tam != 0) {   //Si hay personajes en el edificio
+            /*if (tam != 0) {   //Si hay personajes en el edificio
                 int daño = atack / tam;
 
                 if (daño <= 0) {
@@ -620,19 +621,27 @@ public class Personaje {
                     }
                 }
                 return true;
-            } else if (ef.recibirDaño(atack)) {  //Le pega
+            } else */
+            if (ef.recibirDaño(atack)) {  //Le pega
                 System.out.println("El edificio " + ef.getNombre() + " ha sido fatalmente destruido!");
+                Collection<Personaje> pers=ef.getPersonajes().values();
+                for (Personaje P : pers) {
+                    ef.getPersonajes().remove(P.getNombre());
+                    cell.getPersonajes().remove(P);
+                    //mapa.getCivilizaciones().remove(P.getNombre());
+                    mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
+                }
 
                 mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).getEdificios().remove(ef.getNombre());
                 cell.setEdificio(null);
                 cell.setTipo("Pradera");
-                if(!(mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).civilizacionViva())){
-                    System.out.println("LA CIVILIZACION "+ef.getNombreCivilizacion()+" HA MUERTO");
+                if (!(mapa.getCivilizaciones().get(ef.getNombreCivilizacion()).civilizacionViva())) {
+                    System.out.println("LA CIVILIZACION " + ef.getNombreCivilizacion() + " HA MUERTO");
                     mapa.getCivilizaciones().remove(ef.getNombreCivilizacion());
                     mapa.borrarCivilizacion(ef.getNombreCivilizacion());
                 }
                 mapa.imprimir();
-                
+
             } else {
                 System.out.println("El edificio " + ef.getNombre() + " ha recibido " + atack + " puntos de daño!");
             }
@@ -666,7 +675,7 @@ public class Personaje {
                     System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }
             }
-            if(G.getPersonajes().size()==0){
+            if (G.getPersonajes().size() == 0) {
                 cell.getGrupos().remove(G);
             }
             return true;
