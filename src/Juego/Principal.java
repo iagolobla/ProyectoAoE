@@ -146,16 +146,23 @@ public class Principal {
                                 Personaje P = C.getPersonajes().get(comando[1]);
                                 if(!P.atacar(map, comando[2])){
                                     System.out.println("El personaje no ha sido quien de atacar!");
+                                }else{
+                                    map.turnoTorres();
                                 }
+                                
                             } else if(C.getGrupos().containsKey(comando[1])){   //Si se hace "atacar grupo dir"
                                 Grupo G=C.getGrupos().get(comando[1]);
                                 if(!G.atacar(map, comando[2])){
                                     System.out.println("El grupo no ha sido quien de atacar!");
+                                }else{
+                                    map.turnoTorres();
                                 }
                             } else if(C.getEdificios().containsKey(comando[1])){    //Si se hace "atacar edificio dir"
                                 Edificio ef = C.getEdificios().get(comando[1]);
                                 if(!ef.atacar(map, comando[2])){
                                     System.out.println("Esta basura de edificio no ha tenido los santos cimientos de atacar!");
+                                }else{
+                                    map.turnoTorres();
                                 }
                             } else {
                                 System.out.println("La entidad especificada no existe!");
@@ -163,6 +170,7 @@ public class Principal {
                         } else {
                             System.out.println("Error Sintáctico!");
                         }
+                        
                         break;
                     case "mover":
                         if (comando.length != 3) {
@@ -206,6 +214,7 @@ public class Principal {
                         //obtener personaje del mapa
                         //comprobar si se puede mover a esa posicion
                         //....
+                        map.turnoTorres();
                         map.imprimir();
                         break;
                     case "defender":    //No se puede usar por grupos
@@ -215,6 +224,7 @@ public class Principal {
                                 if (pers.isGrupo()) {
                                     System.out.println("El personaje tiene un compromiso con su grupo!");
                                 } else if (pers.defender(map, comando[2])) {
+                                    map.turnoTorres();
                                     System.out.println("El Personaje servira a su patria en este edificio!");
                                 } else {
                                     System.out.println("El personaje no pudo defender, una autentica deshonra");
@@ -223,6 +233,7 @@ public class Principal {
                             } else if (C.getGrupos().containsKey(comando[1])) { //Si es un grupo
                                 Grupo G = C.getGrupos().get(comando[1]);
                                 if (G.defender(map, comando[2])) {
+                                    map.turnoTorres();
                                     System.out.println("Este grupo de compatriotas ha entrado a defender el edificio");
                                 } else {
                                     System.out.println("Este atajo de individuos no han sido capaces de defender");
@@ -270,6 +281,7 @@ public class Principal {
                             if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
                                 Personaje personaje = map.getCivilizacion().getPersonajes().get(comando[1]);
                                 personaje.construir(map, comando[3], comando[2]);
+                                map.turnoTorres();
                             } else {
                                 System.out.println("El personaje no existe");
                             }
@@ -399,6 +411,7 @@ public class Principal {
                                 if (celdita.getTipo().equals("arbusto") || celdita.getTipo().equals("cantera") || celdita.getTipo().equals("bosque")) {
                                     Recurso recursito = map.getCelda(posPaisanito).getRecurso();
                                     paisanito.recolectar(recursito, map);
+                                    map.turnoTorres();
                                 } else {
                                     System.out.println("No hay un recurso aqui!");
                                 }
@@ -427,6 +440,7 @@ public class Principal {
                                 if (celdita.getTipo().equals("arbusto") || celdita.getTipo().equals("cantera") || celdita.getTipo().equals("bosque")) {
                                     Recurso recursito = map.getCelda(posG).getRecurso();
                                     group.recolectar(recursito, map);
+                                    map.turnoTorres();
                                 } else {
                                     System.out.println("No hay un recurso aqui!");
                                 }
@@ -444,6 +458,7 @@ public class Principal {
                                         if (map.getCivilizacion().getEdificios().get(comando[1]).getTipo().equals("ciudadela")) {
                                             Edificio ciudadela = map.getCivilizacion().getEdificios().get(comando[1]);
                                             ciudadela.crearPaisano(map);
+                                            map.turnoTorres();
                                             
                                         } else {
                                             System.out.println("Este edificio no es  una ciudadela");
@@ -453,6 +468,7 @@ public class Principal {
                                         if (map.getCivilizacion().getEdificios().get(comando[1]).getTipo().equals("cuartel")) {
                                             Edificio cuartel = map.getCivilizacion().getEdificios().get(comando[1]);
                                             cuartel.crearSoldado(map);
+                                            map.turnoTorres();
                                             
                                         } else {
                                             System.out.println("Este edificio no es  un cuartel");
@@ -498,6 +514,7 @@ public class Principal {
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
                                 paisanoAlmacenar.almacenarRecurso(ciudadelaAlmacenar, C);
+                                map.turnoTorres();
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }
@@ -524,6 +541,7 @@ public class Principal {
                             if (celdaAlmacenar.getTipo().equals("ciudadela") || celdaAlmacenar.getTipo().equals("cuartel") || celdaAlmacenar.getTipo().equals("casa")) {  //Comprueba que sea un edificio
                                 Edificio ciudadelaAlmacenar = celdaAlmacenar.getEdificio();
                                 grupoAlmacenar.almacenarRecurso(ciudadelaAlmacenar, C);
+                                map.turnoTorres();
                             } else {
                                 System.out.println("No hay un edificio aqui");
                             }
@@ -537,9 +555,11 @@ public class Principal {
                         } else if (map.getCivilizacion().getPersonajes().containsKey(comando[1])) {
                             Personaje personaje = (Personaje) map.getCivilizacion().getPersonajes().get(comando[1]);
                             personaje.reparar(map, comando[2]);
+                            map.turnoTorres();
                         } else if (map.getCivilizacion().getGrupos().containsKey(comando[1])) {
                             Grupo group=map.getCivilizacion().getGrupos().get(comando[1]);
                             group.reparar(map, comando[2]);
+                            map.turnoTorres();
                         } else {
                             System.out.println("Comando reparar mal introducido. Ejemplo: reparar Paisano-1 S");
                         }
