@@ -191,7 +191,7 @@ public class Principal {
                                 System.out.println("No se puede mover en esa direccion!");
                             }
                         } else {
-                            System.out.println("Ese grupo no es de los autenticos " + C.getNombre() + "!");
+                            System.out.println("Esa entidad no es de los autenticos " + C.getNombre() + "!");
                         } //procesar comando
                         //obtener personaje del mapa
                         //comprobar si se puede mover a esa posicion

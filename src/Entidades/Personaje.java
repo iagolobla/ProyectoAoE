@@ -76,7 +76,7 @@ public class Personaje {
         switch (tipo) {
             case "soldado":
                 this.tipo = tipo;
-                armadura = 90;
+                armadura = 50;
                 salud = SALUD_SOLDADO;
                 ataque = 100;
                 capRecolectar = 0;
@@ -86,9 +86,9 @@ public class Personaje {
                 break;
             case "paisano":
                 this.tipo = tipo;
-                armadura = 40;
+                armadura = 10;
                 salud = SALUD_PAISANO;
-                ataque = 50;
+                ataque = 20;
                 capRecolectar = 100;
                 cantidadRecolectada = 0;
                 this.Nombre = Nombre;
@@ -588,6 +588,9 @@ public class Personaje {
                 } else {
                     System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }
+            }
+            if(G.getPersonajes().size()==0){
+                cell.getGrupos().remove(G);
             }
             return true;
         } else if (cell.isEdificio()) { //Si en la celda hay un edificio
