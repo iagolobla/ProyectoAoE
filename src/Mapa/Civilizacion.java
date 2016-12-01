@@ -33,7 +33,7 @@ public class Civilizacion {
     public Civilizacion(String nombre) {
         edificios = new HashMap<String, Edificio>();
         personajes = new HashMap<String, Personaje>();
-        grupos= new HashMap<String, Grupo>();
+        grupos = new HashMap<String, Grupo>();
         madera = 100;
         piedra = 100;
         comida = 100;
@@ -59,7 +59,14 @@ public class Civilizacion {
         return edificios;
     }
 
-
+    public boolean civilizacionViva() {
+        for (Edificio ef : this.getEdificios().values()) {
+            if (ef.getTipo().equals("ciudadela")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public int[] getCantidades() {
         return cantidades;
@@ -81,7 +88,6 @@ public class Civilizacion {
         this.color = color;
     }
 
-
     public void setPersonajes(HashMap<String, Personaje> personajes) {
         if (personajes != null) {
             this.personajes = new HashMap<>(personajes);
@@ -97,8 +103,6 @@ public class Civilizacion {
             System.out.println("HashMap de edificios pasado nulo!");
         }
     }
-
-
 
     public void setCantidades(int[] cantidades) {
         if (cantidades != null) {
@@ -143,6 +147,5 @@ public class Civilizacion {
     public void setComida(int comida) {
         this.comida = comida;
     }
-    
 
 }
