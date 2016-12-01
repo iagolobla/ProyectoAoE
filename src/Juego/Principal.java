@@ -85,7 +85,7 @@ public class Principal {
                     case "cambiar":
                         if (comando.length == 2) {
                             if (map.getCivilizaciones().containsKey(comando[1])) {
-                                if (comando[1].equals(map.getCivilizacion())) {
+                                if (comando[1].equals(map.getCivilizacion().getNombre())) {
                                     System.out.println("Ya se esta jugando con los " + comando[1]);
                                 } else {
                                     C = map.getCivilizaciones().get(comando[1]);
@@ -144,7 +144,10 @@ public class Principal {
                                     System.out.println("El personaje no ha sido quien de atacar!");
                                 }
                             } else if(C.getGrupos().containsKey(comando[1])){   //Si se hace "atacar grupo dir"
-                                
+                                Grupo G=C.getGrupos().get(comando[1]);
+                                if(!G.atacar(map, comando[2])){
+                                    System.out.println("El grupo no ha sido quien de atacar!");
+                                }
                             } else if(C.getEdificios().containsKey(comando[1])){    //Si se hace "atacar edificio dir"
                                 
                             } else {
