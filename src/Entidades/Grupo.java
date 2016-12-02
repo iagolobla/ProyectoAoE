@@ -232,8 +232,8 @@ public class Grupo {
 
             if (ef.recibirDaño(atack)) {  //Le pega
                 System.out.println("El edificio " + ef.getNombre() + " de la civilizacion " + ef.getNombreCivilizacion() + " ha sido fatalmente destruido!");
-                ArrayList<Personaje> pers= new ArrayList<Personaje> ();
-                for(Personaje P : ef.getPersonajes().values()){
+                ArrayList<Personaje> pers = new ArrayList<Personaje>();
+                for (Personaje P : ef.getPersonajes().values()) {
                     pers.add(P);
                 }
                 for (Personaje P : pers) {
@@ -250,6 +250,9 @@ public class Grupo {
                     System.out.println("LA CIVILIZACION " + ef.getNombreCivilizacion() + " HA MUERTO");
                     mapa.getCivilizaciones().remove(ef.getNombreCivilizacion());
                     mapa.borrarCivilizacion(ef.getNombreCivilizacion());
+                    if (mapa.getCivilizaciones().size() == 1) {
+                        System.out.println("LA CIVILIZACION " + mapa.getCivilizacion().getNombre() + " HA GANADO");
+                    }
                 }
                 mapa.imprimir();
 

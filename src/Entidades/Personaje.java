@@ -175,11 +175,11 @@ public class Personaje {
 
         }
         Celda nueva = mapa.getCelda(pos);
-        if(!nueva.isLibre()){
+        if (!nueva.isLibre()) {
             System.out.println("La celda en la que se quiere construir esta ocupada!");
             return;
         }
-        
+
         switch (Edificio.toLowerCase()) {
             case "casa":
                 if (mapa.getCivilizacion().getMadera() >= 50 && mapa.getCivilizacion().getPiedra() >= 20) {
@@ -626,6 +626,9 @@ public class Personaje {
                     System.out.println("LA CIVILIZACION " + ef.getNombreCivilizacion() + " HA MUERTO");
                     mapa.getCivilizaciones().remove(ef.getNombreCivilizacion());
                     mapa.borrarCivilizacion(ef.getNombreCivilizacion());
+                    if (mapa.getCivilizaciones().size() == 1) {
+                        System.out.println("LA CIVILIZACION " + mapa.getCivilizacion().getNombre() + " HA GANADO");
+                    }
                 }
                 mapa.imprimir();
 

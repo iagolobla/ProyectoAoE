@@ -36,7 +36,6 @@ public class Edificio {
     private int ataque;
     private int defensa;
 
-
     public Edificio(String tipe, Posicion posicion, String Nombre) {
         //Igualar posicion y posicion evitando aliasing
         if (posicion == null) {
@@ -141,7 +140,7 @@ public class Edificio {
 
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la primera posicion, si no es valida
             pos1.moverX(2);
-            
+
         }
         if (!(mapa.checkCoords(pos1) && mapa.checkBuilding(pos1))) {  //Comprobamos la segunda posicion, si no es valida
             pos1.moverX(-1);
@@ -175,12 +174,12 @@ public class Edificio {
         //Hay que hacer actualizacion de visibilidades ya que hay un nuevo personaje
         mapa.actualizarVisibilidad();
     }
-    
-    public void atacarTorre(Mapa mapa){
-        this.atacar(mapa,"n");
-        this.atacar(mapa,"s");
-        this.atacar(mapa,"e");
-        this.atacar(mapa,"o");
+
+    public void atacarTorre(Mapa mapa) {
+        this.atacar(mapa, "n");
+        this.atacar(mapa, "s");
+        this.atacar(mapa, "e");
+        this.atacar(mapa, "o");
     }
 
     public void crearSoldado(Mapa mapa) {
@@ -218,7 +217,7 @@ public class Edificio {
         ArrayList<Personaje> person = mapa.getCelda(new Posicion(pos1)).getPersonajes();
         mapa.getCivilizacion().getPersonajes().put(Name, person.get(person.size() - 1));
 
-        mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida()-10);
+        mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
         System.out.println("El " + Name + " se encuentra en la posicion " + pos1);
         System.out.println("Quedan " + ((mapa.getCivilizacion().getCantidades()[3] * CAPACIDADCASA) - (mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1])) + " espacios de almacenamiento");
         System.out.println("Se han gastado 10 unidades de comida en crear el soldado");
@@ -230,12 +229,13 @@ public class Edificio {
         mapa.actualizarVisibilidad();
 
     }
-    public void imprimirCiudadela(Civilizacion civ){
+
+    public void imprimirCiudadela(Civilizacion civ) {
         System.out.println(this);
         System.out.println("Recursos: ");
-        System.out.println("Piedra: "+civ.getPiedra());
-        System.out.println("Madera: "+civ.getMadera());
-        System.out.println("Comida: "+civ.getComida());
+        System.out.println("Piedra: " + civ.getPiedra());
+        System.out.println("Madera: " + civ.getMadera());
+        System.out.println("Comida: " + civ.getComida());
     }
 
     public boolean recibirDaño(int daño) {   //Si muere devuelve true
@@ -246,13 +246,13 @@ public class Edificio {
         }
         return false;
     }
-    
+
     public boolean atacar(Mapa mapa, String direccion) {
         if (mapa == null) {
             System.out.println("Mapa pasado nulo!");
             return false;
         }
-        if (ataque <= 0){
+        if (ataque <= 0) {
             System.out.println("El ataque del edificio es 0!");
             return false;
         }
@@ -291,7 +291,7 @@ public class Edificio {
             if (P.getNombreCivilizacion().equals(nombreCivilizacion)) {
                 return false;
             }
-            
+
             int atack = ataque - P.getArmadura();
             if (atack <= 0) {
                 atack = 1;
@@ -317,14 +317,14 @@ public class Edificio {
             if (atack <= 0) {
                 atack = 1;
             }
-            
+
             if (ef.recibirDaño(atack)) {  //Si muere
                 System.out.println("El edificio " + ef.getNombre() + " ha sido fatalmente destruido!");
-                ArrayList<Personaje> pers= new ArrayList<Personaje> ();
-                for(Personaje P : ef.getPersonajes().values()){
+                ArrayList<Personaje> pers = new ArrayList<Personaje>();
+                for (Personaje P : ef.getPersonajes().values()) {
                     pers.add(P);
                 }
-                
+
                 for (Personaje P : pers) {
                     ef.getPersonajes().remove(P.getNombre());
                     cell.getPersonajes().remove(P);
@@ -338,6 +338,9 @@ public class Edificio {
                     System.out.println("LA CIVILIZACION DE LOS " + ef.getNombreCivilizacion() + " HA MUERTO");
                     mapa.getCivilizaciones().remove(ef.getNombreCivilizacion());
                     mapa.borrarCivilizacion(ef.getNombreCivilizacion());
+                    if (mapa.getCivilizaciones().size() == 1) {
+                        System.out.println("LA CIVILIZACION " + mapa.getCivilizacion().getNombre() + " HA GANADO");
+                    }
                 }
                 mapa.imprimir();
 
@@ -369,7 +372,7 @@ public class Edificio {
                     G.setArmadura(G.getArmadura() - P.getArmadura()); //Quitamos la armadura del personaje
                     cell.getPersonajes().remove(P);
                     mapa.getCivilizaciones().get(P.getNombreCivilizacion()).getPersonajes().remove(P.getNombre());
-                    
+
                 } else {
                     System.out.println("Al personaje " + P.getNombre() + " de la civilizacion" + P.getNombreCivilizacion() + " se le han hecho " + daño + " puntos de daño(Y duele...)");
                 }
@@ -379,12 +382,12 @@ public class Edificio {
                 mapa.getCivilizaciones().get(G.getNombreCivilizacion()).getGrupos().remove(G.getNombre());
                 mapa.imprimir();
             }
-            
+
             return true;
         }
         return false;
     }
-    
+
     @Override
     public String toString() {
         String impresion = "";
@@ -399,7 +402,6 @@ public class Edificio {
         impresion += "Ataque: " + ataque + "\n";
         impresion += "Defensa: " + defensa + "\n";
         impresion += "Posicion: " + posicion + "\n";
-        
 
         return impresion;
     }
@@ -447,8 +449,6 @@ public class Edificio {
         }
     }
 
-    
-
     public int getCapPersonajes() {
 
         return capPersonajes;
@@ -495,8 +495,6 @@ public class Edificio {
         this.defensa = defensa;
     }
 
-    
-    
     public String getNombreCivilizacion() {
         return nombreCivilizacion;
     }
