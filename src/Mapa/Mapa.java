@@ -6,7 +6,7 @@
 package Mapa;
 
 /**
- *
+ * COMENZAMOS LA VERSION3
  * @author javier
  */
 import Entidades.Posicion;
