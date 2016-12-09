@@ -9,6 +9,6 @@ package Personajes;
  *
  * @author iagolobla
  */
-public class Arquero {
+public class Arquero extends Soldado{
     
 }

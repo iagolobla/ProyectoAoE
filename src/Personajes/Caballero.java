@@ -9,6 +9,6 @@ package Personajes;
  *
  * @author iagolobla
  */
-public class Caballero {
+public class Caballero extends Soldado{
     
 }

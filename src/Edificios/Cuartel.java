@@ -9,6 +9,6 @@ package Edificios;
  *
  * @author iagolobla
  */
-public class Cuartel {
+public class Cuartel extends Edificio{
     
 }

@@ -9,6 +9,6 @@ package Recursos;
  *
  * @author iagolobla
  */
-public class Piedra {
+public interface Piedra extends Recurso{
     
 }

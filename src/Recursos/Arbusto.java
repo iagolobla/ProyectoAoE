@@ -9,6 +9,6 @@ package Recursos;
  *
  * @author iagolobla
  */
-public class Arbusto {
+public class Arbusto extends Contenedor implements Comida{
     
 }

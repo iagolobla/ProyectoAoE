@@ -9,6 +9,6 @@ package Personajes;
  *
  * @author iagolobla
  */
-public class Paisano {
+public class Paisano extends Personaje{
     
 }

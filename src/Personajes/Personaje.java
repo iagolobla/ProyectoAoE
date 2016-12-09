@@ -9,6 +9,6 @@ package Personajes;
  *
  * @author iagolobla
  */
-public class Personaje {
+public abstract class Personaje  {
     
 }

@@ -9,6 +9,6 @@ package Recursos;
  *
  * @author iagolobla
  */
-public class Cantera {
+public class Cantera extends Contenedor implements Piedra{
     
 }

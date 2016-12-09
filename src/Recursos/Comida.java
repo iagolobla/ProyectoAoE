@@ -9,6 +9,6 @@ package Recursos;
  *
  * @author iagolobla
  */
-public class Comida {
+public interface Comida extends Recurso{
     
 }

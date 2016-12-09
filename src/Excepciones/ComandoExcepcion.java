@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Edificios;
+package Excepciones;
 
 /**
  *
  * @author iagolobla
  */
-public class Ciudadela extends Edificio{
+public class ComandoExcepcion {
     
 }

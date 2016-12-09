@@ -9,6 +9,6 @@ package Recursos;
  *
  * @author iagolobla
  */
-public class Bosque {
+public class Bosque extends Contenedor implements Madera{
     
 }

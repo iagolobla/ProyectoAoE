@@ -9,6 +9,6 @@ package Personajes;
  *
  * @author iagolobla
  */
-public class Grupo {
+public class Grupo extends Personaje{
     
 }
