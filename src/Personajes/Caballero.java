@@ -5,10 +5,23 @@
  */
 package Personajes;
 
+import Juego.Civilizacion;
+import Juego.Posicion;
+
 /**
  *
  * @author iagolobla
  */
 public class Caballero extends Soldado{
-    
+    public static final int SALUD = 150;
+    public static final int ATAQUE = 60;
+    public static final int ARMADURA = 40;
+
+    public Caballero(String Nombre, Posicion posicion, Civilizacion civilizacion) {
+        super(Nombre, posicion, civilizacion);
+        this.setAtaque(ATAQUE);
+        this.setArmadura(ARMADURA);
+        this.setSalud(SALUD);
+
+    }
 }

@@ -5,10 +5,23 @@
  */
 package Recursos;
 
+import Juego.Posicion;
+
 /**
  *
  * @author iagolobla
  */
-public class Arbusto extends Contenedor implements Comida{
-    
+public class Arbusto extends Contenedor implements Comida {
+
+    public static final int CANTIDAD = 150;
+
+    public Arbusto(String Nombre, Posicion posicion) {
+        super(Nombre,posicion);
+        this.setCantidad(CANTIDAD);
+        
+    }
+
+    public Arbusto(int cantidad, String Nombre, Posicion posicion) {
+        super(cantidad,Nombre,posicion);
+    }
 }

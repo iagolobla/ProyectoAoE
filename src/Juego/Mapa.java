@@ -10,5 +10,7 @@ package Juego;
  * @author iagolobla
  */
 public class Mapa {
-    
+
+    public static final int MAPAX = 16;
+    public static final int MAPAY = 8;
 }

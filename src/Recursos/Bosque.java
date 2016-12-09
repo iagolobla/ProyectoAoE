@@ -5,10 +5,23 @@
  */
 package Recursos;
 
+import Juego.Posicion;
+
 /**
  *
  * @author iagolobla
  */
 public class Bosque extends Contenedor implements Madera{
     
+    public static final int CANTIDAD = 150;
+
+    public Bosque(String Nombre, Posicion posicion) {
+        super(Nombre,posicion);
+        this.setCantidad(CANTIDAD);
+        
+    }
+
+    public Bosque(int cantidad, String Nombre, Posicion posicion) {
+        super(cantidad,Nombre,posicion);
+    }
 }

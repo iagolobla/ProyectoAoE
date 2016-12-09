@@ -28,8 +28,8 @@ public class Juego {
             System.out.println("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
             numciv = scanner.nextInt();
         } while (numciv > 3 || numciv < 1);
-        String nombre;
-        nombre = scanner.nextLine();//para coger el \0
+        String Nombre;
+        Nombre = scanner.nextLine();//para coger el \0
         
         while (seguir) {
             System.out.print("$ ");
@@ -38,7 +38,9 @@ public class Juego {
             String[] comando = lineaLowerCase.split(" ");
             if (comando.length > 0) {
                 switch (comando[0].toLowerCase()) {
-                    
+                    case "salir":
+                        seguir = false;
+                        break;
                 }
             }
         }

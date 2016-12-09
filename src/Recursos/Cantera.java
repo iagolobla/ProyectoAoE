@@ -5,10 +5,23 @@
  */
 package Recursos;
 
+import Juego.Posicion;
+
 /**
  *
  * @author iagolobla
  */
 public class Cantera extends Contenedor implements Piedra{
     
+    public static final int CANTIDAD = 150;
+
+    public Cantera(String Nombre, Posicion posicion) {
+        super(Nombre,posicion);
+        this.setCantidad(CANTIDAD);
+        
+    }
+
+    public Cantera(int cantidad, String Nombre, Posicion posicion) {
+        super(cantidad,Nombre,posicion);
+    }
 }

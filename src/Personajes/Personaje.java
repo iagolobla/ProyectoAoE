@@ -8,6 +8,7 @@ package Personajes;
 
 import Juego.Posicion;
 import Juego.Civilizacion;
+import Juego.Mapa;
 /**
  *
  * @author iagolobla
@@ -19,7 +20,7 @@ public abstract class Personaje  {
     private int armadura;
     private int salud;
     private int ataque;
-    private String Nombre;  //Aqui se necesita poner un nombre al personaje para usar eso como clave en el hashmap de personajes en el mapa
+    private String Nombre;  //Aqui se necesita poner un Nombre al personaje para usar eso como clave en el hashmap de personajes en el mapa
     private Posicion posicion;
     private boolean grupo;
 
@@ -39,4 +40,104 @@ public abstract class Personaje  {
         grupo = false;
         G = null;
     }
+    
+    @Override
+    public String toString() {
+        String impresion = "";
+        impresion += "Armadura: " + armadura + "\n";
+        impresion += "Salud: " + salud + "\n";
+        impresion += "Ataque: " + ataque + "\n";
+        impresion += "Nombre: " + Nombre + "\n";
+        if (grupo) {
+            impresion += "Pertenece a: " + G.getNombre() + "\n";
+        }
+        impresion += "Posicion: " + posicion + "\n";
+
+        return impresion;
+    }
+    
+    public boolean isGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(boolean grupo) {
+        this.grupo = grupo;
+    }
+    
+    public void setArmadura(int armadura) {
+        if (armadura >= 0) {
+            this.armadura = armadura;
+        } else {
+            System.out.println("Armadura introducida debe ser mayor que 0!");
+        }
+    }
+
+    public void setAtaque(int ataque) {
+        if (ataque >= 0) {
+            this.ataque = ataque;
+        } else {
+            System.out.println("Ataque introducido debe ser mayor que 0!");
+        }
+    }
+    
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+    
+    public int getArmadura() {
+        return armadura;
+    }
+
+    public int getSalud() {
+        return salud;
+    }
+
+    public void setSalud(int salud) {
+        if (salud >= 0) {
+            this.salud = salud;
+        } else {
+            System.out.println("Salud introducida debe ser mayor que 0!");
+        }
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+    
+    public Posicion getPosicion() {
+        return new Posicion(posicion);
+    }
+
+    public void setPosicion(Posicion p) {
+        if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
+            posicion = new Posicion(p);
+        } else {
+            System.out.println("Posicion introducida fuera de los limites del mapa!");
+        }
+    }
+
+    public Grupo getG() {
+        return G;
+    }
+
+    public void setG(Grupo G) {
+        this.G = G;
+    }
+
+    public Civilizacion getCivilizacion() {
+        return civilizacion;
+    }
+
+    public void setCivilizacion(Civilizacion civilizacion) {
+        if (civilizacion == null) {
+            System.out.println("Civilizacion pasada nula");
+            return;
+        }
+        this.civilizacion = civilizacion;
+    }
+    
 }

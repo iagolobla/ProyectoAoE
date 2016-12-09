@@ -5,10 +5,16 @@
  */
 package Personajes;
 
+import Juego.Civilizacion;
+import Juego.Posicion;
+
 /**
  *
  * @author iagolobla
  */
 public abstract class Soldado extends Personaje{
     
+    public Soldado(String Nombre, Posicion posicion, Civilizacion civilizacion){
+        super(Nombre, posicion, civilizacion);
+    }
 }
