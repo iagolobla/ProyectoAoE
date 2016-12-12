@@ -13,15 +13,8 @@ import Juego.Posicion;
  */
 public class Bosque extends Contenedor{
     
-    public static final int CANTIDAD = 150;
-
-    public Bosque(String Nombre, Posicion posicion) {
-        super(Nombre,posicion);
-        this.setCantidad(CANTIDAD);
+      public Bosque(String Nombre, Posicion posicion, Recurso R) {
+        super(Nombre,posicion,R);
         
-    }
-
-    public Bosque(int cantidad, String Nombre, Posicion posicion) {
-        super(cantidad,Nombre,posicion);
     }
 }

@@ -11,4 +11,7 @@ package Recursos;
  */
 public class Comida extends Recurso {
 
+    public Comida(int cantidad) {
+        super(cantidad);
+    }
 }

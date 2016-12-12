@@ -13,6 +13,6 @@ import Juego.Posicion;
  */
 public class Pradera extends Contenedor{
     public Pradera( Posicion posicion) {
-        super("Pradera",posicion);
+        super("Pradera",posicion,null);
     }
 }

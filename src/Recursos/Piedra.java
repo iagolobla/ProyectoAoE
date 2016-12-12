@@ -10,5 +10,7 @@ package Recursos;
  * @author javier
  */
 public class Piedra extends Recurso{
-    
+    public Piedra(int cantidad){
+        super(cantidad);
+    }
 }

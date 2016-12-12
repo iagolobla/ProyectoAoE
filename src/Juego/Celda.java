@@ -150,13 +150,7 @@ public class Celda {
         this.visible = visible;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
     public Posicion getPos() {
         return new Posicion(pos);
@@ -195,4 +189,4 @@ public class Celda {
     }
 
 }
-}
+

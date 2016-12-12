@@ -11,17 +11,10 @@ import Juego.Posicion;
  *
  * @author iagolobla
  */
-public class Cantera extends Contenedor{
-    
-    public static final int CANTIDAD = 150;
+public class Cantera extends Contenedor {
 
-    public Cantera(String Nombre, Posicion posicion) {
-        super(Nombre,posicion);
-        this.setCantidad(CANTIDAD);
-        
-    }
+    public Cantera(String Nombre, Posicion posicion, Recurso R) {
+        super(Nombre, posicion, R);
 
-    public Cantera(int cantidad, String Nombre, Posicion posicion) {
-        super(cantidad,Nombre,posicion);
     }
 }
