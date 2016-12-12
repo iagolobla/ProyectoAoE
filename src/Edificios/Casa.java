@@ -7,6 +7,12 @@ package Edificios;
 
 import Juego.Civilizacion;
 import Juego.Posicion;
+import Personajes.Paisano;
+import Personajes.Personaje;
+import Recursos.Comida;
+import Recursos.Madera;
+import Recursos.Piedra;
+import Recursos.Recurso;
 
 /**
  *
@@ -29,5 +35,18 @@ public class Casa extends Edificio{
         
 
         return impresion;
+    }
+    
+    public void almacenar(Recurso recurso){
+        System.out.println("las casas no almacenan");
+    }
+    
+    public Personaje crear(String tipo_personaje){
+        System.out.println("las casas no crean");
+        return null;
+    }
+    
+    public void atacar(Personaje[] personajes){
+        
     }
 }

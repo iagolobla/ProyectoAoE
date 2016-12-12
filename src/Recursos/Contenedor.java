@@ -34,6 +34,17 @@ public abstract class Contenedor {
 
         return impresion;
     }
+    
+    public Recurso procesar(){
+        return recurso;
+    }
+    
+    public boolean esTransitable(){
+        if(this instanceof Pradera){
+            return true;
+        }
+        return false;
+    }
 
 
 
