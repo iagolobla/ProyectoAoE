@@ -87,39 +87,52 @@ public class Celda {
     public boolean isEdificio() {
         return (edificio != null);
     }
-    
-    public Personaje getPersonaje(){    //Devuelve el personaje que está mas arriba para imprimirlo
-        if(contenedor instanceof Pradera){
-            if(personajes.size() > 0){
-                return personajes.get(personajes.size()-1); //Ultimo personaje que entró
+
+    public Personaje getPersonaje() {    //Devuelve el personaje que está mas arriba para imprimirlo
+        if (contenedor instanceof Pradera) {
+            if (personajes.size() > 0) {
+                return personajes.get(personajes.size() - 1); //Ultimo personaje que entró
             }
         }
         return null;
     }
 
-    public void quitarPersonaje(Personaje P) {
+    public void quitarPersonaje(Personaje P) {  //Quita personajes de una celda, tiene en cuenta si hay edificio
         if (contenedor instanceof Pradera) {
             if (!this.isEdificio()) {
                 if (personajes.size() > 0) {
                     personajes.remove(P);
                 }
-            } else {
-                if (edificio.getNPersonajes() > 0) {
-                    if (edificio.getPersonajes().containsKey(P.getNombre())) {
-                        edificio.getPersonajes().remove(P.getNombre());
-                        edificio.setNPersonajes(edificio.getNPersonajes() - 1);
-                    }
+            } else if (edificio.getNPersonajes() > 0) {
+                if (edificio.getPersonajes().containsKey(P.getNombre())) {
+                    edificio.getPersonajes().remove(P.getNombre());
+                    edificio.setNPersonajes(edificio.getNPersonajes() - 1);
                 }
             }
         }
     }
 
-    public void addPersonaje(Personaje personaje) {
+    public void addPersonaje(Personaje personaje) { //Sirve para añadir personajes a una celda, tiene en cuenta si hay edificio
         if (personaje != null) {
-            this.personajes.add(personaje);
-        } else {
-            System.out.println("El personaje pasado es nulo!");
+            if (this.getContenedor() instanceof Pradera) {
+                if (this.isEdificio()) {
+                    Edificio ef = this.edificio;
+                    if (personaje instanceof Grupo) {
+                        int tamG = ((Grupo) personaje).getNPersonajes();
+                        if ((ef.getCapPersonajes() - ef.getNPersonajes()) > tamG) {
+                            ef.getPersonajes().put(personaje.getNombre(), personaje);
+                            ef.setNPersonajes(ef.getNPersonajes() + tamG);
+                        }
+                    } else if ((ef.getCapPersonajes() - ef.getNPersonajes()) > 0) {
+                        ef.getPersonajes().put(personaje.getNombre(), personaje);
+                    }
+                }
+                this.personajes.add(personaje);
+            } else {
+                System.out.println("El personaje pasado es nulo!");
+            }
         }
+
     }
 
     public void setEdificio(Edificio edificio) {    //Se puede poner el edificio a null(necesario)

@@ -18,12 +18,12 @@ public class ConsolaNormal implements Consola{
     }
 
     public String leer(String Mensaje) {
-        System.out.println(Mensaje);
+        System.out.printf(Mensaje);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
     public Integer leerInt(String Mensaje) {
-        System.out.println(Mensaje);
+        System.out.printf(Mensaje);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }

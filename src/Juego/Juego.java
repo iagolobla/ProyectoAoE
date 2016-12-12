@@ -30,8 +30,7 @@ public class Juego {
         do {
             numciv = Shell.leerInt("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
         } while (numciv > 3 || numciv < 1);
-        String nombre;
-        nombre = Shell.leer(""); //Para coger \0
+        String nombre = null;
         for (int i = 1; i <= numciv; i++) {
             nombre = Shell.leer("Introduzca el nombre de la civilizacion " + i + ": ");
             C = new Civilizacion(nombre);
