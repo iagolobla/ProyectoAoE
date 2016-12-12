@@ -7,8 +7,8 @@ package Recursos;
 
 /**
  *
- * @author iagolobla
+ * @author javier
  */
-public interface Comida extends Recurso{
-    
+public class Comida extends Recurso {
+
 }

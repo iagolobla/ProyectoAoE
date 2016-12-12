@@ -12,7 +12,7 @@ import Juego.Posicion;
  * @author iagolobla
  */
 public class Pradera extends Contenedor{
-    public Pradera(int cantidad, String Nombre, Posicion posicion) {
-        super(cantidad,Nombre,posicion);
+    public Pradera( Posicion posicion) {
+        super("Pradera",posicion);
     }
 }

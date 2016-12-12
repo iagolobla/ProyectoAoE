@@ -7,8 +7,8 @@ package Recursos;
 
 /**
  *
- * @author iagolobla
+ * @author javier
  */
-public interface Madera extends Recurso{
+public class Madera extends Recurso{
     
 }

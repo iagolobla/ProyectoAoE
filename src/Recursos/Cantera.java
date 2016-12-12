@@ -11,7 +11,7 @@ import Juego.Posicion;
  *
  * @author iagolobla
  */
-public class Cantera extends Contenedor implements Piedra{
+public class Cantera extends Contenedor{
     
     public static final int CANTIDAD = 150;
 

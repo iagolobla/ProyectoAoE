@@ -7,8 +7,8 @@ package Recursos;
 
 /**
  *
- * @author iagolobla
+ * @author javier
  */
-public interface Piedra extends Recurso{
+public class Piedra extends Recurso{
     
 }

@@ -7,8 +7,8 @@ package Recursos;
 
 /**
  *
- * @author iagolobla
+ * @author javier
  */
-public interface Recurso {
+public abstract class Recurso {
     
 }

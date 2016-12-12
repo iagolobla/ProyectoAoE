@@ -11,7 +11,7 @@ import Juego.Posicion;
  *
  * @author iagolobla
  */
-public class Bosque extends Contenedor implements Madera{
+public class Bosque extends Contenedor{
     
     public static final int CANTIDAD = 150;
 

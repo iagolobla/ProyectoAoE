@@ -9,6 +9,9 @@ package Personajes;
 import Juego.Posicion;
 import Juego.Civilizacion;
 import Juego.Mapa;
+import Recursos.Contenedor;
+import Edificios.Ciudadela;
+import Edificios.Edificio;
 /**
  *
  * @author iagolobla
@@ -55,6 +58,50 @@ public abstract class Personaje  {
 
         return impresion;
     }
+    
+    public Posicion mover(String pto_cardinal){
+        Posicion p=new Posicion(posicion);
+        switch (pto_cardinal) {
+            case "s":
+                p.moverX(this.capacidadMovimiento());
+                break;
+            case "n":
+                p.moverX((-1)*this.capacidadMovimiento());
+                break;
+            case "e":
+                p.moverY(this.capacidadMovimiento());
+                break;
+            case "o":
+                p.moverY((-1)*this.capacidadMovimiento());
+                break;
+            default:
+                System.out.println("Error, direccion no valida!");
+
+        }
+        return p;
+    }
+    
+    public abstract int capacidadMovimiento();
+    
+    public abstract void recolectar(Contenedor contenedor);
+    
+    public abstract void almacenar(Ciudadela ciudadela);
+    
+    public abstract void reparar(Edificio edificio);
+    
+    public abstract Edificio construir(String tipo_edificio);
+    
+    public void defender(Edificio edificio){
+        
+    }
+    
+    public abstract void atacar(Personaje[] personajes);
+    
+    public abstract void atacar(Edificio edificio);
+    
+    public abstract double danhoAtaque(Personaje personaje);
+    
+    public abstract double danhoAtaque(Edificio edificio);
     
     public boolean isGrupo() {
         return grupo;

@@ -11,9 +11,10 @@ import Juego.Posicion;
  *
  * @author iagolobla
  */
-public class Arbusto extends Contenedor implements Comida {
+public class Arbusto extends Contenedor{
 
     public static final int CANTIDAD = 150;
+    
 
     public Arbusto(String Nombre, Posicion posicion) {
         super(Nombre,posicion);
