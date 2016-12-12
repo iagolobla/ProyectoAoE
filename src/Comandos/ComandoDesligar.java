@@ -9,6 +9,8 @@ package Comandos;
  *
  * @author iagolobla
  */
-public class ComandoDesligar {
-    
+public class ComandoDesligar implements Comando{
+    public void ejecutar(){
+        
+    }
 }

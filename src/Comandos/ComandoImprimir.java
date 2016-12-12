@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 package Comandos;
-
+import Juego.Mapa;
 /**
  *
  * @author iagolobla
  */
-public class ComandoImprimir {
-    
+public class ComandoImprimir implements Comando{
+    Mapa mapa;
+    public ComandoImprimir(Mapa mapa){
+        if(mapa!=null)
+            this.mapa=mapa;
+    }
+    public void ejecutar(){
+        mapa.print();
+    }
 }

@@ -9,6 +9,8 @@ package Comandos;
  *
  * @author iagolobla
  */
-public class ComandoCambiar {
-    
+public class ComandoCambiar implements Comando{
+    public void ejecutar(){
+        
+    }
 }

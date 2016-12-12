@@ -10,5 +10,5 @@ package Comandos;
  * @author iagolobla
  */
 public interface Comando {
-    
+    public void ejecutar();
 }

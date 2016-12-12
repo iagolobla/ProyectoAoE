@@ -9,6 +9,8 @@ package Comandos;
  *
  * @author iagolobla
  */
-public class ComandoDesagrupar {
-    
+public class ComandoDesagrupar implements Comando{
+    public void ejecutar(){
+        
+    }
 }

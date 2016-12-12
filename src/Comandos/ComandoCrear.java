@@ -9,6 +9,8 @@ package Comandos;
  *
  * @author iagolobla
  */
-public class ComandoCrear {
-    
+public class ComandoCrear implements Comando{
+    public void ejecutar(){
+        
+    }
 }

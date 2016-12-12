@@ -9,6 +9,8 @@ package Comandos;
  *
  * @author iagolobla
  */
-public class ComandoReparar {
-    
+public class ComandoReparar implements Comando{
+    public void ejecutar(){
+        
+    }
 }
