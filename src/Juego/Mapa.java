@@ -108,7 +108,7 @@ public class Mapa {
             c.getEdificios().put(Namec, getCelda(new Posicion(x1, y1)).getEdificio());
 
             Celda newcell = getCelda(new Posicion(x1, y1 + 1));
-            newcell.setPersonajes(new Paisano(Namep, new Posicion(x1, y1 + 1), c));
+            newcell.addPersonaje(new Paisano(Namep, new Posicion(x1, y1 + 1), c));
             newcell.getVisible().replace(c.getNombre(), Boolean.TRUE);
             ArrayList<Personaje> person = getCelda(new Posicion(new Posicion(x1, y1 + 1))).getPersonajes();
             c.getPersonajes().put(Namep, person.get(person.size() - 1));
@@ -486,10 +486,11 @@ public class Mapa {
         }
         System.out.println("");
     }*/
-
     public boolean checkBuilding(Posicion pos) {
-        if (this.getCelda(pos).getTipo().equals("Pradera")) {
-            return true;
+        if (this.getCelda(pos).getContenedor() instanceof Pradera) {
+            if (!(this.getCelda(pos).isEdificio())) {
+                return true;
+            }
         }
         return false;
     }
@@ -507,7 +508,7 @@ public class Mapa {
         return mapa;
     }
 
-    public HashMap<String, Recurso> getRecursos() {
+    public HashMap<String, Contenedor> getRecursos() {
         return recursos;
     }
 
@@ -523,7 +524,7 @@ public class Mapa {
         }
     }
 
-    public void setRecursos(HashMap<String, Recurso> recursos) {
+    public void setRecursos(HashMap<String, Contenedor> recursos) {
         if (recursos != null) {
             this.recursos = new HashMap<>(recursos);
         } else {
