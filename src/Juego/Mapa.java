@@ -206,50 +206,52 @@ public class Mapa {
         }
     }
 
-    /*public void ponerVisible(Celda cell) {  //Pone visible cell y sus adyacentes
+    public void ponerVisible(Celda cell) {  //Pone visible cell y sus adyacentes
         Celda aux;
         Posicion pos;
-        if (cell.isPaisano() || cell.isSoldado() || cell.getTipo().equals("ciudadela") || cell.getTipo().equals("cuartel") || cell.getTipo().equals("casa")) {   //Cuando localiza un soldado o paisano pone
-            if (cell.getEdificio() != null) {
+        if (cell.getContenedor() instanceof Pradera) {
+            if (cell.isEdificio()) {
                 Edificio edif = cell.getEdificio();
-                if (edif.getNombreCivilizacion().equals(civilizacion.getNombre()) == false) {
+                if (edif.getCivilizacion().equals(civilizacion) == false) {
                     return;
                 }
-            } else if (cell.getPersonajes() != null) {
+            } else if (cell.getPersonajes().size() > 0) {
                 ArrayList<Personaje> person = cell.getPersonajes();
-                if (person.get(0).getNombreCivilizacion().equals(civilizacion.getNombre()) == false) {
+                if (person.get(0).getCivilizacion().equals(civilizacion) == false) {
                     return;
                 }
             }
-            pos = new Posicion(cell.getPos());    //sus celdas adyacentes en visible
-            aux = this.getCelda(pos);
-            aux.ponerVisible(civilizacion.getNombre());  //Pone visible la celda del personaje
+            if (!cell.isLibre()) {
+                pos = new Posicion(cell.getPosicion());    //sus celdas adyacentes en visible
+                aux = this.getCelda(pos);
+                aux.ponerVisible(civilizacion);  //Pone visible la celda en cuestion
 
-            pos.moverX(1);
-            if (this.checkCoords(pos)) {
-                aux = this.getCelda(pos);
-                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda de abajo
-            }
-            pos.moverX(-2);
-            if (this.checkCoords(pos)) {
-                aux = this.getCelda(pos);
-                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda de arriba
-            }
-            pos.moverX(1);
-            pos.moverY(1);
-            if (this.checkCoords(pos)) {
-                aux = this.getCelda(pos);
-                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda derecha
-            }
-            pos.moverY(-2);
-            if (this.checkCoords(pos)) {
-                aux = this.getCelda(pos);
-                aux.ponerVisible(civilizacion.getNombre());   //Pone visible la celda izquierda
+                pos.moverX(1);
+                if (this.checkCoords(pos)) {
+                    aux = this.getCelda(pos);
+                    aux.ponerVisible(civilizacion);   //Pone visible la celda de abajo
+                }
+                pos.moverX(-2);
+                if (this.checkCoords(pos)) {
+                    aux = this.getCelda(pos);
+                    aux.ponerVisible(civilizacion);   //Pone visible la celda de arriba
+                }
+                pos.moverX(1);
+                pos.moverY(1);
+                if (this.checkCoords(pos)) {
+                    aux = this.getCelda(pos);
+                    aux.ponerVisible(civilizacion);   //Pone visible la celda derecha
+                }
+                pos.moverY(-2);
+                if (this.checkCoords(pos)) {
+                    aux = this.getCelda(pos);
+                    aux.ponerVisible(civilizacion);   //Pone visible la celda izquierda
+                }
             }
         }
-    }*/
+    }
 
- /* public void actualizarVisibilidad() {
+    public void actualizarVisibilidad() {
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {
@@ -257,9 +259,9 @@ public class Mapa {
                 this.ponerVisible(cell);    //Pone visible esa celda y sus adyacentes
             }
         }
-    }*/
+    }
 
- /*public void borrarCivilizacion(String civ) {
+    /*public void borrarCivilizacion(String civ) {
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {
@@ -314,63 +316,66 @@ public class Mapa {
                 if (cell.isVisible(civilizacion)) {
                     if (cell.getContenedor() instanceof Pradera) {
                         if (cell.isGrupo()) {
-                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
                         } else if (cell.getPersonaje() instanceof Paisano) {
-                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getPersonaje() instanceof Legionario) {
-                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
                         } else if (cell.getPersonaje() instanceof Arquero) {
-                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getPersonaje() instanceof Caballero) {
-                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getEdificio() instanceof Casa) {
-                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getEdificio() instanceof Ciudadela) {
-                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getEdificio() instanceof Torre) {
-                            if (getCelda(i, j).getEdificio().getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
                                 System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
-
-                        } else if (getCelda(i, j).getEdificio().getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                        } else if (cell.getEdificio() instanceof Cuartel) {
+                            if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
                         } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            System.out.print(Colores.BACK_VERDE + " " + Colores.BACK_RESET);
                         }
                     } else if (cell.getContenedor() instanceof Bosque) {
                         System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);

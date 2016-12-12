@@ -23,13 +23,38 @@ public class Juego {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bienvenido al juego.");
         int numciv;
-      
+        
+        
+        Civilizacion C;
+        HashMap<String, Civilizacion> civilizaciones = new HashMap<String, Civilizacion>();
         do {
             System.out.println("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
             numciv = scanner.nextInt();
         } while (numciv > 3 || numciv < 1);
-        String Nombre;
-        Nombre = scanner.nextLine();//para coger el \0
+        String nombre;
+        nombre = scanner.nextLine();//para coger el \0
+        for (int i = 1; i <= numciv; i++) {
+            System.out.println("Introduzca el nombre de la civilizacion " + i + ": ");
+            nombre = scanner.nextLine();
+            C = new Civilizacion(nombre);
+            
+            if (i == 1) {
+                C.setColor("azul");
+            } else if (i == 2) {
+                C.setColor("rojo");
+            } else {
+                C.setColor("morado");
+            }
+            civilizaciones.put(nombre, C);
+            
+        }
+        
+        C = civilizaciones.get(nombre);
+        
+        System.out.println("Estas jugando con los: " + C.getNombre());
+        Mapa map = new Mapa(6, 6, 6, civilizaciones.values());
+        map.setCivilizacion(C);
+        map.print();
         
         while (seguir) {
             System.out.print("$ ");
@@ -40,6 +65,7 @@ public class Juego {
                 switch (comando[0].toLowerCase()) {
                     case "salir":
                         seguir = false;
+                        map.print();
                         break;
                 }
             }
