@@ -7,6 +7,12 @@ package Edificios;
 
 import Juego.Civilizacion;
 import Juego.Posicion;
+import Personajes.Paisano;
+import Recursos.Recurso;
+import Recursos.Piedra;
+import Recursos.Madera;
+import Recursos.Comida;
+import Personajes.Personaje;
 
 /**
  *
@@ -30,5 +36,34 @@ public class Ciudadela extends Edificio {
         
 
         return impresion;
+    }
+    
+
+    public void almacenar(Recurso recurso){
+        if(recurso instanceof Comida){
+            this.getCivilizacion().setComida(this.getCivilizacion().getComida()+recurso.getCantidad());
+        }else if(recurso instanceof Piedra){
+            this.getCivilizacion().setPiedra(this.getCivilizacion().getPiedra()+recurso.getCantidad());
+        }else if(recurso instanceof Madera){
+            this.getCivilizacion().setMadera(this.getCivilizacion().getMadera()+recurso.getCantidad());
+        }else{
+            
+        }
+    }
+    
+    public Personaje crear(String tipo_personaje){
+        if(tipo_personaje.equals("paisano")){
+            String Name="paisano-"+this.getCivilizacion().getCantidades()[0];
+            this.getCivilizacion().getCantidades()[0]++;
+            return new Paisano(Name, this.getPosicion(), this.getCivilizacion());
+            
+        }else{
+            System.out.println("tipo personaje no valido introducido");
+            return null;
+        }
+    }
+    
+        public void atacar(Personaje[] personajes){
+        
     }
 }

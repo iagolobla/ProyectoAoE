@@ -7,12 +7,19 @@ package Edificios;
 
 import Juego.Civilizacion;
 import Juego.Posicion;
+import Personajes.Paisano;
+import Personajes.Personaje;
+import Recursos.Comida;
+import Recursos.Madera;
+import Recursos.Piedra;
+import Recursos.Recurso;
 
 /**
  *
  * @author iagolobla
  */
-public class Torre extends Edificio{
+public class Torre extends Edificio {
+
     public static final int SALUD = 500;
     public static final int CAPACIDAD = 3;
     public static final int ATAQUE = 100;
@@ -24,15 +31,27 @@ public class Torre extends Edificio{
         this.setCapPersonajes(CAPACIDAD);
         this.setAtaque(ATAQUE);
         this.setDefensa(DEFENSA);
-        
+
     }
-    
+
     @Override
     public String toString() {
         String impresion = super.toString();
-        impresion+="Tipo de edificio: Torre";
-        
+        impresion += "Tipo de edificio: Torre";
 
         return impresion;
+    }
+
+    public void almacenar(Recurso recurso) {
+        System.out.println("las torres no almacenan");
+    }
+
+    public Personaje crear(String tipo_personaje) {
+        System.out.println("las torres no crean");
+        return null;
+    }
+
+    public void atacar(Personaje[] personajes) {
+
     }
 }

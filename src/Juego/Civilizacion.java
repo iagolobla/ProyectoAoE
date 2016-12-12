@@ -33,15 +33,17 @@ public class Civilizacion {
         madera = 100;
         piedra = 100;
         comida = 100;
-        cantidades = new int[7];//guardara las cantidades de personajes, soldados,etc.
+        cantidades = new int[9];//guardara las cantidades de personajes, soldados,etc.
         /*
         0--Paisano
-        1--Soldado
+        1--Legionario
         2--Ciudadela
         3--Casa
         4--Cuartel
         5--Torre
         6--grupo
+        7--Arquero
+        8--Caballero
          */
         this.nombre = nombre;
         color = "rojo";

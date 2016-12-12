@@ -10,6 +10,7 @@ import Juego.Civilizacion;
 import Juego.Posicion;
 import Personajes.Personaje;
 import Juego.Mapa;
+import Recursos.Recurso;
 
 /**
  *
@@ -62,6 +63,13 @@ public abstract class Edificio {
 
         return impresion;
     }
+    
+    
+    public abstract void almacenar(Recurso recurso);
+    
+    public abstract Personaje crear(String tipo_personaje);
+    
+    public abstract void atacar(Personaje[] personajes);
 
     public int getSalud() {
         return salud;
