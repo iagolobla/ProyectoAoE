@@ -31,6 +31,7 @@ public class Celda {
             System.out.println("ERROR EN LA POSICION ->NULL");
             return;
         }
+        edificio = null;
         personajes = new ArrayList<Personaje>();
         visible = new HashMap<String, Boolean>();
         grupos = new ArrayList<Grupo>();
@@ -46,6 +47,7 @@ public class Celda {
         if (visible == null) {
             visible = new HashMap<String, Boolean>();
         }
+        edificio = null;
         personajes = new ArrayList<Personaje>();
         grupos = new ArrayList<Grupo>();
         this.posicion = new Posicion(posicion);
@@ -66,22 +68,10 @@ public class Celda {
     }
 
     public boolean isLibre() {
-        if (contenedor instanceof Pradera) {
+        if (contenedor instanceof Pradera && !this.isEdificio()) {
             if (personajes.size() == 0) {
                 return true;
             }
-        }
-        return false;
-    }
-
-    public boolean isPersonaje() {
-        if (this.isPaisano() || this.isSoldado()) {
-            for (Personaje P : personajes) {
-                if (P.isGrupo()) {
-                    return false;
-                }
-            }
-            return true;
         }
         return false;
     }
@@ -90,39 +80,41 @@ public class Celda {
         return (grupos.size() > 0);
     }
 
-    public boolean isRecurso() {
-        return (recurso != null);
+    public boolean isContenedor() {
+        return (contenedor != null);
     }
 
     public boolean isEdificio() {
         return (edificio != null);
     }
+    
+    public Personaje getPersonaje(){    //Devuelve el personaje que está mas arriba para imprimirlo
+        if(contenedor instanceof Pradera){
+            if(personajes.size() > 0){
+                return personajes.get(personajes.size()-1); //Ultimo personaje que entró
+            }
+        }
+        return null;
+    }
 
     public void quitarPersonaje(Personaje P) {
-        if (this.isPaisano() || this.isSoldado()) {
-            if (personajes.size() > 1) {
-                personajes.remove(P);
+        if (contenedor instanceof Pradera) {
+            if (!this.isEdificio()) {
+                if (personajes.size() > 0) {
+                    personajes.remove(P);
+                }
             } else {
-                liberarCelda();
-            }
-        } else if (this.isEdificio()) {
-            if (edificio.getNPersonajes() > 0) {
-                if (edificio.getPersonajes().containsKey(P.getNombre())) {
-                    edificio.getPersonajes().remove(P.getNombre());
-                    edificio.setNPersonajes(edificio.getNPersonajes() - 1);
+                if (edificio.getNPersonajes() > 0) {
+                    if (edificio.getPersonajes().containsKey(P.getNombre())) {
+                        edificio.getPersonajes().remove(P.getNombre());
+                        edificio.setNPersonajes(edificio.getNPersonajes() - 1);
+                    }
                 }
             }
         }
     }
 
-    public void liberarCelda() {
-        edificio = null;
-        personajes = new ArrayList<Personaje>();
-        recurso = null;
-        tipo = "Pradera";
-    }
-
-    public void setPersonajes(Personaje personaje) {
+    public void addPersonaje(Personaje personaje) {
         if (personaje != null) {
             this.personajes.add(personaje);
         } else {
@@ -134,11 +126,11 @@ public class Celda {
         this.edificio = edificio;
     }
 
-    public void setRecurso(Recurso recurso) {
-        if (recurso != null) {
-            this.recurso = recurso;
+    public void setContenedor(Contenedor contenedor) {
+        if (contenedor != null) {
+            this.contenedor = contenedor;
         } else {
-            System.out.println("El recurso pasado es nulo!");
+            System.out.println("El contenedor pasado es nulo!");
         }
     }
 
@@ -150,32 +142,24 @@ public class Celda {
         this.visible = visible;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Posicion getPosicion() {
+        return new Posicion(posicion);
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Posicion getPos() {
-        return new Posicion(pos);
-    }
-
-    public void setPos(Posicion p) {
+    public void setPosicion(Posicion p) {
         if (p.getX() >= 0 && p.getX() < Mapa.MAPAY && p.getY() >= 0 && p.getY() < Mapa.MAPAX) {
-            pos = new Posicion(p);
+            posicion = new Posicion(p);
         } else {
             System.out.println("Posicion pasada fuera de los limites del mapa!");
         }
     }
 
-    public boolean isVisible(String civilizacion) {
-        return visible.get(civilizacion);
+    public boolean isVisible(Civilizacion civilizacion) {
+        return visible.get(civilizacion.getNombre());
     }
 
-    public void ponerVisible(String civilizacion) {
-        visible.replace(civilizacion, Boolean.TRUE);
+    public void ponerVisible(Civilizacion civilizacion) {
+        visible.replace(civilizacion.getNombre(), Boolean.TRUE);
     }
 
     public ArrayList<Grupo> getGrupos() {
@@ -186,13 +170,12 @@ public class Celda {
         this.grupos = grupos;
     }
 
-    public void setGrupo(Grupo grupo) {
+    public void addGrupo(Grupo grupo) {
         if (grupo != null) {
             grupos.add(grupo);
         } else {
-            System.out.println("grupo pasado null");
+            System.out.println("Grupo pasado Nulo");
         }
     }
 
-}
 }
