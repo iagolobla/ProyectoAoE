@@ -54,11 +54,11 @@ public class Cuartel extends Edificio {
         } else if (tipo_personaje.equals("legionario")) {
             Name = "legionario-" + this.getCivilizacion().getCantidades()[1];
             this.getCivilizacion().getCantidades()[1]++;
-            return new Arquero(Name, this.getPosicion(), this.getCivilizacion());
+            return new Legionario(Name, this.getPosicion(), this.getCivilizacion());
         } else if (tipo_personaje.equals("caballero")) {
             Name = "caballero-" + this.getCivilizacion().getCantidades()[8];
             this.getCivilizacion().getCantidades()[8]++;
-            return new Arquero(Name, this.getPosicion(), this.getCivilizacion());
+            return new Caballero(Name, this.getPosicion(), this.getCivilizacion());
         } else {
             System.out.println("tipo personaje no valido introducido");
             return null;

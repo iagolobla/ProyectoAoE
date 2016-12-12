@@ -9,6 +9,7 @@ package Juego;
  *
  * @author iagolobla
  */
-public class Consola {
-    
+public interface Consola {
+    public void imprimir(String Mensaje);
+    public String leer(String Mensaje);
 }

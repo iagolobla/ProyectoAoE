@@ -19,23 +19,21 @@ import java.util.HashMap;
 public class Juego {
     
     public Juego() {
+        ConsolaNormal Shell = new ConsolaNormal();
         boolean seguir = true;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Bienvenido al juego.");
+        Shell.imprimir("Bienvenido al Juego!");
         int numciv;
         
         
         Civilizacion C;
         HashMap<String, Civilizacion> civilizaciones = new HashMap<String, Civilizacion>();
         do {
-            System.out.println("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
-            numciv = scanner.nextInt();
+            numciv = Shell.leerInt("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
         } while (numciv > 3 || numciv < 1);
         String nombre;
-        nombre = scanner.nextLine();//para coger el \0
+        nombre = Shell.leer(""); //Para coger \0
         for (int i = 1; i <= numciv; i++) {
-            System.out.println("Introduzca el nombre de la civilizacion " + i + ": ");
-            nombre = scanner.nextLine();
+            nombre = Shell.leer("Introduzca el nombre de la civilizacion " + i + ": ");
             C = new Civilizacion(nombre);
             
             if (i == 1) {
@@ -57,8 +55,7 @@ public class Juego {
         map.print();
         
         while (seguir) {
-            System.out.print("$ ");
-            String linea = scanner.nextLine();
+            String linea = Shell.leer("$ ");
             String lineaLowerCase = linea.toLowerCase();    //Pasamos todo a minusculas
             String[] comando = lineaLowerCase.split(" ");
             if (comando.length > 0) {
