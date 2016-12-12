@@ -36,7 +36,7 @@ public class ComandoMover implements Comando {
         Posicion nueva = personaje.mover(direccion);
         Celda newcell=null;
         Celda cell = mapa.getCelda(vieja);
-        if (mapa.checkBuilding(nueva) && mapa.checkCoords(nueva)) {
+        if (mapa.checkCoords(nueva) && mapa.checkBuilding(nueva) ) {
             newcell=mapa.getCelda(nueva);
         }else{
             return;//excepcion
