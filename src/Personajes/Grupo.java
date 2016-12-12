@@ -38,4 +38,8 @@ public class Grupo extends Personaje{
         this.personajes = personajes;
     }
     
+    public int capacidadMovimiento(){   //Los paisanos se mueven una casilla
+        return 1;
+    }
+    
 }

@@ -69,5 +69,9 @@ public class Paisano extends Personaje {
     public void setTipoRecurso(String tipoRecurso) {
         this.tipoRecurso = tipoRecurso;
     }
-
+    
+    public int capacidadMovimiento(){   //Los paisanos se mueven una casilla
+        return 1;
+    }
+    
 }

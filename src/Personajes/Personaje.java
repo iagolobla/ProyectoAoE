@@ -82,7 +82,7 @@ public abstract class Personaje  {
     }
     
     public abstract int capacidadMovimiento();
-    
+    /*
     public abstract void recolectar(Contenedor contenedor);
     
     public abstract void almacenar(Ciudadela ciudadela);
@@ -102,7 +102,7 @@ public abstract class Personaje  {
     public abstract double danhoAtaque(Personaje personaje);
     
     public abstract double danhoAtaque(Edificio edificio);
-    
+    */
     public boolean isGrupo() {
         return grupo;
     }

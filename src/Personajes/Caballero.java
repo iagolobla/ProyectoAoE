@@ -24,4 +24,9 @@ public class Caballero extends Soldado{
         this.setSalud(SALUD);
 
     }
+    
+    public int capacidadMovimiento(){   //Los caballeros se mueven dos casillas
+        return 2;
+    }
+    
 }

@@ -25,4 +25,9 @@ public class Arquero extends Soldado {
         this.setSalud(SALUD);
 
     }
+    
+    public int capacidadMovimiento(){   //Los paisanos se mueven una casilla
+        return 1;
+    }
+    
 }

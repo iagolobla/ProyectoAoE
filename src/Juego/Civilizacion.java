@@ -25,6 +25,24 @@ public class Civilizacion {
     private int madera;
     private int piedra;
     private int comida;
+    
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj){
+            return true;
+        }
+        if(obj == null){
+            return false;
+        }
+        if(this.getClass() != obj.getClass()){
+            return false;
+        }
+        final Civilizacion other = (Civilizacion) obj;
+        if(other.getNombre() != this.getNombre()){
+            return false;
+        }
+        return true;
+    }
 
     public Civilizacion(String nombre) {
         edificios = new HashMap<String, Edificio>();
