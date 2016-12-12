@@ -311,81 +311,90 @@ public class Mapa {
             System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
             for (int j = 0; j < MAPAX; j++) {
                 cell = this.getCelda(i, j);
-                if (cell.getContenedor() instanceof Pradera) {
-                    if (cell.isGrupo()) {
-                        if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
-                    } else if (cell.getPersonaje() instanceof Paisano) {
-                        if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
+                if (cell.isVisible(civilizacion)) {
+                    if (cell.getContenedor() instanceof Pradera) {
+                        if (cell.isGrupo()) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
+                        } else if (cell.getPersonaje() instanceof Paisano) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
 
-                    } else if (cell.getPersonaje() instanceof Legionario) {
-                        if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
-                    } else if (cell.getPersonaje() instanceof Arquero) {
-                        if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
+                        } else if (cell.getPersonaje() instanceof Legionario) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
+                        } else if (cell.getPersonaje() instanceof Arquero) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
 
-                    } else if (cell.getPersonaje() instanceof Caballero) {
-                        if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
+                        } else if (cell.getPersonaje() instanceof Caballero) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
 
-                    } else if (cell.getEdificio() instanceof Casa) {
-                        if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
+                        } else if (cell.getEdificio() instanceof Casa) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
 
-                    } else if (cell.getEdificio() instanceof Ciudadela) {
-                        if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
+                        } else if (cell.getEdificio() instanceof Ciudadela) {
+                            if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
 
-                    } else if (cell.getEdificio() instanceof Torre) {
-                        if (getCelda(i, j).getEdificio().getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        } else {
-                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
-                        }
+                        } else if (cell.getEdificio() instanceof Torre) {
+                            if (getCelda(i, j).getEdificio().getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            } else {
+                                System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                            }
 
-                    } else if (getCelda(i, j).getEdificio().getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
-                        System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                        } else if (getCelda(i, j).getEdificio().getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                        } else {
+                            System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                        }
+                    } else if (cell.getContenedor() instanceof Bosque) {
+                        System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
+
+                    } else if (cell.getContenedor() instanceof Arbusto) {
+                        System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♣" + Colores.BACK_RESET + Colores.TEXT_RESET);
+
                     } else {
-                        System.out.print(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                        System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♦" + Colores.BACK_RESET + Colores.TEXT_RESET);
                     }
-                } else if (cell.getContenedor() instanceof Bosque) {
-                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
-
-                } else if (cell.getContenedor() instanceof Arbusto) {
-                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♣" + Colores.BACK_RESET + Colores.TEXT_RESET);
-
                 } else {
-                    System.out.print(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♦" + Colores.BACK_RESET + Colores.TEXT_RESET);
+                    System.out.print(Colores.BACK_GRIS + " " + Colores.BACK_RESET);
                 }
-
             }
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
+            System.out.println("");
         }
+        for (int i = 0; i < MAPAX + 2; i++) {
+            System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
+        }
+        System.out.println("");
     }
 
-    public void imprimir() {
+    /*public void imprimir() {
         Celda cell;
         Celda aux;
         Posicion pos;
@@ -476,7 +485,7 @@ public class Mapa {
             System.out.print(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
         }
         System.out.println("");
-    }
+    }*/
 
     public boolean checkBuilding(Posicion pos) {
         if (this.getCelda(pos).getTipo().equals("Pradera")) {
