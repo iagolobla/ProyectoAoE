@@ -45,12 +45,12 @@ public class Juego {
             civilizaciones.put(nombre, C);
 
         }
-
+        
         C = civilizaciones.get(nombre);
         System.out.println("Estas jugando con los: " + C.getNombre());
         Mapa map = new Mapa(6, 6, 6, civilizaciones.values());
         map.setCivilizacion(C);
-        
+        Shell.imprimir(map.print());
 
         while (seguir) {
             String linea = Shell.leer("$ ");
@@ -62,11 +62,11 @@ public class Juego {
                         if (C.getPersonajes().containsKey(comando[1])) {
                             Personaje p = map.getCivilizacion().getPersonajes().get(comando[1]);
                             new ComandoMover(comando[2],p,map).ejecutar();
-                            new ComandoImprimir(map).ejecutar();
+                            new ComandoImprimir(map, Shell).ejecutar();
                         }
                         break;
                     case "imprimir":
-                        new ComandoImprimir(map).ejecutar();
+                        new ComandoImprimir(map, Shell).ejecutar();
                         break;
                     case "salir":
                         seguir = false;

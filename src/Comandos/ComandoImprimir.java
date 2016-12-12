@@ -5,17 +5,22 @@
  */
 package Comandos;
 import Juego.Mapa;
+import Juego.ConsolaNormal;
 /**
  *
  * @author iagolobla
  */
 public class ComandoImprimir implements Comando{
     Mapa mapa;
-    public ComandoImprimir(Mapa mapa){
+    ConsolaNormal Shell;
+    public ComandoImprimir(Mapa mapa, ConsolaNormal Shell){
         if(mapa!=null)
             this.mapa=mapa;
+        if(Shell != null){
+            this.Shell = Shell;
+        }
     }
     public void ejecutar(){
-        mapa.print();
+        Shell.imprimir(mapa.print());
     }
 }
