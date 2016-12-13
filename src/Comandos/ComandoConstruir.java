@@ -71,10 +71,11 @@ public class ComandoConstruir implements Comando {
         } else {
             throw new ExcepcionConstruir("El personaje indicado no existe!");
         }
-        Edificio ef = p.construir(tipo_edificio);
-        Posicion nueva = ef.mover(pto_cardinal);
+        
+        Posicion nueva = p.mover(pto_cardinal);
         
         if (mapa.checkCoords(nueva) && mapa.checkBuilding(nueva)) {
+            Edificio ef = p.construir(tipo_edificio);
             cell = mapa.getCelda(nueva);
             ef.setPosicion(nueva);
             cell.setEdificio(ef);
