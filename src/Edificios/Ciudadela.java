@@ -29,11 +29,14 @@ public class Ciudadela extends Edificio {
         this.setCapPersonajes(CAPACIDAD);
     }
     
-    @Override
+     @Override
     public String toString() {
         String impresion = super.toString();
-        impresion+="Tipo de edificio: Ciudadela";
-        
+        impresion += "Recursos: \n";
+        impresion += "Piedra: " + this.getCivilizacion().getPiedra() + "\n";
+        impresion += "Madera: " + this.getCivilizacion().getMadera() + "\n";
+        impresion += "Comida: " + this.getCivilizacion().getComida() + "\n";
+        impresion += "Tipo de edificio: Ciudadela";
 
         return impresion;
     }

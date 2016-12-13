@@ -10,6 +10,7 @@ package Juego;
  * @author iagolobla
  */
 import Comandos.ComandoCrear;
+import Comandos.ComandoDescribir;
 import Comandos.ComandoImprimir;
 import Comandos.ComandoListar;
 import Comandos.ComandoMover;
@@ -96,7 +97,19 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoListar(comando[1],juego.getMapa()).ejecutar();
+                            new ComandoListar(comando[1],juego.getMapa(),Shell).ejecutar();
+
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                        }
+                        break;
+                    case "describir":
+                        try {
+                            if (comando.length != 2) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoDescribir(comando[1],juego.getMapa()).ejecutar();
 
                         } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());

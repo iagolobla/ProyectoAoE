@@ -5,6 +5,10 @@
  */
 package Comandos;
 
+import Excepciones.ExcepcionEdificioVacio;
+import Excepciones.ExcepcionPosicionNoValida;
+import Excepciones.ExcepcionSintaxis;
+import Juego.ConsolaNormal;
 import Juego.Mapa;
 
 /**
@@ -15,37 +19,38 @@ public class ComandoListar implements Comando {
 
     Mapa map;
     String tipoentidad;
+    ConsolaNormal Shell;
 
-    public ComandoListar(String tipoentidad, Mapa mapa) {
+    public ComandoListar(String tipoentidad, Mapa mapa,ConsolaNormal Shell) {
         this.map = mapa;
         this.tipoentidad = tipoentidad;
+        this.Shell=Shell;
     }
 
-    public void ejecutar() {
+    public void ejecutar() throws ExcepcionSintaxis{
         switch (tipoentidad) {
             case "personajes":
                 for (String k : map.getCivilizacion().getPersonajes().keySet()) {
-                    System.out.println("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getPersonajes().get(k).getPosicion());
+                    Shell.imprimir("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getPersonajes().get(k).getPosicion());
                 }
                 break;
             case "edificios":
                 for (String k : map.getCivilizacion().getEdificios().keySet()) {
-                    System.out.println("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getEdificios().get(k).getPosicion());
+                    Shell.imprimir("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getEdificios().get(k).getPosicion());
                 }
                 break;
             case "civilizaciones":
                 for (String k : map.getCivilizaciones().keySet()) {
-                    System.out.println("Nombre : " + k);
+                    Shell.imprimir("Nombre : " + k);
                 }
                 break;
             case "grupos":
                 for (String G : map.getCivilizacion().getGrupos().keySet()) {
-                    System.out.println("Grupo: " + G);
+                    Shell.imprimir("Grupo: " + G);
                 }
                 break;
             default:
-                System.out.println("comando incorrecto. Debe introducir listar personajes o listar edificios.");
-                break;
+                throw new ExcepcionSintaxis("tipo de entidad incorrecto");
         }
     }
 
@@ -64,34 +69,6 @@ public class ComandoListar implements Comando {
     public void setTipoentidad(String tipoentidad) {
         this.tipoentidad = tipoentidad;
     }
+
     
 }
-/*if (comando.length == 2) {
-                            switch (comando[1].toLowerCase()) {
-                                case "personajes":
-                                    for (String k : map.getCivilizacion().getPersonajes().keySet()) {
-                                        System.out.println("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getPersonajes().get(k).getPosicion());
-                                    }
-                                    break;
-                                case "edificios":
-                                    for (String k : map.getCivilizacion().getEdificios().keySet()) {
-                                        System.out.println("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getEdificios().get(k).getPosicion());
-                                    }
-                                    break;
-                                case "civilizaciones":
-                                    for (String k : map.getCivilizaciones().keySet()) {
-                                        System.out.println("Nombre : " + k);
-                                    }
-                                    break;
-                                case "grupos":
-                                    for (String G : C.getGrupos().keySet()) {
-                                        System.out.println("Grupo: " + G);
-                                    }
-                                    break;
-                                default:
-                                    System.out.println("comando incorrecto. Debe introducir listar personajes o listar edificios.");
-                                    break;
-                            }
-                        } else {
-                            System.out.println("Error sintactico!");
-                        }*/

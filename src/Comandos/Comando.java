@@ -16,5 +16,5 @@ import Excepciones.ExcepcionSintaxis;
  * @author iagolobla
  */
 public interface Comando{
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio;
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio,ExcepcionEntidadNoEncontrada;
 }
