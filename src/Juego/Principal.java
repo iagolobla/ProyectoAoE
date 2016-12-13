@@ -85,7 +85,7 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoCrear(comando[1],comando[2],juego.getMapa()).ejecutar();
+                            new ComandoCrear(comando[1],comando[2],juego.getMapa(),Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
                         } catch (Exception E) {
@@ -122,7 +122,7 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoConstruir(comando[1],comando[3],comando[2],juego.getMapa()).ejecutar();
+                            new ComandoConstruir(comando[1],comando[3],comando[2],juego.getMapa(),Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
                         } catch (Exception E) {
