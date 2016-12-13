@@ -13,6 +13,7 @@ import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
+import Juego.Posicion;
 import Personajes.Personaje;
 
 /**
@@ -40,14 +41,13 @@ public class ComandoConstruir implements Comando {
         this.Shell = Shell;
     }
     
-    public void ejecutar() throws ExcepcionConstruir, ExcepcionCrear, ExcepcionSintaxis {
+    public void ejecutar() throws ExcepcionConstruir, ExcepcionSintaxis {
         Celda cell;
         Personaje p;
         int gasto;
         switch (tipo_edificio) {
             case "casa":
                 gasto = GASTOCASA;
-                
                 break;
             case "ciudadela":
                 gasto = GASTOCIUDADELA;
@@ -59,8 +59,9 @@ public class ComandoConstruir implements Comando {
                 gasto = GASTOTORRE;
                 break;
             default:
-                throw new ExcepcionSintaxis("tipo edificio mal introducido");
+                throw new ExcepcionSintaxis("Tipo de edificio mal introducido!");
         }
+        
         if (mapa.getCivilizacion().getMadera() < gasto || mapa.getCivilizacion().getPiedra() < gasto) {
             throw new ExcepcionConstruir("No quedan suficientes recursos");
         }
@@ -68,20 +69,21 @@ public class ComandoConstruir implements Comando {
         if (mapa.getCivilizacion().getPersonajes().containsKey(personaje)) {
             p = mapa.getCivilizacion().getPersonajes().get(personaje);
         } else {
-            //Excepcion Aqui
+            throw new ExcepcionConstruir("El personaje indicado no existe!");
         }
         Edificio ef = p.construir(tipo_edificio);
+        Posicion nueva = ef.mover(pto_cardinal);
         
-        if (mapa.checkCoords(ef.mover(pto_cardinal)) && mapa.checkBuilding(ef.mover(pto_cardinal))) {
-            cell = mapa.getCelda(ef.mover(pto_cardinal));
-            ef.setPosicion(p.mover(pto_cardinal));
+        if (mapa.checkCoords(nueva) && mapa.checkBuilding(nueva)) {
+            cell = mapa.getCelda(nueva);
+            ef.setPosicion(nueva);
             cell.setEdificio(ef);
             mapa.getCivilizacion().getEdificios().put(ef.getNombre(), ef);
             mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - gasto);
             mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - gasto);
             Shell.imprimir("Se ha construido el edificio " + ef.getNombre() + " en la posicion " + ef.getPosicion());
         } else {
-            //Excepcion Aqui
+            throw new ExcepcionConstruir("No se puede construir en esa direccion!");
         }
         
     }

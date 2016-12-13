@@ -13,117 +13,103 @@ import Edificios.Casa;
 import Juego.Mapa;
 import Edificios.Ciudadela;
 import Edificios.Cuartel;
+import Edificios.Edificio;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionSintaxis;
 import Personajes.Personaje;
 import Juego.Celda;
 import Juego.ConsolaNormal;
+import Juego.Posicion;
 
 public class ComandoCrear implements Comando {
 
     private String edificio;
     private String tipopersonaje;
     private Mapa mapa;
-    private ConsolaNormal Shell; 
+    private ConsolaNormal Shell;
 
-    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa,ConsolaNormal Shell) {
+    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa, ConsolaNormal Shell) {
         this.edificio = edificio;
         this.tipopersonaje = tipopersonaje;
         this.mapa = mapa;
-        this.Shell=Shell;
+        this.Shell = Shell;
     }
 
     public void ejecutar() throws ExcepcionSintaxis, ExcepcionCrear {
         Celda cell;
         Personaje p;
-        if (tipopersonaje.equals("paisano")) {
-            if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
-                //Excepcion Aqui
-            }
+        Edificio ef;
+        int gasto = 10;  //Cantidad de comida para crear un personaje
+        int comida = mapa.getCivilizacion().getComida();    //Comida disponible
 
-            if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
-                if(edificio.equals("cuartel")){
-                    throw new ExcepcionCrear("Tipo edificio incorrecto");
-                }
-                Ciudadela C = (Ciudadela) mapa.getCivilizacion().getEdificios().get(edificio);
-                p = C.crear(tipopersonaje);
-            } else {
-                //Excepcion Aqui
-            }
-            if (mapa.checkCoords(p.mover("n")) && mapa.checkBuilding(p.mover("n"))) {
-                cell = mapa.getCelda(p.mover("n"));
-                p.setPosicion(p.mover("n"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-
-            } else if (mapa.checkCoords(p.mover("s")) && mapa.checkBuilding(p.mover("s"))) {
-                cell = mapa.getCelda(p.mover("s"));
-                p.setPosicion(p.mover("s"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else if (mapa.checkCoords(p.mover("e")) && mapa.checkBuilding(p.mover("e"))) {
-                cell = mapa.getCelda(p.mover("e"));
-                p.setPosicion(p.mover("e"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else if (mapa.checkCoords(p.mover("o")) && mapa.checkBuilding(p.mover("o"))) {
-                cell = mapa.getCelda(p.mover("o"));
-                p.setPosicion(p.mover("o"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else {
-                //Excepcion Aqui
-            }
-
-        } else if (tipopersonaje.equals("caballero") || tipopersonaje.equals("arquero") || tipopersonaje.equals("legionario")) {
-            if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
-                //Excepcion Aqui
-            }
-            if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
-                if(edificio.equals("ciudadela")){
-                    throw new ExcepcionCrear("Tipo edificio incorrecto");
-                }
-                Cuartel C = (Cuartel) mapa.getCivilizacion().getEdificios().get(edificio);
-                p = C.crear(tipopersonaje);
-            } else {
-                //Excepcion Aqui
-            }
-            if (mapa.checkCoords(p.mover("n")) && mapa.checkBuilding(p.mover("n"))) {
-                cell = mapa.getCelda(p.mover("n"));
-                p.setPosicion(p.mover("n"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-
-            } else if (mapa.checkCoords(p.mover("s")) && mapa.checkBuilding(p.mover("s"))) {
-                cell = mapa.getCelda(p.mover("s"));
-                p.setPosicion(p.mover("s"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else if (mapa.checkCoords(p.mover("e")) && mapa.checkBuilding(p.mover("e"))) {
-                cell = mapa.getCelda(p.mover("e"));
-                p.setPosicion(p.mover("e"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else if (mapa.checkCoords(p.mover("o")) && mapa.checkBuilding(p.mover("o"))) {
-                cell = mapa.getCelda(p.mover("o"));
-                p.setPosicion(p.mover("o"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else {
-                //Excepcion Aqui
-            }
-        } else {
-            //Excepcion Aqui
+        //Comprueba si hay sitio, si existe el edificio, y si hay suficiente comida (Por ese orden)
+        if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
+            throw new ExcepcionCrear("No hay sitio para mas personajes, se necesitan mas casas!");
         }
-        Shell.imprimir("Se ha creado el personaje "+p.getNombre()+" en la posicion "+ p.getPosicion());
+        if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
+            ef = mapa.getCivilizacion().getEdificios().get(edificio);
+        } else {
+            throw new ExcepcionCrear("El edificio no existe!");
+        }
+        if (gasto > comida) { //Si no hay comida para crear un paisano
+            throw new ExcepcionCrear("No hay suficiente comida!");
+        }
+
+        switch (tipopersonaje) {
+            case "paisano":
+                if (ef instanceof Ciudadela) {
+                    p = ((Ciudadela) ef).crear(tipopersonaje);
+                } else {
+                    throw new ExcepcionCrear("Ese edificio no crea Paisanos!");
+                }
+                break;
+
+            case "caballero":   //El orden importa(Caballeros mas caros)
+                gasto += 10;
+            case "legionario":
+                gasto += 10;
+            case "arquero":
+                gasto += 10;
+                
+                if (gasto > comida) { //Si no hay comida para crear un soldado
+                    throw new ExcepcionCrear("No hay suficiente comida!");
+                }
+                
+                if (ef instanceof Cuartel) {
+                    p = ((Cuartel) ef).crear(tipopersonaje);
+                } else {
+                    throw new ExcepcionCrear("Ese edificio no crea Soldados!");
+                }
+                break;
+
+            default:
+                throw new ExcepcionCrear("El tipo de personaje especificado no existe!");
+        }
+
+        Posicion nueva = p.getPosicion();   //Busqueda de posicion para crear
+        nueva.moverX(-1);
+        if (!(mapa.checkCoords(nueva) && mapa.checkBuilding(nueva))) {
+            nueva.moverX(2);
+        }
+        if (!(mapa.checkCoords(nueva) && mapa.checkBuilding(nueva))) {
+            nueva.moverX(-1);
+            nueva.moverY(1);
+        }
+        if (!(mapa.checkCoords(nueva) && mapa.checkBuilding(nueva))) {
+            nueva.moverY(-2);
+        }
+        if (!(mapa.checkCoords(nueva) && mapa.checkBuilding(nueva))) {
+            throw new ExcepcionCrear("No hay posiciones libres en el entorno del edificio!");
+        }
+
+        cell = mapa.getCelda(nueva);
+        p.setPosicion(nueva);
+        cell.addPersonaje(p);
+        mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
+        mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - gasto);
+
+        Shell.imprimir(
+                "Se ha creado el personaje " + p.getNombre() + " en la posicion " + p.getPosicion());
     }
 
     public String getEdificio() {
