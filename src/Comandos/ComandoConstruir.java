@@ -11,6 +11,7 @@ import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionEntidadNoEncontrada;
 import Excepciones.ExcepcionPosicionNoValida;
+import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.Mapa;
 import Personajes.Personaje;
@@ -33,7 +34,7 @@ public class ComandoConstruir implements Comando {
         this.mapa = mapa;
     }
 
-    public void ejecutar() throws ExcepcionEntidadNoEncontrada,ExcepcionConstruir,ExcepcionCrear,ExceptionSintaxis{
+    public void ejecutar() throws ExcepcionEntidadNoEncontrada,ExcepcionConstruir,ExcepcionCrear,ExcepcionSintaxis, ExcepcionPosicionNoValida{
         Celda cell;
         Personaje p;
         

@@ -5,6 +5,7 @@
  */
 package Comandos;
 
+import Excepciones.ExcepcionCivilizacionNoEncontrada;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionEdificioVacio;
@@ -19,5 +20,5 @@ import Excepciones.ExcepcionSintaxis;
  * @author iagolobla
  */
 public interface Comando{
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio,ExcepcionEntidadNoEncontrada,ExcepcionLimiteAlojamiento,ExcepcionCrear,ExcepcionConstruir;
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio,ExcepcionEntidadNoEncontrada,ExcepcionLimiteAlojamiento,ExcepcionCrear,ExcepcionConstruir, ExcepcionCivilizacionNoEncontrada;
 }
