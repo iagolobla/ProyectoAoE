@@ -5,6 +5,7 @@
  */
 package Edificios;
 
+import Excepciones.ExcepcionCrear;
 import Juego.Civilizacion;
 import Juego.Posicion;
 import Personajes.Paisano;
@@ -54,15 +55,14 @@ public class Ciudadela extends Edificio {
         }
     }
     
-    public Personaje crear(String tipo_personaje){
+    public Personaje crear(String tipo_personaje) throws ExcepcionCrear{
         if(tipo_personaje.equals("paisano")){
-            String Name="paisano-"+this.getCivilizacion().getCantidades()[0];
+            String Name="paisano-"+(this.getCivilizacion().getCantidades()[0]+1);
             this.getCivilizacion().getCantidades()[0]++;
             return new Paisano(Name, this.getPosicion(), this.getCivilizacion());
             
         }else{
-            System.out.println("tipo personaje no valido introducido");
-            return null;
+            throw new ExcepcionCrear("Tipo personaje incorrecto");
         }
     }
     

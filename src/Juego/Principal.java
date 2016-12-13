@@ -9,6 +9,7 @@ package Juego;
  *
  * @author iagolobla
  */
+import Comandos.ComandoConstruir;
 import Comandos.ComandoCrear;
 import Comandos.ComandoDescribir;
 import Comandos.ComandoImprimir;
@@ -115,6 +116,20 @@ public class Principal {
                             Shell.imprimir("Error: " + E.getMessage());
                         }
                         break;
+                    case "construir":
+                        try {
+                            if (comando.length != 4) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoConstruir(comando[1],comando[3],comando[2],juego.getMapa()).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                        }
+                        break;
+                        
                     case "imprimir":
                         new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
                         break;

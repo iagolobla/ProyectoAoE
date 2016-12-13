@@ -6,6 +6,7 @@
 package Edificios;
 
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionSintaxis;
 import java.util.HashMap;
 import Juego.Civilizacion;
 import Juego.Posicion;
@@ -65,7 +66,27 @@ public abstract class Edificio {
         return impresion;
     }
     
-    
+    public Posicion mover(String pto_cardinal) throws ExcepcionSintaxis{
+        Posicion p=new Posicion(posicion);
+        switch (pto_cardinal) {
+            case "s":
+                p.moverX(1);
+                break;
+            case "n":
+                p.moverX(-1);
+                break;
+            case "e":
+                p.moverY(1);
+                break;
+            case "o":
+                p.moverY(-1);
+                break;
+            default:
+                throw new ExcepcionSintaxis("Direccion pasada erronea!");
+
+        }
+        return p;
+    }
     public abstract void almacenar(Recurso recurso);
     
     public abstract Personaje crear(String tipo_personaje) throws ExcepcionCrear;

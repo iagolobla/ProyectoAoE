@@ -66,16 +66,16 @@ public abstract class Personaje  {
         Posicion p=new Posicion(posicion);
         switch (pto_cardinal) {
             case "s":
-                p.moverX(this.capacidadMovimiento());
+                p.moverX(1);
                 break;
             case "n":
-                p.moverX((-1)*this.capacidadMovimiento());
+                p.moverX(-1);
                 break;
             case "e":
-                p.moverY(this.capacidadMovimiento());
+                p.moverY(1);
                 break;
             case "o":
-                p.moverY((-1)*this.capacidadMovimiento());
+                p.moverY(-1);
                 break;
             default:
                 throw new ExcepcionSintaxis("Direccion pasada erronea!");

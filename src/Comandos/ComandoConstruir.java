@@ -11,6 +11,7 @@ import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionEntidadNoEncontrada;
 import Excepciones.ExcepcionPosicionNoValida;
+import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.Mapa;
 import Personajes.Personaje;
@@ -21,6 +22,11 @@ import Personajes.Personaje;
  */
 public class ComandoConstruir implements Comando {
 
+    public static final int GASTOCASA = 20;
+    public static final int GASTOCUARTEL = 40;
+    public static final int GASTOCIUDADELA = 40;
+    public static final int GASTOTORRE = 50;
+    
     String personaje;
     String pto_cardinal;
     String tipo_edificio;
@@ -33,46 +39,49 @@ public class ComandoConstruir implements Comando {
         this.mapa = mapa;
     }
 
-    public void ejecutar() throws ExcepcionEntidadNoEncontrada,ExcepcionConstruir,ExcepcionCrear,ExceptionSintaxis{
+    public void ejecutar() throws ExcepcionEntidadNoEncontrada, ExcepcionConstruir, ExcepcionCrear, ExcepcionSintaxis, ExcepcionPosicionNoValida {
         Celda cell;
         Personaje p;
+        int gasto;
+        int posible=1;
+        switch (tipo_edificio) {
+            case "casa":
+                gasto=GASTOCASA;
+                
+                break;
+            case "ciudadela":
+                gasto=GASTOCIUDADELA;
+                break;
+            case "cuartel":
+                gasto=GASTOCUARTEL;
+                break;
+            case "torre":
+                gasto=GASTOTORRE;
+                break;
+            default:
+                throw new ExcepcionSintaxis("tipo edificio mal introducido");
+        }
+        if(mapa.getCivilizacion().getMadera() < gasto || mapa.getCivilizacion().getPiedra() < gasto){
+            throw new ExcepcionConstruir("No quedan suficientes recursos");
+        }
         
         if (mapa.getCivilizacion().getPersonajes().containsKey(personaje)) {
             p = mapa.getCivilizacion().getPersonajes().get(personaje);
         } else {
             throw new ExcepcionEntidadNoEncontrada("No existe el edificio introducido");
         }
-        Edificio ef=p.construir(tipo_edificio);
-        
-        
-        if (mapa.checkCoords(p.mover("n")) && mapa.checkBuilding(p.mover("n"))) {
-                cell = mapa.getCelda(p.mover("n"));
-                p.setPosicion(p.mover("n"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
+        Edificio ef = p.construir(tipo_edificio);
 
-            } else if (mapa.checkCoords(p.mover("s")) && mapa.checkBuilding(p.mover("s"))) {
-                cell = mapa.getCelda(p.mover("s"));
-                p.setPosicion(p.mover("s"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else if (mapa.checkCoords(p.mover("e")) && mapa.checkBuilding(p.mover("e"))) {
-                cell = mapa.getCelda(p.mover("e"));
-                p.setPosicion(p.mover("e"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else if (mapa.checkCoords(p.mover("o")) && mapa.checkBuilding(p.mover("o"))) {
-                cell = mapa.getCelda(p.mover("o"));
-                p.setPosicion(p.mover("o"));
-                cell.addPersonaje(p);
-                mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
-                mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
-            } else {
-                throw new ExcepcionPosicionNoValida("No se puede crear el personaje!");
-            }
-        
+        if (mapa.checkCoords(ef.mover(pto_cardinal)) && mapa.checkBuilding(ef.mover(pto_cardinal))) {
+            cell = mapa.getCelda(ef.mover(pto_cardinal));
+            ef.setPosicion(p.mover(pto_cardinal));
+            cell.setEdificio(ef);
+            mapa.getCivilizacion().getEdificios().put(ef.getNombre(), ef);
+            mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - gasto);
+            mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - gasto);
+        } else {
+            throw new ExcepcionPosicionNoValida("No se puede crear el personaje!");
+        }
+
     }
 }

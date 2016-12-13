@@ -36,23 +36,26 @@ public class ComandoMover implements Comando {
     }
 
     public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio {
+
         Personaje p = mapa.getCivilizacion().getPersonajes().get(personaje);
         if (p == null) {
             throw new NullPointerException("El Personaje especificado no existe!");
         }
-        Posicion vieja = p.getPosicion();
-        Posicion nueva = p.mover(direccion);
-        Celda newcell = null;
-        Celda cell = mapa.getCelda(vieja);
-        if (mapa.checkCoords(nueva) && mapa.checkBuilding(nueva)) {
-            newcell = mapa.getCelda(nueva);
-        } else {
-            throw new ExcepcionPosicionNoValida("No se puede mover en esa direccion!");
-        }
+        for (int i = 0; i < p.capacidadMovimiento(); i++) {
+            Posicion vieja = p.getPosicion();
+            Posicion nueva = p.mover(direccion);
+            Celda newcell = null;
+            Celda cell = mapa.getCelda(vieja);
+            if (mapa.checkCoords(nueva) && mapa.checkBuilding(nueva)) {
+                newcell = mapa.getCelda(nueva);
+            } else {
+                throw new ExcepcionPosicionNoValida("No se puede mover en esa direccion!");
+            }
 
-        cell.quitarPersonaje(p);
-        newcell.addPersonaje(p);
-        p.setPosicion(nueva);
+            cell.quitarPersonaje(p);
+            newcell.addPersonaje(p);
+            p.setPosicion(nueva);
+        }
         mapa.actualizarVisibilidad();
     }
 
@@ -79,6 +82,5 @@ public class ComandoMover implements Comando {
     public void setMapa(Mapa mapa) {
         this.mapa = mapa;
     }
-    
-    
+
 }
