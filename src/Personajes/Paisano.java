@@ -10,10 +10,12 @@ import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Edificios.Edificio;
 import Edificios.Torre;
+import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionReparar;
 import Juego.Posicion;
 import Juego.Civilizacion;
 import Juego.Mapa;
+import Recursos.Contenedor;
 
 /**
  *
@@ -92,6 +94,10 @@ public class Paisano extends Personaje {
         } else {
             throw new ExcepcionReparar("Edificio a reparar incorrecto");
         }
+    }
+    
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar{
+        
     }
 
     public int getCantidadRecolectada() {

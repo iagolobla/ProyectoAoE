@@ -14,6 +14,7 @@ import Edificios.Ciudadela;
 import Edificios.Edificio;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
 /**

@@ -8,6 +8,7 @@ package Personajes;
 import Edificios.Edificio;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionReparar;
 import Juego.Civilizacion;
 import Juego.Posicion;
