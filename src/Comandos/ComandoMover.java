@@ -12,6 +12,7 @@ import Juego.Celda;
 import Excepciones.ExcepcionSintaxis;
 import Edificios.Edificio;
 import Excepciones.ExcepcionMover;
+import Juego.ConsolaNormal;
 
 
 /**
@@ -23,13 +24,15 @@ public class ComandoMover implements Comando {
     private String direccion;
     private String personaje;
     private Mapa mapa;
+    private ConsolaNormal Shell;
 
-    public ComandoMover(String direccion, String personaje, Mapa mapa) {
+    public ComandoMover(String direccion, String personaje, Mapa mapa,ConsolaNormal Shell) {
         if (mapa != null) {
             this.mapa = mapa;
         }
         this.direccion = direccion;
         this.personaje = personaje;
+        this.Shell=Shell;
 
     }
 
@@ -53,6 +56,7 @@ public class ComandoMover implements Comando {
             cell.quitarPersonaje(p);
             newcell.addPersonaje(p);
             p.setPosicion(nueva);
+            Shell.imprimir("El "+ p.getNombre()+" se ha movido a la posicion "+p.getPosicion());
         }
         mapa.actualizarVisibilidad();
     }

@@ -15,7 +15,9 @@ import Comandos.ComandoCrear;
 import Comandos.ComandoDescribir;
 import Comandos.ComandoImprimir;
 import Comandos.ComandoListar;
+import Comandos.ComandoMirar;
 import Comandos.ComandoMover;
+import Comandos.ComandoReparar;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,7 +72,7 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoMover(comando[2], comando[1], juego.getMapa()).ejecutar();
+                            new ComandoMover(comando[2], comando[1], juego.getMapa(),Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
                         } catch (Exception E) {
@@ -84,10 +86,10 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoCrear(comando[1],comando[2],juego.getMapa(),Shell).ejecutar();
+                            new ComandoCrear(comando[1], comando[2], juego.getMapa(), Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
-                        } catch(Exception E){
+                        } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
                             break;
                         }
@@ -100,7 +102,7 @@ public class Principal {
 
                             new ComandoListar(comando[1], juego.getMapa(), Shell).ejecutar();
 
-                        } catch(Exception E){
+                        } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
                             break;
                         }
@@ -113,7 +115,34 @@ public class Principal {
 
                             new ComandoDescribir(comando[1], juego.getMapa()).ejecutar();
 
-                        } catch(Exception E){
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "mirar":
+                        try {
+                            if (comando.length != 2) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoMirar(comando[1], juego.getMapa(), Shell).ejecutar();
+
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "reparar":
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoReparar(comando[2], comando[1], juego.getMapa(), Shell).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+
+                        } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
                             break;
                         }
@@ -124,18 +153,18 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoConstruir(comando[1],comando[3],comando[2],juego.getMapa(),Shell).ejecutar();
+                            new ComandoConstruir(comando[1], comando[3], comando[2], juego.getMapa(), Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
-                        } catch(Exception E){
+                        } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
                     case "recolectar":
-                        try{
-                            
-                        }catch(Exception E){
+                        try {
+
+                        } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
                             break;
                         }

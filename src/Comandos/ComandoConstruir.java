@@ -69,6 +69,7 @@ public class ComandoConstruir implements Comando {
             p = mapa.getCivilizacion().getPersonajes().get(personaje);
         } else {
             //Excepcion Aqui
+            throw new ExcepcionConstruir("no existe la entidad introducida");
         }
         Edificio ef = p.construir(tipo_edificio);
         

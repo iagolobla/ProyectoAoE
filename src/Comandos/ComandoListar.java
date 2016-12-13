@@ -15,9 +15,9 @@ import Juego.Mapa;
  */
 public class ComandoListar implements Comando {
 
-    Mapa map;
-    String tipoentidad;
-    ConsolaNormal Shell;
+    private Mapa map;
+    private String tipoentidad;
+    private ConsolaNormal Shell;
 
     public ComandoListar(String tipoentidad, Mapa mapa,ConsolaNormal Shell) {
         this.map = mapa;

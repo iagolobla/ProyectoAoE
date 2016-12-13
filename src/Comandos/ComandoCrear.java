@@ -49,6 +49,7 @@ public class ComandoCrear implements Comando {
                 p = C.crear(tipopersonaje);
             } else {
                 //Excepcion Aqui
+                throw new ExcepcionCrear("No existe la entidad introducida"); 
             }
             if (mapa.checkCoords(p.mover("n")) && mapa.checkBuilding(p.mover("n"))) {
                 cell = mapa.getCelda(p.mover("n"));
@@ -91,6 +92,7 @@ public class ComandoCrear implements Comando {
                 p = C.crear(tipopersonaje);
             } else {
                 //Excepcion Aqui
+                throw new ExcepcionCrear("No existe la entidad introducida"); 
             }
             if (mapa.checkCoords(p.mover("n")) && mapa.checkBuilding(p.mover("n"))) {
                 cell = mapa.getCelda(p.mover("n"));
@@ -119,9 +121,11 @@ public class ComandoCrear implements Comando {
                 mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
             } else {
                 //Excepcion Aqui
+                throw new ExcepcionCrear("No hay posicion en la que crear la entidad"); 
             }
         } else {
             //Excepcion Aqui
+            throw new ExcepcionCrear("Tipo personaje mal introducido"); 
         }
         Shell.imprimir("Se ha creado el personaje "+p.getNombre()+" en la posicion "+ p.getPosicion());
     }
