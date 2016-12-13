@@ -8,7 +8,6 @@ package Comandos;
 import Edificios.Ciudadela;
 import Edificios.Edificio;
 import Excepciones.ExcepcionCrear;
-import Excepciones.ExcepcionEntidadNoEncontrada;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
