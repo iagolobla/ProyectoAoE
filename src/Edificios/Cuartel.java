@@ -5,6 +5,7 @@
  */
 package Edificios;
 
+import Excepciones.ExcepcionCrear;
 import Juego.Civilizacion;
 import Juego.Posicion;
 import Personajes.Paisano;
@@ -44,24 +45,23 @@ public class Cuartel extends Edificio {
         System.out.println("los cuarteles no almacenan");
     }
 
-    public Personaje crear(String tipo_personaje) {
+    public Personaje crear(String tipo_personaje) throws ExcepcionCrear {
         String Name;
         if (tipo_personaje.equals("arquero")) {
-            Name = "arquero-" + this.getCivilizacion().getCantidades()[7];
+            Name = "arquero-" + (this.getCivilizacion().getCantidades()[7]+1);
             this.getCivilizacion().getCantidades()[7]++;
             return new Arquero(Name, this.getPosicion(), this.getCivilizacion());
 
         } else if (tipo_personaje.equals("legionario")) {
-            Name = "legionario-" + this.getCivilizacion().getCantidades()[1];
+            Name = "legionario-" + (this.getCivilizacion().getCantidades()[1]+1);
             this.getCivilizacion().getCantidades()[1]++;
             return new Legionario (Name, this.getPosicion(), this.getCivilizacion());
         } else if (tipo_personaje.equals("caballero")) {
-            Name = "caballero-" + this.getCivilizacion().getCantidades()[8];
+            Name = "caballero-" + (this.getCivilizacion().getCantidades()[8]+1);
             this.getCivilizacion().getCantidades()[8]++;
             return new Caballero(Name, this.getPosicion(), this.getCivilizacion());
         } else {
-            System.out.println("tipo personaje no valido introducido");
-            return null;
+            throw new ExcepcionCrear("Tipo personaje incorrecto");
         }
     }
     

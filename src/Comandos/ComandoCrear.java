@@ -13,6 +13,7 @@ import Edificios.Casa;
 import Juego.Mapa;
 import Edificios.Ciudadela;
 import Edificios.Cuartel;
+import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionEdificioVacio;
 import Excepciones.ExcepcionEntidadNoEncontrada;
 import Excepciones.ExcepcionLimiteAlojamiento;
@@ -20,20 +21,23 @@ import Excepciones.ExcepcionPosicionNoValida;
 import Excepciones.ExcepcionSintaxis;
 import Personajes.Personaje;
 import Juego.Celda;
+import Juego.ConsolaNormal;
 
 public class ComandoCrear implements Comando {
 
     private String edificio;
     private String tipopersonaje;
     private Mapa mapa;
+    private ConsolaNormal Shell; 
 
-    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa) {
+    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa,ConsolaNormal Shell) {
         this.edificio = edificio;
         this.tipopersonaje = tipopersonaje;
         this.mapa = mapa;
+        this.Shell=Shell;
     }
 
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio, ExcepcionEntidadNoEncontrada,ExcepcionLimiteAlojamiento {
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio, ExcepcionEntidadNoEncontrada,ExcepcionLimiteAlojamiento,ExcepcionCrear {
         Celda cell;
         Personaje p;
         if (tipopersonaje.equals("paisano")) {
@@ -42,6 +46,9 @@ public class ComandoCrear implements Comando {
             }
 
             if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
+                if(edificio.equals("cuartel")){
+                    throw new ExcepcionCrear("Tipo edificio incorrecto");
+                }
                 Ciudadela C = (Ciudadela) mapa.getCivilizacion().getEdificios().get(edificio);
                 p = C.crear(tipopersonaje);
             } else {
@@ -81,6 +88,9 @@ public class ComandoCrear implements Comando {
                 throw new ExcepcionLimiteAlojamiento("Se necesitan mas casas, no se pueden crear personajes");
             }
             if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
+                if(edificio.equals("ciudadela")){
+                    throw new ExcepcionCrear("Tipo edificio incorrecto");
+                }
                 Cuartel C = (Cuartel) mapa.getCivilizacion().getEdificios().get(edificio);
                 p = C.crear(tipopersonaje);
             } else {
@@ -115,8 +125,9 @@ public class ComandoCrear implements Comando {
                 throw new ExcepcionPosicionNoValida("No se puede crear el personaje!");
             }
         } else {
-            throw new ExcepcionEntidadNoEncontrada("No el tipo de personaje introducido");
+            throw new ExcepcionEntidadNoEncontrada(" tipo de personaje mal introducido");
         }
+        Shell.imprimir("Se ha creado el personaje "+p.getNombre()+" en la posicion "+ p.getPosicion());
     }
 
     public String getEdificio() {

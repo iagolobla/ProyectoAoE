@@ -33,7 +33,7 @@ public class Caballero extends Soldado{
     }
     
     public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
-        throw new ExcepcionConstruir("Las torres no crean personajes");
+        throw new ExcepcionConstruir("Los caballeros no construyen");
     }
     
 }
