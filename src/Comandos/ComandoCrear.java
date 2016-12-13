@@ -43,7 +43,7 @@ public class ComandoCrear implements Comando {
         int comida = mapa.getCivilizacion().getComida();    //Comida disponible
 
         //Comprueba si hay sitio, si existe el edificio, y si hay suficiente comida (Por ese orden)
-        if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
+        if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getPersonajes().size()) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
             throw new ExcepcionCrear("No hay sitio para mas personajes, se necesitan mas casas!");
         }
         if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
