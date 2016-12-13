@@ -12,6 +12,8 @@ import Juego.Mapa;
 import Recursos.Contenedor;
 import Edificios.Ciudadela;
 import Edificios.Edificio;
+import Excepciones.ExcepcionConstruir;
+import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionSintaxis;
 /**
  *
@@ -83,6 +85,8 @@ public abstract class Personaje  {
     }
     
     public abstract int capacidadMovimiento();
+    
+    public abstract Edificio construir(String tipo_edificio) throws ExcepcionConstruir;
     /*
     public abstract void recolectar(Contenedor contenedor);
     
@@ -90,7 +94,7 @@ public abstract class Personaje  {
     
     public abstract void reparar(Edificio edificio);
     
-    public abstract Edificio construir(String tipo_edificio);
+    
     
     public void defender(Edificio edificio){
         

@@ -5,6 +5,11 @@
  */
 package Personajes;
 
+import Edificios.Casa;
+import Edificios.Ciudadela;
+import Edificios.Cuartel;
+import Edificios.Edificio;
+import Edificios.Torre;
 import Juego.Posicion;
 import Juego.Civilizacion;
 import Juego.Mapa;
@@ -46,6 +51,31 @@ public class Paisano extends Personaje {
         return impresion;
     }
 
+    public Edificio construir(String tipo_edificio) {
+        String Name;
+        if (tipo_edificio.equals("casa")) {
+            Name = "casa-" + this.getCivilizacion().getCantidades()[3];
+            this.getCivilizacion().getCantidades()[3]++;
+            return new Casa( this.getPosicion(),Name, this.getCivilizacion());
+
+        } else if (tipo_edificio.equals("torre")) {
+            Name = "torre-" + this.getCivilizacion().getCantidades()[5];
+            this.getCivilizacion().getCantidades()[5]++;
+            return new Torre(this.getPosicion(),Name, this.getCivilizacion());
+        } else if (tipo_edificio.equals("ciudadela")) {
+            Name = "ciudadela-" + this.getCivilizacion().getCantidades()[2];
+            this.getCivilizacion().getCantidades()[2]++;
+            return new Ciudadela(this.getPosicion(),Name, this.getCivilizacion());
+        } else if (tipo_edificio.equals("cuartel")) {
+            Name = "cuartel-" + this.getCivilizacion().getCantidades()[4];
+            this.getCivilizacion().getCantidades()[4]++;
+            return new Cuartel(this.getPosicion(),Name, this.getCivilizacion());
+        } else {
+            System.out.println("tipo personaje no valido introducido");
+            return null;
+        }
+    }
+
     public int getCantidadRecolectada() {
         return cantidadRecolectada;
     }
@@ -69,9 +99,9 @@ public class Paisano extends Personaje {
     public void setTipoRecurso(String tipoRecurso) {
         this.tipoRecurso = tipoRecurso;
     }
-    
-    public int capacidadMovimiento(){   //Los paisanos se mueven una casilla
+
+    public int capacidadMovimiento() {   //Los paisanos se mueven una casilla
         return 1;
     }
-    
+
 }

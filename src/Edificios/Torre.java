@@ -5,6 +5,7 @@
  */
 package Edificios;
 
+import Excepciones.ExcepcionCrear;
 import Juego.Civilizacion;
 import Juego.Posicion;
 import Personajes.Paisano;
@@ -46,9 +47,8 @@ public class Torre extends Edificio {
         System.out.println("las torres no almacenan");
     }
 
-    public Personaje crear(String tipo_personaje) {
-        System.out.println("las torres no crean");
-        return null;
+    public Personaje crear(String tipo_personaje) throws ExcepcionCrear{
+        throw new ExcepcionCrear("Las torres no crean personajes");
     }
 
     public void atacar(Personaje[] personajes) {

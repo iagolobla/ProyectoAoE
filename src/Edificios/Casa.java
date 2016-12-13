@@ -5,6 +5,7 @@
  */
 package Edificios;
 
+import Excepciones.ExcepcionCrear;
 import Juego.Civilizacion;
 import Juego.Posicion;
 import Personajes.Paisano;
@@ -41,9 +42,8 @@ public class Casa extends Edificio{
         System.out.println("las casas no almacenan");
     }
     
-    public Personaje crear(String tipo_personaje){
-        System.out.println("las casas no crean");
-        return null;
+    public Personaje crear(String tipo_personaje) throws ExcepcionCrear{
+        throw new ExcepcionCrear("Las casas no crean personajes");
     }
     
     public void atacar(Personaje[] personajes){

@@ -5,6 +5,7 @@
  */
 package Edificios;
 
+import Excepciones.ExcepcionCrear;
 import java.util.HashMap;
 import Juego.Civilizacion;
 import Juego.Posicion;
@@ -67,7 +68,7 @@ public abstract class Edificio {
     
     public abstract void almacenar(Recurso recurso);
     
-    public abstract Personaje crear(String tipo_personaje);
+    public abstract Personaje crear(String tipo_personaje) throws ExcepcionCrear;
     
     public abstract void atacar(Personaje[] personajes);
 

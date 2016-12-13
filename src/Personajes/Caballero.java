@@ -5,6 +5,9 @@
  */
 package Personajes;
 
+import Edificios.Edificio;
+import Excepciones.ExcepcionConstruir;
+import Excepciones.ExcepcionCrear;
 import Juego.Civilizacion;
 import Juego.Posicion;
 
@@ -27,6 +30,10 @@ public class Caballero extends Soldado{
     
     public int capacidadMovimiento(){   //Los caballeros se mueven dos casillas
         return 2;
+    }
+    
+    public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
+        throw new ExcepcionConstruir("Las torres no crean personajes");
     }
     
 }
