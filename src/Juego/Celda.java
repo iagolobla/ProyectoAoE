@@ -10,8 +10,12 @@ import java.util.HashMap;
 import Personajes.Personaje;
 import Personajes.Grupo;
 import Edificios.Edificio;
+import Excepciones.ExcepcionEdificioVacio;
+import Excepciones.ExcepcionEntidadNoEncontrada;
+import Excepciones.ExcepcionPersonajeNoEncontrado;
 import Recursos.Contenedor;
 import Recursos.Pradera;
+
 
 /**
  *
@@ -97,7 +101,10 @@ public class Celda {
         return null;
     }
 
-    public void quitarPersonaje(Personaje P) {  //Quita personajes de una celda, tiene en cuenta si hay edificio
+    public void quitarPersonaje(Personaje P) throws ExcepcionEdificioVacio{  //Quita personajes de una celda, tiene en cuenta si hay edificio
+        if(P == null){
+            throw new NullPointerException("Personaje especificado nulo!");
+        }
         if (contenedor instanceof Pradera) {
             if (!this.isEdificio()) {
                 if (personajes.size() > 0) {
@@ -107,7 +114,11 @@ public class Celda {
                 if (edificio.getPersonajes().containsKey(P.getNombre())) {
                     edificio.getPersonajes().remove(P.getNombre());
                     edificio.setNPersonajes(edificio.getNPersonajes() - 1);
+                } else {
+                    //throw (ExcepcionEntidadNoEncontrada)new ExcepcionPersonajeNoEncontrado("El personaje que se quiere quitar no esta dentro del edificio " + edificio.getNombre());
                 }
+            } else {
+                throw new ExcepcionEdificioVacio("El edificio " + edificio.getNombre() + " esta vacio, no hay nadie dentro, por lo que no se puede quitar personajes");
             }
         }
     }

@@ -9,6 +9,13 @@ package Excepciones;
  *
  * @author iagolobla
  */
-public class ComandoExcepcion {
-    
+public class ExcepcionSintaxis extends Exception {
+
+    public ExcepcionSintaxis() {
+    }
+
+
+    public ExcepcionSintaxis(String msg) {
+        super(msg);
+    }
 }

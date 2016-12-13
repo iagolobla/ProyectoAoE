@@ -12,6 +12,7 @@ import Juego.Mapa;
 import Recursos.Contenedor;
 import Edificios.Ciudadela;
 import Edificios.Edificio;
+import Excepciones.ExcepcionSintaxis;
 /**
  *
  * @author iagolobla
@@ -59,7 +60,7 @@ public abstract class Personaje  {
         return impresion;
     }
     
-    public Posicion mover(String pto_cardinal){
+    public Posicion mover(String pto_cardinal) throws ExcepcionSintaxis{
         Posicion p=new Posicion(posicion);
         switch (pto_cardinal) {
             case "s":
@@ -75,7 +76,7 @@ public abstract class Personaje  {
                 p.moverY((-1)*this.capacidadMovimiento());
                 break;
             default:
-                System.out.println("Error, direccion no valida!");
+                throw new ExcepcionSintaxis("Direccion pasada erronea!");
 
         }
         return p;

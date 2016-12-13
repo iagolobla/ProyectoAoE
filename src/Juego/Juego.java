@@ -11,10 +11,14 @@ package Juego;
  */
 import Comandos.ComandoImprimir;
 import Comandos.ComandoMover;
+import Excepciones.ExcepcionEdificioVacio;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import Personajes.Personaje;
+import Excepciones.ExcepcionSintaxis;
+import Excepciones.ExcepcionPersonajeNoEncontrado;
+import Excepciones.ExcepcionPosicionNoValida;
 
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
 public class Juego {
@@ -45,7 +49,7 @@ public class Juego {
             civilizaciones.put(nombre, C);
 
         }
-        
+
         C = civilizaciones.get(nombre);
         System.out.println("Estas jugando con los: " + C.getNombre());
         Mapa map = new Mapa(6, 6, 6, civilizaciones.values());
@@ -59,10 +63,20 @@ public class Juego {
             if (comando.length > 0) {
                 switch (comando[0].toLowerCase()) {
                     case "mover":
-                        if (C.getPersonajes().containsKey(comando[1])) {
+                        try {
+                            if(comando.length != 3){
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
                             Personaje p = map.getCivilizacion().getPersonajes().get(comando[1]);
-                            new ComandoMover(comando[2],p,map).ejecutar();
+                            if(p == null){
+                                throw new NullPointerException("El Personaje especificado no existe!");
+                            }
+                            new ComandoMover(comando[2], p, map).ejecutar();
                             new ComandoImprimir(map, Shell).ejecutar();
+
+                        }
+                        catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
                         }
                         break;
                     case "imprimir":

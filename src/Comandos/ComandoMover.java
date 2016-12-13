@@ -9,7 +9,12 @@ import Personajes.Personaje;
 import Juego.Posicion;
 import Juego.Mapa;
 import Juego.Celda;
+import Excepciones.ExcepcionSintaxis;
+import Excepciones.ExcepcionPosicionNoValida;
 import Edificios.Edificio;
+import Excepciones.ExcepcionEdificioVacio;
+import Excepciones.ExcepcionEntidadNoEncontrada;
+import Excepciones.ExcepcionPersonajeNoEncontrado;
 /**
  *
  * @author iagolobla
@@ -25,22 +30,21 @@ public class ComandoMover implements Comando {
             this.mapa = mapa;
         }
         this.direccion = direccion;
-        if (personaje != null) {
-            this.personaje = personaje;
-        }
+        this.personaje = personaje;
 
     }
 
-    public void ejecutar() {
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio{
         Posicion vieja = personaje.getPosicion();
         Posicion nueva = personaje.mover(direccion);
         Celda newcell=null;
         Celda cell = mapa.getCelda(vieja);
         if (mapa.checkCoords(nueva) && mapa.checkBuilding(nueva) ) {
             newcell=mapa.getCelda(nueva);
-        }else{
-            return;//excepcion
+        } else {
+            throw new ExcepcionPosicionNoValida("No se puede mover en esa direccion!");
         }
+        
         cell.quitarPersonaje(personaje);
         newcell.addPersonaje(personaje);
         personaje.setPosicion(nueva);

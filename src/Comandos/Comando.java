@@ -5,10 +5,16 @@
  */
 package Comandos;
 
+import Excepciones.ExcepcionEdificioVacio;
+import Excepciones.ExcepcionEntidadNoEncontrada;
+import Excepciones.ExcepcionPersonajeNoEncontrado;
+import Excepciones.ExcepcionPosicionNoValida;
+import Excepciones.ExcepcionSintaxis;
+
 /**
  *
  * @author iagolobla
  */
-public interface Comando {
-    public void ejecutar();
+public interface Comando{
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio;
 }
