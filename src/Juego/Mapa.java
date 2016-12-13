@@ -101,6 +101,8 @@ public class Mapa {
             }
             c.getCantidades()[2]++; //Sumamos uno a los paisanos y ciudadelas de esa civ
             c.getCantidades()[0]++;
+            c.getCantidades()[2]++; //Sumamos uno a los paisanos y ciudadelas de esa civ
+            c.getCantidades()[0]++;
             Celda nueva = getCelda(x1, y1);
             Edificio ef = new Ciudadela(new Posicion(x1, y1), Namec, c);
             nueva.setEdificio(ef);

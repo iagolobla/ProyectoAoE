@@ -22,9 +22,9 @@ import Excepciones.ExcepcionPersonajeNoEncontrado;
  */
 public class ComandoMover implements Comando {
 
-    String direccion;
-    String personaje;
-    Mapa mapa;
+    private String direccion;
+    private String personaje;
+    private Mapa mapa;
 
     public ComandoMover(String direccion, String personaje, Mapa mapa) {
         if (mapa != null) {
@@ -55,4 +55,30 @@ public class ComandoMover implements Comando {
         p.setPosicion(nueva);
         mapa.actualizarVisibilidad();
     }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getPersonaje() {
+        return personaje;
+    }
+
+    public void setPersonaje(String personaje) {
+        this.personaje = personaje;
+    }
+
+    public Mapa getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(Mapa mapa) {
+        this.mapa = mapa;
+    }
+    
+    
 }

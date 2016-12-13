@@ -10,7 +10,7 @@ package Juego;
  * @author javier
  */
 public class Juego {
-    Mapa map;
+    private Mapa map;
     
     public Juego(Mapa mapa){
         this.map=mapa;

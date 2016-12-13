@@ -9,7 +9,9 @@ package Juego;
  *
  * @author iagolobla
  */
+import Comandos.ComandoCrear;
 import Comandos.ComandoImprimir;
+import Comandos.ComandoListar;
 import Comandos.ComandoMover;
 import Excepciones.ExcepcionEdificioVacio;
 import java.util.Scanner;
@@ -52,7 +54,7 @@ public class Principal {
 
         C = civilizaciones.get(nombre);
         System.out.println("Estas jugando con los: " + C.getNombre());
-        Juego juego=new Juego(new Mapa(6, 6, 6, civilizaciones.values()));
+        Juego juego = new Juego(new Mapa(6, 6, 6, civilizaciones.values()));
         juego.getMapa().setCivilizacion(C);
         Shell.imprimir(juego.getMapa().print());
 
@@ -64,15 +66,39 @@ public class Principal {
                 switch (comando[0].toLowerCase()) {
                     case "mover":
                         try {
-                            if(comando.length != 3){
+                            if (comando.length != 3) {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
-                            
+
                             new ComandoMover(comando[2], comando[1], juego.getMapa()).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
                         }
-                        catch (Exception E) {
+                        break;
+                    case "crear":
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoCrear(comando[1],comando[2],juego.getMapa()).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                        }
+                        break;
+                    case "listar":
+                        try {
+                            if (comando.length != 2) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoListar(comando[1],juego.getMapa()).ejecutar();
+
+                        } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
                         }
                         break;
