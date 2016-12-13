@@ -10,6 +10,7 @@ import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Edificios.Edificio;
 import Edificios.Torre;
+import Excepciones.ExcepcionReparar;
 import Juego.Posicion;
 import Juego.Civilizacion;
 import Juego.Mapa;
@@ -54,25 +55,42 @@ public class Paisano extends Personaje {
     public Edificio construir(String tipo_edificio) {
         String Name;
         if (tipo_edificio.equals("casa")) {
-            Name = "casa-" + (this.getCivilizacion().getCantidades()[3]+1);
+            Name = "casa-" + (this.getCivilizacion().getCantidades()[3] + 1);
             this.getCivilizacion().getCantidades()[3]++;
-            return new Casa( this.getPosicion(),Name, this.getCivilizacion());
+            return new Casa(this.getPosicion(), Name, this.getCivilizacion());
 
         } else if (tipo_edificio.equals("torre")) {
-            Name = "torre-" + (this.getCivilizacion().getCantidades()[5]+1);
+            Name = "torre-" + (this.getCivilizacion().getCantidades()[5] + 1);
             this.getCivilizacion().getCantidades()[5]++;
-            return new Torre(this.getPosicion(),Name, this.getCivilizacion());
+            return new Torre(this.getPosicion(), Name, this.getCivilizacion());
         } else if (tipo_edificio.equals("ciudadela")) {
-            Name = "ciudadela-" + (this.getCivilizacion().getCantidades()[2]+1);
+            Name = "ciudadela-" + (this.getCivilizacion().getCantidades()[2] + 1);
             this.getCivilizacion().getCantidades()[2]++;
-            return new Ciudadela(this.getPosicion(),Name, this.getCivilizacion());
+            return new Ciudadela(this.getPosicion(), Name, this.getCivilizacion());
         } else if (tipo_edificio.equals("cuartel")) {
-            Name = "cuartel-" + (this.getCivilizacion().getCantidades()[4]+1);
+            Name = "cuartel-" + (this.getCivilizacion().getCantidades()[4] + 1);
             this.getCivilizacion().getCantidades()[4]++;
-            return new Cuartel(this.getPosicion(),Name, this.getCivilizacion());
+            return new Cuartel(this.getPosicion(), Name, this.getCivilizacion());
         } else {
             System.out.println("tipo personaje no valido introducido");
             return null;
+        }
+    }
+
+    public void reparar(Edificio edificio) throws ExcepcionReparar {
+        if (edificio instanceof Casa) {
+            edificio.setSalud(Casa.SALUD);
+        } else if (edificio instanceof Cuartel) {
+            edificio.setSalud(Cuartel.SALUD);
+
+        } else if (edificio instanceof Ciudadela) {
+            edificio.setSalud(Ciudadela.SALUD);
+
+        } else if (edificio instanceof Torre) {
+            edificio.setSalud(Torre.SALUD);
+
+        } else {
+            throw new ExcepcionReparar("Edificio a reparar incorrecto");
         }
     }
 

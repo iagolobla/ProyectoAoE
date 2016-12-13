@@ -14,6 +14,7 @@ import Edificios.Ciudadela;
 import Edificios.Edificio;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
 /**
  *
@@ -87,12 +88,16 @@ public abstract class Personaje  {
     public abstract int capacidadMovimiento();
     
     public abstract Edificio construir(String tipo_edificio) throws ExcepcionConstruir;
+    
+    public abstract void reparar(Edificio edificio) throws ExcepcionReparar;
+    
+    public abstract void recolectar(Contenedor contenedor) throws ExcepcionRecolectar;
     /*
     public abstract void recolectar(Contenedor contenedor);
     
     public abstract void almacenar(Ciudadela ciudadela);
     
-    public abstract void reparar(Edificio edificio);
+    
     
     
     

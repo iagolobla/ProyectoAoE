@@ -8,6 +8,7 @@ package Personajes;
 import Edificios.Edificio;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionReparar;
 import Juego.Civilizacion;
 import Juego.Posicion;
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class Grupo extends Personaje{
     
     public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
         throw new ExcepcionConstruir("Los gruposno construyen");
+    }
+    
+    public void reparar(Edificio edificio) throws ExcepcionReparar{
+        throw new ExcepcionReparar("Los grupos no pueden reparar");
     }
 
     public ArrayList<Personaje> getPersonajes() {
