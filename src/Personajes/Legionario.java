@@ -8,8 +8,10 @@ package Personajes;
 import Edificios.Edificio;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionReparar;
 import Juego.Civilizacion;
 import Juego.Posicion;
+import Recursos.Contenedor;
 
 /**
  *
@@ -34,5 +36,13 @@ public class Legionario extends Soldado{
     
     public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
         throw new ExcepcionConstruir("Los legionario no construyen");
+    }
+    
+    public void reparar(Edificio edificio) throws ExcepcionReparar{
+        throw new ExcepcionReparar("Los legionarios no pueden reparar");
+    }
+    
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar{
+        throw new ExcepcionRecolectar("Los legionarios no pueden recolectar");
     }
 }

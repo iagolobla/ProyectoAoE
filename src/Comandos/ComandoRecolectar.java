@@ -5,12 +5,30 @@
  */
 package Comandos;
 
+import Juego.ConsolaNormal;
+import Juego.Mapa;
+
 /**
  *
  * @author iagolobla
  */
-public class ComandoRecolectar implements Comando{
-    public void ejecutar(){
+public class ComandoRecolectar implements Comando {
+
+    private String direccion;
+    private String personaje;
+    private Mapa mapa;
+    private ConsolaNormal Shell;
+
+    public ComandoRecolectar(String direccion, String personaje, Mapa mapa, ConsolaNormal Shell) {
+        this.direccion = direccion;
+        this.personaje = personaje;
+        this.mapa = mapa;
+        this.Shell = Shell;
+    }
+    
+    
+
+    public void ejecutar() {
         
     }
 }

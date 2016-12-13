@@ -46,7 +46,6 @@ public class ComandoConstruir implements Comando {
         Celda cell;
         Personaje p;
         int gasto;
-        int posible = 1;
         switch (tipo_edificio) {
             case "casa":
                 gasto = GASTOCASA;

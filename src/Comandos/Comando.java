@@ -13,6 +13,7 @@ import Excepciones.ExcepcionEntidadNoEncontrada;
 import Excepciones.ExcepcionLimiteAlojamiento;
 import Excepciones.ExcepcionPersonajeNoEncontrado;
 import Excepciones.ExcepcionPosicionNoValida;
+import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
 
 /**
@@ -20,5 +21,5 @@ import Excepciones.ExcepcionSintaxis;
  * @author iagolobla
  */
 public interface Comando{
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio,ExcepcionEntidadNoEncontrada,ExcepcionLimiteAlojamiento,ExcepcionCrear,ExcepcionConstruir, ExcepcionCivilizacionNoEncontrada;
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio,ExcepcionEntidadNoEncontrada,ExcepcionReparar,ExcepcionLimiteAlojamiento,ExcepcionCrear,ExcepcionConstruir, ExcepcionCivilizacionNoEncontrada;
 }

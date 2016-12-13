@@ -8,8 +8,10 @@ package Personajes;
 import Edificios.Edificio;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionReparar;
 import Juego.Civilizacion;
 import Juego.Posicion;
+import Recursos.Contenedor;
 
 /**
  *
@@ -34,7 +36,15 @@ public class Arquero extends Soldado {
     }
     
     public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
-        throw new ExcepcionConstruir("Las torres no crean personajes");
+        throw new ExcepcionConstruir("Los arqueros no construyen");
+    }
+    
+    public void reparar(Edificio edificio) throws ExcepcionReparar{
+        throw new ExcepcionReparar("Los arqueros no pueden reparar");
+    }
+    
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar{
+        throw new ExcepcionRecolectar("Los arqueros no pueden recolectar");
     }
     
 }
