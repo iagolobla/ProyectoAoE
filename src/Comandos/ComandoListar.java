@@ -5,8 +5,6 @@
  */
 package Comandos;
 
-import Excepciones.ExcepcionEdificioVacio;
-import Excepciones.ExcepcionPosicionNoValida;
 import Excepciones.ExcepcionSintaxis;
 import Juego.ConsolaNormal;
 import Juego.Mapa;

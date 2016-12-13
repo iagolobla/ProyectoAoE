@@ -9,8 +9,6 @@ import Edificios.Ciudadela;
 import Edificios.Edificio;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
-import Excepciones.ExcepcionEntidadNoEncontrada;
-import Excepciones.ExcepcionPosicionNoValida;
 import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.ConsolaNormal;
@@ -42,7 +40,7 @@ public class ComandoConstruir implements Comando {
         this.Shell = Shell;
     }
     
-    public void ejecutar() throws ExcepcionEntidadNoEncontrada, ExcepcionConstruir, ExcepcionCrear, ExcepcionSintaxis, ExcepcionPosicionNoValida {
+    public void ejecutar() throws ExcepcionConstruir, ExcepcionCrear, ExcepcionSintaxis {
         Celda cell;
         Personaje p;
         int gasto;
@@ -71,7 +69,7 @@ public class ComandoConstruir implements Comando {
         if (mapa.getCivilizacion().getPersonajes().containsKey(personaje)) {
             p = mapa.getCivilizacion().getPersonajes().get(personaje);
         } else {
-            throw new ExcepcionEntidadNoEncontrada("No existe el edificio introducido");
+            //Excepcion Aqui
         }
         Edificio ef = p.construir(tipo_edificio);
         
@@ -84,7 +82,7 @@ public class ComandoConstruir implements Comando {
             mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - gasto);
             Shell.imprimir("Se ha construido el edificio " + ef.getNombre() + " en la posicion " + ef.getPosicion());
         } else {
-            throw new ExcepcionPosicionNoValida("No se puede crear el personaje!");
+            //Excepcion Aqui
         }
         
     }

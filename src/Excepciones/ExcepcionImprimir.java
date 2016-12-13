@@ -7,23 +7,24 @@ package Excepciones;
 
 /**
  *
- * @author javier
+ * @author iagolobla
  */
-public class ExcepcionCrear extends ExcepcionComando{
+public class ExcepcionImprimir extends ExcepcionComando {
+
     /**
-     * Creates a new instance of <code>ExcepcionEdificioVacio</code> without
-     * detail message.
+     * Creates a new instance of <code>ExcepcionImprimir</code> without detail
+     * message.
      */
-    public ExcepcionCrear() {
+    public ExcepcionImprimir() {
     }
 
     /**
-     * Constructs an instance of <code>ExcepcionEdificioVacio</code> with the
+     * Constructs an instance of <code>ExcepcionImprimir</code> with the
      * specified detail message.
      *
      * @param msg the detail message.
      */
-    public ExcepcionCrear(String msg) {
+    public ExcepcionImprimir(String msg) {
         super(msg);
     }
 }

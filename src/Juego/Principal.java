@@ -16,14 +16,11 @@ import Comandos.ComandoDescribir;
 import Comandos.ComandoImprimir;
 import Comandos.ComandoListar;
 import Comandos.ComandoMover;
-import Excepciones.ExcepcionEdificioVacio;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import Personajes.Personaje;
 import Excepciones.ExcepcionSintaxis;
-import Excepciones.ExcepcionPersonajeNoEncontrado;
-import Excepciones.ExcepcionPosicionNoValida;
 
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
 public class Principal {
@@ -78,6 +75,7 @@ public class Principal {
 
                         } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
+                            break;
                         }
                         break;
                     case "crear":
@@ -89,8 +87,9 @@ public class Principal {
                             new ComandoCrear(comando[1],comando[2],juego.getMapa(),Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
-                        } catch (Exception E) {
+                        } catch(Exception E){
                             Shell.imprimir("Error: " + E.getMessage());
+                            break;
                         }
                         break;
                     case "listar":
@@ -101,8 +100,9 @@ public class Principal {
 
                             new ComandoListar(comando[1], juego.getMapa(), Shell).ejecutar();
 
-                        } catch (Exception E) {
+                        } catch(Exception E){
                             Shell.imprimir("Error: " + E.getMessage());
+                            break;
                         }
                         break;
                     case "describir":
@@ -113,8 +113,9 @@ public class Principal {
 
                             new ComandoDescribir(comando[1], juego.getMapa()).ejecutar();
 
-                        } catch (Exception E) {
+                        } catch(Exception E){
                             Shell.imprimir("Error: " + E.getMessage());
+                            break;
                         }
                         break;
                     case "construir":
@@ -126,11 +127,19 @@ public class Principal {
                             new ComandoConstruir(comando[1],comando[3],comando[2],juego.getMapa(),Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
-                        } catch (Exception E) {
+                        } catch(Exception E){
                             Shell.imprimir("Error: " + E.getMessage());
+                            break;
                         }
                         break;
-                        
+                    case "recolectar":
+                        try{
+                            
+                        }catch(Exception E){
+                            Shell.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
                     case "cambiar":
                         try {
                             if (comando.length == 2) {

@@ -9,7 +9,7 @@ package Excepciones;
  *
  * @author javier
  */
-public class ExcepcionConstruir extends Exception{
+public class ExcepcionConstruir extends ExcepcionComando{
     /**
      * Creates a new instance of <code>ExcepcionEdificioVacio</code> without
      * detail message.

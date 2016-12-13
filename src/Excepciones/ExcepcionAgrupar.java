@@ -9,22 +9,22 @@ package Excepciones;
  *
  * @author iagolobla
  */
-public class ExcepcionPosicionNoValida extends Exception {
+public class ExcepcionAgrupar extends ExcepcionComando {
 
     /**
-     * Creates a new instance of <code>ExcepcionPosicionNoValida</code> without
-     * detail message.
+     * Creates a new instance of <code>ExcepcionAgrupar</code> without detail
+     * message.
      */
-    public ExcepcionPosicionNoValida() {
+    public ExcepcionAgrupar() {
     }
 
     /**
-     * Constructs an instance of <code>ExcepcionPosicionNoValida</code> with the
+     * Constructs an instance of <code>ExcepcionAgrupar</code> with the
      * specified detail message.
      *
      * @param msg the detail message.
      */
-    public ExcepcionPosicionNoValida(String msg) {
+    public ExcepcionAgrupar(String msg) {
         super(msg);
     }
 }

@@ -9,22 +9,22 @@ package Excepciones;
  *
  * @author iagolobla
  */
-public class ExcepcionEdificioVacio extends Exception {
+public class ExcepcionContenedor extends Exception {
 
     /**
-     * Creates a new instance of <code>ExcepcionEdificioVacio</code> without
-     * detail message.
+     * Creates a new instance of <code>ExcepcionContenedor</code> without detail
+     * message.
      */
-    public ExcepcionEdificioVacio() {
+    public ExcepcionContenedor() {
     }
 
     /**
-     * Constructs an instance of <code>ExcepcionEdificioVacio</code> with the
+     * Constructs an instance of <code>ExcepcionContenedor</code> with the
      * specified detail message.
      *
      * @param msg the detail message.
      */
-    public ExcepcionEdificioVacio(String msg) {
+    public ExcepcionContenedor(String msg) {
         super(msg);
     }
 }

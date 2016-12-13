@@ -14,10 +14,6 @@ import Juego.Mapa;
 import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Excepciones.ExcepcionCrear;
-import Excepciones.ExcepcionEdificioVacio;
-import Excepciones.ExcepcionEntidadNoEncontrada;
-import Excepciones.ExcepcionLimiteAlojamiento;
-import Excepciones.ExcepcionPosicionNoValida;
 import Excepciones.ExcepcionSintaxis;
 import Personajes.Personaje;
 import Juego.Celda;
@@ -37,12 +33,12 @@ public class ComandoCrear implements Comando {
         this.Shell=Shell;
     }
 
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio, ExcepcionEntidadNoEncontrada,ExcepcionLimiteAlojamiento,ExcepcionCrear {
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionCrear {
         Celda cell;
         Personaje p;
         if (tipopersonaje.equals("paisano")) {
             if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
-                throw new ExcepcionLimiteAlojamiento("Se necesitan mas casas, no se pueden crear personajes");
+                //Excepcion Aqui
             }
 
             if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
@@ -52,7 +48,7 @@ public class ComandoCrear implements Comando {
                 Ciudadela C = (Ciudadela) mapa.getCivilizacion().getEdificios().get(edificio);
                 p = C.crear(tipopersonaje);
             } else {
-                throw new ExcepcionEntidadNoEncontrada("No existe el edificio introducido");
+                //Excepcion Aqui
             }
             if (mapa.checkCoords(p.mover("n")) && mapa.checkBuilding(p.mover("n"))) {
                 cell = mapa.getCelda(p.mover("n"));
@@ -80,12 +76,12 @@ public class ComandoCrear implements Comando {
                 mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
                 mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
             } else {
-                throw new ExcepcionPosicionNoValida("No se puede crear el personaje!");
+                //Excepcion Aqui
             }
 
         } else if (tipopersonaje.equals("caballero") || tipopersonaje.equals("arquero") || tipopersonaje.equals("legionario")) {
             if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getCantidades()[0] + mapa.getCivilizacion().getCantidades()[1]) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
-                throw new ExcepcionLimiteAlojamiento("Se necesitan mas casas, no se pueden crear personajes");
+                //Excepcion Aqui
             }
             if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
                 if(edificio.equals("ciudadela")){
@@ -94,7 +90,7 @@ public class ComandoCrear implements Comando {
                 Cuartel C = (Cuartel) mapa.getCivilizacion().getEdificios().get(edificio);
                 p = C.crear(tipopersonaje);
             } else {
-                throw new ExcepcionEntidadNoEncontrada("No existe el edificio introducido");
+                //Excepcion Aqui
             }
             if (mapa.checkCoords(p.mover("n")) && mapa.checkBuilding(p.mover("n"))) {
                 cell = mapa.getCelda(p.mover("n"));
@@ -122,10 +118,10 @@ public class ComandoCrear implements Comando {
                 mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
                 mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - 10);
             } else {
-                throw new ExcepcionPosicionNoValida("No se puede crear el personaje!");
+                //Excepcion Aqui
             }
         } else {
-            throw new ExcepcionEntidadNoEncontrada(" tipo de personaje mal introducido");
+            //Excepcion Aqui
         }
         Shell.imprimir("Se ha creado el personaje "+p.getNombre()+" en la posicion "+ p.getPosicion());
     }

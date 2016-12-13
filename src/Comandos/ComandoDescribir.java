@@ -7,7 +7,6 @@ package Comandos;
 
 import Edificios.Ciudadela;
 import Edificios.Edificio;
-import Excepciones.ExcepcionEntidadNoEncontrada;
 import Juego.Mapa;
 import Personajes.Grupo;
 import Personajes.Personaje;
@@ -28,7 +27,7 @@ public class ComandoDescribir implements Comando {
         this.map = mapa;
     }
 
-    public void ejecutar() throws ExcepcionEntidadNoEncontrada{
+    public void ejecutar() {
         if (map.getCivilizacion().getPersonajes().containsKey(entidad)) {
             Personaje personaje = map.getCivilizacion().getPersonajes().get(entidad);
             System.out.println(personaje);
@@ -46,7 +45,7 @@ public class ComandoDescribir implements Comando {
             Grupo G = map.getCivilizacion().getGrupos().get(entidad);
             System.out.println(G);
         } else {
-            throw new ExcepcionEntidadNoEncontrada("Entidad no encontrada");
+            //Excepcion Aqui
         }
     }
 }

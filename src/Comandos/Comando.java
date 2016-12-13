@@ -5,20 +5,37 @@
  */
 package Comandos;
 
-import Excepciones.ExcepcionCivilizacionNoEncontrada;
+import Excepciones.ExcepcionAgrupar;
+import Excepciones.ExcepcionAlmacenar;
+import Excepciones.ExcepcionAtacar;
+import Excepciones.ExcepcionMover;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
-import Excepciones.ExcepcionEdificioVacio;
-import Excepciones.ExcepcionEntidadNoEncontrada;
-import Excepciones.ExcepcionLimiteAlojamiento;
-import Excepciones.ExcepcionPersonajeNoEncontrado;
-import Excepciones.ExcepcionPosicionNoValida;
 import Excepciones.ExcepcionSintaxis;
+import Excepciones.ExcepcionCambiar;
+import Excepciones.ExcepcionCelda;
+import Excepciones.ExcepcionCivilizacion;
+import Excepciones.ExcepcionComando;
+import Excepciones.ExcepcionDefender;
+import Excepciones.ExcepcionDesagrupar;
+import Excepciones.ExcepcionDescribir;
+import Excepciones.ExcepcionDesligar;
+import Excepciones.ExcepcionImprimir;
+import Excepciones.ExcepcionListar;
+import Excepciones.ExcepcionMirar;
+import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionSalir;
+
 
 /**
  *
  * @author iagolobla
  */
 public interface Comando{
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio,ExcepcionEntidadNoEncontrada,ExcepcionLimiteAlojamiento,ExcepcionCrear,ExcepcionConstruir, ExcepcionCivilizacionNoEncontrada;
+    public void ejecutar() 
+            throws ExcepcionAgrupar, ExcepcionAlmacenar, ExcepcionAtacar, ExcepcionCambiar,
+            ExcepcionCelda, ExcepcionCivilizacion, ExcepcionConstruir, ExcepcionCrear,
+            ExcepcionDefender, ExcepcionDesagrupar, ExcepcionDescribir, ExcepcionDesligar,
+            ExcepcionImprimir, ExcepcionListar, ExcepcionMirar, ExcepcionMover,
+            ExcepcionRecolectar, ExcepcionSalir, ExcepcionSintaxis;
 }

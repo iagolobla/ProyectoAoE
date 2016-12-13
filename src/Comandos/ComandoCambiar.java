@@ -5,7 +5,7 @@
  */
 package Comandos;
 
-import Excepciones.ExcepcionCivilizacionNoEncontrada;
+import Excepciones.ExcepcionCambiar;
 import Juego.Civilizacion;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
@@ -26,19 +26,19 @@ public class ComandoCambiar implements Comando {
         this.Shell = Shell;
     }
 
-    public void ejecutar() throws ExcepcionCivilizacionNoEncontrada{
+    public void ejecutar() throws ExcepcionCambiar{
         if (civilizacion != null) {
             if(mapa.getCivilizaciones().containsKey(civilizacion.getNombre())){
                 if(mapa.getCivilizacion().getNombre().equals(civilizacion.getNombre())){
-                    throw new ExcepcionCivilizacionNoEncontrada("Ya se esta jugando con los " + mapa.getCivilizacion().getNombre());
+                    throw new ExcepcionCambiar("Ya se esta jugando con los " + mapa.getCivilizacion().getNombre());
                 }
                 mapa.setCivilizacion(civilizacion);
                 Shell.imprimir("Ahora se esta jugando con los " + civilizacion.getNombre());
             } else {
-                throw new ExcepcionCivilizacionNoEncontrada("Civilizacion introducida erronea!");
+                throw new ExcepcionCambiar("Civilizacion introducida erronea!");
             }
         } else {
-            throw new ExcepcionCivilizacionNoEncontrada("Civilizacion introducida erronea!");
+            throw new ExcepcionCambiar("Civilizacion introducida erronea!");
         }
     }
 }

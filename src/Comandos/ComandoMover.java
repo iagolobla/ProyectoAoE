@@ -10,11 +10,9 @@ import Juego.Posicion;
 import Juego.Mapa;
 import Juego.Celda;
 import Excepciones.ExcepcionSintaxis;
-import Excepciones.ExcepcionPosicionNoValida;
 import Edificios.Edificio;
-import Excepciones.ExcepcionEdificioVacio;
-import Excepciones.ExcepcionEntidadNoEncontrada;
-import Excepciones.ExcepcionPersonajeNoEncontrado;
+import Excepciones.ExcepcionMover;
+
 
 /**
  *
@@ -35,7 +33,7 @@ public class ComandoMover implements Comando {
 
     }
 
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionPosicionNoValida, ExcepcionEdificioVacio {
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionMover {
 
         Personaje p = mapa.getCivilizacion().getPersonajes().get(personaje);
         if (p == null) {
@@ -49,7 +47,7 @@ public class ComandoMover implements Comando {
             if (mapa.checkCoords(nueva) && mapa.checkBuilding(nueva)) {
                 newcell = mapa.getCelda(nueva);
             } else {
-                throw new ExcepcionPosicionNoValida("No se puede mover en esa direccion!");
+                throw new ExcepcionMover("No se puede mover en esa direccion!");
             }
 
             cell.quitarPersonaje(p);
