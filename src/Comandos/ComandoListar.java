@@ -20,7 +20,7 @@ public class ComandoListar implements Comando {
     private String tipoentidad;
     
 
-    public ComandoListar(String tipoentidad, Mapa mapa,ConsolaNormal SHELL) {
+    public ComandoListar(String tipoentidad, Mapa mapa) {
         this.map = mapa;
         this.tipoentidad = tipoentidad;
         

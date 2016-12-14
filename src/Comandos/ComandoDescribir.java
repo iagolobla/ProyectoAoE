@@ -26,7 +26,7 @@ public class ComandoDescribir implements Comando {
     private Mapa map;
     
 
-    public ComandoDescribir(String entidad, Mapa mapa,ConsolaNormal SHELL) {
+    public ComandoDescribir(String entidad, Mapa mapa) {
         this.entidad = entidad;
         this.map = mapa;
         

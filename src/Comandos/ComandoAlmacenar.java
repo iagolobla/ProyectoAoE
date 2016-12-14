@@ -25,7 +25,7 @@ public class ComandoAlmacenar implements Comando{
     private Mapa mapa;
     
 
-    public ComandoAlmacenar(String personaje, String pto_cardinal,Mapa mapa,ConsolaNormal SHELL) {
+    public ComandoAlmacenar(String personaje, String pto_cardinal,Mapa mapa) {
         this.personaje = personaje;
         this.pto_cardinal = pto_cardinal;
         this.mapa=mapa;

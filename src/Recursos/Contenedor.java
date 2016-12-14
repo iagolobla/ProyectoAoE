@@ -38,13 +38,21 @@ public abstract class Contenedor {
     }
 
     public Recurso procesar() {
-        if(this instanceof Cantera){
-            //Por cada acceso rebajar un 
+        int cantidad = this.getRecurso().getCantidad();
+        if(this instanceof Cantera){    //Por cada 20% que falte a la cantera se rebaja un 10%
+            Cantera cantera = new Cantera((Cantera) this);
+            Recurso piedra = cantera.getRecurso();
+            // Calcula el numero de "20%" que le faltan para quitarle el correspondiente numero de "10%"
+            int factor = (cantera.getCantInit()-cantidad)/cantera.getCant20();
+            // Resta a la cantidad actual el 10% de la cantidad inicial * factor
+            piedra.setCantidad(cantidad - ((cantera.getCant20()/2) * factor));
+            if(piedra.getCantidad() < 1){
+                piedra.setCantidad(1);
+            }
+            return piedra;
         } else {
-            
+            return recurso;
         }
-        
-        return recurso;
     }
 
     public boolean esTransitable() {

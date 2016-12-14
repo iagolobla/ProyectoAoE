@@ -6,14 +6,14 @@
 package Comandos;
 import Juego.Mapa;
 import Juego.ConsolaNormal;
+import static Juego.Principal.SHELL;
 /**
  *
  * @author iagolobla
  */
 public class ComandoImprimir implements Comando{
     Mapa mapa;
-    ConsolaNormal SHELL;
-    public ComandoImprimir(Mapa mapa, ConsolaNormal SHELL){
+    public ComandoImprimir(Mapa mapa){
         if(mapa!=null)
             this.mapa=mapa;
         if(SHELL != null){

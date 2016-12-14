@@ -13,4 +13,7 @@ public class Madera extends Recurso{
     public Madera(int cantidad){
         super(cantidad);
     }
+    public Madera(Madera madera){
+        super(madera);
+    }
 }

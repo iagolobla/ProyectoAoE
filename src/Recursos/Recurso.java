@@ -15,6 +15,9 @@ public abstract class Recurso {
     public Recurso(int cantidad){
         this.cantidad=cantidad;
     }
+    public Recurso(Recurso recurso){
+        this.cantidad = recurso.getCantidad();
+    }
 
     public int getCantidad() {
         return cantidad;

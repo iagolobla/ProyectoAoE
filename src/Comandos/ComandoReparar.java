@@ -27,7 +27,7 @@ public class ComandoReparar implements Comando {
     private Mapa mapa;
     
 
-    public ComandoReparar(String direccion, String personaje, Mapa mapa, ConsolaNormal SHELL) {
+    public ComandoReparar(String direccion, String personaje, Mapa mapa) {
         this.direccion = direccion;
         this.personaje = personaje;
         this.mapa = mapa;

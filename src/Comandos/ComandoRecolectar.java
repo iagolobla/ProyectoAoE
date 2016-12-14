@@ -11,9 +11,12 @@ import Juego.Celda;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
 import Juego.Posicion;
+import static Juego.Principal.SHELL;
+import Personajes.Paisano;
 import Personajes.Personaje;
 import Recursos.Contenedor;
 import Recursos.Pradera;
+import Recursos.Recurso;
 
 /**
  *
@@ -26,7 +29,7 @@ public class ComandoRecolectar implements Comando {
     private Mapa mapa;
     
 
-    public ComandoRecolectar(String direccion, String personaje, Mapa mapa, ConsolaNormal SHELL) {
+    public ComandoRecolectar(String direccion, String personaje, Mapa mapa) {
         this.direccion = direccion;
         this.personaje = personaje;
         this.mapa = mapa;
@@ -56,5 +59,6 @@ public class ComandoRecolectar implements Comando {
         }
         
         P.recolectar(contenedor);
+        SHELL.imprimir("El "+ P.getNombre() +" ahora tiene " + ((Paisano) P).getCantidadRecolectada());
     }
 }

@@ -34,7 +34,7 @@ public class ComandoConstruir implements Comando {
     private Mapa mapa;
     
     
-    public ComandoConstruir(String personaje, String pto_cardinal, String tipo_edificio, Mapa mapa, ConsolaNormal SHELL) {
+    public ComandoConstruir(String personaje, String pto_cardinal, String tipo_edificio, Mapa mapa) {
         this.personaje = personaje;
         this.pto_cardinal = pto_cardinal;
         this.tipo_edificio = tipo_edificio;

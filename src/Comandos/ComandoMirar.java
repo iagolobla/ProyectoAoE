@@ -36,7 +36,7 @@ public class ComandoMirar implements Comando {
     private Mapa mapa;
     
 
-    public ComandoMirar(String posicion, Mapa mapa, ConsolaNormal SHELL) {
+    public ComandoMirar(String posicion, Mapa mapa) {
         this.posicion = posicion;
         this.mapa = mapa;
         

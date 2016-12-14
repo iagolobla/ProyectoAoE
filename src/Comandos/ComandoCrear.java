@@ -29,7 +29,7 @@ public class ComandoCrear implements Comando {
     private Mapa mapa;
     
 
-    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa, ConsolaNormal SHELL) {
+    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa) {
         this.edificio = edificio;
         this.tipopersonaje = tipopersonaje;
         this.mapa = mapa;

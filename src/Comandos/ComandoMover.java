@@ -27,7 +27,7 @@ public class ComandoMover implements Comando {
     private Mapa mapa;
     
 
-    public ComandoMover(String direccion, String personaje, Mapa mapa,ConsolaNormal SHELL) {
+    public ComandoMover(String direccion, String personaje, Mapa mapa) {
         if (mapa != null) {
             this.mapa = mapa;
         }

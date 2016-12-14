@@ -18,7 +18,7 @@ public class ComandoCivilizacion implements Comando {
     private Mapa mapa;
     
     
-    public ComandoCivilizacion(Mapa mapa, ConsolaNormal SHELL) {
+    public ComandoCivilizacion(Mapa mapa) {
         this.mapa = mapa;
         
     }

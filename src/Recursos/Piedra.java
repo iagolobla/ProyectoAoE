@@ -13,4 +13,7 @@ public class Piedra extends Recurso{
     public Piedra(int cantidad){
         super(cantidad);
     }
+    public Piedra(Piedra piedra){
+        super(piedra);
+    }
 }

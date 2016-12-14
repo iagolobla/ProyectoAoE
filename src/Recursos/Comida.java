@@ -14,4 +14,7 @@ public class Comida extends Recurso {
     public Comida(int cantidad) {
         super(cantidad);
     }
+    public Comida(Comida comida){
+        super(comida);
+    }
 }
