@@ -39,11 +39,14 @@ public class ComandoReparar implements Comando {
         if (mapa.getCivilizacion().getPersonajes().containsKey(personaje)) {
             p = mapa.getCivilizacion().getPersonajes().get(personaje);
         } else {
-            //throw new ExcepcionReparar("No existe el paisano");EXCEPCION AQUI!!!
+            throw new ExcepcionReparar("No existe el paisano");
         }
         if (mapa.getCelda(p.mover(direccion)).isEdificio() && mapa.checkCoords(p.mover(direccion))) {
             cell = mapa.getCelda(p.mover(direccion));
             Edificio ef = cell.getEdificio();
+            if(ef==null){
+                throw new ExcepcionReparar("No hay un edificio aqui");
+            }
             int vidarec = ef.getSalud();
             p.reparar(ef);
             Shell.imprimir("El edificio "+ ef.getNombre()+ " ahora esta full-vida");

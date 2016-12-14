@@ -117,6 +117,8 @@ public abstract class Personaje  {
     
     public abstract double danhoAtaque(Edificio edificio);
     */
+    
+    
     public boolean isGrupo() {
         return grupo;
     }

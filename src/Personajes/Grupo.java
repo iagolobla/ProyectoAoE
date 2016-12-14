@@ -61,7 +61,10 @@ public class Grupo extends Personaje{
                 throw new ExcepcionAlmacenar("Este grupo no puede recolectar");
             }
         }
-        //aora almacena
+        for(Personaje p:personajes){
+            Paisano paisano=(Paisano) p;
+            ciudadela.almacenar(paisano.getRecurso());
+        }
     }
 
     public ArrayList<Personaje> getPersonajes() {

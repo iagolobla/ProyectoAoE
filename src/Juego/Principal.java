@@ -9,6 +9,7 @@ package Juego;
  *
  * @author iagolobla
  */
+import Comandos.ComandoAlmacenar;
 import Comandos.ComandoConstruir;
 import Comandos.ComandoCambiar;
 import Comandos.ComandoCivilizacion;
@@ -89,6 +90,20 @@ public class Principal {
                             }
 
                             new ComandoCrear(comando[1], comando[2], juego.getMapa(), Shell).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "almacenar":
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoAlmacenar(comando[1], comando[2], juego.getMapa(), Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
                         } catch (Exception E) {
@@ -212,7 +227,7 @@ public class Principal {
                     case "salir":
                         try {
                             if (comando.length == 1) {
-                                seguir=false;
+                                seguir = false;
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
