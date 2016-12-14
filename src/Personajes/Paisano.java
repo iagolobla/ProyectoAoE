@@ -32,7 +32,7 @@ public class Paisano extends Personaje {
 
     private int cantidadRecolectada;
     private int capacidadRecurso;
-    Recurso recurso;
+    private Recurso recurso;
 
     public Paisano(String Nombre, Posicion posicion, Civilizacion civilizacion) {
         super(Nombre, posicion, civilizacion);
@@ -111,6 +111,7 @@ public class Paisano extends Personaje {
             throw new ExcepcionAlmacenar("Ciudadela para almacenar nula");
         }
         ciudadela.almacenar(recurso);
+        this.getRecurso().setCantidad(0);
     }
 
     public int getCantidadRecolectada() {
@@ -133,5 +134,15 @@ public class Paisano extends Personaje {
     public int capacidadMovimiento() {   //Los paisanos se mueven una casilla
         return 1;
     }
+
+    public Recurso getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
+    }
+    
+    
 
 }

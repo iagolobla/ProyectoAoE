@@ -14,6 +14,7 @@ import Juego.Celda;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
 import Juego.Posicion;
+import static Juego.Principal.SHELL;
 import Personajes.Personaje;
 
 /**
@@ -31,14 +32,14 @@ public class ComandoConstruir implements Comando {
     private String pto_cardinal;
     private String tipo_edificio;
     private Mapa mapa;
-    private ConsolaNormal Shell;
     
-    public ComandoConstruir(String personaje, String pto_cardinal, String tipo_edificio, Mapa mapa, ConsolaNormal Shell) {
+    
+    public ComandoConstruir(String personaje, String pto_cardinal, String tipo_edificio, Mapa mapa, ConsolaNormal SHELL) {
         this.personaje = personaje;
         this.pto_cardinal = pto_cardinal;
         this.tipo_edificio = tipo_edificio;
         this.mapa = mapa;
-        this.Shell = Shell;
+        
     }
     
     public void ejecutar() throws ExcepcionConstruir, ExcepcionSintaxis {
@@ -82,7 +83,7 @@ public class ComandoConstruir implements Comando {
             mapa.getCivilizacion().getEdificios().put(ef.getNombre(), ef);
             mapa.getCivilizacion().setMadera(mapa.getCivilizacion().getMadera() - gasto);
             mapa.getCivilizacion().setPiedra(mapa.getCivilizacion().getPiedra() - gasto);
-            Shell.imprimir("Se ha construido el edificio " + ef.getNombre() + " en la posicion " + ef.getPosicion());
+            SHELL.imprimir("Se ha construido el edificio " + ef.getNombre() + " en la posicion " + ef.getPosicion());
         } else {
             throw new ExcepcionConstruir("No se puede construir en esa direccion!");
         }

@@ -18,12 +18,12 @@ public class ComandoCambiar implements Comando {
 
     Civilizacion civilizacion;
     Mapa mapa;
-    ConsolaNormal Shell;
+    ConsolaNormal SHELL;
 
-    public ComandoCambiar(String civilizacion, Mapa mapa, ConsolaNormal Shell) {
+    public ComandoCambiar(String civilizacion, Mapa mapa, ConsolaNormal SHELL) {
         this.mapa = mapa;
         this.civilizacion = mapa.getCivilizaciones().get(civilizacion);
-        this.Shell = Shell;
+        
     }
 
     public void ejecutar() throws ExcepcionCambiar{
@@ -33,7 +33,7 @@ public class ComandoCambiar implements Comando {
                     throw new ExcepcionCambiar("Ya se esta jugando con los " + mapa.getCivilizacion().getNombre());
                 }
                 mapa.setCivilizacion(civilizacion);
-                Shell.imprimir("Ahora se esta jugando con los " + civilizacion.getNombre());
+                SHELL.imprimir("Ahora se esta jugando con los " + civilizacion.getNombre());
             } else {
                 throw new ExcepcionCambiar("Civilizacion introducida erronea!");
             }

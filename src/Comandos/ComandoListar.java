@@ -8,6 +8,7 @@ package Comandos;
 import Excepciones.ExcepcionSintaxis;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
+import static Juego.Principal.SHELL;
 
 /**
  *
@@ -17,34 +18,34 @@ public class ComandoListar implements Comando {
 
     private Mapa map;
     private String tipoentidad;
-    private ConsolaNormal Shell;
+    
 
-    public ComandoListar(String tipoentidad, Mapa mapa,ConsolaNormal Shell) {
+    public ComandoListar(String tipoentidad, Mapa mapa,ConsolaNormal SHELL) {
         this.map = mapa;
         this.tipoentidad = tipoentidad;
-        this.Shell=Shell;
+        
     }
 
     public void ejecutar() throws ExcepcionSintaxis{
         switch (tipoentidad) {
             case "personajes":
                 for (String k : map.getCivilizacion().getPersonajes().keySet()) {
-                    Shell.imprimir("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getPersonajes().get(k).getPosicion());
+                    SHELL.imprimir("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getPersonajes().get(k).getPosicion());
                 }
                 break;
             case "edificios":
                 for (String k : map.getCivilizacion().getEdificios().keySet()) {
-                    Shell.imprimir("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getEdificios().get(k).getPosicion());
+                    SHELL.imprimir("Nombre : " + k + ", Posicion: " + map.getCivilizacion().getEdificios().get(k).getPosicion());
                 }
                 break;
             case "civilizaciones":
                 for (String k : map.getCivilizaciones().keySet()) {
-                    Shell.imprimir("Nombre : " + k);
+                    SHELL.imprimir("Nombre : " + k);
                 }
                 break;
             case "grupos":
                 for (String G : map.getCivilizacion().getGrupos().keySet()) {
-                    Shell.imprimir("Grupo: " + G);
+                    SHELL.imprimir("Grupo: " + G);
                 }
                 break;
             default:

@@ -9,6 +9,7 @@ package Juego;
  *
  * @author iagolobla
  */
+import Comandos.ComandoAlmacenar;
 import Comandos.ComandoConstruir;
 import Comandos.ComandoCambiar;
 import Comandos.ComandoCivilizacion;
@@ -29,20 +30,22 @@ import Excepciones.ExcepcionSintaxis;
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
 public class Principal {
 
+    public static final ConsolaNormal SHELL = new ConsolaNormal();
+
     public Principal() {
-        ConsolaNormal Shell = new ConsolaNormal();
+
         Boolean seguir = true;
-        Shell.imprimir("Bienvenido al Juego!");
+        SHELL.imprimir("Bienvenido al Juego!");
         int numciv;
 
         Civilizacion C;
         HashMap<String, Civilizacion> civilizaciones = new HashMap<String, Civilizacion>();
         do {
-            numciv = Shell.leerInt("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
+            numciv = SHELL.leerInt("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
         } while (numciv > 3 || numciv < 1);
         String nombre = null;
         for (int i = 1; i <= numciv; i++) {
-            nombre = Shell.leer("Introduzca el nombre de la civilizacion " + i + ": ");
+            nombre = SHELL.leer("Introduzca el nombre de la civilizacion " + i + ": ");
             C = new Civilizacion(nombre);
 
             if (i == 1) {
@@ -60,10 +63,10 @@ public class Principal {
         System.out.println("Estas jugando con los: " + C.getNombre());
         Juego juego = new Juego(new Mapa(6, 6, 6, civilizaciones.values()));
         juego.getMapa().setCivilizacion(C);
-        Shell.imprimir(juego.getMapa().print());
+        SHELL.imprimir(juego.getMapa().print());
 
         while (seguir) {
-            String linea = Shell.leer("$ ");
+            String linea = SHELL.leer("$ ");
             String lineaLowerCase = linea.toLowerCase();    //Pasamos todo a minusculas
             String[] comando = lineaLowerCase.split(" ");
             if (comando.length > 0) {
@@ -74,11 +77,11 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoMover(comando[2], comando[1], juego.getMapa(), Shell).ejecutar();
-                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                            new ComandoMover(comando[2], comando[1], juego.getMapa(), SHELL).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
@@ -88,11 +91,25 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoCrear(comando[1], comando[2], juego.getMapa(), Shell).ejecutar();
-                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                            new ComandoCrear(comando[1], comando[2], juego.getMapa(), SHELL).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "almacenar":
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoAlmacenar(comando[1], comando[2], juego.getMapa(), SHELL).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
+
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
@@ -102,10 +119,10 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoListar(comando[1], juego.getMapa(), Shell).ejecutar();
+                            new ComandoListar(comando[1], juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
@@ -115,10 +132,10 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoDescribir(comando[1], juego.getMapa(), Shell).ejecutar();
+                            new ComandoDescribir(comando[1], juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
@@ -128,10 +145,10 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoMirar(comando[1], juego.getMapa(), Shell).ejecutar();
+                            new ComandoMirar(comando[1], juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
@@ -141,11 +158,11 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoReparar(comando[2], comando[1], juego.getMapa(), Shell).ejecutar();
-                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                            new ComandoReparar(comando[2], comando[1], juego.getMapa(), SHELL).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
@@ -155,11 +172,11 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoConstruir(comando[1], comando[3], comando[2], juego.getMapa(), Shell).ejecutar();
-                            new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                            new ComandoConstruir(comando[1], comando[3], comando[2], juego.getMapa(), SHELL).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
@@ -167,44 +184,44 @@ public class Principal {
                         try {
 
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
                     case "cambiar":
                         try {
                             if (comando.length == 2) {
-                                new ComandoCambiar(comando[1], juego.getMapa(), Shell).ejecutar();
+                                new ComandoCambiar(comando[1], juego.getMapa(), SHELL).ejecutar();
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
-                        new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                        new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
                         break;
                     case "civilizacion":
                         try {
                             if (comando.length == 1) {
-                                new ComandoCivilizacion(juego.getMapa(), Shell).ejecutar();
+                                new ComandoCivilizacion(juego.getMapa(), SHELL).ejecutar();
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
                         break;
                     case "imprimir":
                         try {
                             if (comando.length == 1) {
-                                new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                                new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
 
@@ -212,12 +229,12 @@ public class Principal {
                     case "salir":
                         try {
                             if (comando.length == 1) {
-                                seguir=false;
+                                seguir = false;
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
                         } catch (Exception E) {
-                            Shell.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         }
 

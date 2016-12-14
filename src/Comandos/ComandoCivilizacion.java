@@ -7,6 +7,7 @@ package Comandos;
 
 import Juego.ConsolaNormal;
 import Juego.Mapa;
+import static Juego.Principal.SHELL;
 
 /**
  *
@@ -15,14 +16,14 @@ import Juego.Mapa;
 public class ComandoCivilizacion implements Comando {
 
     private Mapa mapa;
-    private ConsolaNormal Shell;
     
-    public ComandoCivilizacion(Mapa mapa, ConsolaNormal Shell) {
+    
+    public ComandoCivilizacion(Mapa mapa, ConsolaNormal SHELL) {
         this.mapa = mapa;
-        this.Shell = Shell;
+        
     }
     
     public void ejecutar() {
-        Shell.imprimir("Esta jugando con la civilizacion " + mapa.getCivilizacion().getNombre());
+        SHELL.imprimir("Esta jugando con la civilizacion " + mapa.getCivilizacion().getNombre());
     }
 }

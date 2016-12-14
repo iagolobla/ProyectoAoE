@@ -24,13 +24,13 @@ public class ComandoRecolectar implements Comando {
     private String direccion;
     private String personaje;
     private Mapa mapa;
-    private ConsolaNormal Shell;
+    
 
-    public ComandoRecolectar(String direccion, String personaje, Mapa mapa, ConsolaNormal Shell) {
+    public ComandoRecolectar(String direccion, String personaje, Mapa mapa, ConsolaNormal SHELL) {
         this.direccion = direccion;
         this.personaje = personaje;
         this.mapa = mapa;
-        this.Shell = Shell;
+        
     }
     
     
