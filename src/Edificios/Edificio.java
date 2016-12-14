@@ -5,6 +5,7 @@
  */
 package Edificios;
 
+import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionSintaxis;
 import java.util.HashMap;
@@ -87,7 +88,7 @@ public abstract class Edificio {
         }
         return p;
     }
-    public abstract void almacenar(Recurso recurso);
+    public abstract void almacenar(Recurso recurso) throws ExcepcionAlmacenar;
     
     public abstract Personaje crear(String tipo_personaje) throws ExcepcionCrear;
     

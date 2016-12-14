@@ -5,6 +5,7 @@
  */
 package Edificios;
 
+import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionCrear;
 import Juego.Civilizacion;
 import Juego.Posicion;
@@ -43,7 +44,7 @@ public class Ciudadela extends Edificio {
     }
     
 
-    public void almacenar(Recurso recurso){
+    public void almacenar(Recurso recurso) throws ExcepcionAlmacenar{
         if(recurso instanceof Comida){
             this.getCivilizacion().setComida(this.getCivilizacion().getComida()+recurso.getCantidad());
         }else if(recurso instanceof Piedra){
@@ -51,7 +52,7 @@ public class Ciudadela extends Edificio {
         }else if(recurso instanceof Madera){
             this.getCivilizacion().setMadera(this.getCivilizacion().getMadera()+recurso.getCantidad());
         }else{
-            
+            throw new ExcepcionAlmacenar("Tipo de recurso incorrecto");
         }
     }
     
