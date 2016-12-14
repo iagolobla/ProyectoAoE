@@ -9,6 +9,7 @@ import Excepciones.ExcepcionCambiar;
 import Juego.Civilizacion;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
+import static Juego.Principal.SHELL;
 
 /**
  *
@@ -16,9 +17,8 @@ import Juego.Mapa;
  */
 public class ComandoCambiar implements Comando {
 
-    Civilizacion civilizacion;
-    Mapa mapa;
-    ConsolaNormal SHELL;
+    private Civilizacion civilizacion;
+    private Mapa mapa;
 
     public ComandoCambiar(String civilizacion, Mapa mapa, ConsolaNormal SHELL) {
         this.mapa = mapa;

@@ -12,7 +12,9 @@ import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionReparar;
+import Juego.Celda;
 import Juego.Civilizacion;
+import Juego.Mapa;
 import Juego.Posicion;
 import Recursos.Contenedor;
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ import java.util.ArrayList;
  *
  * @author iagolobla
  */
-public class Grupo extends Personaje{
+public class Grupo extends Personaje {
+
     private ArrayList<Personaje> personajes;
 
     public Grupo(ArrayList<Personaje> person, String Nombre, Posicion posicion, Civilizacion civilizacion) {
@@ -30,41 +33,63 @@ public class Grupo extends Personaje{
         for (Personaje p : person) {
             p.setGrupo(true);
             personajes.add(p);
-            this.setArmadura(this.getArmadura()+p.getArmadura());
-            this.setSalud(this.getSalud()+p.getSalud());
-            this.setAtaque(this.getAtaque()+p.getAtaque());
+            this.setArmadura(this.getArmadura() + p.getArmadura());
+            this.setSalud(this.getSalud() + p.getSalud());
+            this.setAtaque(this.getAtaque() + p.getAtaque());
 
         }
 
     }
-    
-    public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
+
+    @Override
+    public String toString() {
+        String impresion = super.toString();
+        impresion += "El grupo tiene los siguientes personajes: \n";
+        for (Personaje p : personajes) {
+            impresion += p.getNombre() + "\n";
+        }
+        return impresion;
+    }
+
+    public Edificio construir(String tipo_edificio) throws ExcepcionConstruir {
         throw new ExcepcionConstruir("Los gruposno construyen");
     }
-    
-    public void reparar(Edificio edificio) throws ExcepcionReparar{
+
+    public void reparar(Edificio edificio) throws ExcepcionReparar {
         throw new ExcepcionReparar("Los grupos no pueden reparar");
     }
-    
-    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar{
+
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar {
         //comprobar que todos son paisanos, sino dar excepcion
-        for(Personaje p:personajes){
-            if(!(p instanceof Paisano)){
+        for (Personaje p : personajes) {
+            if (!(p instanceof Paisano)) {
                 throw new ExcepcionRecolectar("Este grupo no puede recolectar");
             }
         }
     }
-    
-    public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
-        for(Personaje p:personajes){
-            if(!(p instanceof Paisano)){
+
+    public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar {
+        for (Personaje p : personajes) {
+            if (!(p instanceof Paisano)) {
                 throw new ExcepcionAlmacenar("Este grupo no puede almacenar");
             }
         }
-        for(Personaje p:personajes){
-            Paisano paisano=(Paisano) p;
+        for (Personaje p : personajes) {
+            Paisano paisano = (Paisano) p;
             ciudadela.almacenar(paisano.getRecurso());
         }
+    }
+
+    public void desagrupar(Mapa mapa) {
+        mapa.getCivilizacion().getGrupos().remove(this.getNombre());
+        Celda cell = mapa.getCelda(this.getPosicion());
+        for (Personaje p : personajes) {
+            p.setGrupo(false);
+            p.setPosicion(new Posicion(this.getPosicion()));
+            cell.getPersonajes().add(p);
+        }
+        cell.getPersonajes().remove(this);
+        mapa.getCivilizacion().getPersonajes().remove(this.getNombre());
     }
 
     public ArrayList<Personaje> getPersonajes() {
@@ -74,13 +99,13 @@ public class Grupo extends Personaje{
     public void setPersonajes(ArrayList<Personaje> personajes) {
         this.personajes = personajes;
     }
-    
-    public int capacidadMovimiento(){   //Los Grupos se mueven una casilla
+
+    public int capacidadMovimiento() {   //Los Grupos se mueven una casilla
         return 1;
     }
-    
-    public int getNPersonajes(){
+
+    public int getNPersonajes() {
         return personajes.size();
     }
-    
+
 }

@@ -9,11 +9,13 @@ package Juego;
  *
  * @author iagolobla
  */
+import Comandos.ComandoAgrupar;
 import Comandos.ComandoAlmacenar;
 import Comandos.ComandoConstruir;
 import Comandos.ComandoCambiar;
 import Comandos.ComandoCivilizacion;
 import Comandos.ComandoCrear;
+import Comandos.ComandoDesagrupar;
 import Comandos.ComandoDescribir;
 import Comandos.ComandoImprimir;
 import Comandos.ComandoListar;
@@ -92,6 +94,34 @@ public class Principal {
                             }
 
                             new ComandoCrear(comando[1], comando[2], juego.getMapa(), SHELL).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
+
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "agrupar":
+                        try {
+                            if (comando.length != 2) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoAgrupar(juego.getMapa(), comando[1]).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
+
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "desagrupar":
+                        try {
+                            if (comando.length != 2) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoDesagrupar(juego.getMapa(), comando[1]).ejecutar();
                             new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {
