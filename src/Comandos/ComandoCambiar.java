@@ -19,7 +19,6 @@ public class ComandoCambiar implements Comando {
 
     private Civilizacion civilizacion;
     private Mapa mapa;
-    
 
     public ComandoCambiar(String civilizacion, Mapa mapa) {
         this.mapa = mapa;

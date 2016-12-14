@@ -18,9 +18,6 @@ public class ComandoImprimir implements Comando{
     public ComandoImprimir(Mapa mapa){
         if(mapa!=null)
             this.mapa=mapa;
-        if(SHELL != null){
-            
-        }
     }
 
     public void ejecutar() {

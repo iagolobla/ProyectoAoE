@@ -158,6 +158,7 @@ public class Principal {
                             break;
                         }
                         break;
+                    
                     case "almacenar":
                         try {
                             if (comando.length != 3) {

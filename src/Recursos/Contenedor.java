@@ -5,6 +5,8 @@
  */
 package Recursos;
 
+import Excepciones.ExcepcionRecolectar;
+import Juego.Celda;
 import Juego.Posicion;
 import Juego.Mapa;
 
@@ -57,6 +59,17 @@ public abstract class Contenedor {
 
     public boolean esTransitable() {
         if (this instanceof Pradera) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean destruir(Celda cell) throws ExcepcionRecolectar{
+        if(!(this instanceof Pradera)){
+            if(this.getRecurso().getCantidad() > 0){
+                throw new ExcepcionRecolectar("No se puede eliminar un recurso no acabado!");
+            }
+            cell.setContenedor(new Pradera(cell.getPosicion()));
             return true;
         }
         return false;

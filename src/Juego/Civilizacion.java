@@ -19,6 +19,7 @@ public class Civilizacion {
     private HashMap<String, Personaje> personajes;
     private HashMap<String, Edificio> edificios;
     private HashMap<String, Grupo> grupos;
+    /*prueba*/
 
     private int[] cantidades;
     private String color;
