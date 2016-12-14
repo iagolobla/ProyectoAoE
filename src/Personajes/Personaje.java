@@ -99,7 +99,6 @@ public abstract class Personaje  {
     /*
     public abstract void recolectar(Contenedor contenedor);
     
-    public abstract void almacenar(Ciudadela ciudadela);
     
     
     
