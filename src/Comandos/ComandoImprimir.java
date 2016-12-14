@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package Comandos;
+
 import Juego.Mapa;
 import Juego.ConsolaNormal;
 import static Juego.Principal.SHELL;
+
 /**
  *
  * @author iagolobla
@@ -20,7 +22,8 @@ public class ComandoImprimir implements Comando{
             
         }
     }
-    public void ejecutar(){
+
+    public void ejecutar() {
         SHELL.imprimir(mapa.print());
     }
 }

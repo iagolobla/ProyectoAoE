@@ -5,7 +5,6 @@
  */
 package Personajes;
 
-
 import Juego.Posicion;
 import Juego.Civilizacion;
 import Juego.Mapa;
@@ -15,15 +14,17 @@ import Edificios.Edificio;
 import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
+import Excepciones.ExcepcionDefender;
 import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
+
 /**
  *
  * @author iagolobla
  */
-public abstract class Personaje  {
-    
+public abstract class Personaje {
+
     private Grupo G;
     private Civilizacion civilizacion;
     private int armadura;
@@ -33,8 +34,7 @@ public abstract class Personaje  {
     private Posicion posicion;
     private boolean grupo;
 
- 
-    public Personaje(String Nombre, Posicion posicion, Civilizacion civilizacion){
+    public Personaje(String Nombre, Posicion posicion, Civilizacion civilizacion) {
         if (posicion == null) {
             System.out.println("Posicion pasada a Personaje nula!");
             return;
@@ -49,7 +49,7 @@ public abstract class Personaje  {
         grupo = false;
         G = null;
     }
-    
+
     @Override
     public String toString() {
         String impresion = "";
@@ -64,9 +64,9 @@ public abstract class Personaje  {
 
         return impresion;
     }
-    
-    public Posicion mover(String pto_cardinal) throws ExcepcionSintaxis{
-        Posicion p=new Posicion(posicion);
+
+    public Posicion mover(String pto_cardinal) throws ExcepcionSintaxis {
+        Posicion p = new Posicion(posicion);
         switch (pto_cardinal) {
             case "s":
                 p.moverX(1);
@@ -86,28 +86,58 @@ public abstract class Personaje  {
         }
         return p;
     }
-    
+
     public abstract int capacidadMovimiento();
-    
+
     public abstract Edificio construir(String tipo_edificio) throws ExcepcionConstruir;
-    
+
     public abstract void reparar(Edificio edificio) throws ExcepcionReparar;
-    
+
     public abstract void recolectar(Contenedor contenedor) throws ExcepcionRecolectar;
-    
+
     public abstract void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar;
+
+    public void defender(Edificio edificio) throws ExcepcionDefender {
+        int contador = 0;
+        if (!(edificio.getCivilizacion().getNombre().equals(this.getCivilizacion().getNombre()))) {
+            throw new ExcepcionDefender("Este edificio nos es de tu civilizacion!");
+        }
+        if ((edificio.getCapPersonajes() - edificio.getNPersonajes()) <= 0) {
+            throw new ExcepcionDefender("No cogen mas personajes aqui dentro");
+        }
+
+        if (this instanceof Grupo) {
+            Grupo G = (Grupo) this;
+            for (Personaje person : G.getPersonajes()) {
+                person.restaurarVida(person);
+                contador++;
+            }
+        } else {
+            this.restaurarVida(this);
+            contador++;
+        }
+
+        edificio.setAtaque(edificio.getAtaque() + ataque);
+        edificio.setDefensa(edificio.getDefensa() + armadura);
+        edificio.getPersonajes().put(Nombre, this);
+        edificio.setNPersonajes(edificio.getNPersonajes() + contador);
+    }
+
+    public void restaurarVida(Personaje personaje) {
+        if (personaje instanceof Paisano) {
+            personaje.setSalud(Paisano.SALUD);
+        } else if (personaje instanceof Arquero) {
+            personaje.setSalud(Arquero.SALUD);
+        } else if (personaje instanceof Caballero) {
+            personaje.setSalud(Caballero.SALUD);
+        } else if (personaje instanceof Legionario) {
+            personaje.setSalud(Legionario.SALUD);
+        }
+    }
+
     /*
     public abstract void recolectar(Contenedor contenedor);
     
-    public abstract void almacenar(Ciudadela ciudadela);
-    
-    
-    
-    
-    
-    public void defender(Edificio edificio){
-        
-    }
     
     public abstract void atacar(Personaje[] personajes);
     
@@ -116,9 +146,7 @@ public abstract class Personaje  {
     public abstract double danhoAtaque(Personaje personaje);
     
     public abstract double danhoAtaque(Edificio edificio);
-    */
-    
-    
+     */
     public boolean isGrupo() {
         return grupo;
     }
@@ -126,7 +154,7 @@ public abstract class Personaje  {
     public void setGrupo(boolean grupo) {
         this.grupo = grupo;
     }
-    
+
     public void setArmadura(int armadura) {
         if (armadura >= 0) {
             this.armadura = armadura;
@@ -142,7 +170,7 @@ public abstract class Personaje  {
             System.out.println("Ataque introducido debe ser mayor que 0!");
         }
     }
-    
+
     public String getNombre() {
         return Nombre;
     }
@@ -150,7 +178,7 @@ public abstract class Personaje  {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-    
+
     public int getArmadura() {
         return armadura;
     }
@@ -170,7 +198,7 @@ public abstract class Personaje  {
     public int getAtaque() {
         return ataque;
     }
-    
+
     public Posicion getPosicion() {
         return new Posicion(posicion);
     }
@@ -202,5 +230,5 @@ public abstract class Personaje  {
         }
         this.civilizacion = civilizacion;
     }
-    
+
 }

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import Personajes.Personaje;
 import Personajes.Grupo;
 import Edificios.Edificio;
+import Excepciones.ExcepcionAgrupar;
 import Recursos.Contenedor;
 import Recursos.Pradera;
 
@@ -20,7 +21,6 @@ import Recursos.Pradera;
 public class Celda {
 
     private ArrayList<Personaje> personajes;
-    private ArrayList<Grupo> grupos;
     private Edificio edificio;
     private Contenedor contenedor;
     private Posicion posicion;
@@ -34,7 +34,6 @@ public class Celda {
         edificio = null;
         personajes = new ArrayList<Personaje>();
         visible = new HashMap<String, Boolean>();
-        grupos = new ArrayList<Grupo>();
         this.posicion = new Posicion(posicion);
         contenedor = new Pradera(this.posicion);
     }
@@ -49,11 +48,25 @@ public class Celda {
         }
         edificio = null;
         personajes = new ArrayList<Personaje>();
-        grupos = new ArrayList<Grupo>();
         this.posicion = new Posicion(posicion);
         this.contenedor = contenedor;
 
     }
+
+    public void agrupar(Mapa mapa) throws ExcepcionAgrupar {
+        if (personajes.size() > 1) {
+            String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
+            mapa.getCivilizacion().getCantidades()[6]++;
+            Grupo G = new Grupo(personajes, Name, new Posicion(posicion), mapa.getCivilizacion());
+            personajes.removeAll(personajes);
+            personajes.add(G);
+            mapa.getCivilizacion().getPersonajes().put(Name, G);
+            mapa.getCivilizacion().getGrupos().put(Name, G);
+        } else {
+            throw new ExcepcionAgrupar("Debe existir más de una entidad en la celda");
+        }
+    }
+    
 
     public ArrayList<Personaje> getPersonajes() {
         return personajes;
@@ -77,7 +90,12 @@ public class Celda {
     }
 
     public boolean isGrupo() {
-        return (grupos.size() > 0);
+        for (Personaje p : personajes) {
+            if (p instanceof Grupo) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isContenedor() {
@@ -180,22 +198,6 @@ public class Celda {
 
     public void ponerVisible(Civilizacion civilizacion) {
         visible.replace(civilizacion.getNombre(), Boolean.TRUE);
-    }
-
-    public ArrayList<Grupo> getGrupos() {
-        return grupos;
-    }
-
-    public void setGrupos(ArrayList<Grupo> grupos) {
-        this.grupos = grupos;
-    }
-
-    public void addGrupo(Grupo grupo) {
-        if (grupo != null) {
-            grupos.add(grupo);
-        } else {
-            System.out.println("Grupo pasado Nulo");
-        }
     }
 
 }
