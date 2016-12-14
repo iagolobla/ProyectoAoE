@@ -10,7 +10,13 @@ package Comandos;
  * @author iagolobla
  */
 public class ComandoSalir implements Comando {
+    Boolean seguir;
+
+    public ComandoSalir(Boolean seguir) {
+        this.seguir = seguir;
+    }
+    
     public void ejecutar(){
-        
+        seguir=false;
     }
 }

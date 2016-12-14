@@ -11,6 +11,7 @@ package Juego;
  */
 import Comandos.ComandoConstruir;
 import Comandos.ComandoCambiar;
+import Comandos.ComandoCivilizacion;
 import Comandos.ComandoCrear;
 import Comandos.ComandoDescribir;
 import Comandos.ComandoImprimir;
@@ -18,6 +19,7 @@ import Comandos.ComandoListar;
 import Comandos.ComandoMirar;
 import Comandos.ComandoMover;
 import Comandos.ComandoReparar;
+import Comandos.ComandoSalir;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +31,7 @@ public class Principal {
 
     public Principal() {
         ConsolaNormal Shell = new ConsolaNormal();
-        boolean seguir = true;
+        Boolean seguir = true;
         Shell.imprimir("Bienvenido al Juego!");
         int numciv;
 
@@ -72,7 +74,7 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoMover(comando[2], comando[1], juego.getMapa(),Shell).ejecutar();
+                            new ComandoMover(comando[2], comando[1], juego.getMapa(), Shell).ejecutar();
                             new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
 
                         } catch (Exception E) {
@@ -113,7 +115,7 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoDescribir(comando[1], juego.getMapa()).ejecutar();
+                            new ComandoDescribir(comando[1], juego.getMapa(), Shell).ejecutar();
 
                         } catch (Exception E) {
                             Shell.imprimir("Error: " + E.getMessage());
@@ -182,11 +184,43 @@ public class Principal {
                         }
                         new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
                         break;
+                    case "civilizacion":
+                        try {
+                            if (comando.length == 1) {
+                                new ComandoCivilizacion(juego.getMapa(), Shell).ejecutar();
+                            } else {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
                     case "imprimir":
-                        new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                        try {
+                            if (comando.length == 1) {
+                                new ComandoImprimir(juego.getMapa(), Shell).ejecutar();
+                            } else {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+
                         break;
                     case "salir":
-                        seguir = false;
+                        try {
+                            if (comando.length == 1) {
+                                seguir=false;
+                            } else {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+                        } catch (Exception E) {
+                            Shell.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+
                         break;
                 }
             }

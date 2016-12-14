@@ -46,6 +46,11 @@ public class Grupo extends Personaje{
     
     public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar{
         //comprobar que todos son paisanos, sino dar excepcion
+        for(Personaje p:personajes){
+            if(!(p instanceof Paisano)){
+                throw new ExcepcionRecolectar("Este grupo no puede recolectar");
+            }
+        }
     }
 
     public ArrayList<Personaje> getPersonajes() {

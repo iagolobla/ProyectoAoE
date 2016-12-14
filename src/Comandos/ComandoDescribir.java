@@ -7,6 +7,8 @@ package Comandos;
 
 import Edificios.Ciudadela;
 import Edificios.Edificio;
+import Excepciones.ExcepcionDescribir;
+import Juego.ConsolaNormal;
 import Juego.Mapa;
 import Personajes.Grupo;
 import Personajes.Personaje;
@@ -21,31 +23,33 @@ public class ComandoDescribir implements Comando {
 
     private String entidad;
     private Mapa map;
+    private ConsolaNormal Shell;
 
-    public ComandoDescribir(String entidad, Mapa mapa) {
+    public ComandoDescribir(String entidad, Mapa mapa,ConsolaNormal Shell) {
         this.entidad = entidad;
         this.map = mapa;
+        this.Shell=Shell;
     }
 
-    public void ejecutar() {
+    public void ejecutar() throws ExcepcionDescribir{
         if (map.getCivilizacion().getPersonajes().containsKey(entidad)) {
             Personaje personaje = map.getCivilizacion().getPersonajes().get(entidad);
-            System.out.println(personaje);
+            Shell.imprimir(personaje.toString());
         } else if (map.getCivilizacion().getEdificios().containsKey(entidad)) {
             Edificio edificio = map.getCivilizacion().getEdificios().get(entidad);
-            System.out.println(edificio);
+            Shell.imprimir(edificio.toString());
         } else if (map.getRecursos().containsKey(entidad)) {
             Contenedor recurso = map.getRecursos().get(entidad);
             if (map.getCelda(recurso.getPosicion()).isVisible(map.getCivilizacion())) {
-                System.out.println(recurso);
+                Shell.imprimir(recurso.toString());
             } else {
-                System.out.println("La celda no es visible.");
+                throw new ExcepcionDescribir("La entidad que desea describir está en una celda no visible");
             }
         } else if (map.getCivilizacion().getGrupos().containsKey(entidad)) {
             Grupo G = map.getCivilizacion().getGrupos().get(entidad);
-            System.out.println(G);
+            Shell.imprimir(G.toString());
         } else {
-            //Excepcion Aqui
+            throw new ExcepcionDescribir("No existe el tipo de entidad introducida");
         }
     }
 }
