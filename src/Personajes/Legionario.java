@@ -5,7 +5,9 @@
  */
 package Personajes;
 
+import Edificios.Ciudadela;
 import Edificios.Edificio;
+import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionRecolectar;
@@ -45,5 +47,9 @@ public class Legionario extends Soldado{
     
     public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar{
         throw new ExcepcionRecolectar("Los legionarios no pueden recolectar");
+    }
+    
+    public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
+        throw new ExcepcionAlmacenar("Los legionarios no pueden almacenar");
     }
 }

@@ -12,6 +12,7 @@ import Juego.Mapa;
 import Recursos.Contenedor;
 import Edificios.Ciudadela;
 import Edificios.Edificio;
+import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionRecolectar;
@@ -93,6 +94,8 @@ public abstract class Personaje  {
     public abstract void reparar(Edificio edificio) throws ExcepcionReparar;
     
     public abstract void recolectar(Contenedor contenedor) throws ExcepcionRecolectar;
+    
+    public abstract void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar;
     /*
     public abstract void recolectar(Contenedor contenedor);
     

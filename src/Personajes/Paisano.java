@@ -10,12 +10,14 @@ import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Edificios.Edificio;
 import Edificios.Torre;
+import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionReparar;
 import Juego.Posicion;
 import Juego.Civilizacion;
 import Juego.Mapa;
 import Recursos.Contenedor;
+import Recursos.Recurso;
 
 /**
  *
@@ -30,13 +32,13 @@ public class Paisano extends Personaje {
 
     private int cantidadRecolectada;
     private int capacidadRecurso;
-    private String tipoRecurso;
+    Recurso recurso;
 
     public Paisano(String Nombre, Posicion posicion, Civilizacion civilizacion) {
         super(Nombre, posicion, civilizacion);
         cantidadRecolectada = 0;
         capacidadRecurso = CAPACIDAD;
-        tipoRecurso = null;
+        recurso=null;
         this.setAtaque(ATAQUE);
         this.setArmadura(ARMADURA);
         this.setSalud(SALUD);
@@ -49,7 +51,7 @@ public class Paisano extends Personaje {
         impresion += "Capacidad de recoleccion: " + capacidadRecurso + "\n";
         impresion += "Cantidad recolectada: " + cantidadRecolectada + "\n";
         if (cantidadRecolectada > 0) {
-            impresion += "Recurso cargado: " + tipoRecurso + "\n";
+            impresion += "Recurso cargado: " + recurso.getClass() + "\n";
         }
         return impresion;
     }
@@ -103,6 +105,13 @@ public class Paisano extends Personaje {
     public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar {
 
     }
+    
+    public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
+        if(ciudadela==null){
+            throw new ExcepcionAlmacenar("Ciudadela para almacenar nula");
+        }
+        ciudadela.almacenar(recurso);
+    }
 
     public int getCantidadRecolectada() {
         return cantidadRecolectada;
@@ -120,13 +129,6 @@ public class Paisano extends Personaje {
         this.capacidadRecurso = capacidadRecurso;
     }
 
-    public String getTipoRecurso() {
-        return tipoRecurso;
-    }
-
-    public void setTipoRecurso(String tipoRecurso) {
-        this.tipoRecurso = tipoRecurso;
-    }
 
     public int capacidadMovimiento() {   //Los paisanos se mueven una casilla
         return 1;

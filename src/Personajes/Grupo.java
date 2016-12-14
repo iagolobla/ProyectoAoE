@@ -5,7 +5,9 @@
  */
 package Personajes;
 
+import Edificios.Ciudadela;
 import Edificios.Edificio;
+import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionRecolectar;
@@ -51,6 +53,15 @@ public class Grupo extends Personaje{
                 throw new ExcepcionRecolectar("Este grupo no puede recolectar");
             }
         }
+    }
+    
+    public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
+        for(Personaje p:personajes){
+            if(!(p instanceof Paisano)){
+                throw new ExcepcionAlmacenar("Este grupo no puede recolectar");
+            }
+        }
+        //aora almacena
     }
 
     public ArrayList<Personaje> getPersonajes() {
