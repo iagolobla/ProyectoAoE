@@ -58,7 +58,7 @@ public class Grupo extends Personaje{
     public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
         for(Personaje p:personajes){
             if(!(p instanceof Paisano)){
-                throw new ExcepcionAlmacenar("Este grupo no puede recolectar");
+                throw new ExcepcionAlmacenar("Este grupo no puede almacenar");
             }
         }
         //aora almacena

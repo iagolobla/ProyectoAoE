@@ -103,7 +103,7 @@ public class Paisano extends Personaje {
     }
 
     public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar {
-
+        
     }
     
     public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{

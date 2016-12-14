@@ -38,6 +38,12 @@ public abstract class Contenedor {
     }
 
     public Recurso procesar() {
+        if(this instanceof Cantera){
+            //Por cada acceso rebajar un 
+        } else {
+            
+        }
+        
         return recurso;
     }
 

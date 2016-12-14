@@ -13,8 +13,19 @@ import Juego.Posicion;
  */
 public class Cantera extends Contenedor {
 
+    private int CantInit;
+    
     public Cantera(String Nombre, Posicion posicion, Recurso R) {
         super(Nombre, posicion, R);
-
+        CantInit = R.getCantidad();
     }
+
+    public int getCantInit() {
+        return CantInit;
+    }
+
+    public void setCantInit(int accesos) {
+        this.CantInit = accesos;
+    }
+    
 }

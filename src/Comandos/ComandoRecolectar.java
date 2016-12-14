@@ -5,8 +5,15 @@
  */
 package Comandos;
 
+import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionSintaxis;
+import Juego.Celda;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
+import Juego.Posicion;
+import Personajes.Personaje;
+import Recursos.Contenedor;
+import Recursos.Pradera;
 
 /**
  *
@@ -28,7 +35,26 @@ public class ComandoRecolectar implements Comando {
     
     
 
-    public void ejecutar() {
+    public void ejecutar() throws ExcepcionRecolectar, ExcepcionSintaxis{
+        Personaje P;
+        Posicion cont;
+        Celda cell;
+        Contenedor contenedor;
         
+        if (!mapa.getCivilizacion().getPersonajes().containsKey(personaje)){
+            throw new ExcepcionRecolectar("El personaje indicado no existe!");
+        }
+        P = mapa.getCivilizacion().getPersonajes().get(personaje);
+        
+        cont = P.mover(direccion);
+        
+        cell = mapa.getCelda(cont);
+        contenedor = cell.getContenedor();
+        
+        if(contenedor instanceof Pradera){
+            throw new ExcepcionRecolectar("No hay un recurso en la direccion especificada!");
+        }
+        
+        P.recolectar(contenedor);
     }
 }
