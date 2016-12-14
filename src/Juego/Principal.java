@@ -17,6 +17,7 @@ import Comandos.ComandoCivilizacion;
 import Comandos.ComandoCrear;
 import Comandos.ComandoDesagrupar;
 import Comandos.ComandoDescribir;
+import Comandos.ComandoDesligar;
 import Comandos.ComandoImprimir;
 import Comandos.ComandoListar;
 import Comandos.ComandoMirar;
@@ -122,6 +123,20 @@ public class Principal {
                             }
 
                             new ComandoDesagrupar(juego.getMapa(), comando[1]).ejecutar();
+                            new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
+
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "desligar":
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoDesligar(juego.getMapa(), comando[1],comando[2]).ejecutar();
                             new ComandoImprimir(juego.getMapa(), SHELL).ejecutar();
 
                         } catch (Exception E) {

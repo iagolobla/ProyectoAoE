@@ -92,6 +92,19 @@ public class Grupo extends Personaje {
         mapa.getCivilizacion().getPersonajes().remove(this.getNombre());
     }
 
+    public void desligar(Personaje p, Mapa mapa) {
+        if (personajes.size() > 2) {
+            
+            Celda cell = mapa.getCelda(this.getPosicion());
+            p.setGrupo(false);
+            p.setPosicion(new Posicion(this.getPosicion()));
+            cell.getPersonajes().add(p);
+            personajes.remove(p);
+        } else {
+            this.desagrupar(mapa);
+        }
+    }
+
     public ArrayList<Personaje> getPersonajes() {
         return personajes;
     }
