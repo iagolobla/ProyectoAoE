@@ -13,6 +13,7 @@ import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
+import static Juego.Principal.SHELL;
 import Personajes.Personaje;
 
 /**
@@ -24,13 +25,13 @@ public class ComandoReparar implements Comando {
     private String direccion;
     private String personaje;
     private Mapa mapa;
-    private ConsolaNormal Shell;
+    
 
-    public ComandoReparar(String direccion, String personaje, Mapa mapa, ConsolaNormal Shell) {
+    public ComandoReparar(String direccion, String personaje, Mapa mapa, ConsolaNormal SHELL) {
         this.direccion = direccion;
         this.personaje = personaje;
         this.mapa = mapa;
-        this.Shell = Shell;
+        
     }
 
     public void ejecutar() throws ExcepcionSintaxis, ExcepcionReparar {
@@ -49,7 +50,7 @@ public class ComandoReparar implements Comando {
             }
             int vidarec = ef.getSalud();
             p.reparar(ef);
-            Shell.imprimir("El edificio "+ ef.getNombre()+ " ahora esta full-vida");
+            SHELL.imprimir("El edificio "+ ef.getNombre()+ " ahora esta full-vida");
         }
     }
 }

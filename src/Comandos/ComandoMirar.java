@@ -15,6 +15,7 @@ import Juego.Colores;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
 import Juego.Posicion;
+import static Juego.Principal.SHELL;
 import Personajes.Arquero;
 import Personajes.Caballero;
 import Personajes.Legionario;
@@ -33,12 +34,12 @@ public class ComandoMirar implements Comando {
 
     private String posicion;
     private Mapa mapa;
-    private ConsolaNormal Shell;
+    
 
-    public ComandoMirar(String posicion, Mapa mapa, ConsolaNormal Shell) {
+    public ComandoMirar(String posicion, Mapa mapa, ConsolaNormal SHELL) {
         this.posicion = posicion;
         this.mapa = mapa;
-        this.Shell = Shell;
+        
     }
 
     public void ejecutar() {
@@ -48,19 +49,19 @@ public class ComandoMirar implements Comando {
             if (cell.isVisible(mapa.getCivilizacion())) {
                 if (cell.getContenedor() instanceof Pradera) {
                     if (cell.getEdificio() instanceof Edificio) {
-                        Shell.imprimir(cell.getEdificio().toString());
+                        SHELL.imprimir(cell.getEdificio().toString());
                     } else if (cell.getPersonajes().size() > 0) {
                         ArrayList<Personaje> personajes = cell.getPersonajes();
                         if (personajes.size() > 0) {
-                            Shell.imprimir("Hay personajes aqui!");
+                            SHELL.imprimir("Hay personajes aqui!");
                             for (Personaje person : personajes) {
-                                Shell.imprimir(person.toString());
+                                SHELL.imprimir(person.toString());
                             }
                         }
                     }
 
                 } else {
-                    Shell.imprimir(cell.getContenedor().toString());
+                    SHELL.imprimir(cell.getContenedor().toString());
                 }
             } else {
                 System.out.println("no es visible");

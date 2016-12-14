@@ -12,15 +12,15 @@ import Juego.ConsolaNormal;
  */
 public class ComandoImprimir implements Comando{
     Mapa mapa;
-    ConsolaNormal Shell;
-    public ComandoImprimir(Mapa mapa, ConsolaNormal Shell){
+    ConsolaNormal SHELL;
+    public ComandoImprimir(Mapa mapa, ConsolaNormal SHELL){
         if(mapa!=null)
             this.mapa=mapa;
-        if(Shell != null){
-            this.Shell = Shell;
+        if(SHELL != null){
+            
         }
     }
     public void ejecutar(){
-        Shell.imprimir(mapa.print());
+        SHELL.imprimir(mapa.print());
     }
 }

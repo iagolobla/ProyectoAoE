@@ -20,19 +20,20 @@ import Personajes.Personaje;
 import Juego.Celda;
 import Juego.ConsolaNormal;
 import Juego.Posicion;
+import static Juego.Principal.SHELL;
 
 public class ComandoCrear implements Comando {
 
     private String edificio;
     private String tipopersonaje;
     private Mapa mapa;
-    private ConsolaNormal Shell;
+    
 
-    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa, ConsolaNormal Shell) {
+    public ComandoCrear(String edificio, String tipopersonaje, Mapa mapa, ConsolaNormal SHELL) {
         this.edificio = edificio;
         this.tipopersonaje = tipopersonaje;
         this.mapa = mapa;
-        this.Shell = Shell;
+        
     }
 
     public void ejecutar() throws ExcepcionSintaxis, ExcepcionCrear {
@@ -108,7 +109,7 @@ public class ComandoCrear implements Comando {
         mapa.getCivilizacion().getPersonajes().put(p.getNombre(), p);
         mapa.getCivilizacion().setComida(mapa.getCivilizacion().getComida() - gasto);
 
-        Shell.imprimir(
+        SHELL.imprimir(
                 "Se ha creado el personaje " + p.getNombre() + " en la posicion " + p.getPosicion());
     }
 

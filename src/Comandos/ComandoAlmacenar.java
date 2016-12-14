@@ -23,13 +23,13 @@ public class ComandoAlmacenar implements Comando{
     private String personaje;
     private String pto_cardinal;
     private Mapa mapa;
-    private ConsolaNormal Shell;
+    
 
-    public ComandoAlmacenar(String personaje, String pto_cardinal,Mapa mapa,ConsolaNormal Shell) {
+    public ComandoAlmacenar(String personaje, String pto_cardinal,Mapa mapa,ConsolaNormal SHELL) {
         this.personaje = personaje;
         this.pto_cardinal = pto_cardinal;
         this.mapa=mapa;
-        this.Shell=Shell;
+        
     }
 
     
