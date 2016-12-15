@@ -68,6 +68,10 @@ public class Grupo extends Personaje {
                 throw new ExcepcionRecolectar("Este grupo no puede recolectar");
             }
         }
+        for (Personaje p : personajes) {
+            Paisano paisano = (Paisano) p;
+            p.recolectar(contenedor);
+        }
     }
 
     public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar {
