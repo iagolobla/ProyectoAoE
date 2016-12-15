@@ -20,7 +20,8 @@ import Recursos.Contenedor;
  *
  * @author iagolobla
  */
-public class Caballero extends Soldado{
+public class Caballero extends Soldado {
+
     public static final int SALUD = 150;
     public static final int ATAQUE = 60;
     public static final int ARMADURA = 40;
@@ -32,25 +33,37 @@ public class Caballero extends Soldado{
         this.setSalud(SALUD);
 
     }
-    
-    public int capacidadMovimiento(){   //Los caballeros se mueven dos casillas
+
+    public int capacidadMovimiento() {   //Los caballeros se mueven dos casillas
         return 2;
     }
-    
-    public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
+
+    public Edificio construir(String tipo_edificio) throws ExcepcionConstruir {
         throw new ExcepcionConstruir("Los caballeros no construyen");
     }
-    
-    public void reparar(Edificio edificio) throws ExcepcionReparar{
+
+    public void reparar(Edificio edificio) throws ExcepcionReparar {
         throw new ExcepcionReparar("Los caballeros no pueden reparar");
     }
-    
-    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar{
+
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar {
         throw new ExcepcionRecolectar("Los caballeros no pueden recolectar");
     }
-    
-    public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
+
+    public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar {
         throw new ExcepcionAlmacenar("Los caballeros no pueden almacenar");
     }
-    
+
+    public double danhoAtaque(Edificio edificio) {
+        return this.getAtaque() - edificio.getDefensa();
+    }
+
+    public double danhoAtaque(Personaje personaje) {
+        if (personaje instanceof Legionario || personaje instanceof Arquero) {
+            return this.getAtaque() * 2 - personaje.getArmadura();
+        } else {
+            return this.getAtaque() - personaje.getArmadura();
+        }
+    }
+
 }

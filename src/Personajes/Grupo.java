@@ -111,6 +111,14 @@ public class Grupo extends Personaje {
             this.desagrupar(mapa);
         }
     }
+    
+    public   double danhoAtaque(Edificio edificio) {
+        return this.getAtaque() - edificio.getDefensa();
+    }
+    
+    public double danhoAtaque(Personaje personaje) {
+        return this.getAtaque() - personaje.getArmadura();
+    }
 
     public ArrayList<Personaje> getPersonajes() {
         return personajes;

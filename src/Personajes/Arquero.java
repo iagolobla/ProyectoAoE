@@ -53,5 +53,12 @@ public class Arquero extends Soldado {
     public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
         throw new ExcepcionAlmacenar("Los arqueros no pueden almacenar");
     }
+    public double danhoAtaque(Edificio edificio) {
+        return this.getAtaque()/2 - edificio.getDefensa();
+    }
+    
+    public double danhoAtaque(Personaje personaje) {
+        return this.getAtaque() - personaje.getArmadura();
+    }
     
 }
