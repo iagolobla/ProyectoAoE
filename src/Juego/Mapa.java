@@ -5,6 +5,7 @@
  */
 package Juego;
 
+import Comandos.ComandoAtacar;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,6 +27,8 @@ import Edificios.Casa;
 import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Edificios.Torre;
+import Excepciones.ExcepcionAtacar;
+import Excepciones.ExcepcionSintaxis;
 import Personajes.Arquero;
 import Personajes.Caballero;
 import Personajes.Legionario;
@@ -261,44 +264,42 @@ public class Mapa {
         }
     }
 
-    /*public void borrarCivilizacion(String civ) {
+    public void borrarCivilizacion(String civ) {
         Celda cell;
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {
                 cell = this.getCelda(i, j);
-                if (cell.isPersonaje() || cell.isGrupo()) {
+                if (cell.getPersonajes().size() > 0) {
                     Personaje p = cell.getPersonajes().get(0);
 
-                    if (p.getNombreCivilizacion().equals(civ)) {
+                    if (p.getCivilizacion().getNombre().equals(civ)) {
                         Collection<Personaje> per = cell.getPersonajes();
-                        Collection<Grupo> gr = cell.getGrupos();
-                        cell.getGrupos().removeAll(gr);
                         cell.getPersonajes().removeAll(per);
 
                     }
                 } else if (cell.isEdificio()) {
                     Edificio ef = cell.getEdificio();
-                    if (ef.getNombreCivilizacion().equals(civ)) {
+                    if (ef.getCivilizacion().getNombre().equals(civ)) {
                         cell.setEdificio(null);
-                        cell.setTipo("Pradera");
                     }
                 }
             }
         }
-    }*/
+    }
 
- /*public void turnoTorres() {
+    public void turnoTorres() throws ExcepcionSintaxis, ExcepcionAtacar {
 
         for (Civilizacion civ : civilizaciones.values()) {
             for (Edificio ef : civ.getEdificios().values()) {
-                if (ef.getTipo().equals("torre")) {
+                if (ef instanceof Torre) {
                     if (!civ.getNombre().equals(civilizacion.getNombre())) {
-                        ef.atacarTorre(this);
+                        ef.atacarTorres(this);
                     }
                 }
             }
         }
-    }*/
+    }
+
     public String print() {
         Celda cell;
         Celda aux;
@@ -311,97 +312,96 @@ public class Mapa {
         System.out.println("");
 
         for (int i = 0; i < MAPAY; i++) {   //Ahora recorremos mapa para imprimirlo
-            Imp+=(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
+            Imp += (Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
             for (int j = 0; j < MAPAX; j++) {
                 cell = this.getCelda(i, j);
                 if (cell.isVisible(civilizacion)) {
                     if (cell.getContenedor() instanceof Pradera) {
                         if (cell.isGrupo()) {
                             if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "G" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
                         } else if (cell.getPersonaje() instanceof Paisano) {
                             if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "P" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getPersonaje() instanceof Legionario) {
                             if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "L" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
                         } else if (cell.getPersonaje() instanceof Arquero) {
                             if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "A" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getPersonaje() instanceof Caballero) {
                             if (getCelda(i, j).getPersonajes().get(0).getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "C" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getEdificio() instanceof Casa) {
                             if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "^" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getEdificio() instanceof Ciudadela) {
                             if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "♛" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
 
                         } else if (cell.getEdificio() instanceof Torre) {
                             if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "T" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
                         } else if (cell.getEdificio() instanceof Cuartel) {
                             if (cell.getEdificio().getCivilizacion().equals(civilizacion)) {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_AZUL + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_AZUL + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             } else {
-                                Imp+=(Colores.BACK_VERDE + Colores.TEXT_ROJO + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
+                                Imp += (Colores.BACK_VERDE + Colores.TEXT_ROJO + "♜" + Colores.TEXT_RESET + Colores.BACK_RESET);
                             }
                         } else {
-                            Imp+=(Colores.BACK_VERDE + " " + Colores.BACK_RESET);
+                            Imp += (Colores.BACK_VERDE + " " + Colores.BACK_RESET);
                         }
                     } else if (cell.getContenedor() instanceof Bosque) {
-                        Imp+=(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
+                        Imp += (Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "@" + Colores.BACK_RESET + Colores.TEXT_RESET);
 
                     } else if (cell.getContenedor() instanceof Arbusto) {
-                        Imp+=(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♣" + Colores.BACK_RESET + Colores.TEXT_RESET);
+                        Imp += (Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♣" + Colores.BACK_RESET + Colores.TEXT_RESET);
 
                     } else {
-                        Imp+=(Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♦" + Colores.BACK_RESET + Colores.TEXT_RESET);
+                        Imp += (Colores.BACK_VERDE + Colores.TEXT_AMARILLO + "♦" + Colores.BACK_RESET + Colores.TEXT_RESET);
                     }
                 } else {
-                    Imp+=(Colores.BACK_GRIS + " " + Colores.BACK_RESET);
+                    Imp += (Colores.BACK_GRIS + " " + Colores.BACK_RESET);
                 }
             }
-            Imp+=(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
-            Imp+=("\n");
+            Imp += (Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
+            Imp += ("\n");
         }
         for (int i = 0; i < MAPAX + 2; i++) {
-            Imp+=(Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
+            Imp += (Colores.BACK_AZUL + Colores.TEXT_AZUL + "&" + Colores.TEXT_RESET + Colores.BACK_RESET);
         }
-        Imp+=("\n");
+        Imp += ("\n");
         return Imp;
     }
 
-    
     public boolean checkBuilding(Posicion pos) {
         if (this.getCelda(pos).getContenedor() instanceof Pradera) {
             if (!(this.getCelda(pos).isEdificio())) {

@@ -85,6 +85,7 @@ public class Principal {
 
                             new ComandoMover(comando[2], comando[1], juego.getMapa()).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());

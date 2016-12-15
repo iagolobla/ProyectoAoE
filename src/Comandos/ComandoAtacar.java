@@ -61,7 +61,7 @@ public class ComandoAtacar implements Comando {
                         if (!(mapa.getCivilizaciones().get(ef.getCivilizacion().getNombre()).civilizacionViva())) {
                             System.out.println("LA CIVILIZACION " + ef.getCivilizacion().getNombre() + " HA MUERTO");
                             mapa.getCivilizaciones().remove(ef.getCivilizacion().getNombre());
-                            //mapa.borrarCivilizacion(ef.getCivilizacion().getNombre());
+                            mapa.borrarCivilizacion(ef.getCivilizacion().getNombre());
                         }
                     }
                 } else if (cell.getPersonajes().size() > 0) {
@@ -102,7 +102,7 @@ public class ComandoAtacar implements Comando {
                     if (!(mapa.getCivilizaciones().get(ef.getCivilizacion().getNombre()).civilizacionViva())) {
                         System.out.println("LA CIVILIZACION " + ef.getCivilizacion().getNombre() + " HA MUERTO");
                         mapa.getCivilizaciones().remove(ef.getCivilizacion().getNombre());
-                        //mapa.borrarCivilizacion(ef.getCivilizacion().getNombre());
+                        mapa.borrarCivilizacion(ef.getCivilizacion().getNombre());
                     }
                 }
             } else if (cell.getPersonajes().size() > 0) {
