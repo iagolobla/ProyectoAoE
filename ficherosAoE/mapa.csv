@@ -1,0 +1,37 @@
+# Coordenada;Tipo;Codigo;Descripcion;Cantidad
+0,0;Bosque;bosque-1;Bosque de las sombras (oeste);100
+0,1;Bosque;bosque-2;Bosque de las sombras (centro);20
+0,2;Bosque;bosque-3;Bosque de las sombras (este);30
+0,3;Pradera;
+0,4;Pradera;
+0,5;Pradera;
+1,0;Pradera;
+1,1;Pradera;
+1,2;Cantera;cantera-1;Cantera del enano valiente;30
+1,3;Cantera;cantera-2;Cantera del diablo;40
+1,4;Cantera;cantera-3;Cantera del lago;40
+1,5;Pradera;
+2,0;Pradera;
+2,1;Pradera;
+2,2;Pradera;
+2,3;Pradera;
+2,4;Pradera;
+2,5;Pradera;
+3,0;Pradera;
+3,1;Pradera;
+3,2;Pradera;
+3,3;Pradera;
+3,4;Pradera;
+3,5;Pradera;
+4,0;Pradera;
+4,1;Pradera;
+4,2;Arbusto;arbusto-1;Nogales;200
+4,3;Arbusto;arbusto-2;Moras azules;20
+4,4;Pradera
+4,5;Pradera
+5,0;Pradera;
+5,1;Pradera;
+5,2;Arbusto;arbusto-3;Fresas;50
+5,3;Arbusto;arbusto-4;Campo de cerezos;5
+5,4;Pradera;
+5,5;Pradera;

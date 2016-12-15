@@ -34,6 +34,7 @@ public abstract class Edificio {
     private int NPersonajes;
     private int ataque;
     private int defensa;
+    private String Descripcion;
 
     public Edificio(Posicion posicion, String Nombre, Civilizacion civilizacion) {
         if (posicion == null) {
@@ -358,4 +359,14 @@ public abstract class Edificio {
             }
         }
     }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+    
+    
 }

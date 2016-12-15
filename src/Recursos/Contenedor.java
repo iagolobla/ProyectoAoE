@@ -20,6 +20,7 @@ public abstract class Contenedor {
     Recurso recurso;
     private String Nombre;
     private Posicion posicion;
+    private String Descripcion;
 
     public Contenedor(String Nombre, Posicion posicion, Recurso R) {
         if (posicion == null) {
@@ -111,5 +112,15 @@ public abstract class Contenedor {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+    
+    
 
 }

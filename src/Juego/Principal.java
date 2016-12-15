@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import Personajes.Personaje;
 import Excepciones.ExcepcionSintaxis;
+import java.io.FileNotFoundException;
 
 //Bienvenido al mejor juego de la historia, hecho de la mejor forma posible
 public class Principal {
@@ -43,39 +44,42 @@ public class Principal {
 
         Boolean seguir = true;
         SHELL.imprimir("Bienvenido al Juego!");
-        int numciv;
+        Juego juego = null;
+        String opcion;
+        boolean cargar = true;
+        opcion = SHELL.leer("Quiere cargar ficheros? (S/N): ");
 
-        Civilizacion C;
-        HashMap<String, Civilizacion> civilizaciones = new HashMap<String, Civilizacion>();
         do {
-            numciv = SHELL.leerInt("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
-        } while (numciv > 3 || numciv < 1);
-        String nombre = null;
-        for (int i = 1; i <= numciv; i++) {            nombre = SHELL.leer("Introduzca el nombre de la civilizacion " + i + ": ");
-            C = new Civilizacion(nombre);
+            switch (opcion) {
+                case "S":
+                    cargar = false;
+                    SHELL.imprimir("Introduzca el comando de carga de ficheros: ");
+                    String comandocargar = SHELL.leer("> ");
+                    String[] ruta = comandocargar.split(" ");
+                    String com = ruta[0].toLowerCase();
+                    if (ruta[0].equals("cargar")) {
+                        try {
+                            juego = new CargadorJuegoDeFichero(ruta[1]).cargar();
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            cargar = true;
+                            break;
+                        }
+                    } else {
+                        cargar = true;
+                    }
+                    break;
+                case "N":
+                    cargar = false;
+                    juego = new CargadorJuegoPorDefecto().cargar();
+                    break;
+                default:
+                    cargar = true;
 
-            if (i == 1) {
-                C.setColor("azul");
-            } else if (i == 2) {
-                C.setColor("rojo");
-            } else {
-                C.setColor("morado");
             }
-            civilizaciones.put(nombre, C);
+        } while (cargar);
 
-        }
-
-        C = civilizaciones.get(nombre);
-        System.out.println("Estas jugando con los: " + C.getNombre());
-        Juego juego;
-        try {
-            juego = new Juego(new Mapa(6, 6, 6, civilizaciones.values()));
-            juego.getMapa().setCivilizacion(C);
-        } catch (Exception E) {
-            SHELL.imprimir("Error: " + E.getMessage());
-            return;
-        }
-        SHELL.imprimir(juego.getMapa().print());
+        
 
         while (seguir) {
             String linea = SHELL.leer("$ ");
@@ -184,7 +188,7 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoAtacar(juego.getMapa(),comando[2],comando[1]).ejecutar();
+                            new ComandoAtacar(juego.getMapa(), comando[2], comando[1]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 

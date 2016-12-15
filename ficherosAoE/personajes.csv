@@ -1,0 +1,6 @@
+# Coordenada;Tipo;Codigo;Descripcion;Ataque;Defensa;Capacidad;Grupo;Civilizacion
+2,1;Paisano;paisano-1;John Smith;20;10;10;;Breton
+2,4;Caballero;caballero-1;Lancelot;130;90;0;grupo-1;Breton
+2,3;Caballero;caballero-2;Rey Arturo;150;60;0;grupo-1;Breton
+4,5;Caballero;caballero-3;Duque de Weimar;120;90;0;grupo-1;Sajon
+5,5;Caballero;caballero-4;Duque de Cornualles;110;100;0;grupo-1;Sajon

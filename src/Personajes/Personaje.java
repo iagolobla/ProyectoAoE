@@ -38,6 +38,7 @@ public abstract class Personaje {
     private String Nombre;  //Aqui se necesita poner un Nombre al personaje para usar eso como clave en el hashmap de personajes en el mapa
     private Posicion posicion;
     private boolean grupo;
+    private String Descripcion;
 
     public Personaje(String Nombre, Posicion posicion, Civilizacion civilizacion) {
         if (posicion == null) {
@@ -291,5 +292,15 @@ public abstract class Personaje {
         }
         this.civilizacion = civilizacion;
     }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+    
+    
 
 }

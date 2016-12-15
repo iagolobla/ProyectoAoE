@@ -41,8 +41,8 @@ import Personajes.Paisano;
  */
 public class Mapa {
 
-    public static final int MAPAX = 16;
-    public static final int MAPAY = 8;
+    public static int MAPAX = 16;
+    public static int MAPAY = 8;
 
     private ArrayList<ArrayList<Celda>> mapa;
     private HashMap<String, Civilizacion> civilizaciones;
@@ -50,7 +50,13 @@ public class Mapa {
     int[] cantidades;
     Civilizacion civilizacion;
 
-    public Mapa(int bosques, int canteras, int arbustos, Collection<Civilizacion> civ) throws ExcepcionCelda{
+    public Mapa(ArrayList<ArrayList<Celda>> mapa,HashMap<String, Contenedor> recursos){
+        MAPAX=mapa.get(0).size();
+        MAPAY=mapa.size();
+        this.mapa=new ArrayList<ArrayList<Celda>>(mapa);
+        this.recursos=new HashMap<String, Contenedor>(recursos);
+    }
+    public Mapa(int bosques, int canteras, int arbustos, Collection<Civilizacion> civ) throws ExcepcionCelda {
         if (bosques < 0 || canteras < 0 || arbustos < 0) {
             System.out.println("Valores pasados al mapa menores que 0!");
             return;
@@ -407,9 +413,10 @@ public class Mapa {
         Celda cell = this.getCelda(pos);
         if (cell.getContenedor() instanceof Pradera) {
             if (!(cell.isEdificio())) {
-                if(cell.getPersonajes().size() > 0){
-                    if(cell.getPersonaje().getCivilizacion().getNombre().equals(this.getCivilizacion().getNombre()))
+                if (cell.getPersonajes().size() > 0) {
+                    if (cell.getPersonaje().getCivilizacion().getNombre().equals(this.getCivilizacion().getNombre())) {
                         return true;
+                    }
                 } else {
                     return true;
                 }
