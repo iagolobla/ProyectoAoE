@@ -346,6 +346,7 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
             }
         }*/
         SHELL.imprimir(juego.getMapa().print());
+        SHELL.imprimir("Estas jugando con los: " + juego.getMapa().getCivilizacion().getNombre());
         return juego;
     }
 }

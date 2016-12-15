@@ -35,7 +35,7 @@ public class Caballero extends Soldado {
     }
 
     public int capacidadMovimiento() {   //Los caballeros se mueven dos casillas
-        return 2;
+        return 2*super.capacidadMovimiento();
     }
 
     public Edificio construir(String tipo_edificio) throws ExcepcionConstruir {

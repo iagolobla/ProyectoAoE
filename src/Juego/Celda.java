@@ -63,6 +63,7 @@ public class Celda {
             
             for (Personaje person : personajes) {
                 person.setG(G);
+                person.setGrupo(true);
                 if (person instanceof Grupo) {
                     Grupo group = (Grupo) person;
                     G.setNPersonajes(G.getNPersonajes() + group.getNPersonajes());

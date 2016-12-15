@@ -170,9 +170,6 @@ public class Paisano extends Personaje {
         this.capacidadRecurso = capacidadRecurso;
     }
 
-    public int capacidadMovimiento() {   //Los paisanos se mueven una casilla
-        return 1;
-    }
 
     public Recurso getRecurso() {
         return recurso;

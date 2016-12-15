@@ -93,7 +93,9 @@ public abstract class Personaje {
         return p;
     }
 
-    public abstract int capacidadMovimiento();
+    public int capacidadMovimiento(){
+        return 1;
+    }
 
     public abstract Edificio construir(String tipo_edificio) throws ExcepcionConstruir;
 
@@ -108,9 +110,6 @@ public abstract class Personaje {
         if (!(edificio.getCivilizacion().getNombre().equals(this.getCivilizacion().getNombre()))) {
             throw new ExcepcionDefender("Este edificio nos es de tu civilizacion!");
         }
-        if ((edificio.getCapPersonajes() - edificio.getNPersonajes()) <= 0) {
-            throw new ExcepcionDefender("No cogen mas personajes aqui dentro");
-        }
 
         if (this instanceof Grupo) {
             Grupo G = (Grupo) this;
@@ -121,6 +120,9 @@ public abstract class Personaje {
         } else {
             this.restaurarVida(this);
             contador++;
+        }
+        if ((edificio.getCapPersonajes() - edificio.getNPersonajes()) - contador < 0) {
+            throw new ExcepcionDefender("No cogen mas personajes aqui dentro");
         }
 
         edificio.setAtaque(edificio.getAtaque() + ataque);
@@ -141,7 +143,7 @@ public abstract class Personaje {
         }
     }
 
-    public abstract  double danhoAtaque(Edificio edificio) ;
+    public abstract double danhoAtaque(Edificio edificio);
 
     public void atacar(Edificio edificio) throws ExcepcionAtacar {
         if (edificio.getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
@@ -300,7 +302,5 @@ public abstract class Personaje {
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
     }
-    
-    
 
 }
