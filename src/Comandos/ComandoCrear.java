@@ -21,6 +21,7 @@ import Personajes.Personaje;
 import Juego.Celda;
 import Juego.Posicion;
 import static Juego.Principal.SHELL;
+import Personajes.Grupo;
 
 public class ComandoCrear implements Comando {
 
@@ -44,7 +45,13 @@ public class ComandoCrear implements Comando {
         int comida = mapa.getCivilizacion().getComida();    //Comida disponible
 
         //Comprueba si hay sitio, si existe el edificio, y si hay suficiente comida (Por ese orden)
-        if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= mapa.getCivilizacion().getPersonajes().size()) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
+        int cont=mapa.getCivilizacion().getPersonajes().size();
+        for(Personaje person:mapa.getCivilizacion().getPersonajes().values()){
+            if(person instanceof Grupo){
+                cont--;
+            }
+        }
+        if (mapa.getCivilizacion().getCantidades()[3] * Casa.CAPACIDAD <= cont) {   //Comprobamos si la suma de paisanos y soldados es mayor igual que la capacidad de almacenamiento
             throw new ExcepcionCrear("No hay sitio para mas personajes, se necesitan mas casas!");
         }
         if (mapa.getCivilizacion().getEdificios().containsKey(edificio)) {
