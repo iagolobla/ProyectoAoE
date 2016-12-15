@@ -132,6 +132,7 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
                                 grupo.setArmadura(grupo.getArmadura() + pa.getArmadura());
                                 grupo.setAtaque(grupo.getAtaque() + pa.getAtaque());
+                                grupo.setSalud(grupo.getSalud() + pa.getSalud());
                                 //Esta linea tan larga actualiza el grupo en la celda
                                 juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
@@ -164,6 +165,7 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
                                 grupo.setArmadura(grupo.getArmadura() + l.getArmadura());
                                 grupo.setAtaque(grupo.getAtaque() + l.getAtaque());
+                                grupo.setSalud(grupo.getSalud() + l.getSalud());
                                 //Esta linea tan larga actualiza el grupo en la celda
                                 juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
@@ -197,6 +199,7 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
                                 grupo.setArmadura(grupo.getArmadura() + ar.getArmadura());
                                 grupo.setAtaque(grupo.getAtaque() + ar.getAtaque());
+                                grupo.setSalud(grupo.getSalud() + ar.getSalud());
                                 //Esta linea tan larga actualiza el grupo en la celda
                                 juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
@@ -229,6 +232,7 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
                                 grupo.setArmadura(grupo.getArmadura() + c.getArmadura());
                                 grupo.setAtaque(grupo.getAtaque() + c.getAtaque());
+                                grupo.setSalud(grupo.getSalud() + c.getSalud());
                                 //Esta linea tan larga actualiza el grupo en la celda
                                 juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
