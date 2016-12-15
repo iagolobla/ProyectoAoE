@@ -130,19 +130,25 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo = (Grupo) civilizaciones.get(line[8]).getPersonajes().get(line[7]);
                                 grupo.getPersonajes().add(pa);
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
+                                //Esta linea tan larga actualiza el grupo en la celda
+                                juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
                                 ArrayList<Personaje> g = new ArrayList<Personaje>();
                                 g.add(pa);
                                 grupo = new Grupo(g, line[7], pos, civilizaciones.get(line[8]));
                                 civilizaciones.get(line[8]).getCantidades()[6]++;
+                                civilizaciones.get(line[8]).getPersonajes().put(line[7], (Personaje) grupo);
+                                juego.getMapa().getCelda(pos).addPersonaje(grupo);
                             }
 
                             pa.setG(grupo);
+                            pa.setDescripcion(line[3]);
+                        } else {
+                            pa.setDescripcion(line[3]);
+                            juego.getMapa().getCelda(pos).addPersonaje(pa);
                         }
-
-                        pa.setDescripcion(line[3]);
-                        juego.getMapa().getCelda(pos).addPersonaje(pa);
                         civilizaciones.get(line[8]).getCantidades()[0]++;
+                        civilizaciones.get(line[8]).getPersonajes().put(line[2], (Personaje) pa);
                         break;
                     case "legionario":
                         Legionario l = ((Legionario) p);
@@ -154,19 +160,26 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo = (Grupo) civilizaciones.get(line[8]).getPersonajes().get(line[7]);
                                 grupo.getPersonajes().add(l);
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
+                                //Esta linea tan larga actualiza el grupo en la celda
+                                juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
                                 ArrayList<Personaje> g = new ArrayList<Personaje>();
                                 g.add(l);
                                 grupo = new Grupo(g, line[7], pos, civilizaciones.get(line[8]));
                                 civilizaciones.get(line[8]).getCantidades()[6]++;
+                                civilizaciones.get(line[8]).getPersonajes().put(line[7], (Personaje) grupo);
+                                juego.getMapa().getCelda(pos).addPersonaje(grupo);
                             }
 
                             l.setG(grupo);
+                            l.setDescripcion(line[3]);
+                        } else {
+                            l.setDescripcion(line[3]);
+                            juego.getMapa().getCelda(pos).addPersonaje(l);
                         }
 
-                        l.setDescripcion(line[3]);
-                        juego.getMapa().getCelda(pos).addPersonaje(l);
                         civilizaciones.get(line[8]).getCantidades()[1]++;
+                        civilizaciones.get(line[8]).getPersonajes().put(line[2], (Personaje) l);
                         break;
                     case "arquero":
                         Arquero ar = ((Arquero) p);
@@ -178,19 +191,25 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo = (Grupo) civilizaciones.get(line[8]).getPersonajes().get(line[7]);
                                 grupo.getPersonajes().add(ar);
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
+                                //Esta linea tan larga actualiza el grupo en la celda
+                                juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
                                 ArrayList<Personaje> g = new ArrayList<Personaje>();
                                 g.add(ar);
                                 grupo = new Grupo(g, line[7], pos, civilizaciones.get(line[8]));
                                 civilizaciones.get(line[8]).getCantidades()[6]++;
+                                civilizaciones.get(line[8]).getPersonajes().put(line[7], (Personaje) grupo);
+                                juego.getMapa().getCelda(pos).addPersonaje(grupo);
                             }
 
                             ar.setG(grupo);
+                            ar.setDescripcion(line[3]);
+                        } else {
+                            ar.setDescripcion(line[3]);
+                            juego.getMapa().getCelda(pos).addPersonaje(ar);
                         }
-
-                        ar.setDescripcion(line[3]);
-                        juego.getMapa().getCelda(pos).addPersonaje(ar);
                         civilizaciones.get(line[8]).getCantidades()[7]++;
+                        civilizaciones.get(line[8]).getPersonajes().put(line[2], (Personaje) ar);
                         break;
                     case "caballero":
                         Caballero c = ((Caballero) p);
@@ -202,25 +221,35 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                                 grupo = (Grupo) civilizaciones.get(line[8]).getPersonajes().get(line[7]);
                                 grupo.getPersonajes().add(c);
                                 grupo.setNPersonajes(grupo.getNPersonajes() + 1);
+                                //Esta linea tan larga actualiza el grupo en la celda
+                                juego.getMapa().getCelda(pos).getPersonajes().set(juego.getMapa().getCelda(pos).getPersonajes().indexOf(grupo), grupo);
                             } else {
                                 ArrayList<Personaje> g = new ArrayList<Personaje>();
                                 g.add(c);
                                 grupo = new Grupo(g, line[7], pos, civilizaciones.get(line[8]));
                                 civilizaciones.get(line[8]).getCantidades()[6]++;
+                                civilizaciones.get(line[8]).getPersonajes().put(line[7], (Personaje) grupo);
+                                juego.getMapa().getCelda(pos).addPersonaje(grupo);
                             }
 
                             c.setG(grupo);
+                            c.setDescripcion(line[3]);
+                        }else {
+                            c.setDescripcion(line[3]);
+                            juego.getMapa().getCelda(pos).addPersonaje(c);
                         }
 
-                        c.setDescripcion(line[3]);
-                        juego.getMapa().getCelda(pos).addPersonaje(c);
+                        
                         civilizaciones.get(line[8]).getCantidades()[8]++;
+                        civilizaciones.get(line[8]).getPersonajes().put(line[2], (Personaje) c);
                         break;
 
                 }
 
             }
         }
+
+        scanner.close();
 
         scanner = new Scanner(new File(edificios));
         scanner.useDelimiter("\n");
@@ -241,34 +270,38 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                         c.setDescripcion(line[3]);
                         juego.getMapa().getCelda(pos).setEdificio(c);
                         civilizaciones.get(line[4]).getCantidades()[3]++;
+                        civilizaciones.get(line[4]).getEdificios().put(line[2], (Edificio) c);
                         break;
                     case "ciudadela":
                         Ciudadela ciu = new Ciudadela(pos, line[2], civilizaciones.get(line[4]));
                         ciu.setDescripcion(line[3]);
                         juego.getMapa().getCelda(pos).setEdificio(ciu);
                         civilizaciones.get(line[4]).getCantidades()[2]++;
+                        civilizaciones.get(line[4]).getEdificios().put(line[2], (Edificio) ciu);
                         break;
                     case "torre":
                         Torre t = new Torre(pos, line[2], civilizaciones.get(line[4]));
                         t.setDescripcion(line[3]);
                         juego.getMapa().getCelda(pos).setEdificio(t);
                         civilizaciones.get(line[4]).getCantidades()[4]++;
+                        civilizaciones.get(line[4]).getEdificios().put(line[2], (Edificio) t);
                         break;
                     case "cuartel":
                         Cuartel cua = new Cuartel(pos, line[2], civilizaciones.get(line[4]));
                         cua.setDescripcion(line[3]);
                         juego.getMapa().getCelda(pos).setEdificio(cua);
                         civilizaciones.get(line[4]).getCantidades()[5]++;
+                        civilizaciones.get(line[4]).getEdificios().put(line[2], (Edificio) cua);
                         break;
 
                 }
             }
 
         }
-        juego.getMapa().setCivilizaciones(new HashMap<String,Civilizacion>(civilizaciones));
-        Civilizacion C=null;
-        for(Civilizacion c:civilizaciones.values()){
-            C=c;
+        juego.getMapa().setCivilizaciones(new HashMap<String, Civilizacion>(civilizaciones));
+        Civilizacion C = null;
+        for (Civilizacion c : civilizaciones.values()) {
+            C = c;
         }
         juego.getMapa().setCivilizacion(C);
         HashMap<String, Boolean> aux = new HashMap<String, Boolean>();
@@ -280,18 +313,18 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                 juego.getMapa().getCelda(i, j).setVisible(aux);
             }
         }
-        Celda celdita=null;
-        Edificio E=null;
-        Personaje T=null;
+        Celda celdita = null;
+        Edificio E = null;
+        Personaje T = null;
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {   //Poner visibles las celdas con personajes
-                celdita=juego.getMapa().getCelda(i, j);
-                if(celdita.isEdificio()){
-                    E=celdita.getEdificio();
+                celdita = juego.getMapa().getCelda(i, j);
+                if (celdita.isEdificio()) {
+                    E = celdita.getEdificio();
                     celdita.getVisible().put(E.getCivilizacion().getNombre(), Boolean.TRUE);
                 }
-                if(celdita.getPersonajes().size()>0){
-                    T=celdita.getPersonajes().get(0);
+                if (celdita.getPersonajes().size() > 0) {
+                    T = celdita.getPersonajes().get(0);
                     celdita.getVisible().put(T.getCivilizacion().getNombre(), Boolean.TRUE);
                 }
             }
