@@ -29,7 +29,6 @@ public class ComandoDescribir implements Comando {
     public ComandoDescribir(String entidad, Mapa mapa) {
         this.entidad = entidad;
         this.map = mapa;
-        
     }
 
     public void ejecutar() throws ExcepcionDescribir{

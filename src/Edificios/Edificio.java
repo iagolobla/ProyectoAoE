@@ -153,6 +153,7 @@ public abstract class Edificio {
                 mapa.getCivilizaciones().remove(this.getCivilizacion().getNombre());
                 mapa.borrarCivilizacion(this.getCivilizacion().getNombre());
             }
+            SHELL.imprimir(mapa.print());
         }
     }
 
