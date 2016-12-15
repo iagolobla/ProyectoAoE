@@ -12,6 +12,7 @@ import Personajes.Grupo;
 import Edificios.Edificio;
 import Excepciones.ExcepcionAgrupar;
 import Excepciones.ExcepcionCelda;
+import static Juego.Principal.SHELL;
 import Recursos.Contenedor;
 import Recursos.Pradera;
 
@@ -73,6 +74,7 @@ public class Celda {
             personajes.add(G);
             mapa.getCivilizacion().getPersonajes().put(Name, G);
             mapa.getCivilizacion().getGrupos().put(Name, G);
+            SHELL.imprimir("Se ha formado el " + G.getNombre());
         } else {
             throw new ExcepcionAgrupar("Debe existir más de una entidad en la celda");
         }

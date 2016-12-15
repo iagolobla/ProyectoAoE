@@ -33,7 +33,6 @@ public class ComandoAgrupar implements Comando{
         if (mapa.checkCoords(posMirar) && mapa.checkBuilding(posMirar)) {
             Celda cell=mapa.getCelda(posMirar);
             cell.agrupar(mapa);
-            
         }
     }
 }

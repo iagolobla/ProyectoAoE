@@ -32,7 +32,7 @@ public class Grupo extends Personaje {
     public Grupo(ArrayList<Personaje> person, String Nombre, Posicion posicion, Civilizacion civilizacion) {
         super(Nombre, posicion, civilizacion);
         personajes = new ArrayList<Personaje>();
-        NPersonajes=0;
+        NPersonajes = 0;
         for (Personaje p : person) {
             p.setGrupo(true);
             personajes.add(p);
@@ -66,24 +66,43 @@ public class Grupo extends Personaje {
         //comprobar que todos son paisanos, sino dar excepcion
         for (Personaje p : personajes) {
             if (!(p instanceof Paisano)) {
-                throw new ExcepcionRecolectar("Este grupo no puede recolectar");
+                if (p instanceof Grupo) {
+                    ((Grupo) p).recolectar(contenedor);
+                } else {
+                    throw new ExcepcionRecolectar("Este grupo no puede recolectar");
+                }
             }
         }
         for (Personaje p : personajes) {
-            Paisano paisano = (Paisano) p;
-            p.recolectar(contenedor);
+            if (p instanceof Paisano) {
+
+                Paisano paisano = (Paisano) p;
+                if (paisano.getRecurso() == null) {
+                    paisano.recolectar(contenedor);
+                }
+            }
+
         }
     }
 
     public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar {
         for (Personaje p : personajes) {
             if (!(p instanceof Paisano)) {
-                throw new ExcepcionAlmacenar("Este grupo no puede almacenar");
+                if (p instanceof Grupo) {
+                    ((Grupo) p).almacenar(ciudadela);
+                } else {
+                    throw new ExcepcionAlmacenar("Este grupo no puede almacenar");
+                }
             }
         }
         for (Personaje p : personajes) {
-            Paisano paisano = (Paisano) p;
-            ciudadela.almacenar(paisano.getRecurso());
+            if (p instanceof Paisano) {
+                Paisano paisano = (Paisano) p;
+                if (paisano.getRecurso() != null) {
+                    ciudadela.almacenar(paisano.getRecurso());
+                    paisano.setRecurso(null);
+                }
+            }
         }
     }
 
@@ -101,7 +120,7 @@ public class Grupo extends Personaje {
 
     public void desligar(Personaje p, Mapa mapa) {
         if (personajes.size() > 2) {
-            
+
             Celda cell = mapa.getCelda(this.getPosicion());
             p.setGrupo(false);
             p.setPosicion(new Posicion(this.getPosicion()));
@@ -111,11 +130,11 @@ public class Grupo extends Personaje {
             this.desagrupar(mapa);
         }
     }
-    
-    public   double danhoAtaque(Edificio edificio) {
+
+    public double danhoAtaque(Edificio edificio) {
         return this.getAtaque() - edificio.getDefensa();
     }
-    
+
     public double danhoAtaque(Personaje personaje) {
         return this.getAtaque() - personaje.getArmadura();
     }
@@ -139,6 +158,5 @@ public class Grupo extends Personaje {
     public void setNPersonajes(int NPersonajes) {
         this.NPersonajes = NPersonajes;
     }
-    
 
 }

@@ -117,11 +117,7 @@ public class Paisano extends Personaje {
 
     public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar, ExcepcionRecurso {
         Recurso R;
-        //try {
             R = contenedor.procesar();
-        //} catch (ExcepcionRecurso e) {
-            //throw new ExcepcionRecolectar(e.getMessage());
-        //}
 
         if (this.recurso != null && !this.recurso.getClass().equals(contenedor.getRecurso().getClass())) {
             throw new ExcepcionRecolectar("El paisano ya esta cargando otro tipo de recurso!");
