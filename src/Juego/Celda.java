@@ -59,7 +59,9 @@ public class Celda {
             String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
             mapa.getCivilizacion().getCantidades()[6]++;
             Grupo G = new Grupo(personajes, Name, new Posicion(posicion), mapa.getCivilizacion());
+            
             for (Personaje person : personajes) {
+                person.setG(G);
                 if (person instanceof Grupo) {
                     Grupo group = (Grupo) person;
                     G.setNPersonajes(G.getNPersonajes() + group.getNPersonajes());
