@@ -47,7 +47,4 @@ public class Casa extends Edificio{
         throw new ExcepcionCrear("Las casas no crean personajes");
     }
     
-    public void atacar(Personaje[] personajes){
-        
-    }
 }

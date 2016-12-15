@@ -67,7 +67,4 @@ public class Ciudadela extends Edificio {
         }
     }
     
-        public void atacar(Personaje[] personajes){
-        
-    }
 }

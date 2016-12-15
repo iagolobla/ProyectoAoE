@@ -198,11 +198,6 @@ public abstract class Personaje {
     public abstract void recolectar(Contenedor contenedor);
     
     
-    public abstract void atacar(Personaje[] personajes);
-    
-    
-    public abstract double danhoAtaque(Personaje personaje);
-    
      */
     public boolean isGrupo() {
         return grupo;

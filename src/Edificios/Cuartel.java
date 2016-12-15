@@ -66,7 +66,4 @@ public class Cuartel extends Edificio {
         }
     }
     
-        public void atacar(Personaje[] personajes){
-        
-    }
 }
