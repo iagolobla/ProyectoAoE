@@ -31,6 +31,7 @@ public class Grupo extends Personaje {
     public Grupo(ArrayList<Personaje> person, String Nombre, Posicion posicion, Civilizacion civilizacion) {
         super(Nombre, posicion, civilizacion);
         personajes = new ArrayList<Personaje>();
+        NPersonajes=0;
         for (Personaje p : person) {
             p.setGrupo(true);
             personajes.add(p);
