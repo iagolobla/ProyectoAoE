@@ -43,6 +43,7 @@ public class ComandoMover implements Comando {
         if (p == null) {
             throw new NullPointerException("El Personaje especificado no existe!");
         }
+        if(p.isGrupo()==false){
         for (int i = 0; i < p.capacidadMovimiento(); i++) {
             Posicion vieja = p.getPosicion();
             Posicion nueva = p.mover(direccion);
@@ -60,6 +61,9 @@ public class ComandoMover implements Comando {
             SHELL.imprimir("El "+ p.getNombre()+" se ha movido a la posicion "+p.getPosicion());
         }
         mapa.actualizarVisibilidad();
+        }else{
+            throw new ExcepcionMover("La entidad pertenece a un grupo!");
+        }
     }
 
     public String getDireccion() {

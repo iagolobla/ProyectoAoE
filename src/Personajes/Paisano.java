@@ -140,7 +140,7 @@ public class Paisano extends Personaje {
             throw new ExcepcionAlmacenar("Ciudadela para almacenar nula");
         }
         ciudadela.almacenar(recurso);
-        this.getRecurso().setCantidad(0);
+        recurso=null;
     }
 
     public int getCantidadRecolectada() {

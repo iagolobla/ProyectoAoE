@@ -59,8 +59,10 @@ public class ComandoRecolectar implements Comando {
         }
         
         P.recolectar(contenedor);
-        if(contenedor.destruir(cell)){
-            this.mapa.getRecursos().remove(contenedor);
+        if(contenedor.getRecurso().getCantidad()==0){
+            this.mapa.getRecursos().remove(contenedor.getNombre());
+            contenedor.destruir(cell);
+            
         }
         SHELL.imprimir("El "+ P.getNombre() +" ahora tiene " + ((Paisano) P).getCantidadRecolectada());
     }

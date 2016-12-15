@@ -15,6 +15,7 @@ import Comandos.ComandoConstruir;
 import Comandos.ComandoCambiar;
 import Comandos.ComandoCivilizacion;
 import Comandos.ComandoCrear;
+import Comandos.ComandoDefender;
 import Comandos.ComandoDesagrupar;
 import Comandos.ComandoDescribir;
 import Comandos.ComandoDesligar;
@@ -104,13 +105,13 @@ public class Principal {
                         }
                         break;
                     case "recolectar":
-                        try{
-                        if(comando.length != 3){
-                            throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
-                        }
-                        
-                        new ComandoRecolectar(comando[2], comando[1], juego.getMapa()).ejecutar();
-                        new ComandoImprimir(juego.getMapa());
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoRecolectar(comando[2], comando[1], juego.getMapa()).ejecutar();
+                            new ComandoImprimir(juego.getMapa());
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
                             break;
@@ -144,13 +145,13 @@ public class Principal {
                             break;
                         }
                         break;
-                    case "desligar":
+                    case "defender":
                         try {
                             if (comando.length != 3) {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoDesligar(juego.getMapa(), comando[1],comando[2]).ejecutar();
+                            new ComandoDefender(juego.getMapa(),comando[1],comando[2]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
 
                         } catch (Exception E) {
@@ -158,7 +159,21 @@ public class Principal {
                             break;
                         }
                         break;
-                    
+                    case "desligar":
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoDesligar(juego.getMapa(), comando[1], comando[2]).ejecutar();
+                            new ComandoImprimir(juego.getMapa()).ejecutar();
+
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+
                     case "almacenar":
                         try {
                             if (comando.length != 3) {
@@ -240,7 +255,7 @@ public class Principal {
                             break;
                         }
                         break;
-                    
+
                     case "cambiar":
                         try {
                             if (comando.length == 2) {
