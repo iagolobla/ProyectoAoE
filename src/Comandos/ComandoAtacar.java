@@ -35,7 +35,7 @@ public class ComandoAtacar implements Comando {
         if (p == null) {
             throw new NullPointerException("El Personaje especificado no existe!");
         }
-        if (mapa.getCelda(p.mover(pto_cardinal)).isEdificio() && mapa.checkCoords(p.mover(pto_cardinal))) {
+        if (mapa.checkCoords(p.mover(pto_cardinal))) {
             Celda cell = mapa.getCelda(p.mover(pto_cardinal));
             if (cell.isEdificio()) {
                 Edificio ef = cell.getEdificio();
@@ -62,7 +62,14 @@ public class ComandoAtacar implements Comando {
                     }
                 }
             } else if (cell.getPersonajes().size() > 0) {
-                //atacar paisanos.
+                p.atacar(cell.getPersonajes());
+                Personaje person = cell.getPersonajes().get(0);
+                if (person.getSalud() <= 0) {   //Si muere
+                    System.out.println("El personaje " + person.getNombre() + " de la civilizacion " + person.getCivilizacion().getNombre() + " ha sufrido una horrible y dolorosa muerte!");
+
+                    cell.getPersonajes().remove(person);
+                    mapa.getCivilizaciones().get(person.getCivilizacion().getNombre()).getPersonajes().remove(person.getNombre());
+                }
             } else {
                 throw new ExcepcionAtacar("En esta celda no hay entidades a las que atacar");
             }
