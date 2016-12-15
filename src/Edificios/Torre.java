@@ -52,7 +52,4 @@ public class Torre extends Edificio {
         throw new ExcepcionCrear("Las torres no crean personajes");
     }
 
-    public void atacar(Personaje[] personajes) {
-
-    }
 }

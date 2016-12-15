@@ -11,6 +11,7 @@ import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionRecurso;
 import Excepciones.ExcepcionReparar;
 import Juego.Celda;
 import Juego.Civilizacion;
@@ -26,10 +27,12 @@ import java.util.ArrayList;
 public class Grupo extends Personaje {
 
     private ArrayList<Personaje> personajes;
+    private int NPersonajes;
 
     public Grupo(ArrayList<Personaje> person, String Nombre, Posicion posicion, Civilizacion civilizacion) {
         super(Nombre, posicion, civilizacion);
         personajes = new ArrayList<Personaje>();
+        NPersonajes=0;
         for (Personaje p : person) {
             p.setGrupo(true);
             personajes.add(p);
@@ -59,12 +62,16 @@ public class Grupo extends Personaje {
         throw new ExcepcionReparar("Los grupos no pueden reparar");
     }
 
-    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar {
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar, ExcepcionRecurso {
         //comprobar que todos son paisanos, sino dar excepcion
         for (Personaje p : personajes) {
             if (!(p instanceof Paisano)) {
                 throw new ExcepcionRecolectar("Este grupo no puede recolectar");
             }
+        }
+        for (Personaje p : personajes) {
+            Paisano paisano = (Paisano) p;
+            p.recolectar(contenedor);
         }
     }
 
@@ -118,7 +125,12 @@ public class Grupo extends Personaje {
     }
 
     public int getNPersonajes() {
-        return personajes.size();
+        return NPersonajes;
     }
+
+    public void setNPersonajes(int NPersonajes) {
+        this.NPersonajes = NPersonajes;
+    }
+    
 
 }

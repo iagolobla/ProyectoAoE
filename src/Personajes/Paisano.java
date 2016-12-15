@@ -52,9 +52,11 @@ public class Paisano extends Personaje {
     public String toString() {
         String impresion = super.toString();
         impresion += "Capacidad de recoleccion: " + capacidadRecurso + "\n";
-        impresion += "Cantidad recolectada: " + recurso.getCantidad() + "\n";
-        if (recurso.getCantidad() > 0) {
-            impresion += "Recurso cargado: " + recurso.getClass() + "\n";
+        if (recurso != null) {
+            impresion += "Cantidad recolectada: " + recurso.getCantidad() + "\n";
+            if (recurso.getCantidad() > 0) {
+                impresion += "Recurso cargado: " + recurso.getClass().getSimpleName() + "\n";
+            }
         }
         return impresion;
     }

@@ -6,6 +6,7 @@
 package Edificios;
 
 import Excepciones.ExcepcionAlmacenar;
+import Excepciones.ExcepcionAtacar;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionSintaxis;
 import java.util.HashMap;
@@ -13,7 +14,9 @@ import Juego.Civilizacion;
 import Juego.Posicion;
 import Personajes.Personaje;
 import Juego.Mapa;
+import static Juego.Principal.SHELL;
 import Recursos.Recurso;
+import java.util.ArrayList;
 
 /**
  *
@@ -92,7 +95,49 @@ public abstract class Edificio {
     
     public abstract Personaje crear(String tipo_personaje) throws ExcepcionCrear;
     
-    public abstract void atacar(Personaje[] personajes);
+    public double danhoAtaque(Edificio edificio) {
+        return ataque - edificio.getDefensa();
+    }
+
+    public void atacar(Edificio edificio) throws ExcepcionAtacar {
+        if (edificio.getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+            throw new ExcepcionAtacar("El edificio al que intentas atacar es de tu civilizacion");
+        }
+        int atack = (int) this.danhoAtaque(edificio);
+        if (atack <= 0) {
+            atack = 1;
+        }
+        edificio.recibirDaño(atack);
+        SHELL.imprimir("El " + edificio.getNombre() + " de la civilizacion " + edificio.getCivilizacion().getNombre() + " ha recibido " + atack + " ptos de daño");
+
+    }
+
+    public double danhoAtaque(Personaje personaje) {
+        return ataque - personaje.getArmadura();
+    }
+
+    public void atacar(ArrayList<Personaje> personajes) throws ExcepcionAtacar {
+        if (personajes.get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+            throw new ExcepcionAtacar("El edificio al que intentas atacar es de tu civilizacion");
+        }
+        Personaje p = personajes.get(0);
+        int atack = (int) this.danhoAtaque(p);
+        if (atack <= 0) {
+            atack = 1;
+        }
+        p.recibirDaño(atack);
+        SHELL.imprimir("El " + p.getNombre() + " de la civilizacion " + p.getCivilizacion().getNombre() + " ha recibido " + atack + " ptos de daño");
+
+    }
+    
+    public boolean recibirDaño(int daño) {   //Si muere devuelve true
+        salud -= daño;
+        if (salud <= 0) {
+            salud = 0;
+            return true;
+        }
+        return false;
+    }
 
     public int getSalud() {
         return salud;

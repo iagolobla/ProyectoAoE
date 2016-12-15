@@ -59,6 +59,14 @@ public class Celda {
             String Name = "grupo-" + (mapa.getCivilizacion().getCantidades()[6] + 1);
             mapa.getCivilizacion().getCantidades()[6]++;
             Grupo G = new Grupo(personajes, Name, new Posicion(posicion), mapa.getCivilizacion());
+            for (Personaje person : personajes) {
+                if (person instanceof Grupo) {
+                    Grupo group = (Grupo) person;
+                    G.setNPersonajes(G.getNPersonajes() + group.getNPersonajes());
+                } else {
+                    G.setNPersonajes(G.getNPersonajes() + 1);
+                }
+            }
             personajes.removeAll(personajes);
             personajes.add(G);
             mapa.getCivilizacion().getPersonajes().put(Name, G);
@@ -67,7 +75,6 @@ public class Celda {
             throw new ExcepcionAgrupar("Debe existir más de una entidad en la celda");
         }
     }
-    
 
     public ArrayList<Personaje> getPersonajes() {
         return personajes;

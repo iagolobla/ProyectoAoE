@@ -27,6 +27,9 @@ public class ComandoAgrupar implements Comando{
     
     public void ejecutar()throws ExcepcionAgrupar{
         Posicion posMirar = new Posicion(posicion);
+        if(!mapa.getCelda(posMirar).isVisible(mapa.getCivilizacion())){
+           throw new ExcepcionAgrupar("La celda no es visible");
+        }
         if (mapa.checkCoords(posMirar) && mapa.checkBuilding(posMirar)) {
             Celda cell=mapa.getCelda(posMirar);
             cell.agrupar(mapa);

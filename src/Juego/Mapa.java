@@ -404,9 +404,15 @@ public class Mapa {
 
     
     public boolean checkBuilding(Posicion pos) {
-        if (this.getCelda(pos).getContenedor() instanceof Pradera) {
-            if (!(this.getCelda(pos).isEdificio())) {
-                return true;
+        Celda cell = this.getCelda(pos);
+        if (cell.getContenedor() instanceof Pradera) {
+            if (!(cell.isEdificio())) {
+                if(cell.getPersonajes().size() > 0){
+                    if(cell.getPersonaje().getCivilizacion().equals(this.getCivilizacion()))
+                        return true;
+                } else {
+                    return true;
+                }
             }
         }
         return false;

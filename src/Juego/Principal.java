@@ -11,6 +11,7 @@ package Juego;
  */
 import Comandos.ComandoAgrupar;
 import Comandos.ComandoAlmacenar;
+import Comandos.ComandoAtacar;
 import Comandos.ComandoConstruir;
 import Comandos.ComandoCambiar;
 import Comandos.ComandoCivilizacion;
@@ -164,6 +165,20 @@ public class Principal {
                             }
 
                             new ComandoDefender(juego.getMapa(), comando[1], comando[2]).ejecutar();
+                            new ComandoImprimir(juego.getMapa()).ejecutar();
+
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        }
+                        break;
+                    case "atacar":
+                        try {
+                            if (comando.length != 3) {
+                                throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
+                            }
+
+                            new ComandoAtacar(juego.getMapa(),comando[2],comando[1]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
 
                         } catch (Exception E) {

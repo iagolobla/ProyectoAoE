@@ -5,6 +5,7 @@
  */
 package Juego;
 
+import Edificios.Ciudadela;
 import java.util.HashMap;
 import Personajes.Personaje;
 import Personajes.Grupo;
@@ -76,14 +77,14 @@ public class Civilizacion {
         return edificios;
     }
 
-    /*public boolean civilizacionViva() {
+    public boolean civilizacionViva() {
         for (Edificio ef : this.getEdificios().values()) {
-            if (ef.getTipo().equals("ciudadela")) {
+            if (ef instanceof Ciudadela) {
                 return true;
             }
         }
         return false;
-    }*/
+    }
 
     public int[] getCantidades() {
         return cantidades;

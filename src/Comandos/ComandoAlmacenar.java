@@ -13,7 +13,12 @@ import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
+import static Juego.Principal.SHELL;
+import Personajes.Paisano;
 import Personajes.Personaje;
+import Recursos.Madera;
+import Recursos.Piedra;
+import Recursos.Recurso;
 
 /**
  *
@@ -38,8 +43,15 @@ public class ComandoAlmacenar implements Comando{
     public void ejecutar() throws ExcepcionSintaxis,ExcepcionAlmacenar{
         Celda cell;
         Personaje p = mapa.getCivilizacion().getPersonajes().get(personaje);
+        Recurso R = null;
+        int CantidadAlmacenada = 0;
+        String TipoRecurso = "";
         if (p == null) {
             throw new NullPointerException("El Personaje especificado no existe!");
+        }
+        
+        if(p instanceof Paisano){
+            R = ((Paisano)p).getRecurso();
         }
         
         if (mapa.getCelda(p.mover(pto_cardinal)).isEdificio() && mapa.checkCoords(p.mover(pto_cardinal))) {
@@ -49,11 +61,15 @@ public class ComandoAlmacenar implements Comando{
                 throw new NullPointerException("El Personaje especificado no existe!");
             }
             if(ef instanceof Ciudadela){
+                if(R!=null){
+                    CantidadAlmacenada = R.getCantidad();
+                    TipoRecurso = R.getClass().getSimpleName();
+                }
                 p.almacenar((Ciudadela)ef);
             }else{
                 throw new ExcepcionAlmacenar("El edificio debe ser una ciudadela");
             }
-            
+            SHELL.imprimir("Se han almacenado " + CantidadAlmacenada + " uds. de " + TipoRecurso);
         }
     }
 }
