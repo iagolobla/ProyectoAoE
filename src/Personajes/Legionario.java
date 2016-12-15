@@ -33,9 +33,6 @@ public class Legionario extends Soldado{
 
     }
     
-    public int capacidadMovimiento(){   //Los paisanos se mueven una casilla
-        return 1;
-    }
     
     public Edificio construir(String tipo_edificio) throws ExcepcionConstruir{
         throw new ExcepcionConstruir("Los legionario no construyen");

@@ -93,7 +93,9 @@ public abstract class Personaje {
         return p;
     }
 
-    public abstract int capacidadMovimiento();
+    public int capacidadMovimiento(){
+        return 1;
+    }
 
     public abstract Edificio construir(String tipo_edificio) throws ExcepcionConstruir;
 
