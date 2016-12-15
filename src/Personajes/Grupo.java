@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class Grupo extends Personaje {
 
     private ArrayList<Personaje> personajes;
+    private int NPersonajes;
 
     public Grupo(ArrayList<Personaje> person, String Nombre, Posicion posicion, Civilizacion civilizacion) {
         super(Nombre, posicion, civilizacion);
@@ -118,7 +119,12 @@ public class Grupo extends Personaje {
     }
 
     public int getNPersonajes() {
-        return personajes.size();
+        return NPersonajes;
     }
+
+    public void setNPersonajes(int NPersonajes) {
+        this.NPersonajes = NPersonajes;
+    }
+    
 
 }

@@ -12,6 +12,7 @@ import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.Mapa;
 import Juego.Posicion;
+import static Juego.Principal.SHELL;
 import Personajes.Grupo;
 import Personajes.Personaje;
 
@@ -31,7 +32,7 @@ public class ComandoDefender implements Comando {
         this.pto_cardinal = pto_cardinal;
     }
 
-    public void ejecutar() throws ExcepcionDefender,ExcepcionSintaxis{
+    public void ejecutar() throws ExcepcionDefender, ExcepcionSintaxis {
         Personaje p = mapa.getCivilizacion().getPersonajes().get(personaje);
         if (p == null) {
             throw new NullPointerException("El Personaje especificado no existe!");
@@ -44,17 +45,19 @@ public class ComandoDefender implements Comando {
             }
             p.defender(ef);
             mapa.getCelda(p.getPosicion()).quitarPersonaje(p);
-            Posicion posnueva=p.mover(pto_cardinal);
-            if(p instanceof Grupo){
+            Posicion posnueva = p.mover(pto_cardinal);
+            if (p instanceof Grupo) {
+
                 p.setPosicion(posnueva);
-                Grupo G=(Grupo) p;
-                for(Personaje person:G.getPersonajes()){
+                Grupo G = (Grupo) p;
+                for (Personaje person : G.getPersonajes()) {
                     person.setPosicion(posnueva);
                 }
-            }else{
+            } else {
                 p.setPosicion(posnueva);
             }
-        }else{
+            SHELL.imprimir("El " + p.getNombre() + " ha entrado a defender el edificio " + ef.getNombre());
+        } else {
             throw new ExcepcionDefender("No es posible defender en esa direccion");
         }
     }
