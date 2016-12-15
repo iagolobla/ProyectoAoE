@@ -318,10 +318,14 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
         }
         for (int i = 0; i < MAPAY; i++) {
             for (int j = 0; j < MAPAX; j++) {   //Inicializamos visible a false para todas las celdas
-                juego.getMapa().getCelda(i, j).setVisible(aux);
+                juego.getMapa().getCelda(i, j).setVisible(new HashMap<String, Boolean>(aux));
             }
         }
-        Celda celdita = null;
+        for (Civilizacion civi : juego.getMapa().getCivilizaciones().values()) {
+            juego.getMapa().setCivilizacion(civi);
+            juego.getMapa().actualizarVisibilidad();
+        }
+        /*Celda celdita = null;
         Edificio E = null;
         Personaje T = null;
         for (int i = 0; i < MAPAY; i++) {
@@ -336,7 +340,7 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
                     celdita.getVisible().put(T.getCivilizacion().getNombre(), Boolean.TRUE);
                 }
             }
-        }
+        }*/
         SHELL.imprimir(juego.getMapa().print());
         return juego;
     }
