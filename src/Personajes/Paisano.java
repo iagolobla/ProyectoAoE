@@ -106,6 +106,14 @@ public class Paisano extends Personaje {
             throw new ExcepcionReparar("Edificio a reparar incorrecto");
         }
     }
+    
+    public   double danhoAtaque(Edificio edificio) {
+        return this.getAtaque() - edificio.getDefensa();
+    }
+    
+    public double danhoAtaque(Personaje personaje) {
+        return this.getAtaque() - personaje.getArmadura();
+    }
 
     public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar, ExcepcionRecurso {
         Recurso R;

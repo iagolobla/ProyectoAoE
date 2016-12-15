@@ -52,4 +52,12 @@ public class Legionario extends Soldado{
     public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar{
         throw new ExcepcionAlmacenar("Los legionarios no pueden almacenar");
     }
+    
+    public   double danhoAtaque(Edificio edificio) {
+        return this.getAtaque() - edificio.getDefensa();
+    }
+    
+    public double danhoAtaque(Personaje personaje) {
+        return this.getAtaque() - personaje.getArmadura();
+    }
 }

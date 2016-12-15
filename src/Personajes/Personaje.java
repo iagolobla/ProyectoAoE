@@ -139,9 +139,7 @@ public abstract class Personaje {
         }
     }
 
-    public double danhoAtaque(Edificio edificio) {
-        return ataque - edificio.getDefensa();
-    }
+    public abstract  double danhoAtaque(Edificio edificio) ;
 
     public void atacar(Edificio edificio) throws ExcepcionAtacar {
         if (edificio.getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
@@ -156,9 +154,7 @@ public abstract class Personaje {
 
     }
 
-    public double danhoAtaque(Personaje personaje) {
-        return ataque - personaje.getArmadura();
-    }
+    public abstract double danhoAtaque(Personaje personaje);
 
     public void atacar(ArrayList<Personaje> personajes) throws ExcepcionAtacar {
         if (personajes.get(0).getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
