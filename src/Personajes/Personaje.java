@@ -20,6 +20,7 @@ import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionRecurso;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
+import Juego.Celda;
 import static Juego.Principal.SHELL;
 import java.util.ArrayList;
 
@@ -183,7 +184,7 @@ public abstract class Personaje {
             }
             Grupo G = (Grupo) this;
             for (Personaje p : G.getPersonajes()) {
-                p.setSalud(p.getSalud() - daño/G.getNPersonajes());
+                p.setSalud(p.getSalud() - daño / G.getNPersonajes());
             }
         } else {
             salud -= daño;
@@ -193,6 +194,17 @@ public abstract class Personaje {
             }
         }
         return false;
+    }
+
+    public void matarPersonaje(Mapa mapa) {
+        Celda celda = mapa.getCelda(posicion);
+        if (this.getSalud() <= 0) {   //Si muere
+            SHELL.imprimir("El personaje " + this.getNombre() + " de la civilizacion " + celda.getPersonaje().getCivilizacion().getNombre() + " ha sufrido una horrible y dolorosa muerte!");
+            celda.getPersonajes().remove(this);
+            mapa.getCivilizaciones().get(this.getCivilizacion().getNombre()).getPersonajes().remove(this.getNombre());
+            SHELL.imprimir(mapa.print());
+        }
+
     }
 
     /*

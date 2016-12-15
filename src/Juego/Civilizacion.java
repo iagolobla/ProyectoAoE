@@ -40,7 +40,7 @@ public class Civilizacion {
             return false;
         }
         final Civilizacion other = (Civilizacion) obj;
-        if(other.getNombre() != this.getNombre()){
+        if(!(other.getNombre().equals(this.getNombre()))){
             return false;
         }
         return true;
