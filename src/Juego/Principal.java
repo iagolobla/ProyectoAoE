@@ -106,6 +106,7 @@ public class Principal {
 
                             new ComandoCrear(comando[1], comando[2], juego.getMapa()).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -120,6 +121,7 @@ public class Principal {
 
                             new ComandoRecolectar(comando[2], comando[1], juego.getMapa()).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
                         } catch (ExcepcionRecolectar E) {
                             SHELL.imprimir("Error: " + E.getMessage());
                             break;
@@ -139,6 +141,7 @@ public class Principal {
 
                             new ComandoAgrupar(juego.getMapa(), comando[1]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -153,6 +156,7 @@ public class Principal {
 
                             new ComandoDesagrupar(juego.getMapa(), comando[1]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -167,6 +171,7 @@ public class Principal {
 
                             new ComandoDefender(juego.getMapa(), comando[1], comando[2]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -181,6 +186,7 @@ public class Principal {
 
                             new ComandoAtacar(juego.getMapa(),comando[2],comando[1]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -195,6 +201,7 @@ public class Principal {
 
                             new ComandoDesligar(juego.getMapa(), comando[1], comando[2]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -210,6 +217,7 @@ public class Principal {
 
                             new ComandoAlmacenar(comando[1], comando[2], juego.getMapa()).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -263,6 +271,7 @@ public class Principal {
 
                             new ComandoReparar(comando[2], comando[1], juego.getMapa()).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
@@ -277,6 +286,7 @@ public class Principal {
 
                             new ComandoConstruir(comando[1], comando[3], comando[2], juego.getMapa()).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
+                            juego.getMapa().turnoTorres();
 
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
