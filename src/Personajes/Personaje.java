@@ -12,12 +12,15 @@ import Recursos.Contenedor;
 import Edificios.Ciudadela;
 import Edificios.Edificio;
 import Excepciones.ExcepcionAlmacenar;
+import Excepciones.ExcepcionAtacar;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionDefender;
 import Excepciones.ExcepcionRecolectar;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
+import static Juego.Principal.SHELL;
+import java.util.ArrayList;
 
 /**
  *
@@ -135,17 +138,33 @@ public abstract class Personaje {
         }
     }
 
-    /*
+    public double danhoAtaque(Edificio edificio) {
+        return ataque - edificio.getDefensa();
+    }
+
+    public void atacar(Edificio edificio) throws ExcepcionAtacar {
+        if (edificio.getCivilizacion().getNombre().equals(civilizacion.getNombre())) {
+            throw new ExcepcionAtacar("El edificio al que intentas atacar es de tu civilizacion");
+        }
+        int atack = (int)this.danhoAtaque(edificio);
+        if (atack <= 0) {
+            atack = 1;
+        }
+        edificio.recibirDaño(atack);
+        SHELL.imprimir("El "+edificio.getNombre()+" ha recibido "+atack+" ptos de daño");
+        
+    }
+
+    
+ /*
     public abstract void recolectar(Contenedor contenedor);
     
     
     public abstract void atacar(Personaje[] personajes);
     
-    public abstract void atacar(Edificio edificio);
     
     public abstract double danhoAtaque(Personaje personaje);
     
-    public abstract double danhoAtaque(Edificio edificio);
      */
     public boolean isGrupo() {
         return grupo;

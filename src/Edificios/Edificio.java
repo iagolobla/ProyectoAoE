@@ -93,6 +93,15 @@ public abstract class Edificio {
     public abstract Personaje crear(String tipo_personaje) throws ExcepcionCrear;
     
     public abstract void atacar(Personaje[] personajes);
+    
+    public boolean recibirDaño(int daño) {   //Si muere devuelve true
+        salud -= daño;
+        if (salud <= 0) {
+            salud = 0;
+            return true;
+        }
+        return false;
+    }
 
     public int getSalud() {
         return salud;
