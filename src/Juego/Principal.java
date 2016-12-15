@@ -26,6 +26,7 @@ import Comandos.ComandoMover;
 import Comandos.ComandoRecolectar;
 import Comandos.ComandoReparar;
 import Comandos.ComandoSalir;
+import Excepciones.ExcepcionRecolectar;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,8 +50,7 @@ public class Principal {
             numciv = SHELL.leerInt("Introduzca el numero de civilizaciones con el que desea jugar (maximo 3. Nombres de una palabra)");
         } while (numciv > 3 || numciv < 1);
         String nombre = null;
-        for (int i = 1; i <= numciv; i++) {
-            nombre = SHELL.leer("Introduzca el nombre de la civilizacion " + i + ": ");
+        for (int i = 1; i <= numciv; i++) {            nombre = SHELL.leer("Introduzca el nombre de la civilizacion " + i + ": ");
             C = new Civilizacion(nombre);
 
             if (i == 1) {
@@ -66,8 +66,14 @@ public class Principal {
 
         C = civilizaciones.get(nombre);
         System.out.println("Estas jugando con los: " + C.getNombre());
-        Juego juego = new Juego(new Mapa(6, 6, 6, civilizaciones.values()));
-        juego.getMapa().setCivilizacion(C);
+        Juego juego;
+        try {
+            juego = new Juego(new Mapa(6, 6, 6, civilizaciones.values()));
+            juego.getMapa().setCivilizacion(C);
+        } catch (Exception E) {
+            SHELL.imprimir("Error: " + E.getMessage());
+            return;
+        }
         SHELL.imprimir(juego.getMapa().print());
 
         while (seguir) {
@@ -111,7 +117,13 @@ public class Principal {
                             }
 
                             new ComandoRecolectar(comando[2], comando[1], juego.getMapa()).ejecutar();
-                            new ComandoImprimir(juego.getMapa());
+                            new ComandoImprimir(juego.getMapa()).ejecutar();
+                        } catch (ExcepcionRecolectar E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
                         } catch (Exception E) {
                             SHELL.imprimir("Error: " + E.getMessage());
                             break;
@@ -151,7 +163,7 @@ public class Principal {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
 
-                            new ComandoDefender(juego.getMapa(),comando[1],comando[2]).ejecutar();
+                            new ComandoDefender(juego.getMapa(), comando[1], comando[2]).ejecutar();
                             new ComandoImprimir(juego.getMapa()).ejecutar();
 
                         } catch (Exception E) {

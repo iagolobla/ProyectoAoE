@@ -11,6 +11,7 @@ import Personajes.Personaje;
 import Personajes.Grupo;
 import Edificios.Edificio;
 import Excepciones.ExcepcionAgrupar;
+import Excepciones.ExcepcionCelda;
 import Recursos.Contenedor;
 import Recursos.Pradera;
 
@@ -115,7 +116,7 @@ public class Celda {
         return null;
     }
 
-    public void quitarPersonaje(Personaje P) {  //Quita personajes de una celda, tiene en cuenta si hay edificio
+    public void quitarPersonaje(Personaje P) throws ExcepcionCelda {  //Quita personajes de una celda, tiene en cuenta si hay edificio
         if (P == null) {
             throw new NullPointerException("Personaje especificado nulo!");
         }
@@ -127,19 +128,26 @@ public class Celda {
             } else if (edificio.getNPersonajes() > 0) {
                 if (edificio.getPersonajes().containsKey(P.getNombre())) {
                     edificio.getPersonajes().remove(P.getNombre());
+                    if(P instanceof Grupo){
+                        edificio.setNPersonajes(edificio.getNPersonajes() - ((Grupo) P).getNPersonajes());
+                    } else {
                     edificio.setNPersonajes(edificio.getNPersonajes() - 1);
+                    }
+                    edificio.setAtaque(edificio.getAtaque() - P.getAtaque());
+                    edificio.setDefensa(edificio.getDefensa() - P.getArmadura());
                 } else {
-                    //Excepcion Aqui
+                    throw new ExcepcionCelda("El "+ P.getNombre() + " no se encuentra en " + edificio.getNombre());
                 }
             } else {
-                //Excepcion Aqui
+                throw new ExcepcionCelda("El edificio " + edificio.getNombre() + " esta vacio!");
+
             }
         }
     }
 
-    public void addPersonaje(Personaje personaje) { //Sirve para añadir personajes a una celda, tiene en cuenta si hay edificio
+    public void addPersonaje(Personaje personaje) throws ExcepcionCelda{ //Sirve para añadir personajes a una celda, tiene en cuenta si hay edificio
         if (personaje != null) {
-            if (this.getContenedor() instanceof Pradera) {
+            if (this.getContenedor().esTransitable()) {
                 if (this.isEdificio()) {
                     Edificio ef = this.edificio;
                     if (personaje instanceof Grupo) {
@@ -154,7 +162,8 @@ public class Celda {
                 }
                 this.personajes.add(personaje);
             } else {
-                System.out.println("El personaje pasado es nulo!");
+                throw new ExcepcionCelda("La celda tiene que ser transitable!");
+
             }
         }
 

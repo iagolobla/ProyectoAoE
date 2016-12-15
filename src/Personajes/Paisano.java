@@ -12,10 +12,10 @@ import Edificios.Edificio;
 import Edificios.Torre;
 import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionRecurso;
 import Excepciones.ExcepcionReparar;
 import Juego.Posicion;
 import Juego.Civilizacion;
-import Juego.Mapa;
 import Recursos.Comida;
 import Recursos.Contenedor;
 import Recursos.Madera;
@@ -105,8 +105,13 @@ public class Paisano extends Personaje {
         }
     }
 
-    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar {
-        Recurso R = contenedor.procesar();
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar, ExcepcionRecurso {
+        Recurso R;
+        //try {
+            R = contenedor.procesar();
+        //} catch (ExcepcionRecurso e) {
+            //throw new ExcepcionRecolectar(e.getMessage());
+        //}
 
         if (this.recurso != null && !this.recurso.getClass().equals(contenedor.getRecurso().getClass())) {
             throw new ExcepcionRecolectar("El paisano ya esta cargando otro tipo de recurso!");
@@ -119,20 +124,16 @@ public class Paisano extends Personaje {
         //Calculamos el minimo entre la capacidad del paisano y la cantidad del recurso
         int cantidad = Math.min(R.getCantidad(), this.getCapacidadRecurso() - this.getCantidadRecolectada());
 
-        Recurso Copia;
-        if (R instanceof Piedra) {
-            Copia = new Piedra((Piedra) R);
-        } else if (R instanceof Madera) {
-            Copia = new Madera((Madera) R);
-        } else {
-            Copia = new Comida((Comida) R);
-        }
-
-        Copia.setCantidad(cantidad);
-
-        this.setRecurso(Copia);
-
-        contenedor.getRecurso().setCantidad(contenedor.getRecurso().getCantidad() - cantidad);
+        //try {
+            R.setCantidad(cantidad);
+            if (this.getCantidadRecolectada() > 0) {
+                R.setCantidad(cantidad + this.getCantidadRecolectada());
+            }
+            this.setRecurso(R);
+            contenedor.getRecurso().setCantidad(contenedor.getRecurso().getCantidad() - cantidad);
+        //} catch (ExcepcionRecurso e) {
+            //throw new ExcepcionRecolectar(e.getMessage());
+        //}
     }
 
     public void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar {
@@ -140,7 +141,7 @@ public class Paisano extends Personaje {
             throw new ExcepcionAlmacenar("Ciudadela para almacenar nula");
         }
         ciudadela.almacenar(recurso);
-        recurso=null;
+        recurso = null;
     }
 
     public int getCantidadRecolectada() {

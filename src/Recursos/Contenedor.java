@@ -6,6 +6,7 @@
 package Recursos;
 
 import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionRecurso;
 import Juego.Celda;
 import Juego.Posicion;
 import Juego.Mapa;
@@ -39,21 +40,29 @@ public abstract class Contenedor {
         return impresion;
     }
 
-    public Recurso procesar() {
+    public Recurso procesar() throws ExcepcionRecurso{
         int cantidad = this.getRecurso().getCantidad();
         if(this instanceof Cantera){    //Por cada 20% que falte a la cantera se rebaja un 10%
             Cantera cantera = new Cantera((Cantera) this);
-            Recurso piedra = cantera.getRecurso();
+            Recurso piedra = new Piedra((Piedra)cantera.getRecurso());
             // Calcula el numero de "20%" que le faltan para quitarle el correspondiente numero de "10%"
             int factor = (cantera.getCantInit()-cantidad)/cantera.getCant20();
             // Resta a la cantidad actual el 10% de la cantidad inicial * factor
-            piedra.setCantidad(cantidad - ((cantera.getCant20()/2) * factor));
-            if(piedra.getCantidad() < 1){
+            int Cquitar = cantidad - ((cantera.getCant20()/2) * factor);
+            
+            if(Cquitar < 1){
                 piedra.setCantidad(1);
+            } else {
+                piedra.setCantidad(Cquitar);
             }
             return piedra;
         } else {
-            return recurso;
+            if(this instanceof Bosque){
+                return new Madera((Madera)recurso);
+            } else {
+                return new Comida((Comida)recurso);
+            }
+            
         }
     }
 
