@@ -11,6 +11,7 @@ import Juego.Mapa;
 import Juego.Celda;
 import Excepciones.ExcepcionSintaxis;
 import Edificios.Edificio;
+import Excepciones.ExcepcionCelda;
 import Excepciones.ExcepcionMover;
 import Juego.ConsolaNormal;
 import static Juego.Principal.SHELL;
@@ -37,7 +38,7 @@ public class ComandoMover implements Comando {
 
     }
 
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionMover {
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionMover, ExcepcionCelda {
 
         Personaje p = mapa.getCivilizacion().getPersonajes().get(personaje);
         if (p == null) {

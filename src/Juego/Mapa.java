@@ -27,6 +27,7 @@ import Edificios.Casa;
 import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Edificios.Torre;
+import Excepciones.ExcepcionCelda;
 import Excepciones.ExcepcionAtacar;
 import Excepciones.ExcepcionSintaxis;
 import Personajes.Arquero;
@@ -49,7 +50,7 @@ public class Mapa {
     int[] cantidades;
     Civilizacion civilizacion;
 
-    public Mapa(int bosques, int canteras, int arbustos, Collection<Civilizacion> civ) {
+    public Mapa(int bosques, int canteras, int arbustos, Collection<Civilizacion> civ) throws ExcepcionCelda{
         if (bosques < 0 || canteras < 0 || arbustos < 0) {
             System.out.println("Valores pasados al mapa menores que 0!");
             return;
@@ -403,9 +404,15 @@ public class Mapa {
     }
 
     public boolean checkBuilding(Posicion pos) {
-        if (this.getCelda(pos).getContenedor() instanceof Pradera) {
-            if (!(this.getCelda(pos).isEdificio())) {
-                return true;
+        Celda cell = this.getCelda(pos);
+        if (cell.getContenedor() instanceof Pradera) {
+            if (!(cell.isEdificio())) {
+                if(cell.getPersonajes().size() > 0){
+                    if(cell.getPersonaje().getCivilizacion().equals(this.getCivilizacion()))
+                        return true;
+                } else {
+                    return true;
+                }
             }
         }
         return false;

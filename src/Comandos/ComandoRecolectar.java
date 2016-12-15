@@ -6,6 +6,7 @@
 package Comandos;
 
 import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionRecurso;
 import Excepciones.ExcepcionSintaxis;
 import Juego.Celda;
 import Juego.ConsolaNormal;
@@ -15,6 +16,8 @@ import static Juego.Principal.SHELL;
 import Personajes.Paisano;
 import Personajes.Personaje;
 import Recursos.Contenedor;
+import Recursos.Madera;
+import Recursos.Piedra;
 import Recursos.Pradera;
 import Recursos.Recurso;
 
@@ -35,10 +38,8 @@ public class ComandoRecolectar implements Comando {
         this.mapa = mapa;
         
     }
-    
-    
 
-    public void ejecutar() throws ExcepcionRecolectar, ExcepcionSintaxis{
+    public void ejecutar() throws ExcepcionRecolectar, ExcepcionSintaxis, ExcepcionRecurso{
         Personaje P;
         Posicion cont;
         Celda cell;
@@ -62,8 +63,7 @@ public class ComandoRecolectar implements Comando {
         if(contenedor.getRecurso().getCantidad()==0){
             this.mapa.getRecursos().remove(contenedor.getNombre());
             contenedor.destruir(cell);
-            
         }
-        SHELL.imprimir("El "+ P.getNombre() +" ahora tiene " + ((Paisano) P).getCantidadRecolectada());
+        SHELL.imprimir("El "+ P.getNombre() +" ahora tiene " + ((Paisano) P).getCantidadRecolectada() + " uds. de " + ((Paisano) P).getRecurso().getClass().getSimpleName());
     }
 }

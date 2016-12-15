@@ -14,11 +14,11 @@ import Juego.Mapa;
 import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Edificios.Edificio;
+import Excepciones.ExcepcionCelda;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionSintaxis;
 import Personajes.Personaje;
 import Juego.Celda;
-import Juego.ConsolaNormal;
 import Juego.Posicion;
 import static Juego.Principal.SHELL;
 
@@ -36,7 +36,7 @@ public class ComandoCrear implements Comando {
         
     }
 
-    public void ejecutar() throws ExcepcionSintaxis, ExcepcionCrear {
+    public void ejecutar() throws ExcepcionSintaxis, ExcepcionCrear, ExcepcionCelda {
         Celda cell;
         Personaje p;
         Edificio ef;

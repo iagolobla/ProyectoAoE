@@ -24,6 +24,7 @@ import Excepciones.ExcepcionImprimir;
 import Excepciones.ExcepcionListar;
 import Excepciones.ExcepcionMirar;
 import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionRecurso;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSalir;
 
@@ -38,5 +39,6 @@ public interface Comando{
             ExcepcionCelda, ExcepcionCivilizacion, ExcepcionConstruir, ExcepcionCrear,
             ExcepcionDefender, ExcepcionDesagrupar, ExcepcionDescribir, ExcepcionDesligar,
             ExcepcionImprimir, ExcepcionListar, ExcepcionMirar, ExcepcionMover,
-            ExcepcionRecolectar,ExcepcionReparar, ExcepcionSalir, ExcepcionSintaxis;
+            ExcepcionRecolectar,ExcepcionReparar, ExcepcionSalir, ExcepcionSintaxis,
+            ExcepcionRecurso;
 }

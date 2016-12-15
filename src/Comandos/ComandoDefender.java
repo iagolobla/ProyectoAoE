@@ -6,6 +6,7 @@
 package Comandos;
 
 import Edificios.Edificio;
+import Excepciones.ExcepcionCelda;
 import Excepciones.ExcepcionDefender;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
@@ -32,7 +33,7 @@ public class ComandoDefender implements Comando {
         this.pto_cardinal = pto_cardinal;
     }
 
-    public void ejecutar() throws ExcepcionDefender, ExcepcionSintaxis {
+    public void ejecutar() throws ExcepcionDefender,ExcepcionSintaxis, ExcepcionCelda{
         Personaje p = mapa.getCivilizacion().getPersonajes().get(personaje);
         if (p == null) {
             throw new NullPointerException("El Personaje especificado no existe!");

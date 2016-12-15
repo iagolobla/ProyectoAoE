@@ -17,6 +17,7 @@ import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionDefender;
 import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionRecurso;
 import Excepciones.ExcepcionReparar;
 import Excepciones.ExcepcionSintaxis;
 import static Juego.Principal.SHELL;
@@ -96,7 +97,7 @@ public abstract class Personaje {
 
     public abstract void reparar(Edificio edificio) throws ExcepcionReparar;
 
-    public abstract void recolectar(Contenedor contenedor) throws ExcepcionRecolectar;
+    public abstract void recolectar(Contenedor contenedor) throws ExcepcionRecolectar, ExcepcionRecurso;
 
     public abstract void almacenar(Ciudadela ciudadela) throws ExcepcionAlmacenar;
 

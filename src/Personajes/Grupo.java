@@ -11,6 +11,7 @@ import Excepciones.ExcepcionAlmacenar;
 import Excepciones.ExcepcionConstruir;
 import Excepciones.ExcepcionCrear;
 import Excepciones.ExcepcionRecolectar;
+import Excepciones.ExcepcionRecurso;
 import Excepciones.ExcepcionReparar;
 import Juego.Celda;
 import Juego.Civilizacion;
@@ -61,7 +62,7 @@ public class Grupo extends Personaje {
         throw new ExcepcionReparar("Los grupos no pueden reparar");
     }
 
-    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar {
+    public void recolectar(Contenedor contenedor) throws ExcepcionRecolectar, ExcepcionRecurso {
         //comprobar que todos son paisanos, sino dar excepcion
         for (Personaje p : personajes) {
             if (!(p instanceof Paisano)) {
