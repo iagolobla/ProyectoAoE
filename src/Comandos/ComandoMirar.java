@@ -10,6 +10,7 @@ import Edificios.Ciudadela;
 import Edificios.Cuartel;
 import Edificios.Edificio;
 import Edificios.Torre;
+import Excepciones.ExcepcionMirar;
 import Juego.Celda;
 import Juego.Colores;
 import Juego.ConsolaNormal;
@@ -42,7 +43,7 @@ public class ComandoMirar implements Comando {
         
     }
 
-    public void ejecutar() {
+    public void ejecutar() throws ExcepcionMirar{
         Posicion posMirar = new Posicion(posicion);
         if (mapa.checkCoords(posMirar)) {
             Celda cell = mapa.getCelda(posMirar);
@@ -64,7 +65,7 @@ public class ComandoMirar implements Comando {
                     SHELL.imprimir(cell.getContenedor().toString());
                 }
             } else {
-                System.out.println("no es visible");
+                throw new ExcepcionMirar("La celda no es visible");
             }
         }
     }
