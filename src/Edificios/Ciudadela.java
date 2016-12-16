@@ -45,12 +45,15 @@ public class Ciudadela extends Edificio {
     
 
     public void almacenar(Recurso recurso) throws ExcepcionAlmacenar{
-        int cantidad = this.getCivilizacion().getComida()+recurso.getCantidad();
+        int cantidad=0;
         if(recurso instanceof Comida){
+            cantidad=this.getCivilizacion().getComida()+recurso.getCantidad();
             this.getCivilizacion().setComida(cantidad);
         }else if(recurso instanceof Piedra){
+            cantidad=this.getCivilizacion().getPiedra()+recurso.getCantidad();
             this.getCivilizacion().setPiedra(cantidad);
         }else if(recurso instanceof Madera){
+            cantidad=this.getCivilizacion().getMadera()+recurso.getCantidad();
             this.getCivilizacion().setMadera(cantidad);
         }else{
             throw new ExcepcionAlmacenar("Tipo de recurso incorrecto");

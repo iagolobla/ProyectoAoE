@@ -62,8 +62,6 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
         scanner.useDelimiter("\n");
         while (scanner.hasNext()) {
             linea = scanner.next();
-
-            System.out.println(linea);
             String lineaLowerCase = linea.toLowerCase();    //Pasamos todo a minusculas
             String[] line = lineaLowerCase.split(";");
             if (!(line[0].startsWith("#"))) {
@@ -108,8 +106,6 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
         scanner.useDelimiter("\n");
         while (scanner.hasNext()) {
             linea = scanner.next();
-
-            System.out.println(linea);
             String lineaLowerCase = linea.toLowerCase();    //Pasamos todo a minusculas
             String[] line = lineaLowerCase.split(";");
             if (!(line[0].startsWith("#"))) {
@@ -268,7 +264,6 @@ public class CargadorJuegoDeFichero implements CargadorJuego {
         while (scanner.hasNext()) {
             linea = scanner.next();
 
-            System.out.println(linea);
             String lineaLowerCase = linea.toLowerCase();    //Pasamos todo a minusculas
             String[] line = lineaLowerCase.split(";");
             if (!(line[0].startsWith("#"))) {
