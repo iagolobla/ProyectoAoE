@@ -255,7 +255,7 @@ public abstract class Personaje {
         if (salud >= 0) {
             this.salud = salud;
         } else {
-            System.out.println("Salud introducida debe ser mayor que 0!");
+            //System.out.println("Salud introducida debe ser mayor que 0!");
         }
     }
 
