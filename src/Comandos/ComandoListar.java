@@ -5,8 +5,8 @@
  */
 package Comandos;
 
+
 import Excepciones.ExcepcionSintaxis;
-import Juego.ConsolaNormal;
 import Juego.Mapa;
 import static Juego.Principal.SHELL;
 

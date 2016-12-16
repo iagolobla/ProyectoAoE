@@ -27,6 +27,8 @@ import Comandos.ComandoMover;
 import Comandos.ComandoRecolectar;
 import Comandos.ComandoReparar;
 import Comandos.ComandoSalir;
+import Excepciones.ExcepcionComando;
+import Excepciones.ExcepcionMover;
 import Excepciones.ExcepcionRecolectar;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -97,8 +99,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -112,8 +120,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -133,7 +147,7 @@ public class Principal {
                             SHELL.imprimir("Error: " + E.getMessage());
                             break;
                         } catch (Exception E) {
-                            SHELL.imprimir("Error: " + E.getMessage());
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -147,8 +161,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -162,8 +182,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -177,8 +203,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -192,8 +224,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -207,8 +245,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -223,8 +267,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -236,8 +286,12 @@ public class Principal {
 
                             new ComandoListar(comando[1], juego.getMapa()).ejecutar();
 
-                        } catch (Exception E) {
+                        
+                        } catch (ExcepcionSintaxis E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -249,8 +303,14 @@ public class Principal {
 
                             new ComandoDescribir(comando[1], juego.getMapa()).ejecutar();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -262,8 +322,14 @@ public class Principal {
 
                             new ComandoMirar(comando[1], juego.getMapa()).ejecutar();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -277,8 +343,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -292,8 +364,14 @@ public class Principal {
                             new ComandoImprimir(juego.getMapa()).ejecutar();
                             juego.getMapa().turnoTorres();
 
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -305,8 +383,14 @@ public class Principal {
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
-                        } catch (Exception E) {
+                        } catch (ExcepcionComando E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (ExcepcionSintaxis E) {
+                            SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         new ComandoImprimir(juego.getMapa()).ejecutar();
@@ -318,8 +402,11 @@ public class Principal {
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
-                        } catch (Exception E) {
+                        } catch (ExcepcionSintaxis E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
                         break;
@@ -330,8 +417,11 @@ public class Principal {
                             } else {
                                 throw new ExcepcionSintaxis("Error Sintactico, Comando mal introducido");
                             }
-                        } catch (Exception E) {
+                        } catch (ExcepcionSintaxis E) {
                             SHELL.imprimir("Error: " + E.getMessage());
+                            break;
+                        } catch (Exception E) {
+                            SHELL.imprimir("Error Inesperado: " + E.getMessage());
                             break;
                         }
 

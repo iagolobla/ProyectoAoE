@@ -8,6 +8,7 @@ package Comandos;
 import Edificios.Ciudadela;
 import Edificios.Edificio;
 import Excepciones.ExcepcionDescribir;
+import Excepciones.ExcepcionSintaxis;
 import Juego.ConsolaNormal;
 import Juego.Mapa;
 import static Juego.Principal.SHELL;
@@ -31,7 +32,7 @@ public class ComandoDescribir implements Comando {
         this.map = mapa;
     }
 
-    public void ejecutar() throws ExcepcionDescribir{
+    public void ejecutar() throws ExcepcionDescribir, ExcepcionSintaxis{
         if (map.getCivilizacion().getPersonajes().containsKey(entidad)) {
             Personaje personaje = map.getCivilizacion().getPersonajes().get(entidad);
             SHELL.imprimir(personaje.toString());
