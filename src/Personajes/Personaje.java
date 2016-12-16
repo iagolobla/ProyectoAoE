@@ -108,18 +108,19 @@ public abstract class Personaje {
     public void defender(Edificio edificio) throws ExcepcionDefender {
         int contador = 0;
         if (!(edificio.getCivilizacion().getNombre().equals(this.getCivilizacion().getNombre()))) {
-            throw new ExcepcionDefender("Este edificio nos es de tu civilizacion!");
+            throw new ExcepcionDefender("Este edificio no es de tu civilizacion!");
         }
 
         if (this instanceof Grupo) {
             Grupo G = (Grupo) this;
+            contador = G.getNPersonajes();
             for (Personaje person : G.getPersonajes()) {
                 person.restaurarVida(person);
-                contador++;
+                
             }
         } else {
             this.restaurarVida(this);
-            contador++;
+            contador = 1;
         }
         if ((edificio.getCapPersonajes() - edificio.getNPersonajes()) - contador < 0) {
             throw new ExcepcionDefender("No cogen mas personajes aqui dentro");
